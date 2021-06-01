@@ -1,10 +1,11 @@
+import FullFormWrap from '@/components/FullFormWrap';
 import React from 'react';
 
 const Index: React.FC = () => {
   return (
-    <div>
+    <FullFormWrap>
       <p>Home</p>
-    </div>
+    </FullFormWrap>
   );
 };
 
