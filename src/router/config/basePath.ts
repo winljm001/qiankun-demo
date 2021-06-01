@@ -1,1 +1,1 @@
-export const BASE_PATH = '/main';
+export const BASE_PATH = '/pitaya';
