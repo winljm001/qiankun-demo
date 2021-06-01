@@ -22,22 +22,22 @@ const SideMenu: React.FC = React.memo(() => {
         </Menu.Item>
       );
     } else {
-      // 当菜单下只有一个子菜单时，直接显示子菜单
-      if (menu?.routes?.length === 1) {
-        item = (
-          <Menu.Item key={menu?.routes[0].path}>
-            <Link to={menu?.routes[0].path}>{menu?.routes[0].title}</Link>
-          </Menu.Item>
-        );
-      } else {
-        item = (
-          <Menu.SubMenu title={menu?.title} key={menu?.title}>
-            {menu.routes.map((v, i) => {
-              return menuItem(v);
-            })}
-          </Menu.SubMenu>
-        );
-      }
+      // // 当菜单下只有一个子菜单时，直接显示子菜单
+      // if (menu?.routes?.length === 1) {
+      //   item = (
+      //     <Menu.Item key={menu?.routes[0].path}>
+      //       <Link to={menu?.routes[0].path}>{menu?.routes[0].title}</Link>
+      //     </Menu.Item>
+      //   );
+      // } else {
+      item = (
+        <Menu.SubMenu title={menu?.title} key={menu?.title}>
+          {menu.routes.map((v, i) => {
+            return menuItem(v);
+          })}
+        </Menu.SubMenu>
+      );
+      // }
     }
     return item;
   };
