@@ -1,0 +1,16 @@
+.wrap {
+  display: flex;
+  align-items: baseline;
+  .label {
+    flex: 0 0 auto;
+  }
+  .control {
+    flex: 1 1 auto;
+    :global {
+      .ant-picker,
+      .ant-select {
+        width: 100%;
+      }
+    }
+  }
+}
