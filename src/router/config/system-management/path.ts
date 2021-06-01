@@ -1,4 +1,6 @@
-export const BASE_URL = '/system-management';
+import { BASE_PATH } from '../basePath';
+
+export const BASE_URL = `${BASE_PATH}/system-management`;
 /** 果品管理 */
 export const GOODS_MANAGEMENT = `${BASE_URL}/goods-management`;
 /** 新增果品 */
