@@ -1,3 +1,4 @@
+import BaseCard from '@/components/BaseCard';
 import BaseFormWrap from '@/components/BaseFormWrap';
 import React from 'react';
 
@@ -27,7 +28,12 @@ const Index: React.FC = () => {
           },
         },
       ]}>
-      <p>Home</p>
+      <BaseCard title="SPU信息">
+        <p>Home</p>
+      </BaseCard>
+      <BaseCard title="规格信息">
+        <p>Home</p>
+      </BaseCard>
     </BaseFormWrap>
   );
 };

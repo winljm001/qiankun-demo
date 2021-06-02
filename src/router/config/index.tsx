@@ -41,5 +41,4 @@ const routes: RouteConfig[] = [
     component: loadable(() => import('@/pages/404/index')),
   },
 ];
-console.log(routes);
 export default routes;
