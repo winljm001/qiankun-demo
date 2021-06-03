@@ -85,7 +85,7 @@
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "string",
+                  "typeName": "boolean",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -252,7 +252,7 @@
                 "required": false,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "string",
+                  "typeName": "number",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -521,8 +521,8 @@
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
+                  "typeName": "UserVO",
+                  "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -1356,7 +1356,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -1394,7 +1394,9 @@
             "name": "commodityName",
             "description": "商品名称",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": [
           {
             "dataType": {
               "typeArgs": [],
@@ -1458,7 +1460,10 @@
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
+              "enum": [
+                "'APP'",
+                "'WEB'"
+              ],
               "typeProperties": []
             },
             "name": "status",
@@ -1696,7 +1701,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "number",
+              "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -1706,7 +1711,13 @@
             "name": "unitQuantity",
             "description": "单位数量（sku净重；换算比率）",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserLoginResponseVO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
@@ -1804,7 +1815,13 @@
             "name": "commoditySpecId",
             "description": "规格id",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserStoreVO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
@@ -1862,7 +1879,13 @@
             "name": "commoditySkuId",
             "description": "sku id",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserVO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
@@ -1907,8 +1930,18 @@
           },
           {
             "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -1992,7 +2025,13 @@
             "name": "commoditySkuId",
             "description": "sku Id",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserWithRoleIdVO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [
@@ -2047,8 +2086,18 @@
           },
           {
             "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "RoleVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2128,9 +2177,23 @@
             },
             "name": "pageSize",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      }
+    ]
+  },
+  {
+    "mods": [
+      {
+        "description": "角色权限管理",
+        "interfaces": [
           {
-            "dataType": {
+            "description": "版本更新",
+            "name": "getAppDevice",
+            "method": "get",
+            "path": "/api/auth/v1/role/app/device/version",
+            "response": {
               "typeArgs": [
                 {
                   "typeArgs": [],
@@ -2159,10 +2222,34 @@
         "templateArgs": [],
         "properties": [
           {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
+            "description": "根据用户ID获取权限列表",
+            "name": "authListByUserId",
+            "method": "get",
+            "path": "/api/auth/v1/role/authListByUserId",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "AuthDTO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
@@ -2173,10 +2260,34 @@
             "required": false
           },
           {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
+            "description": "获取角色列表",
+            "name": "roleMenu",
+            "method": "get",
+            "path": "/api/auth/v1/role/roleMenu",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "RoleVO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
               "enum": [],
@@ -2192,6 +2303,19 @@
         "name": "SkuSpecificationOptionsHeaderList",
         "templateArgs": [],
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "AppDevice",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],
@@ -2277,7 +2401,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2436,7 +2560,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2465,11 +2589,17 @@
             "name": "checkCode",
             "description": "短信验证码",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "AuthDTO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2505,7 +2635,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "number",
+              "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2533,7 +2663,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2543,7 +2673,13 @@
             "name": "token",
             "description": "用户token",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "RoleVO",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
@@ -2561,7 +2697,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2664,11 +2800,110 @@
         ],
         "properties": [
           {
+            "description": "单位列表 (commodityTypeId|name) (1|水果，5|sku净重)",
+            "name": "listUnits",
+            "method": "get",
+            "path": "/api/commodity/v1_1/units/list/{commodityTypeId}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [
+                        {
+                          "typeArgs": [],
+                          "typeName": "string",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        },
+                        {
+                          "typeArgs": [],
+                          "typeName": "number",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        }
+                      ],
+                      "typeName": "Option",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "commodityTypeId",
+                "name": "commodityTypeId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "AuthDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "unit"
+      }
+    ],
+    "name": "commodityService",
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
             "dataType": {
               "typeArgs": [
                 {
-                  "typeArgs": [],
-                  "typeName": "AuthDTO",
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    },
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Option",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2730,7 +2965,52 @@
             },
             "name": "authId",
             "required": false
-          },
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [
+              {
+                "typeArgs": [
+                  {
+                    "typeArgs": [],
+                    "typeName": "string",
+                    "isDefsType": false,
+                    "templateIndex": -1,
+                    "compileTemplateKeyword": "#/definitions/",
+                    "enum": [],
+                    "typeProperties": []
+                  },
+                  {
+                    "typeArgs": [],
+                    "typeName": "number",
+                    "isDefsType": false,
+                    "templateIndex": -1,
+                    "compileTemplateKeyword": "#/definitions/",
+                    "enum": [],
+                    "typeProperties": []
+                  }
+                ],
+                "typeName": "Option",
+                "isDefsType": true,
+                "templateIndex": -1,
+                "compileTemplateKeyword": "#/definitions/",
+                "enum": [],
+                "typeProperties": []
+              }
+            ],
+            "typeName": "Array",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "Option",
+        "properties": [
           {
             "dataType": {
               "typeArgs": [],
@@ -2747,7 +3027,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "boolean",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2760,7 +3040,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
