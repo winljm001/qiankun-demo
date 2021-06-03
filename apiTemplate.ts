@@ -83,7 +83,7 @@ export default class MyGenerator extends CodeGenerator {
     export ${queryParams}
     export ${paramsInterface}
     export function ${inter.name}(${paramsDestructureStr}:IParams = {} as IParams${getRequestParams(params)}) {
-      return request<${inter.response.generateCode()}>({
+      return request<${inter.responseType}>({
         url: \`${path}\`,
         method: '${inter.method}',
         ${requestParamsCode}

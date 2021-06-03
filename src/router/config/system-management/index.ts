@@ -19,7 +19,7 @@ const routes: RouteConfig[] = [
         meta: {
           inMenu: true,
         },
-        component: loadable(() => import('@/pages/system-management/goods-management/index')),
+        component: loadable(() => import('@/pages/system-management/goods-management/list/index')),
       },
     ],
   },

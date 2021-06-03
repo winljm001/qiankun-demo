@@ -1,5 +1,18 @@
 {
-  "originUrl": "https://durian-dev.hjgpscm.com/hjgp-boot/v2/api-docs",
+  "origins": [
+    {
+      "name": "commodityService",
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/commodity/v2/api-docs?group=web"
+    },
+    {
+      "name": "userService",
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/user/v2/api-docs?group=web"
+    },
+    {
+      "name": "authService",
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/auth/v2/api-docs?group=web"
+    }
+  ],
   "outDir": "./src/services",
   "templatePath": "./apiTemplate",
   "prettierConfig": {
