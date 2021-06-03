@@ -30,10 +30,10 @@ const useGlobalStore = create<State>(
       (set: SetState<State>, get: GetState<State>) => ({
         menuList: [],
         menuOpenKeys: [],
-        isLogin: false,
+        isLogin: true,
         token: null,
         userInfo: null,
-        isAuthReady: false,
+        isAuthReady: true,
         setMenuList: (menuList) => {
           set({ menuList });
         },

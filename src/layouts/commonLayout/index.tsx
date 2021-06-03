@@ -58,7 +58,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     const keys = [];
     // menuOpenKeys has a higher priority than keys computed by pathname
     if (menuOpenKeys?.length) {
-      return menuOpenKeys
+      return menuOpenKeys;
     }
     const traverse = (menu: CustomRouteConfig[]) => {
       for (let i = 0; i <= menu.length - 1; i++) {
@@ -85,6 +85,8 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     return keys;
   }, [location.pathname, menuList]);
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
+
+  console.log(isAuthReady);
   if (!isAuthReady) {
     return null;
   }
