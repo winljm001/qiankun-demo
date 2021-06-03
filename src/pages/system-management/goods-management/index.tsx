@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import SpecForm from './components/spec-form';
 import SpuForm from './components/spu-form';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useBoolean, useToggle } from 'ahooks';
+import { useToggle } from 'ahooks';
 const Index: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();
