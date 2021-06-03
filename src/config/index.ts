@@ -23,7 +23,8 @@ const commonConfig: CommonIConfig = {
 export const envConfig: Record<typeof env, EnvIconfig> = {
   // 开发环境
   dev: {
-    apiHost: 'https://durian-dev.hjgpscm.com',
+    // apiHost: 'https://durian-dev.hjgpscm.com',
+    apiHost: 'http://192.168.10.70:8081',
     uploadHost: 'https://durian-dev.hjgpscm.com',
     baseUrl: '/hjgp-boot',
   },

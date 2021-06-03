@@ -1,0 +1,1914 @@
+[
+  {
+    "mods": [
+      {
+        "description": "app-团队管理模块",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "新增账号",
+            "name": "creatUser",
+            "method": "post",
+            "path": "/api/user/v1/user/creat",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "userCreatVO",
+                "name": "userCreatVO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "UserCreatVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "删除账号",
+            "name": "deleteUser",
+            "method": "delete",
+            "path": "/api/user/v1/user/delete",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "获取用户信息",
+            "name": "getUserInfo",
+            "method": "get",
+            "path": "/api/user/v1/user/getUserInfo",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserWithRoleIdVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "userId",
+                "name": "userId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "获取团队用户列表",
+            "name": "getUSerList",
+            "method": "get",
+            "path": "/api/user/v1/user/getUserList",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "UserVO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "DefaultPageResult",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "name": "offset",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "pageCurrent",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "pageSize",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "sortBys",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "登录",
+            "name": "login",
+            "method": "post",
+            "path": "/api/user/v1/user/login",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserLoginResponseVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "loginDto",
+                "name": "loginDto",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "LoginDto",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "手机号是否已存在",
+            "name": "selectCountByMobile",
+            "method": "get",
+            "path": "/api/user/v1/user/selectByMobile",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "id",
+                "name": "id",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "description": "mobile",
+                "name": "mobile",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "发送验证码",
+            "name": "sendCheckCode",
+            "method": "post",
+            "path": "/api/user/v1/user/sendCheckCode",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "phoneNum",
+                "name": "phoneNum",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "修改账号信息",
+            "name": "updateUser",
+            "method": "put",
+            "path": "/api/user/v1/user/update",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "userCreatVO",
+                "name": "userCreatVO",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "UserCreatVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "userApp"
+      }
+    ],
+    "name": "userService",
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "DefaultPageResult",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errMsg",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [
+              {
+                "typeArgs": [],
+                "typeName": "UserVO",
+                "isDefsType": true,
+                "templateIndex": -1,
+                "compileTemplateKeyword": "#/definitions/",
+                "enum": [],
+                "typeProperties": []
+              }
+            ],
+            "typeName": "DefaultPageResult",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "DefaultPageResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "pageCurrent",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "pageSize",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserVO",
+                  "isDefsType": true,
+                  "templateIndex": 0,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "records",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalRecords",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "UserVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "LoginDto",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "checkCode",
+            "description": "短信验证码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "phoneNum",
+            "description": "用户电话号码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'APP'",
+                "'WEB'"
+              ],
+              "typeProperties": []
+            },
+            "name": "userPlatform",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "RoleVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleName",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserCreatVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "deleted",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationId",
+            "description": "组织ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleIds",
+            "description": "需要新增的角色",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "storeIds",
+            "description": "需要新增的仓库",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userName",
+            "description": "用户名",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userPhoneNum",
+            "description": "手机号",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserLoginResponseVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationId",
+            "description": "公司ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationName",
+            "description": "公司名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "token",
+            "description": "用户token",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userName",
+            "description": "用户名称",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserStoreVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "storehouseId",
+            "description": "仓库ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "storehouseName",
+            "description": "仓库名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户id",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "landlineNum",
+            "description": "座机号码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationName",
+            "description": "组织名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roles",
+            "description": "角色列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "stores",
+            "description": "仓库列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userName",
+            "description": "用户名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userPhoneNum",
+            "description": "用户电话号码",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserWithRoleIdVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createTime",
+            "description": "创建时间",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "landlineNum",
+            "description": "座机号码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationName",
+            "description": "组织名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "RoleVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roles",
+            "description": "角色列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserStoreVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "stores",
+            "description": "仓库列表",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userName",
+            "description": "用户名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userPhoneNum",
+            "description": "用户电话号码",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      }
+    ]
+  },
+  {
+    "mods": [
+      {
+        "description": "角色权限管理",
+        "interfaces": [
+          {
+            "description": "版本更新",
+            "name": "getAppDevice",
+            "method": "get",
+            "path": "/api/auth/v1/role/app/device/version",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "AppDevice",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "platform",
+                "name": "platform",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [
+                    "'ANDROID'",
+                    "'IOS'",
+                    "'WEB'"
+                  ],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "根据用户ID获取权限列表",
+            "name": "authListByUserId",
+            "method": "get",
+            "path": "/api/auth/v1/role/authListByUserId",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "AuthDTO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "userId",
+                "name": "userId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "获取角色列表",
+            "name": "roleMenu",
+            "method": "get",
+            "path": "/api/auth/v1/role/roleMenu",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "RoleVO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": []
+          }
+        ],
+        "name": "role"
+      }
+    ],
+    "name": "authService",
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "AppDevice",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errMsg",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "AppDevice",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "AppDevice",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "appleId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "createAt",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "downloadUrl",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "platform",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "releaseAt",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "updateInfo",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "upgradeStrategy",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "version",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "versionCode",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "AuthDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authKey",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authName",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authPath",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "leaf",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "RoleVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleCode",
+            "description": "角色代码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleId",
+            "description": "角色id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "roleName",
+            "description": "角色名称",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      }
+    ]
+  },
+  {
+    "mods": [
+      {
+        "description": "sku管理",
+        "interfaces": [
+          {
+            "description": "单位列表 (commodityTypeId|name) (1|水果，5|sku净重)",
+            "name": "listUnits",
+            "method": "get",
+            "path": "/api/commodity/v1_1/units/list/{commodityTypeId}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [
+                        {
+                          "typeArgs": [],
+                          "typeName": "string",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        },
+                        {
+                          "typeArgs": [],
+                          "typeName": "number",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        }
+                      ],
+                      "typeName": "Option",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "commodityTypeId",
+                "name": "commodityTypeId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "unit"
+      }
+    ],
+    "name": "commodityService",
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "string",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    },
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Option",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errMsg",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [
+              {
+                "typeArgs": [
+                  {
+                    "typeArgs": [],
+                    "typeName": "string",
+                    "isDefsType": false,
+                    "templateIndex": -1,
+                    "compileTemplateKeyword": "#/definitions/",
+                    "enum": [],
+                    "typeProperties": []
+                  },
+                  {
+                    "typeArgs": [],
+                    "typeName": "number",
+                    "isDefsType": false,
+                    "templateIndex": -1,
+                    "compileTemplateKeyword": "#/definitions/",
+                    "enum": [],
+                    "typeProperties": []
+                  }
+                ],
+                "typeName": "Option",
+                "isDefsType": true,
+                "templateIndex": -1,
+                "compileTemplateKeyword": "#/definitions/",
+                "enum": [],
+                "typeProperties": []
+              }
+            ],
+            "typeName": "Array",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "Option",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "label",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "boolean",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "selected",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "value",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "string",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          },
+          {
+            "typeArgs": [],
+            "typeName": "number",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      }
+    ]
+  }
+]

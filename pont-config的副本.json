@@ -2,15 +2,15 @@
   "origins": [
     {
       "name": "userService",
-      "originUrl": "http://192.168.10.70:8081/api/user/v2/api-docs"
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/user/v2/api-docs"
     },
     {
       "name": "authService",
-      "originUrl": "http://192.168.10.70:8081/api/auth/v2/api-docs"
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/auth/v2/api-docs"
     },
     {
       "name": "commodityService",
-      "originUrl": "http://192.168.10.70:8081/api/commodity/v2/api-docs"
+      "originUrl": "https://pitaya-dev.hjgpscm.com/api/commodity/v2/api-docs"
     }
   ],
   "outDir": "./src/services",

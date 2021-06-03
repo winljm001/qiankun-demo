@@ -10,6 +10,8 @@ export default defineConfig({
     preprocessorOptions: {
       less: {
         javascriptEnabled: true,
+        modifyVars: { '@primary-color': '#0065FE' },
+        additionalData: `@import '@/assets/styles/variables.less';`,
       },
     },
   },
