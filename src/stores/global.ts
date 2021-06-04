@@ -3,7 +3,7 @@ import { devtools, persist } from 'zustand/middleware';
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index';
 import { getMenuList } from '@/utils/tools';
 import React from 'react';
-interface State {
+export interface State {
   /** menuList */
   menuList: CustomRouteConfig[];
   /** 是否登录 */
@@ -11,7 +11,10 @@ interface State {
   /** token */
   token: string;
   /** 用户信息 */
-  userInfo: any;
+  userInfo: {
+    username: string;
+    corpName: string;
+  };
   /** 权限是否准备好 */
   isAuthReady: boolean;
   setMenuList: (value: CustomRouteConfig[]) => void;
@@ -22,7 +25,7 @@ interface State {
   collapsed: boolean;
   setCollapsed: (value: boolean) => void;
   /** 退出 */
-  logout: () => void;
+  logout: (callback?: () => void) => void;
   [key: string]: any;
 }
 
@@ -36,7 +39,10 @@ const useGlobalStore = create<State>(
         menuOpenKeys: null,
         isLogin: false,
         token: null,
-        userInfo: null,
+        userInfo: {
+          corpName: 'test',
+          username: 'test',
+        },
         isAuthReady: false,
         setMenuList: (menuList) => {
           set({ menuList });
@@ -44,25 +50,28 @@ const useGlobalStore = create<State>(
         setMenuOpenKeys: (openKeys) => {
           set({ menuOpenKeys: openKeys });
         },
-        setCollapsed: value => {
-          set({ collapsed: value })
+        setCollapsed: (value) => {
+          set({ collapsed: value });
         },
-        logout: () => {
-          set({ isLogin: false, token: '', userInfo: {} });
+        logout: (callback) => {
+          set({ isLogin: false, token: null, userInfo: null });
+          callback?.()
         },
       }),
       {
         name: 'global-storage',
         getStorage: () => localStorage,
+        // only these props will be persisted
+        whitelist: ['isLogin', 'token', 'collapsed', 'userInfo', 'menuOpenKeys'],
       },
     ),
   ),
 );
 
-// init menuList while isLogin turn to be true
 useGlobalStore.subscribe(
   (isLogin) => {
     if (isLogin) {
+      // init menuList while isLogin turn to be true
       new Promise<any[]>((resolve) => {
         resolve([]);
       })
@@ -77,6 +86,6 @@ useGlobalStore.subscribe(
   },
   (state) => state.isLogin,
 );
-useGlobalStore.setState({ isLogin: true })
+useGlobalStore.setState({ isLogin: true });
 
 export default useGlobalStore;

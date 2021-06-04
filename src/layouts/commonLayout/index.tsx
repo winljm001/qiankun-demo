@@ -35,7 +35,8 @@ const traverseRoutes = (routes: CustomRouteConfig[], handle: (route: CustomRoute
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) => {
   const { route } = props;
-  const { isAuthReady, menuList, collapsed, setCollapsed, menuOpenKeys, setMenuOpenKeys } = useGlobalStore();
+  const { isAuthReady, menuList, collapsed, setCollapsed, menuOpenKeys, setMenuOpenKeys, userInfo, logout } =
+    useGlobalStore();
   useEffect(() => {
     useGlobalStore.setState({
       isLogin: true,
@@ -92,12 +93,12 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
   if (!isAuthReady) {
-    return null
+    return null;
   }
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <AppHeader collapsed={collapsed} setCollapsed={setCollapsed} />
+        <AppHeader userInfo={userInfo} collapsed={collapsed} setCollapsed={setCollapsed} logout={logout} />
       </Header>
       <Layout>
         <Sider collapsed={collapsed} trigger={null} collapsible width={208}>
