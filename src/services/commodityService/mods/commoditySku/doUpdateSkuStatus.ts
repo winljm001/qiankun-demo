@@ -1,34 +1,58 @@
+// doUpdateSkuStatus 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc doUpdateSkuStatus
+ * @description doUpdateSkuStatus 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {}
+export class Params {}
 
-export interface IParams {
-  bodyParams: defs.commodityService.ModifyTheSkuStatus
-}
+/**
+ * @description doUpdateSkuStatus 接口参数
+ */
+export type DoUpdateSkuStatusParams = Params &
+  defs.commodityService.ModifyTheSkuStatus
 
-export function doUpdateSkuStatus({ bodyParams }: IParams = {} as IParams) {
-  return request<defs.commodityService.ApiResult<boolean>>({
-    url: `/api/commodity/v1/commodity/sku/update/status`,
-    method: 'put',
-    data: bodyParams
+/**
+ * @description doUpdateSkuStatus 接口
+ */
+export const doUpdateSkuStatus = (
+  params: DoUpdateSkuStatusParams,
+  headers?: any
+) => {
+  return request.request<defs.commodityService.ApiResult<boolean>>({
+    ...request.buildOptions(
+      '/api/commodity/v1/commodity/sku/update/status',
+      params,
+      'PUT'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function doUpdateSkuStatusRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    bodyParams: restParamsData[0]
-  }
-  try {
-    const res = await doUpdateSkuStatus(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description doUpdateSkuStatus hooks 默认的 key
+ */
+export const USE_DO_UPDATE_SKU_STATUS_KEY =
+  '/api/commodity/v1/commodity/sku/update/status_PUT'
+
+// export const doUpdateSkuStatusQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return doUpdateSkuStatus(params);
+// }
+
+// /**
+//  * @description doUpdateSkuStatus hooks
+//  */
+// export const useDoUpdateSkuStatus = (params: DoUpdateSkuStatusParams, headers?:any, key = 'USE_DO_UPDATE_SKU_STATUS_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => doUpdateSkuStatus(params, headers),
+//   })
+// }

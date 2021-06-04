@@ -1,31 +1,55 @@
+// list 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc list
+ * @description list 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {}
+export class Params {}
 
-export interface IParams {}
+/**
+ * @description list 接口参数
+ */
+export type ListParams = Params
 
-export function list({}: IParams = {} as IParams) {
-  return request<
+/**
+ * @description list 接口
+ */
+export const list = (params: ListParams, headers?: any) => {
+  return request.request<
     defs.commodityService.ApiResult<defs.commodityService.CommodityCategoryVO>
   >({
-    url: `/api/commodity/v1/commodity/category/spu/list`,
-    method: 'get'
+    ...request.buildOptions(
+      '/api/commodity/v1/category/spu/list',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function listRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await list(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description list hooks 默认的 key
+ */
+export const USE_LIST_KEY = '/api/commodity/v1/category/spu/list_GET'
+
+// export const listQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return list(params);
+// }
+
+// /**
+//  * @description list hooks
+//  */
+// export const useList = (params: ListParams, headers?:any, key = 'USE_LIST_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => list(params, headers),
+//   })
+// }

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 import { Layout } from 'antd';
 import styles from './style.module.less';
@@ -35,7 +35,7 @@ const traverseRoutes = (routes: CustomRouteConfig[], handle: (route: CustomRoute
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) => {
   const { route } = props;
-  const { isAuthReady, menuList, collapsed, setCollapsed, userInfo, logout } =
+  const { isAuthReady, menuList, userSetting, setUserSetting, userInfo, logout } =
     useGlobalStore();
   useEffect(() => {
     useGlobalStore.setState({
@@ -86,6 +86,9 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     traverse(menuList);
     return keys;
   }, [location.pathname, menuList]);
+  const setCollapsed = useCallback(collapsed => {
+    setUserSetting({ collapsed })
+  }, [userSetting.collapsed])
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
   if (!isAuthReady) {
@@ -94,15 +97,15 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <AppHeader userInfo={userInfo} collapsed={collapsed} setCollapsed={setCollapsed} logout={logout} />
+        <AppHeader userInfo={userInfo} collapsed={userSetting.collapsed} setCollapsed={setCollapsed} logout={logout} />
       </Header>
       <Layout>
-        <Sider collapsed={collapsed} trigger={null} collapsible width={208}>
+        <Sider collapsed={userSetting.collapsed} trigger={null} collapsible width={208}>
           <SideMenu
             menuList={menuList}
             defaultSelectedKeys={[matchedRouteConfig.meta?.menuText]}
-            defaultOpenKeys={collapsed ? [] : openKeys}
-            inlineCollapsed={collapsed}
+            defaultOpenKeys={userSetting.collapsed ? [] : openKeys}
+            inlineCollapsed={userSetting.collapsed}
           />
         </Sider>
         <Layout>

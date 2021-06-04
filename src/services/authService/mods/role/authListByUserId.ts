@@ -1,37 +1,62 @@
+// 根据用户ID获取权限列表 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc 根据用户ID获取权限列表
+ * @description 根据用户ID获取权限列表 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** userId */
   userId: number
 }
 
-export interface IParams {
-  queryParams: IQueryParams
-}
+/**
+ * @description 根据用户ID获取权限列表 接口参数
+ */
+export type AuthListByUserIdParams = Params
 
-export function authListByUserId({ queryParams }: IParams = {} as IParams) {
-  return request<defs.authService.ApiResult<Array<defs.authService.AuthDTO>>>({
-    url: `/api/auth/v1/role/authListByUserId`,
-    method: 'get',
-    params: queryParams
+/**
+ * @description 根据用户ID获取权限列表 接口
+ */
+export const authListByUserId = (
+  params: AuthListByUserIdParams,
+  headers?: any
+) => {
+  return request.request<
+    defs.authService.ApiResult<Array<defs.authService.AuthDTO>>
+  >({
+    ...request.buildOptions(
+      '/api/auth/v1/role/authListByUserId',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function authListByUserIdRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0]
-  }
-  try {
-    const res = await authListByUserId(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description 根据用户ID获取权限列表 hooks 默认的 key
+ */
+export const USE_AUTH_LIST_BY_USER_ID_KEY =
+  '/api/auth/v1/role/authListByUserId_GET'
+
+// export const authListByUserIdQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return authListByUserId(params);
+// }
+
+// /**
+//  * @description 根据用户ID获取权限列表 hooks
+//  */
+// export const useAuthListByUserId = (params: AuthListByUserIdParams, headers?:any, key = 'USE_AUTH_LIST_BY_USER_ID_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => authListByUserId(params, headers),
+//   })
+// }

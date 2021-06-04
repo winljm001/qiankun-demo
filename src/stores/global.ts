@@ -2,12 +2,15 @@ import create, { SetState, GetState } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index';
 import { getMenuList } from '@/utils/tools';
-import React from 'react';
-export interface State {
+
+import { authListByUserId } from '@/services/authService/mods/role/authListByUserId';
+export type State = {
   /** menuList */
   menuList: CustomRouteConfig[];
   /** 是否登录 */
   isLogin: boolean;
+  /** 用户id */
+  userId: number;
   /** token */
   token: string;
   /** 用户信息 */
@@ -20,12 +23,14 @@ export interface State {
   /** 权限是否准备好 */
   isAuthReady: boolean;
   setMenuList: (value: CustomRouteConfig[]) => void;
-  /** 菜单是否收起 */
-  collapsed: boolean;
-  setCollapsed: (value: boolean) => void;
+  /** 用户设置 */
+  userSetting: {
+    /** 菜单是否收起 */
+    collapsed: boolean;
+  },
+  setUserSetting: (value: Partial<State['userSetting']>) => void;
   /** 退出 */
   logout: (callback?: () => void) => void;
-  [key: string]: any;
 }
 
 const useGlobalStore = create<State>(
@@ -34,22 +39,25 @@ const useGlobalStore = create<State>(
     persist(
       (set: SetState<State>, get: GetState<State>) => ({
         menuList: null,
-        collapsed: false,
         isLogin: false,
+        userId: null,
         token: null,
         userInfo: {
-          companyName: 'test',
-          username: 'test',
+          companyName: '',
+          username: '',
+        },
+        userSetting: {
+          collapsed: false,
         },
         isAuthReady: false,
-        setMenuList: (menuList) => {
+        setMenuList: menuList => {
           set({ menuList });
         },
-        setCollapsed: (value) => {
-          set({ collapsed: value });
+        setUserSetting: value => {
+          set({ userSetting: { ...get().userSetting, ...value } });
         },
-        logout: (callback) => {
-          set({ isLogin: false, token: null, userInfo: null });
+        logout: callback => {
+          set({ isLogin: false });
           callback?.();
         },
       }),
@@ -57,7 +65,7 @@ const useGlobalStore = create<State>(
         name: 'global-storage',
         getStorage: () => localStorage,
         // only these props will be persisted
-        whitelist: ['isLogin', 'token', 'collapsed', 'userInfo'],
+        whitelist: ['isLogin', 'userId', 'token', 'userSetting', 'userInfo'],
       },
     ),
   ),
@@ -67,19 +75,19 @@ useGlobalStore.subscribe(
   (isLogin) => {
     if (isLogin) {
       // init menuList while isLogin turn to be true
-      new Promise<any[]>((resolve) => {
-        resolve([]);
-      })
-        .then((authData) => {
-          useGlobalStore.setState({ isAuthReady: true, menuList: getMenuList(mainRoutes, authData) });
+      authListByUserId({ userId: useGlobalStore.getState().userId })
+        .then((resp) => {
+          useGlobalStore.setState({ isAuthReady: true, menuList: getMenuList(mainRoutes, resp.data || []) });
         })
         .catch(() => {
           useGlobalStore.setState({ isAuthReady: true });
         });
+    } else {
+      // empty user data
+      useGlobalStore.setState({ userId: null, token: null, userInfo: null, });
     }
   },
   (state) => state.isLogin,
 );
-useGlobalStore.setState({ isLogin: true });
 
 export default useGlobalStore;

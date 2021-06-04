@@ -17,6 +17,8 @@ module.exports = {
   },
   rules: {
     // 自定义你的规则
+    '@typescript-eslint/consistent-type-definitions': 0,
+    'no-undef': 0
   },
   settings: {
     react: {
