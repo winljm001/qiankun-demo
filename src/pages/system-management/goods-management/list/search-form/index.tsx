@@ -14,8 +14,8 @@ const SearchForm: React.FC<IProps> = ({ form, submit, reset }) => {
     <Form form={form}>
       <SearchFormLayout
         list={[
-          <Form.Item label="name" name="name" key={1}>
-            <Input placeholder="name" />
+          <Form.Item label="SPU名称" name="commodityName" key={1}>
+            <Input placeholder="SPU名称" />
           </Form.Item>,
           <Form.Item key="2">
             <Space size={24}>

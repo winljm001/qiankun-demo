@@ -31,7 +31,8 @@ const useGlobalStore = create<State>(
         menuList: [],
         menuOpenKeys: [],
         isLogin: true,
-        token: null,
+        token:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwib3JnYW5pemF0aW9uTmFtZSI6IumHjeW6hua0quS5neaenOWTgeiCoeS7veaciemZkOWFrOWPuOmHjeW6huWIhuWFrOWPuCIsInVzZXJfbmFtZSI6Iua4uOaAuyIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjIzMzczNTYwLCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiIwMjk2YzcyOC0zMGZlLTQyMjktOGY3My02M2Q4NWE5ZmFjNzAiLCJwbGF0Zm9ybSI6MTAsImNsaWVudF9pZCI6ImNsaWVudC1hcHAifQ.MwZJZ06MIC5SmiXvajg_i_qzqFyyuJbjRfFKFf0o8V-GfBG_GuHfVwum1FPY4JO12Zn6uBRBOIXlLGzoSYv6OhAyCuJhIEhgrjinlZFVdru8lOMkuiKLfI62DzGh6VPqHASarQkcDpmimp69PozD4vVeQV8D5voKby5ejQWPAGc',
         userInfo: null,
         isAuthReady: true,
         setMenuList: (menuList) => {
