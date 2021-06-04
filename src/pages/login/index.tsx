@@ -82,7 +82,7 @@ const Index: React.FC = () => {
             {/* 用户 */}
             <Form.Item name="username" className={styles.formInput} rules={[{ required: true, message: '请输入手机号！' },
             { pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/, message: '请输入11位正确电话号码!' }]}>
-              <Input className={styles.inputUser} placeholder="请输入手机号" prefix={<TabletOutlined />} />
+              <Input className={styles.inputUser} placeholder="请输入手机号" maxLength={11} prefix={<TabletOutlined />} />
             </Form.Item>
 
             {/* 验证码、按钮 */}
@@ -97,7 +97,7 @@ const Index: React.FC = () => {
                 }
                 return <Form.Item className={styles.formInputB}>
                   <Form.Item name="text" rules={[{ min: 6, max: 6, message: '请输入6位验证码' }, { required: true, message: '输入验证码' }]}>
-                    <Input className={styles.inputPassword} placeholder="请输入验证码" prefix={<SafetyOutlined />} />
+                    <Input className={styles.inputPassword} maxLength={6} placeholder="请输入6位验证码" prefix={<SafetyOutlined />} />
                   </Form.Item>
                   <Button onClick={() => {
                     toastVerificationCode()
