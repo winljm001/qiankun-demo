@@ -25,7 +25,7 @@ axios.interceptors.response.use(
   (response: AxiosResponse<any>) => {
     const data = response.data;
     // 操作不成功时直接提示
-    if (!data.success) {
+    if (data?.errCode !== 200) {
       message.error(data.message);
       return Promise.reject(data.message);
     }
@@ -55,7 +55,6 @@ export default async function request<T = any>(options: requestOptions) {
   if (options) {
     headers = options.headers || {};
   }
-  console.log(getState().token);
   const defaultOptions = {
     headers: {
       ...headers,

@@ -2,6 +2,7 @@ import React, { memo } from 'react';
 import { Menu, MenuProps } from 'antd';
 import styles from './style.module.less';
 import { Link } from 'react-router-dom';
+import * as Icons from '@ant-design/icons';
 import { CustomRouteConfig } from '@/router/config';
 
 interface IProps extends MenuProps {
@@ -13,9 +14,10 @@ const SideMenu: React.FC<IProps> = React.memo(({ menuList, defaultOpenKeys, defa
     return menuConfig?.map((menu) => {
       const menuText = menu.meta?.menuText;
       const subRoutes = menu.routes;
+      const icon = menu?.meta?.menuIcon ? React.createElement(Icons[menu?.meta?.menuIcon]) : null
       if (subRoutes?.length > 0) {
         return (
-          <Menu.SubMenu title={menuText} key={menuText}>
+          <Menu.SubMenu icon={icon} title={menuText} key={menuText}>
             {/* recursive traversal */}
             {renderMenu(subRoutes)}
           </Menu.SubMenu>
@@ -24,6 +26,7 @@ const SideMenu: React.FC<IProps> = React.memo(({ menuList, defaultOpenKeys, defa
       return (
         <Menu.Item key={menuText}>
           {/* path maybe an array! */}
+          {icon}
           <Link to={Array.isArray(menu.path) ? menu.path[0] : menu.path}>{menuText}</Link>
         </Menu.Item>
       );

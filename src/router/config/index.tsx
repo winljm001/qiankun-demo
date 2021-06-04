@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import loadable from '@loadable/component';
 import { RouteConfig } from 'react-router-config';
 import Layouts from '@/layouts/commonLayout/index';
-
+import * as Icons from '@ant-design/icons';
 import { Redirect } from 'react-router-dom';
 import { BASE_PATH } from './basePath';
 import { BreadcrumbItem } from '@/layouts/commonLayout/components/breadcrubm';
@@ -22,6 +22,8 @@ export interface CustomRouteConfig extends RouteConfig {
   meta?: {
     /** 系统左侧菜单栏文案（为空或未配置则不会出现在菜单栏） */
     menuText?: string;
+    /** 菜单按钮 */
+    menuIcon?: keyof typeof Icons;
     /** 主内容区域padding（默认16px） */
     contentPadding?: CSSProperties['padding'];
   };
