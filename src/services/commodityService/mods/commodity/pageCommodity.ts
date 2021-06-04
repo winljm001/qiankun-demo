@@ -1,59 +1,57 @@
 /**
  * @desc pageCommodity
  */
-import request from '@/utils/request'
+import request from '@/utils/request';
 export class IQueryParams {
   /** admin */
-  admin?: boolean
+  admin?: boolean;
   /** currentDate */
-  currentDate?: string
+  currentDate?: string;
   /** offset */
-  offset?: number
+  offset?: number;
   /** organizationId */
-  organizationId?: number
+  organizationId?: number;
   /** organizationName */
-  organizationName?: string
+  organizationName?: string;
   /** pageCurrent */
-  pageCurrent?: number
+  pageCurrent?: number;
   /** pageSize */
-  pageSize?: number
+  pageSize?: number;
   /** sortBys */
-  sortBys?: Array<string>
+  sortBys?: Array<string>;
   /** userId */
-  userId?: number
+  userId?: number;
   /** userName */
-  userName?: string
+  userName?: string;
 }
 
 export interface IParams {
-  queryParams: IQueryParams
+  queryParams: IQueryParams;
 }
 
 export function pageCommodity({ queryParams }: IParams = {} as IParams) {
   return request<
-    defs.commodityService.ApiResult<
-      defs.commodityService.DefaultPageResult<defs.commodityService.CommodityVO>
-    >
+    defs.commodityService.ApiResult<defs.commodityService.DefaultPageResult<defs.commodityService.CommodityVO>>
   >({
     url: `/api/commodity/v1/spu/list`,
     method: 'get',
-    params: queryParams
-  })
+    params: queryParams,
+  });
 }
 interface RqParams {
-  queryKey: any
-  pageParam?: any
+  queryKey: any;
+  pageParam?: any;
 }
 // 需要和react-query一起使用
 export async function pageCommodityRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
+  const [_, ...restParamsData] = params.queryKey;
   const fetchParams: IParams = {
-    queryParams: restParamsData[0]
-  }
+    queryParams: restParamsData[0],
+  };
   try {
-    const res = await pageCommodity(fetchParams)
-    return res
+    const res = await pageCommodity(fetchParams);
+    return res;
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error);
   }
 }

@@ -1,64 +1,86 @@
 import React from 'react';
-import { Form, Table } from 'antd';
-import { useAntdTable } from 'ahooks';
-import { PaginatedParams } from 'ahooks/lib/useAntdTable';
+import { Table } from 'antd';
 import SearchForm from './search-form/index';
 import { pageCommodity } from '@/services/commodityService/mods/commodity/pageCommodity';
-// interface Item {
-//   name: {
-//     last: string;
-//   };
-//   email: string;
-//   phone: string;
-//   gender: 'male' | 'female';
-// }
-
-// interface Result {
-//   total: number;
-//   list: Item[];
-// }
-
-const getTableData = ({ current, pageSize }: PaginatedParams[0], formData: Object) => {
-  const params = { pageCurrent: current, pageSize, ...formData };
-
-  return pageCommodity({ queryParams: params }).then((res) => {
-    console.log(res);
-    return { total: 0, list: [] };
-  });
-};
+import BaseCard from '@/components/BaseCard';
+import ActionGroup from '@/components/ActionGroup';
+import { useHistory } from 'react-router-dom';
+import { SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
+import StatusChanger from '@/components/StatusChanger';
+import useAsyncTable from '@/hooks';
 
 const AntdTable = () => {
-  const [form] = Form.useForm();
-
-  const { tableProps, search } = useAntdTable(getTableData, {
-    form,
-  });
-
-  const { submit, reset } = search;
-
+  const history = useHistory();
+  const { tableProps, form, submit, reset } = useAsyncTable({ fetchAction: pageCommodity });
+  const handleChangeStatus = (record) => {
+    console.log(record);
+  };
   const columns = [
     {
-      title: 'name',
-      dataIndex: ['name', 'last'],
+      title: 'SPU名称',
+      dataIndex: 'commodityName',
     },
     {
-      title: 'email',
-      dataIndex: 'email',
+      title: '商品品类',
+      dataIndex: 'commodityCategoryName',
     },
     {
-      title: 'phone',
-      dataIndex: 'phone',
+      title: '品种',
+      dataIndex: 'commodityVarietyName',
     },
     {
-      title: 'gender',
-      dataIndex: 'gender',
+      title: '产地',
+      dataIndex: 'commodityPlaceOriginName',
+    },
+    {
+      title: 'SKU数',
+      dataIndex: 'skuSum',
+    },
+    {
+      title: '状态',
+      dataIndex: 'status',
+      render: (val, record) => <StatusChanger checked={val === 1} onConfirm={() => handleChangeStatus(record)} />,
+    },
+    {
+      title: '操作1',
+      dataIndex: '_',
+      render: (val, record) => {
+        return (
+          <ActionGroup
+            actions={[
+              {
+                children: '修改SPU',
+                onClick() {
+                  console.log('修改spu');
+                },
+              },
+              {
+                children: '规格管理',
+                onClick() {
+                  history.push(`${SPEC_MANAGEMENT}?id=${record.id}`);
+                },
+              },
+              {
+                children: 'SKU管理',
+                onClick() {
+                  history.push(`${SKU_MANAGEMENT}?id=${record.id}`);
+                },
+              },
+            ]}
+          />
+        );
+      },
     },
   ];
 
   return (
     <div>
-      <SearchForm form={form} submit={submit} reset={reset} />
-      <Table columns={columns} rowKey="email" {...tableProps} />
+      <BaseCard>
+        <SearchForm form={form} submit={submit} reset={reset} />
+      </BaseCard>
+      <BaseCard>
+        <Table columns={columns} rowKey="id" {...tableProps} />
+      </BaseCard>
     </div>
   );
 };

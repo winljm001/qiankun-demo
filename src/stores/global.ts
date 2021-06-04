@@ -55,7 +55,7 @@ const useGlobalStore = create<State>(
         },
         logout: (callback) => {
           set({ isLogin: false, token: null, userInfo: null });
-          callback?.()
+          callback?.();
         },
       }),
       {
@@ -80,7 +80,7 @@ useGlobalStore.subscribe(
         })
         .catch(() => {
           useGlobalStore.setState({ isAuthReady: true });
-        })
+        });
     }
   },
   (state) => state.isLogin,
