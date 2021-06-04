@@ -11,13 +11,6 @@ import img from './images/logo.png'
 import styles from './style.module.less'
 
 const Index: React.FC = () => {
-
-  const { token } = useGlobalStore()
-  console.log(useGlobalStore.getState(), token, '----');
-  // useEffect(() => {
-
-  // })
-
   // 创建倒计时ahook
   const [countdown, setTargetDate] = useCountDown();
 
@@ -29,9 +22,7 @@ const Index: React.FC = () => {
     // 取手机号码
     const phoneNum1 = FormInstance.getFieldValue('username')
     sendCheckCode({
-      queryParams: {
-        phoneNum: String(phoneNum1)
-      }
+      phoneNum: String(phoneNum1)
     }).then(res => {
       message.success('获取验证码成功！')
     }).catch(err => {
@@ -39,25 +30,23 @@ const Index: React.FC = () => {
     })
   }
 
-
-
   const history = useHistory();
   const { logout } = useGlobalStore();
   useMount(() => {
     logout();
   });
+
+  // 登录按钮提交
   const onFinish = (values: any) => {
     login({
-      bodyParams: {
-        /** 短信验证码 */
-        checkCode: values.text,
-        /** 用户电话号码 */
-        phoneNum: values.username
-      }
+      /** 短信验证码 */
+      checkCode: values.text,
+      /** 用户电话号码 */
+      phoneNum: values.username
     }).then(res => {
       message.success('登陆成功！')
-      // 用户信息
-      const userInfo = {
+      // 存入globalState
+      useGlobalStore.setState({
         isLogin: true,
         token: res.data.token,
         userInfo: {
@@ -66,19 +55,15 @@ const Index: React.FC = () => {
           /** 公司名 */
           companyName: res.data.organizationName
         }
-      }
-      console.log(userInfo);
+      })
+      // console.log(useGlobalStore.getState());
 
       history.push('/');
     }).catch(err => {
       console.log(err);
 
     })
-    // 登录逻辑
-
-    // console.log('Success:', values);
   };
-
 
   return (
     <div className={styles.login}>

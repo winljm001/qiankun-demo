@@ -1,16 +1,18 @@
 import React, { FC } from 'react';
-import header_logo from '@/images/header_logo.png';
 import { Menu, Dropdown } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { State } from '@/stores/global';
+import header_logo from '@/images/header_logo.png';
+import avatar from '@/images/avatar.png'
 import styles from './index.module.less';
-import { useHistory } from 'react-router';
 
-type IProps = Pick<State, 'logout' | 'userInfo' | 'collapsed' | 'setCollapsed'>;
+type IProps = Pick<State, 'logout' | 'userInfo'> & {
+  collapsed: boolean;
+  setCollapsed: (collapse: boolean) => void;
+};
 
 const AppHeader: FC<IProps> = ({ userInfo, logout, collapsed, setCollapsed }) => {
   const CollapseIcon = collapsed ? MenuUnfoldOutlined : MenuFoldOutlined;
-  const history = useHistory();
   const routeToLogin = () => {
     location.href = '/login';
   };
@@ -40,7 +42,7 @@ const AppHeader: FC<IProps> = ({ userInfo, logout, collapsed, setCollapsed }) =>
         <span className={styles.corpName}>{userInfo?.companyName}</span>
         <Dropdown overlay={menu} trigger={['click']}>
           <div className={styles.userInfo}>
-            <img src={header_logo} />
+            <img src={avatar} />
             <span className={styles.userName}>{userInfo?.username}</span>
           </div>
         </Dropdown>

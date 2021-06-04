@@ -1,6 +1,6 @@
 class ApiResult {
   /** data */
-  data = new CommodityCategoryVO()
+  data = new CommoditySpuVO()
 
   /** errCode */
   errCode = undefined
@@ -10,58 +10,97 @@ class ApiResult {
 }
 
 class CommodityCategoryVO {
-  /** categoryId */
-  categoryId = undefined
-
-  /** categoryName */
-  categoryName = ''
-
-  /** placeOriginId */
-  placeOriginId = undefined
-
-  /** varietyId */
-  varietyId = undefined
-}
-
-class CommodityGroupVO {
-  /** 商品产地列表 */
-  commodityPlaceOriginVOS = []
-
-  /** 商品品种列表 */
-  commodityVarietyVOS = []
-}
-
-class CommodityPlaceOriginVO {
   /** 品类id */
   categoryId = undefined
+
+  /** 品类名称 */
+  categoryName = ''
 
   /** 产地id */
   placeOriginId = undefined
 
-  /** 产地名称 */
-  placeOriginName = undefined
+  /** 品种id */
+  varietyId = undefined
 }
 
-class CommodityStatusDTO {
-  /** 商品id */
-  commodityId = undefined
+class CommodityDTO {
+  /** 商品品类id */
+  commodityCategoryId = undefined
 
-  /** 激活状态 */
-  status = undefined
-}
+  /** 商品名称 */
+  commodityName = ''
 
-class CommodityTypeVO {
+  /** 商品产地id */
+  commodityPlaceOriginId = undefined
+
+  /** 规格信息 */
+  commoditySpecDTOS = []
+
   /** 商品类型id */
   commodityTypeId = undefined
 
-  /** 商品类型名称 */
-  commodityTypeName = ''
-
-  /** 上级类型id */
-  parentCommodityTypeId = undefined
+  /** 商品品种id */
+  commodityVarietyId = undefined
 }
 
-class CommodityVO {
+class CommodityNameDTO {
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+}
+
+class CommoditySpecAndOptionPO {
+  /** commoditySpecId */
+  commoditySpecId = undefined
+
+  /** commoditySpecName */
+  commoditySpecName = ''
+
+  /** commoditySpecOptionPOList */
+  commoditySpecOptionPOList = []
+}
+
+class CommoditySpecDTO {
+  /** 商品规格名称 */
+  commoditySpecName = ''
+
+  /** 商品SpecificationsAndOptions */
+  commoditySpecOptionDTOS = []
+
+  /** 商品规格排序 */
+  commoditySpecSort = undefined
+}
+
+class CommoditySpecModifyDTO {
+  /** 商品规格ID */
+  commoditySpecId = ''
+
+  /** 商品规格名称 */
+  commoditySpecName = ''
+
+  /** 商品SpecificationsAndOptions */
+  commoditySpecOptionDTOS = []
+
+  /** 商品规格排序 */
+  commoditySpecSort = undefined
+}
+
+class CommoditySpecOptionDTO {
+  /** 商品SpecificationsAndOptions名称 */
+  commoditySpecOptionName = ''
+}
+
+class CommoditySpecOptionPO {
+  /** commoditySpecOptionId */
+  commoditySpecOptionId = undefined
+
+  /** commoditySpecOptionName */
+  commoditySpecOptionName = ''
+}
+
+class CommoditySpuVO {
   /** 商品品类名称 */
   commodityCategoryName = ''
 
@@ -73,6 +112,9 @@ class CommodityVO {
 
   /** 商品产地名称 */
   commodityPlaceOriginName = ''
+
+  /** 规格信息 */
+  commoditySpecAndOptionPOS = []
 
   /** 商品类型名称 */
   commodityTypeName = ''
@@ -87,15 +129,12 @@ class CommodityVO {
   status = undefined
 }
 
-class CommodityVarietyVO {
-  /** 品类id */
-  categoryId = undefined
+class CommodityStatusDTO {
+  /** 商品id */
+  commodityId = undefined
 
-  /** 品种id */
-  varietyId = undefined
-
-  /** 品种名称 */
-  varietyName = undefined
+  /** 激活状态 */
+  status = undefined
 }
 
 class DefaultPageResult {
@@ -121,9 +160,6 @@ class ModifyTheSkuStatus {
 }
 
 class ModifyTheSpu {
-  /** sku id */
-  commoditySkuIds = []
-
   /** 状态（1激活，0禁用） */
   status = undefined
 
@@ -156,7 +192,7 @@ class ScreeningSkuList {
   commoditySpecName = ''
 
   /** SpecificationsAndOptions */
-  commoditySpecOptionVOS = []
+  commoditySpecOptionVOList = []
 }
 
 class SkuDetails {
@@ -178,27 +214,30 @@ class SkuDetails {
 
 class SkuHeader {
   /** SkuListHeader */
-  skuListColumnCommoditySkuUnitVOS = []
+  skuListColumnCommoditySkuUnitVOList = []
 
   /** SkuList规格表头 */
-  skuListColumnCommoditySpecVOS = []
+  skuListColumnCommoditySpecVOList = []
 }
 
 class SkuList {
+  /** 变更状态：0未变更，1变更 */
+  change = undefined
+
   /** sku Id */
   commoditySkuId = undefined
 
   /** SpecificationsAndOptions */
-  skuListCommoditySpecVOS = []
+  skuCommoditySpecOptionMap = undefined
 
   /** 状态（1激活，0禁用） */
   status = undefined
 
   /** 总计类型（sku单位；副单位） */
-  totalType = ''
+  totalTypeText = ''
 
   /** 单位数量（sku净重；换算比率） */
-  unitQuantity = ''
+  unitQuantityText = ''
 }
 
 class SkuListFilterCondition {
@@ -206,7 +245,7 @@ class SkuListFilterCondition {
   commodityId = undefined
 
   /** SpecificationsAndOptions */
-  commoditySpecOptionDTOS = []
+  commoditySpecOptionDTOList = []
 
   /** pageCurrent */
   pageCurrent = undefined
@@ -235,30 +274,47 @@ class SkuSpecificationOptionsHeaderList {
 }
 
 class SpecificationsAndOptions {
-  /** 规格id */
-  commoditySpecId = undefined
-
   /** SpecificationsAndOptionsid */
-  commoditySpecOptionIds = undefined
+  commoditySpecOptionId = undefined
+
+  /** SpecificationsAndOptions名称 */
+  commoditySpecOptionName = ''
 }
 
 class SpecificationsAndOptions0 {
-  /** 规格id */
-  commoditySpecId = undefined
+  /** SpecificationsAndOptionsid */
+  commoditySpecOptionId = undefined
 
-  /** 选项名称 */
+  /** SpecificationsAndOptions名称 */
   commoditySpecOptionName = ''
+}
+
+class SpecificationsAndTypes {
+  /** 商品规格ID */
+  commoditySpecId = ''
+
+  /** 商品规格名称 */
+  commoditySpecName = ''
+
+  /** 商品SpecificationsAndOptions */
+  commoditySpecOptionVOList = []
+
+  /** 商品规格排序 */
+  commoditySpecSort = undefined
 }
 
 export const commodityService = {
   ApiResult,
   CommodityCategoryVO,
-  CommodityGroupVO,
-  CommodityPlaceOriginVO,
+  CommodityDTO,
+  CommodityNameDTO,
+  CommoditySpecAndOptionPO,
+  CommoditySpecDTO,
+  CommoditySpecModifyDTO,
+  CommoditySpecOptionDTO,
+  CommoditySpecOptionPO,
+  CommoditySpuVO,
   CommodityStatusDTO,
-  CommodityTypeVO,
-  CommodityVO,
-  CommodityVarietyVO,
   DefaultPageResult,
   ModifyTheSkuStatus,
   ModifyTheSpu,
@@ -271,5 +327,6 @@ export const commodityService = {
   SkuListHeader,
   SkuSpecificationOptionsHeaderList,
   SpecificationsAndOptions,
-  SpecificationsAndOptions0
+  SpecificationsAndOptions0,
+  SpecificationsAndTypes
 }

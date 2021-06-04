@@ -1,34 +1,54 @@
+// getCommodity 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc getCommodity
+ * @description getCommodity 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** id */
   id: number
 }
 
-export interface IParams {}
+/**
+ * @description getCommodity 接口参数
+ */
+export type GetCommodityParams = Params
 
-export function getCommodity({}: IParams = {} as IParams, id: string | number) {
-  return request<
-    defs.commodityService.ApiResult<defs.commodityService.CommodityVO>
+/**
+ * @description getCommodity 接口
+ */
+export const getCommodity = (params: GetCommodityParams, headers?: any) => {
+  return request.request<
+    defs.commodityService.ApiResult<defs.commodityService.CommoditySpuVO>
   >({
-    url: `/api/commodity/v1/spu/${id}`,
-    method: 'get'
+    ...request.buildOptions('/api/commodity/v1/spu/{id}', params, 'GET'),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function getCommodityRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await getCommodity(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description getCommodity hooks 默认的 key
+ */
+export const USE_GET_COMMODITY_KEY = '/api/commodity/v1/spu/{id}_GET'
+
+// export const getCommodityQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return getCommodity(params);
+// }
+
+// /**
+//  * @description getCommodity hooks
+//  */
+// export const useGetCommodity = (params: GetCommodityParams, headers?:any, key = 'USE_GET_COMMODITY_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => getCommodity(params, headers),
+//   })
+// }

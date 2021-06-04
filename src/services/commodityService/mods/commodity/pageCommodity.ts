@@ -1,57 +1,78 @@
+// pageCommodity 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc pageCommodity
+ * @description pageCommodity 接口 URL 参数/GET
  */
-import request from '@/utils/request';
-export class IQueryParams {
+export class Params {
   /** admin */
-  admin?: boolean;
+  admin?: boolean
+  /** commodityName */
+  commodityName?: string
   /** currentDate */
-  currentDate?: string;
+  currentDate?: string
   /** offset */
-  offset?: number;
+  offset?: number
   /** organizationId */
-  organizationId?: number;
+  organizationId?: number
   /** organizationName */
-  organizationName?: string;
+  organizationName?: string
   /** pageCurrent */
-  pageCurrent?: number;
+  pageCurrent?: number
   /** pageSize */
-  pageSize?: number;
+  pageSize?: number
   /** sortBys */
-  sortBys?: Array<string>;
+  sortBys?: Array<string>
   /** userId */
-  userId?: number;
+  userId?: number
   /** userName */
-  userName?: string;
+  userName?: string
 }
 
-export interface IParams {
-  queryParams: IQueryParams;
-}
+/**
+ * @description pageCommodity 接口参数
+ */
+export type PageCommodityParams = Params
 
-export function pageCommodity({ queryParams }: IParams = {} as IParams) {
-  return request<
-    defs.commodityService.ApiResult<defs.commodityService.DefaultPageResult<defs.commodityService.CommodityVO>>
+/**
+ * @description pageCommodity 接口
+ */
+export const pageCommodity = (params: PageCommodityParams, headers?: any) => {
+  return request.request<
+    defs.commodityService.ApiResult<
+      defs.commodityService.DefaultPageResult<
+        defs.commodityService.CommoditySpuVO
+      >
+    >
   >({
-    url: `/api/commodity/v1/spu/list`,
-    method: 'get',
-    params: queryParams,
-  });
+    ...request.buildOptions('/api/commodity/v1/spu/list', params, 'GET'),
+    headers
+  })
 }
-interface RqParams {
-  queryKey: any;
-  pageParam?: any;
-}
-// 需要和react-query一起使用
-export async function pageCommodityRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey;
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0],
-  };
-  try {
-    const res = await pageCommodity(fetchParams);
-    return res;
-  } catch (error) {
-    throw new Error(error);
-  }
-}
+
+/**
+ * @description pageCommodity hooks 默认的 key
+ */
+export const USE_PAGE_COMMODITY_KEY = '/api/commodity/v1/spu/list_GET'
+
+// export const pageCommodityQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return pageCommodity(params);
+// }
+
+// /**
+//  * @description pageCommodity hooks
+//  */
+// export const usePageCommodity = (params: PageCommodityParams, headers?:any, key = 'USE_PAGE_COMMODITY_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => pageCommodity(params, headers),
+//   })
+// }
