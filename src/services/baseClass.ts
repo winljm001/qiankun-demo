@@ -44,53 +44,6 @@ export class BaseInfoVO {
   statusDesc = ''
 }
 
-export class BasePageRequest {
-  /** 柜次(不超过12个字符 模糊查询) */
-  cabinetBatchCode = ''
-
-  /** 柜号 (不超过11个字符 模糊查询) */
-  cabinetCode = ''
-
-  /** 创建时间-结束 */
-  createTimeEnd = ''
-
-  /** 创建时间-开始 */
-  createTimeStart = ''
-
-  /** 发运方式 1_陆运 2_海运 3_铁运 */
-  deliveryMethod = 1
-
-  /** 发货时间-结束 */
-  deliveryTimeEnd = ''
-
-  /** 发货时间-开始 */
-  deliveryTimeStart = ''
-
-  /** 页码 */
-  pageNo = undefined
-
-  /** 每页条数 */
-  pageSize = undefined
-
-  /** 进口港ID */
-  portId = undefined
-
-  /** 商品品类ID */
-  productId = undefined
-
-  /** 商品SPU ID */
-  productSpuId = undefined
-
-  /** 收货时间-结束 */
-  receivingTimeEnd = ''
-
-  /** 收货时间-开始 */
-  receivingTimeStart = ''
-
-  /** 状态 查询全部时不传 */
-  status = ''
-}
-
 export class BillCodeEditDTO {
   /** 销售单号 */
   billCode = ''
@@ -148,17 +101,6 @@ export class Column {
 
   /** 列名 */
   name = ''
-}
-
-export class CompanyOrder {
-  /** cabinetCount */
-  cabinetCount = undefined
-
-  /** departName */
-  departName = ''
-
-  /** receiverId */
-  receiverId = undefined
 }
 
 export class ContractAddDTO {
@@ -418,20 +360,6 @@ export class CustomerBusinessInfoVO {
   socialCreditCode = ''
 }
 
-export class CustomerCabinetOrderVO {
-  /** cabinetCount */
-  cabinetCount = undefined
-
-  /** departName */
-  departName = ''
-
-  /** receiverId */
-  receiverId = undefined
-
-  /** thisMonthCount */
-  thisMonthCount = undefined
-}
-
 export class CustomerCompanyListVO {
   /** 地址 */
   address = ''
@@ -685,7 +613,7 @@ export class DeclareCustomEditVO {
   /** 总净重 */
   totalNetWeight = undefined
 
-  /** 进口总货值 */
+  /** 总件数 */
   totalPack = undefined
 
   /** 货物到港时间 */
@@ -810,12 +738,6 @@ export class DeclareInfoEditVO {
   /** 计划离港时间 */
   expectDepartedTime = ''
 
-  /** 工厂联系人 */
-  factoryContact = ''
-
-  /** 工厂联系方式 */
-  factoryContactMobile = ''
-
   /** 订舱id */
   id = undefined
 
@@ -935,6 +857,47 @@ export class DeliveryEditBookingInfoVO {
 
   /** 订舱信息-船次号 */
   shipNo = ''
+}
+
+export class DeliveryEditEntryDeliveryInfoVO {
+  /** 进口口岸ID */
+  arrivePortId = undefined
+
+  /** 是否已发货 */
+  delivery = false
+
+  /** 口岸发货ID 用于编辑信息 */
+  id = undefined
+
+  /** 计划ID */
+  planId = undefined
+
+  /** 计划发货时间 */
+  planStartShipTime = ''
+
+  /** 发货方ID */
+  senderId = undefined
+
+  /** 发货类型 1:口岸 2：堆场 */
+  senderType = undefined
+
+  /** 装柜方式 1：原柜，2：装柜 */
+  shipmentMethod = undefined
+
+  /** 是否需要转柜检验 1:启用，99：禁用 */
+  sopEnabled = undefined
+
+  /** 是否已转柜检验 */
+  sopVerified = false
+
+  /** 状态值，12（已发运） */
+  state = ''
+
+  /** 是否在途温控 1：使用，99：不使用 */
+  tempMonitor = undefined
+
+  /** 是否已设置温度 */
+  tempMonitorSet = false
 }
 
 export class DeliveryEditExportDeclareInfoVO {
@@ -1057,6 +1020,9 @@ export class DeliveryEditInfoVO {
   /** 订舱信息 */
   bookingInfoVO = new DeliveryEditBookingInfoVO()
 
+  /** 入境口岸发货信息 */
+  entryDeliveryInfoVO = new DeliveryEditEntryDeliveryInfoVO()
+
   /** 出口报关信息 */
   exportDeclareInfoVO = new DeliveryEditExportDeclareInfoVO()
 
@@ -1071,6 +1037,12 @@ export class DeliveryEditInfoVO {
 
   /** 进口报关信息 */
   importDeclareInfoVO = new DeliveryEditImportDeclareInfoVO()
+
+  /** 流程节点 */
+  operLogs = []
+
+  /** 质检安排信息 */
+  portSopInfoVO = new DeliveryPortSopInfoVO()
 
   /** 商品信息 */
   productVO = new DeliveryEditProductVO()
@@ -1129,7 +1101,27 @@ export class DeliveryEditListVO {
   status = ''
 }
 
+export class DeliveryEditOperateLogsDTO {
+  /** 流程节点 */
+  operLogVOS = []
+}
+
 export class DeliveryEditProductBaseDTO {
+  /** 出口单价金额单位 */
+  exportCurrency = undefined
+
+  /** 出口单价 */
+  exportUnitPrice = undefined
+
+  /** 工厂ID */
+  factoryId = undefined
+
+  /** 进口单价金额单位 */
+  importCurrency = undefined
+
+  /** 进口单价 */
+  importUnitPrice = undefined
+
   /** 商品信息-数量 */
   number = undefined
 
@@ -1144,17 +1136,35 @@ export class DeliveryEditProductDTO {
   /** 修改对象 */
   baseDTOS = []
 
+  /** 出口总货值 */
+  exportTotalAmount = undefined
+
   /** plan表主键 */
   id = undefined
 
   /** 标签 */
   productFile = []
 
+  /** 进口总货值 */
+  totalAmount = undefined
+
+  /** 总重量(毛重)KG */
+  totalGrossWeight = undefined
+
+  /** 总重量(净重)KG */
+  totalNetWeight = undefined
+
   /** 商品信息-数量合计 */
   totalPack = undefined
 }
 
 export class DeliveryEditProductVO {
+  /** 出口总货值 */
+  exportTotalAmount = undefined
+
+  /** 工厂ids */
+  factoryIds = []
+
   /** plan表主键 */
   id = undefined
 
@@ -1171,97 +1181,44 @@ export class DeliveryEditProductVO {
   spuNames = ''
 
   /** 商品明细 */
-  tableVOs = []
+  tableFactoryVOS = []
+
+  /** 进口总货值 */
+  totalAmount = undefined
+
+  /** 总重量(毛重)KG */
+  totalGrossWeight = undefined
+
+  /** 总重量(净重)KG */
+  totalNetWeight = undefined
 
   /** 商品信息-数量合计 */
   totalPack = undefined
 }
 
 export class DeliveryEditReceiverInfoVO {
+  /** 服务区域ID,即国内分公司 */
+  customerCompanyId = undefined
+
+  /** 客户仓库ID */
+  customerDepositoryId = undefined
+
   /** plan表主键 */
   id = undefined
 
-  /** 收货方信息-收货方ID */
+  /** 收货方ID */
   receiverId = undefined
 
-  /** 收货方信息-收货方类型 */
+  /** 收货方类型1：销地分公司 2客户 */
   receiverType = undefined
 }
 
 export class DeliveryEditSenderInfoVO {
-  /** 发货方信息-发货工厂ID */
-  factoryId = undefined
-
   /** plan表主键 */
   id = undefined
 
   /** 发货方信息-发货方ID */
   senderId = undefined
-}
-
-export class DeliveryOrderItem {
-  /** createBy */
-  createBy = undefined
-
-  /** createTime */
-  createTime = ''
-
-  /** deleted */
-  deleted = undefined
-
-  /** deliveryOrderCode */
-  deliveryOrderCode = ''
-
-  /** deliveryOrderId */
-  deliveryOrderId = undefined
-
-  /** id */
-  id = undefined
-
-  /** qty */
-  qty = undefined
-
-  /** skuBrandId */
-  skuBrandId = undefined
-
-  /** skuBrandName */
-  skuBrandName = ''
-
-  /** skuItemId */
-  skuItemId = undefined
-
-  /** skuLevelId */
-  skuLevelId = undefined
-
-  /** skuLevelName */
-  skuLevelName = ''
-
-  /** skuPlaceId */
-  skuPlaceId = undefined
-
-  /** skuPlaceName */
-  skuPlaceName = ''
-
-  /** skuPropertyId */
-  skuPropertyId = undefined
-
-  /** skuPropertyName */
-  skuPropertyName = ''
-
-  /** skuSpecName */
-  skuSpecName = ''
-
-  /** splitQty */
-  splitQty = undefined
-
-  /** spuId */
-  spuId = undefined
-
-  /** updateBy */
-  updateBy = undefined
-
-  /** updateTime */
-  updateTime = ''
 }
 
 export class DeliveryPlanAddDTO {
@@ -1318,59 +1275,6 @@ export class DeliveryPlanAddDTO {
 
   /** 出口港id */
   startPortId = undefined
-}
-
-export class DeliveryPlanDetailVO {
-  /** 进口港 */
-  arrivePort = ''
-
-  /** 出口报关公司 */
-  declareCompany = ''
-
-  /** 进口港报关口岸 */
-  declarePort = ''
-
-  /** 发运方式 */
-  deliveryMethodName = ''
-
-  /** 进口港报关公司 */
-  domesticDeclareCompany = ''
-
-  /** 工厂 */
-  factory = ''
-
-  /** 运输要求 */
-  headTransportRemark = ''
-
-  /** id */
-  id = undefined
-
-  /** 头程运输公司id */
-  internationalTransportId = ''
-
-  /** 计划发柜时间 */
-  planStartTime = ''
-
-  /** 产地 */
-  productPlace = ''
-
-  /** 建议收货方 */
-  receiver = ''
-
-  /** 收货方类型 */
-  receiverTypeName = ''
-
-  /** 产地备注 */
-  remark = ''
-
-  /** 发货方 */
-  shipment = ''
-
-  /** 商品 */
-  spu = ''
-
-  /** 出口港 */
-  startPort = ''
 }
 
 export class DeliveryPlanEditDTO {
@@ -1624,6 +1528,29 @@ export class DeliveryPlanListVO {
   stateName = ''
 }
 
+export class DeliveryPortSopInfoVO {
+  /** 进口口岸ID */
+  arrivePortId = undefined
+
+  /** 进口口岸名称 */
+  arrivePortName = ''
+
+  /** 校验地ID */
+  placeId = undefined
+
+  /** 校验地名称 */
+  placeName = ''
+
+  /** 校验地类型，1：口岸，2:堆场 */
+  placeType = undefined
+
+  /** 计划ID */
+  planId = undefined
+
+  /** 是否口岸质检已完成 */
+  portSopVerified = false
+}
+
 export class DeliveryReceiverDTO {
   /** 服务区域ID,即国内分公司 */
   customerCompanyId = undefined
@@ -1684,6 +1611,20 @@ export class DepartIdModel {
 
   /** value */
   value = undefined
+}
+
+export class DomesticReportPageQueryDTO {
+  /** 柜次-模糊查询 */
+  cabinetBatchCode = ''
+
+  /** 柜号-模糊查询 */
+  cabinetCode = ''
+
+  /** 页码 */
+  pageNo = undefined
+
+  /** 每页条数 */
+  pageSize = undefined
 }
 
 export class DomesticTransportBookDTO {
@@ -1897,21 +1838,58 @@ export class DomesticTransportationVO {
   transitingMonitorTemperature = undefined
 }
 
-export class EDIUpdateInfoDTO {
-  /** 实际到港时间 */
-  actualArriveTime = ''
+export class DomesticTravelingColumVO {
+  /** 列字段 */
+  filed = ''
 
-  /** 实际离港时间 */
-  actualStartTime = ''
+  /** 是否为水果 false_否 true_是 */
+  fruitsStatus = false
 
-  /** 预计到港时间 */
-  expectArriveTime = ''
+  /** 列名 */
+  name = ''
+}
 
-  /** 预计离港时间 */
-  expectStartTime = ''
+export class DomesticTravelingInfoListVO {
+  /** 实际发货时间 */
+  actualStartShipTime = ''
+
+  /** 柜次 */
+  cabinetBatchCode = ''
+
+  /** 柜号 */
+  cabinetCode = ''
+
+  /** 分柜ID */
+  id = undefined
 
   /** 计划ID */
   planId = undefined
+
+  /** 计划发货时间 */
+  planStartShipTime = ''
+
+  /** 品类 */
+  product = ''
+
+  /** 品类ID */
+  productId = undefined
+
+  /** 收货区域 */
+  receiveArea = ''
+
+  /** 收货组织 */
+  receiveDepart = ''
+
+  /** SPU Names */
+  spuNames = ''
+}
+
+export class DomesticTravelingListVO {
+  /** 表单列 */
+  columns = []
+
+  /** 数据集合，key=filed。必返回key=id的数据 */
+  records = []
 }
 
 export class EntryPortDelivery {
@@ -2003,6 +1981,12 @@ export class EntryPortDeliveryDetailVO {
   /** 计划ID */
   id = undefined
 
+  /** 校验地名称 */
+  placeName = ''
+
+  /** 校验地类型，1：口岸，2:堆场 */
+  placeType = undefined
+
   /** 品类名称 */
   product = ''
 
@@ -2050,6 +2034,9 @@ export class EntryPortDeliveryListVO {
   /** 柜号 */
   cabinetCode = ''
 
+  /** 是否可以设置口岸质检（质检安排） */
+  canPortSopSet = false
+
   /** 合同号 */
   contractCode = ''
 
@@ -2067,6 +2054,9 @@ export class EntryPortDeliveryListVO {
 
   /** 品类名称 */
   product = ''
+
+  /** 质量异常状态 */
+  qualityState = 'NORMAL'
 
   /** 商品名称 */
   spuNames = ''
@@ -2108,17 +2098,6 @@ export class ExportDeclareInfoVO {
 
   /** 出口报关信息-货物到港时间 */
   transferTime = ''
-}
-
-export class FactoryOrder {
-  /** cabinetCount */
-  cabinetCount = undefined
-
-  /** departName */
-  departName = ''
-
-  /** factoryId */
-  factoryId = ''
 }
 
 export class File {
@@ -2216,6 +2195,9 @@ export class FinalTransportationInfoVO {
   /** 设定温度 */
   temperature = undefined
 
+  /** 设定风口温度照片 */
+  temperatureAirPortPicture = []
+
   /** 挂车号 */
   trailerNo = ''
 
@@ -2300,6 +2282,9 @@ export class HeadTransportEditVO {
 }
 
 export class HeadTransportListVO {
+  /** 进口港 */
+  arrivePort = ''
+
   /** 柜次 */
   cabinetBatchCode = ''
 
@@ -2516,6 +2501,9 @@ export class ImportDeclareDetailVO {
   /** 船运信息-计划离港时间 */
   expectDepartedTime = ''
 
+  /** 出口总货值 */
+  exportTotalAmount = undefined
+
   /** 出口报关公司 */
   expressCompany = ''
 
@@ -2582,11 +2570,8 @@ export class ImportDeclareDetailVO {
   /** 标签 */
   tagList = []
 
-  /** 总价值 */
+  /** 进口总货值 */
   totalAmount = undefined
-
-  /** 总价值 */
-  totalG = undefined
 
   /** 总重量（毛重） */
   totalGrossWeight = undefined
@@ -2883,6 +2868,17 @@ export class ImportDeclareThirdReplenishDTO {
 
 export class InputStream {}
 
+export class InternationalPortShipPortSopInfoVO {
+  /** 校验地ID */
+  placeId = undefined
+
+  /** 校验地名称 */
+  placeName = ''
+
+  /** 校验地类型，1：口岸，2:堆场 */
+  placeType = undefined
+}
+
 export class InternationalShipmentDetailListVO {
   /** 进口港 */
   arrivePort = ''
@@ -2933,6 +2929,53 @@ export class InternationalShipmentDetailListVO {
   statusName = ''
 }
 
+export class InternationalShipmentDetailQueryDTO {
+  /** 柜次(不超过12个字符 模糊查询) */
+  cabinetBatchCode = ''
+
+  /** 柜号 (不超过11个字符 模糊查询) */
+  cabinetCode = ''
+
+  /** 创建时间-结束 */
+  createTimeEnd = ''
+
+  /** 创建时间-开始 */
+  createTimeStart = ''
+
+  /** 发运方式 1_陆运 2_海运 3_铁运 */
+  deliveryMethod = 1
+
+  /** 发货时间-结束 */
+  deliveryTimeEnd = ''
+
+  /** 发货时间-开始 */
+  deliveryTimeStart = ''
+
+  /** 页码 */
+  pageNo = undefined
+
+  /** 每页条数 */
+  pageSize = undefined
+
+  /** 进口港ID */
+  portId = undefined
+
+  /** 商品品类ID */
+  productId = undefined
+
+  /** 商品SPU ID */
+  productSpuId = undefined
+
+  /** 收货时间-结束 */
+  receivingTimeEnd = ''
+
+  /** 收货时间-开始 */
+  receivingTimeStart = ''
+
+  /** 状态 查询全部时不传 */
+  status = ''
+}
+
 export class InternationalShipmentDetailVO {
   /** 基本信息 */
   baseInfoVO = new BaseInfoVO()
@@ -2978,6 +3021,9 @@ export class InternationalShipmentDetailVO {
 
   /** 发货方信息 */
   shipperCustomerInfoVO = new ShipperCustomerInfoVO()
+
+  /** 口岸质检安排信息 */
+  sopInfoVO = new InternationalPortShipPortSopInfoVO()
 }
 
 export class InternationalTravelingEditDTO {
@@ -3007,6 +3053,9 @@ export class InternationalTravelingInfoListVO {
   /** 柜号 */
   cabinetCode = ''
 
+  /** 可口岸质检  true_可安排, false_不可安排  */
+  canPortSopSet = false
+
   /** 进口报关公司 */
   declareCompany = ''
 
@@ -3034,10 +3083,13 @@ export class InternationalTravelingInfoListVO {
   /** 品类ID */
   productId = undefined
 
+  /** 质量异常状态 EXCEPTION_异常 NORMAL_正常 */
+  qualityState = ''
+
   /** 备注 */
   remark = ''
 
-  /** 可发货状态 全部时不传 1_可发货, 0_不可发货  */
+  /** 可发货状态 1_不可发货, 0_可发货  */
   shipStatus = undefined
 
   /** 发货时间 */
@@ -3171,6 +3223,9 @@ export class LoginedVO {
 export class Map {}
 
 export class OperLogVO {
+  /** 操作主键ID */
+  id = undefined
+
   /** 操作时间 */
   operTime = ''
 
@@ -3380,18 +3435,6 @@ export class PickGoodsEditVO {
   /** 司机照片 */
   driverPic = ''
 
-  /** 工厂地址 */
-  factoryAddress = ''
-
-  /** 工厂联系人 */
-  factoryContact = ''
-
-  /** 工厂联系方式 */
-  factoryContactMobile = ''
-
-  /** 运输要求 */
-  headTransportRemark = ''
-
   /** id */
   id = undefined
 
@@ -3412,6 +3455,9 @@ export class PickGoodsEditVO {
 }
 
 export class PickGoodsListVO {
+  /** 进口港 */
+  arrivePort = ''
+
   /** 柜次 */
   cabinetBatchCode = ''
 
@@ -3432,9 +3478,6 @@ export class PickGoodsListVO {
 
   /** 发运方式 */
   deliveryMethodName = ''
-
-  /** 工厂名 */
-  factory = ''
 
   /** id */
   id = undefined
@@ -3604,6 +3647,49 @@ export class PortListVO {
   transportMode = ''
 }
 
+export class PortSopInfoVO {
+  /** 进口口岸ID */
+  arrivePortId = undefined
+
+  /** 进口口岸名称 */
+  arrivePortName = ''
+
+  /** 柜次号 */
+  cabinetBatchCode = ''
+
+  /** 柜号 */
+  cabinetCode = ''
+
+  /** 合同号 */
+  contractCode = ''
+
+  /** 校验地ID */
+  placeId = undefined
+
+  /** 校验地类型，1：口岸，2:堆场 */
+  placeType = undefined
+
+  /** 计划ID */
+  planId = undefined
+
+  /** 品类名称 */
+  productName = ''
+
+  /** 商品名称 */
+  spuNames = []
+}
+
+export class PortSopSaveDTO {
+  /** 校验地ID */
+  placeId = undefined
+
+  /** 校验地类型，1：口岸，2:堆场 */
+  placeType = undefined
+
+  /** 计划ID */
+  planId = undefined
+}
+
 export class PortVO {
   /** code */
   code = ''
@@ -3660,6 +3746,9 @@ export class ProductCheckDTO {
 }
 
 export class ProductInfoVO {
+  /** 出口总货值 */
+  exportTotalAmount = undefined
+
   /** 建议销售时间 */
   lastSellTime = ''
 
@@ -3678,7 +3767,7 @@ export class ProductInfoVO {
   /** 标签 */
   tagList = []
 
-  /** 总货值 */
+  /** 进口总货值 */
   totalAmount = undefined
 
   /** 总重量（毛重） */
@@ -4708,9 +4797,6 @@ export class ReceiveWebDetailVO {
   /** 发货方地址 */
   senderAddress = ''
 
-  /** 还箱交接文件 */
-  shiftFileList = ''
-
   /** 装柜方式码1：原柜 2：转柜 3：装柜 */
   shipmentMethod = undefined
 
@@ -4777,34 +4863,6 @@ export class ReceiveWebListVO {
   stateName = ''
 }
 
-export class ReportGroupVO {
-  /** countPerMonth */
-  countPerMonth = undefined
-
-  /** perMonthStr */
-  perMonthStr = ''
-}
-
-export class ReportSalesVO {
-  /** addGrowthRate */
-  addGrowthRate = ''
-
-  /** avgCabinetPerDay */
-  avgCabinetPerDay = undefined
-
-  /** avgCabinetPerDayThisMonth */
-  avgCabinetPerDayThisMonth = undefined
-
-  /** totalCabinetCount */
-  totalCabinetCount = undefined
-
-  /** totalCabinetCountPerMonth */
-  totalCabinetCountPerMonth = undefined
-
-  /** transitCabinetCount */
-  transitCabinetCount = undefined
-}
-
 export class Resource {
   /** description */
   description = ''
@@ -4860,6 +4918,9 @@ export class ReturnInfoVO {
 
   /** 收货信息-报空合计费用 */
   emptyTotalFee = undefined
+
+  /** 收货信息-其他费用 */
+  otherFee = undefined
 
   /** 收货信息-压车费用 */
   pressFee = undefined
@@ -4942,12 +5003,6 @@ export class ShipmentInfoVO {
 }
 
 export class ShipperCustomerInfoVO {
-  /** 发货方信息-工厂名称 */
-  factoryId = undefined
-
-  /** 发货方信息-工厂名称 */
-  factoryName = ''
-
   /** 发货方信息-备注 */
   remark = ''
 
@@ -4980,7 +5035,7 @@ export class Sop {
   /** id */
   id = undefined
 
-  /** 操作环节(1-国际装柜，2-堆场验货，3-转柜检验，4-销地收货，5-国内装柜) */
+  /** 操作环节(1-国际装柜，2-口岸质检，3-转柜检验，4-销地收货，5-国内装柜) */
   operation = undefined
 
   /** operationName */
@@ -5073,7 +5128,7 @@ export class SopDetailResult {
   /** 检查项名称 */
   checkName = ''
 
-  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
   checkResultType = undefined
 
   /** ID */
@@ -5105,7 +5160,7 @@ export class SopDetailSaveRequest {
   /** 检查项名称 */
   checkName = ''
 
-  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
   checkResultType = undefined
 
   /** ID */
@@ -5188,7 +5243,7 @@ export class SopQuestionVO {
   /** 检查题目 */
   checkName = ''
 
-  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+  /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
   checkResultType = undefined
 
   /** 是否必须上传图片/视频(1:是 0：不是) */
@@ -5470,17 +5525,6 @@ export class StorageYardListVO {
   subPortName = ''
 }
 
-export class SupplierOrderVO {
-  /** cabinetCount */
-  cabinetCount = undefined
-
-  /** goodsSource */
-  goodsSource = undefined
-
-  /** goodsSourceName */
-  goodsSourceName = ''
-}
-
 export class SysDepart {
   /** address */
   address = ''
@@ -5662,6 +5706,9 @@ export class SysDepartEditVO {
   /** longitude 经度 */
   lng = ''
 
+  /** 国际化 */
+  nameLocale = undefined
+
   /** 组织类型列表 */
   orgCategories = []
 
@@ -5673,6 +5720,9 @@ export class SysDepartEditVO {
 
   /** 唯一key,也是depart的id */
   parentId = undefined
+
+  /** 关联品类ID */
+  productIds = []
 
   /** 备注 */
   remark = ''
@@ -6107,6 +6157,17 @@ export class SysUserVO {
   workNo = ''
 }
 
+export class TableFactoryVO {
+  /** 工厂ID */
+  factoryId = undefined
+
+  /** 工厂名称 */
+  factoryName = ''
+
+  /** 商品明细 */
+  tableVOS = []
+}
+
 export class TableVO {
   /** 表单列 */
   columns = []
@@ -6122,157 +6183,6 @@ export class TableVO {
 
   /** 总件数 */
   total = undefined
-}
-
-export class TempMonitorDetailVO {
-  /** 风口 */
-  airPort = undefined
-
-  /** 柜次 */
-  cabinetBatchCode = ''
-
-  /** 柜号 */
-  cabinetCode = ''
-
-  /** 装柜明细 */
-  items = []
-
-  /** 温度监控id */
-  monitorId = undefined
-
-  /** 是否超期 */
-  overdue = false
-
-  /** planid */
-  planId = undefined
-
-  /** NORMAL 正常 EXCEPTION 异常 */
-  qualityState = ''
-
-  /** 1 原柜 2 转柜 */
-  shipmentMethod = undefined
-
-  /** 是否需要做转柜sop 1 需要 99 不需要 */
-  sopEnabled = undefined
-
-  /** state */
-  state = ''
-
-  /** status */
-  status = undefined
-
-  /** 设置温度 */
-  temperature = undefined
-}
-
-export class TempMonitorListVO {
-  /** 风口 */
-  airPort = undefined
-
-  /** 进口港 */
-  arrivePortName = ''
-
-  /** 柜次 */
-  cabinetBatchCode = ''
-
-  /** 柜号 */
-  cabinetCode = ''
-
-  /** 是否超期 */
-  overdue = false
-
-  /** 计划id */
-  planId = undefined
-
-  /** 计划发货时间 */
-  planStartShipTime = ''
-
-  /** 商品id */
-  productId = ''
-
-  /** 品类 */
-  productName = ''
-
-  /** 品类图片 */
-  productPic = ''
-
-  /** qualityState */
-  qualityState = ''
-
-  /** 收货方 */
-  receiverName = []
-
-  /** 1 原柜 2转柜 3装柜 */
-  shipmentMethod = undefined
-
-  /** 货运方式翻译 */
-  shipmentMethodName = ''
-
-  /** 状态 */
-  state = ''
-
-  /** 状态翻译 */
-  stateName = ''
-
-  /** 状态 1 处理 2 已处理 */
-  status = undefined
-
-  /** statusName */
-  statusName = ''
-
-  /** 任务接收时间 */
-  taskDate = ''
-
-  /** 设置温度 */
-  temperature = undefined
-}
-
-export class TempMonitorQueryDTO {
-  /** 品类id */
-  productIds = []
-
-  /** 状态筛选 */
-  states = []
-
-  /** 1 待处理 2 已处理 */
-  status = undefined
-
-  /** 任务接受结束时间 */
-  taskEndTime = ''
-
-  /** 任务接受开始时间 */
-  taskStartTime = ''
-}
-
-export class TempMonitorSettingDTO {
-  /** 风口 */
-  airPort = undefined
-
-  /** 计划id */
-  planId = undefined
-
-  /** 是否异常 NORMAL 正常 EXCEPTION 异常 */
-  qualityState = ''
-
-  /** 温度 */
-  temperature = undefined
-}
-
-export class TempMonitorSettingEditDTO {
-  /** 风口 */
-  airPort = undefined
-
-  /** 监控id */
-  monitorId = undefined
-
-  /** 计划id */
-  planId = undefined
-
-  /** 是否异常 NORMAL 正常 EXCEPTION 异常 */
-  qualityState = ''
-
-  /** 温度 */
-  temperature = undefined
 }
 
 export class ThirdLoginModel {

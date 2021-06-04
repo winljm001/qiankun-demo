@@ -1,5 +1,5 @@
 /**
- * @desc 客户管理-添加
+ * @desc 新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

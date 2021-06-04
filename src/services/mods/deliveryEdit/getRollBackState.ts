@@ -1,5 +1,5 @@
 /**
- * @desc 国际发货-发货编辑-获取回滚到状态
+ * @desc 查询-获取当前回滚状态
  */
 import request from '@/utils/request'
 export class IQueryParams {

@@ -1,5 +1,5 @@
 /**
- * @desc 纳税放行-根据国际计划ID查询
+ * @desc 纳税放柜-查询-根据国际计划ID查询
  */
 import request from '@/utils/request'
 export class IQueryParams {

@@ -4,6 +4,8 @@ import Router from './router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 
+// import Login from './pages/login/index'
+
 const client = new QueryClient({
   defaultOptions: {
     queries: {
@@ -20,6 +22,7 @@ function App() {
         <Router />
         <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
+      {/* <Login /> */}
     </div>
   );
 }

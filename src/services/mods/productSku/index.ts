@@ -3,6 +3,7 @@
  */
 import * as updateBatchInfo from './updateBatchInfo'
 import * as checkSku from './checkSku'
+import * as getSkuInfo from './getSkuInfo'
 import * as findInfo from './findInfo'
 import * as updateInfo from './updateInfo'
 import * as listSkuOption from './listSkuOption'
@@ -14,6 +15,7 @@ import * as snapshotSku from './snapshotSku'
 export {
   updateBatchInfo,
   checkSku,
+  getSkuInfo,
   findInfo,
   updateInfo,
   listSkuOption,

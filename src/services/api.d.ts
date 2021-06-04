@@ -49,53 +49,6 @@ declare namespace defs {
     statusDesc?: string
   }
 
-  export class BasePageRequest {
-    /** 柜次(不超过12个字符 模糊查询) */
-    cabinetBatchCode?: string
-
-    /** 柜号 (不超过11个字符 模糊查询) */
-    cabinetCode?: string
-
-    /** 创建时间-结束 */
-    createTimeEnd?: string
-
-    /** 创建时间-开始 */
-    createTimeStart?: string
-
-    /** 发运方式 1_陆运 2_海运 3_铁运 */
-    deliveryMethod?: 1 | 2 | 3 | 1 | 2 | 3
-
-    /** 发货时间-结束 */
-    deliveryTimeEnd?: string
-
-    /** 发货时间-开始 */
-    deliveryTimeStart?: string
-
-    /** 页码 */
-    pageNo: number
-
-    /** 每页条数 */
-    pageSize: number
-
-    /** 进口港ID */
-    portId?: number
-
-    /** 商品品类ID */
-    productId?: number
-
-    /** 商品SPU ID */
-    productSpuId?: number
-
-    /** 收货时间-结束 */
-    receivingTimeEnd?: string
-
-    /** 收货时间-开始 */
-    receivingTimeStart?: string
-
-    /** 状态 查询全部时不传 */
-    status?: string
-  }
-
   export class BillCodeEditDTO {
     /** 销售单号 */
     billCode?: string
@@ -153,17 +106,6 @@ declare namespace defs {
 
     /** 列名 */
     name?: string
-  }
-
-  export class CompanyOrder {
-    /** cabinetCount */
-    cabinetCount?: number
-
-    /** departName */
-    departName?: string
-
-    /** receiverId */
-    receiverId?: number
   }
 
   export class ContractAddDTO {
@@ -423,20 +365,6 @@ declare namespace defs {
     socialCreditCode?: string
   }
 
-  export class CustomerCabinetOrderVO {
-    /** cabinetCount */
-    cabinetCount?: number
-
-    /** departName */
-    departName?: string
-
-    /** receiverId */
-    receiverId?: number
-
-    /** thisMonthCount */
-    thisMonthCount?: number
-  }
-
   export class CustomerCompanyListVO {
     /** 地址 */
     address?: string
@@ -690,7 +618,7 @@ declare namespace defs {
     /** 总净重 */
     totalNetWeight?: number
 
-    /** 进口总货值 */
+    /** 总件数 */
     totalPack?: number
 
     /** 货物到港时间 */
@@ -815,12 +743,6 @@ declare namespace defs {
     /** 计划离港时间 */
     expectDepartedTime?: string
 
-    /** 工厂联系人 */
-    factoryContact?: string
-
-    /** 工厂联系方式 */
-    factoryContactMobile?: string
-
     /** 订舱id */
     id?: number
 
@@ -940,6 +862,47 @@ declare namespace defs {
 
     /** 订舱信息-船次号 */
     shipNo?: string
+  }
+
+  export class DeliveryEditEntryDeliveryInfoVO {
+    /** 进口口岸ID */
+    arrivePortId?: number
+
+    /** 是否已发货 */
+    delivery?: boolean
+
+    /** 口岸发货ID 用于编辑信息 */
+    id?: number
+
+    /** 计划ID */
+    planId?: number
+
+    /** 计划发货时间 */
+    planStartShipTime?: string
+
+    /** 发货方ID */
+    senderId?: number
+
+    /** 发货类型 1:口岸 2：堆场 */
+    senderType?: number
+
+    /** 装柜方式 1：原柜，2：装柜 */
+    shipmentMethod?: number
+
+    /** 是否需要转柜检验 1:启用，99：禁用 */
+    sopEnabled?: number
+
+    /** 是否已转柜检验 */
+    sopVerified?: boolean
+
+    /** 状态值，12（已发运） */
+    state?: string
+
+    /** 是否在途温控 1：使用，99：不使用 */
+    tempMonitor?: number
+
+    /** 是否已设置温度 */
+    tempMonitorSet?: boolean
   }
 
   export class DeliveryEditExportDeclareInfoVO {
@@ -1062,6 +1025,9 @@ declare namespace defs {
     /** 订舱信息 */
     bookingInfoVO?: defs.DeliveryEditBookingInfoVO
 
+    /** 入境口岸发货信息 */
+    entryDeliveryInfoVO?: defs.DeliveryEditEntryDeliveryInfoVO
+
     /** 出口报关信息 */
     exportDeclareInfoVO?: defs.DeliveryEditExportDeclareInfoVO
 
@@ -1076,6 +1042,12 @@ declare namespace defs {
 
     /** 进口报关信息 */
     importDeclareInfoVO?: defs.DeliveryEditImportDeclareInfoVO
+
+    /** 流程节点 */
+    operLogs?: Array<defs.OperLogVO>
+
+    /** 质检安排信息 */
+    portSopInfoVO?: defs.DeliveryPortSopInfoVO
 
     /** 商品信息 */
     productVO?: defs.DeliveryEditProductVO
@@ -1134,7 +1106,27 @@ declare namespace defs {
     status?: string
   }
 
+  export class DeliveryEditOperateLogsDTO {
+    /** 流程节点 */
+    operLogVOS?: Array<defs.OperLogVO>
+  }
+
   export class DeliveryEditProductBaseDTO {
+    /** 出口单价金额单位 */
+    exportCurrency?: number
+
+    /** 出口单价 */
+    exportUnitPrice?: number
+
+    /** 工厂ID */
+    factoryId?: number
+
+    /** 进口单价金额单位 */
+    importCurrency?: number
+
+    /** 进口单价 */
+    importUnitPrice?: number
+
     /** 商品信息-数量 */
     number?: number
 
@@ -1149,17 +1141,35 @@ declare namespace defs {
     /** 修改对象 */
     baseDTOS: Array<defs.DeliveryEditProductBaseDTO>
 
+    /** 出口总货值 */
+    exportTotalAmount?: number
+
     /** plan表主键 */
     id: number
 
     /** 标签 */
     productFile?: Array<defs.FileVO>
 
+    /** 进口总货值 */
+    totalAmount?: number
+
+    /** 总重量(毛重)KG */
+    totalGrossWeight?: number
+
+    /** 总重量(净重)KG */
+    totalNetWeight?: number
+
     /** 商品信息-数量合计 */
     totalPack: number
   }
 
   export class DeliveryEditProductVO {
+    /** 出口总货值 */
+    exportTotalAmount?: number
+
+    /** 工厂ids */
+    factoryIds?: Array<number>
+
     /** plan表主键 */
     id?: number
 
@@ -1176,97 +1186,44 @@ declare namespace defs {
     spuNames?: string
 
     /** 商品明细 */
-    tableVOs?: Array<defs.TableVO>
+    tableFactoryVOS?: Array<defs.TableFactoryVO>
+
+    /** 进口总货值 */
+    totalAmount?: number
+
+    /** 总重量(毛重)KG */
+    totalGrossWeight?: number
+
+    /** 总重量(净重)KG */
+    totalNetWeight?: number
 
     /** 商品信息-数量合计 */
     totalPack?: number
   }
 
   export class DeliveryEditReceiverInfoVO {
+    /** 服务区域ID,即国内分公司 */
+    customerCompanyId?: number
+
+    /** 客户仓库ID */
+    customerDepositoryId?: number
+
     /** plan表主键 */
     id: number
 
-    /** 收货方信息-收货方ID */
+    /** 收货方ID */
     receiverId?: number
 
-    /** 收货方信息-收货方类型 */
+    /** 收货方类型1：销地分公司 2客户 */
     receiverType?: number
   }
 
   export class DeliveryEditSenderInfoVO {
-    /** 发货方信息-发货工厂ID */
-    factoryId?: number
-
     /** plan表主键 */
     id: number
 
     /** 发货方信息-发货方ID */
     senderId?: number
-  }
-
-  export class DeliveryOrderItem {
-    /** createBy */
-    createBy?: number
-
-    /** createTime */
-    createTime?: string
-
-    /** deleted */
-    deleted?: number
-
-    /** deliveryOrderCode */
-    deliveryOrderCode?: string
-
-    /** deliveryOrderId */
-    deliveryOrderId?: number
-
-    /** id */
-    id?: number
-
-    /** qty */
-    qty?: number
-
-    /** skuBrandId */
-    skuBrandId?: number
-
-    /** skuBrandName */
-    skuBrandName?: string
-
-    /** skuItemId */
-    skuItemId?: number
-
-    /** skuLevelId */
-    skuLevelId?: number
-
-    /** skuLevelName */
-    skuLevelName?: string
-
-    /** skuPlaceId */
-    skuPlaceId?: number
-
-    /** skuPlaceName */
-    skuPlaceName?: string
-
-    /** skuPropertyId */
-    skuPropertyId?: number
-
-    /** skuPropertyName */
-    skuPropertyName?: string
-
-    /** skuSpecName */
-    skuSpecName?: string
-
-    /** splitQty */
-    splitQty?: number
-
-    /** spuId */
-    spuId?: number
-
-    /** updateBy */
-    updateBy?: number
-
-    /** updateTime */
-    updateTime?: string
   }
 
   export class DeliveryPlanAddDTO {
@@ -1323,59 +1280,6 @@ declare namespace defs {
 
     /** 出口港id */
     startPortId?: number
-  }
-
-  export class DeliveryPlanDetailVO {
-    /** 进口港 */
-    arrivePort?: string
-
-    /** 出口报关公司 */
-    declareCompany?: string
-
-    /** 进口港报关口岸 */
-    declarePort?: string
-
-    /** 发运方式 */
-    deliveryMethodName?: string
-
-    /** 进口港报关公司 */
-    domesticDeclareCompany?: string
-
-    /** 工厂 */
-    factory?: string
-
-    /** 运输要求 */
-    headTransportRemark?: string
-
-    /** id */
-    id?: number
-
-    /** 头程运输公司id */
-    internationalTransportId?: string
-
-    /** 计划发柜时间 */
-    planStartTime?: string
-
-    /** 产地 */
-    productPlace?: string
-
-    /** 建议收货方 */
-    receiver?: string
-
-    /** 收货方类型 */
-    receiverTypeName?: string
-
-    /** 产地备注 */
-    remark?: string
-
-    /** 发货方 */
-    shipment?: string
-
-    /** 商品 */
-    spu?: string
-
-    /** 出口港 */
-    startPort?: string
   }
 
   export class DeliveryPlanEditDTO {
@@ -1629,6 +1533,29 @@ declare namespace defs {
     stateName?: string
   }
 
+  export class DeliveryPortSopInfoVO {
+    /** 进口口岸ID */
+    arrivePortId?: number
+
+    /** 进口口岸名称 */
+    arrivePortName?: string
+
+    /** 校验地ID */
+    placeId?: number
+
+    /** 校验地名称 */
+    placeName?: string
+
+    /** 校验地类型，1：口岸，2:堆场 */
+    placeType?: number
+
+    /** 计划ID */
+    planId?: number
+
+    /** 是否口岸质检已完成 */
+    portSopVerified?: boolean
+  }
+
   export class DeliveryReceiverDTO {
     /** 服务区域ID,即国内分公司 */
     customerCompanyId?: number
@@ -1689,6 +1616,20 @@ declare namespace defs {
 
     /** value */
     value?: number
+  }
+
+  export class DomesticReportPageQueryDTO {
+    /** 柜次-模糊查询 */
+    cabinetBatchCode?: string
+
+    /** 柜号-模糊查询 */
+    cabinetCode?: string
+
+    /** 页码 */
+    pageNo: number
+
+    /** 每页条数 */
+    pageSize: number
   }
 
   export class DomesticTransportBookDTO {
@@ -1902,21 +1843,58 @@ declare namespace defs {
     transitingMonitorTemperature?: number
   }
 
-  export class EDIUpdateInfoDTO {
-    /** 实际到港时间 */
-    actualArriveTime?: string
+  export class DomesticTravelingColumVO {
+    /** 列字段 */
+    filed?: string
 
-    /** 实际离港时间 */
-    actualStartTime?: string
+    /** 是否为水果 false_否 true_是 */
+    fruitsStatus?: boolean
 
-    /** 预计到港时间 */
-    expectArriveTime?: string
+    /** 列名 */
+    name?: string
+  }
 
-    /** 预计离港时间 */
-    expectStartTime?: string
+  export class DomesticTravelingInfoListVO {
+    /** 实际发货时间 */
+    actualStartShipTime?: string
+
+    /** 柜次 */
+    cabinetBatchCode?: string
+
+    /** 柜号 */
+    cabinetCode?: string
+
+    /** 分柜ID */
+    id?: number
 
     /** 计划ID */
     planId?: number
+
+    /** 计划发货时间 */
+    planStartShipTime?: string
+
+    /** 品类 */
+    product?: string
+
+    /** 品类ID */
+    productId?: number
+
+    /** 收货区域 */
+    receiveArea?: string
+
+    /** 收货组织 */
+    receiveDepart?: string
+
+    /** SPU Names */
+    spuNames?: string
+  }
+
+  export class DomesticTravelingListVO {
+    /** 表单列 */
+    columns?: Array<defs.DomesticTravelingColumVO>
+
+    /** 数据集合，key=filed。必返回key=id的数据 */
+    records?: Array<defs.ObjectMap<string, ObjectMap>>
   }
 
   export class EntryPortDelivery {
@@ -2008,6 +1986,12 @@ declare namespace defs {
     /** 计划ID */
     id?: number
 
+    /** 校验地名称 */
+    placeName?: string
+
+    /** 校验地类型，1：口岸，2:堆场 */
+    placeType?: number
+
     /** 品类名称 */
     product?: string
 
@@ -2055,6 +2039,9 @@ declare namespace defs {
     /** 柜号 */
     cabinetCode?: string
 
+    /** 是否可以设置口岸质检（质检安排） */
+    canPortSopSet?: boolean
+
     /** 合同号 */
     contractCode?: string
 
@@ -2072,6 +2059,9 @@ declare namespace defs {
 
     /** 品类名称 */
     product?: string
+
+    /** 质量异常状态 */
+    qualityState?: 'NORMAL' | 'EXCEPTION'
 
     /** 商品名称 */
     spuNames?: string
@@ -2113,17 +2103,6 @@ declare namespace defs {
 
     /** 出口报关信息-货物到港时间 */
     transferTime?: string
-  }
-
-  export class FactoryOrder {
-    /** cabinetCount */
-    cabinetCount?: number
-
-    /** departName */
-    departName?: string
-
-    /** factoryId */
-    factoryId?: string
   }
 
   export class File {
@@ -2221,6 +2200,9 @@ declare namespace defs {
     /** 设定温度 */
     temperature?: number
 
+    /** 设定风口温度照片 */
+    temperatureAirPortPicture?: Array<defs.FileVO>
+
     /** 挂车号 */
     trailerNo?: string
 
@@ -2305,6 +2287,9 @@ declare namespace defs {
   }
 
   export class HeadTransportListVO {
+    /** 进口港 */
+    arrivePort?: string
+
     /** 柜次 */
     cabinetBatchCode?: string
 
@@ -2521,6 +2506,9 @@ declare namespace defs {
     /** 船运信息-计划离港时间 */
     expectDepartedTime?: string
 
+    /** 出口总货值 */
+    exportTotalAmount?: number
+
     /** 出口报关公司 */
     expressCompany?: string
 
@@ -2587,11 +2575,8 @@ declare namespace defs {
     /** 标签 */
     tagList?: Array<defs.FileVO>
 
-    /** 总价值 */
+    /** 进口总货值 */
     totalAmount?: number
-
-    /** 总价值 */
-    totalG?: number
 
     /** 总重量（毛重） */
     totalGrossWeight?: number
@@ -2888,6 +2873,17 @@ declare namespace defs {
 
   export class InputStream {}
 
+  export class InternationalPortShipPortSopInfoVO {
+    /** 校验地ID */
+    placeId?: number
+
+    /** 校验地名称 */
+    placeName?: string
+
+    /** 校验地类型，1：口岸，2:堆场 */
+    placeType?: number
+  }
+
   export class InternationalShipmentDetailListVO {
     /** 进口港 */
     arrivePort?: string
@@ -2938,6 +2934,53 @@ declare namespace defs {
     statusName?: string
   }
 
+  export class InternationalShipmentDetailQueryDTO {
+    /** 柜次(不超过12个字符 模糊查询) */
+    cabinetBatchCode?: string
+
+    /** 柜号 (不超过11个字符 模糊查询) */
+    cabinetCode?: string
+
+    /** 创建时间-结束 */
+    createTimeEnd?: string
+
+    /** 创建时间-开始 */
+    createTimeStart?: string
+
+    /** 发运方式 1_陆运 2_海运 3_铁运 */
+    deliveryMethod?: 1 | 2 | 3 | 1 | 2 | 3
+
+    /** 发货时间-结束 */
+    deliveryTimeEnd?: string
+
+    /** 发货时间-开始 */
+    deliveryTimeStart?: string
+
+    /** 页码 */
+    pageNo: number
+
+    /** 每页条数 */
+    pageSize: number
+
+    /** 进口港ID */
+    portId?: number
+
+    /** 商品品类ID */
+    productId?: number
+
+    /** 商品SPU ID */
+    productSpuId?: number
+
+    /** 收货时间-结束 */
+    receivingTimeEnd?: string
+
+    /** 收货时间-开始 */
+    receivingTimeStart?: string
+
+    /** 状态 查询全部时不传 */
+    status?: string
+  }
+
   export class InternationalShipmentDetailVO {
     /** 基本信息 */
     baseInfoVO?: defs.BaseInfoVO
@@ -2983,6 +3026,9 @@ declare namespace defs {
 
     /** 发货方信息 */
     shipperCustomerInfoVO?: defs.ShipperCustomerInfoVO
+
+    /** 口岸质检安排信息 */
+    sopInfoVO?: defs.InternationalPortShipPortSopInfoVO
   }
 
   export class InternationalTravelingEditDTO {
@@ -3012,6 +3058,9 @@ declare namespace defs {
     /** 柜号 */
     cabinetCode?: string
 
+    /** 可口岸质检  true_可安排, false_不可安排  */
+    canPortSopSet?: boolean
+
     /** 进口报关公司 */
     declareCompany?: string
 
@@ -3039,10 +3088,13 @@ declare namespace defs {
     /** 品类ID */
     productId?: number
 
+    /** 质量异常状态 EXCEPTION_异常 NORMAL_正常 */
+    qualityState?: string
+
     /** 备注 */
     remark?: string
 
-    /** 可发货状态 全部时不传 1_可发货, 0_不可发货  */
+    /** 可发货状态 1_不可发货, 0_可发货  */
     shipStatus?: number
 
     /** 发货时间 */
@@ -3176,6 +3228,9 @@ declare namespace defs {
   export class Map<T0 = any, T1 = any> {}
 
   export class OperLogVO {
+    /** 操作主键ID */
+    id?: number
+
     /** 操作时间 */
     operTime?: string
 
@@ -3385,18 +3440,6 @@ declare namespace defs {
     /** 司机照片 */
     driverPic?: string
 
-    /** 工厂地址 */
-    factoryAddress?: string
-
-    /** 工厂联系人 */
-    factoryContact?: string
-
-    /** 工厂联系方式 */
-    factoryContactMobile?: string
-
-    /** 运输要求 */
-    headTransportRemark?: string
-
     /** id */
     id?: number
 
@@ -3417,6 +3460,9 @@ declare namespace defs {
   }
 
   export class PickGoodsListVO {
+    /** 进口港 */
+    arrivePort?: string
+
     /** 柜次 */
     cabinetBatchCode?: string
 
@@ -3437,9 +3483,6 @@ declare namespace defs {
 
     /** 发运方式 */
     deliveryMethodName?: string
-
-    /** 工厂名 */
-    factory?: string
 
     /** id */
     id?: number
@@ -3609,6 +3652,49 @@ declare namespace defs {
     transportMode?: string
   }
 
+  export class PortSopInfoVO {
+    /** 进口口岸ID */
+    arrivePortId?: number
+
+    /** 进口口岸名称 */
+    arrivePortName?: string
+
+    /** 柜次号 */
+    cabinetBatchCode: string
+
+    /** 柜号 */
+    cabinetCode: string
+
+    /** 合同号 */
+    contractCode?: string
+
+    /** 校验地ID */
+    placeId: number
+
+    /** 校验地类型，1：口岸，2:堆场 */
+    placeType: number
+
+    /** 计划ID */
+    planId: number
+
+    /** 品类名称 */
+    productName?: string
+
+    /** 商品名称 */
+    spuNames?: Array<string>
+  }
+
+  export class PortSopSaveDTO {
+    /** 校验地ID */
+    placeId: number
+
+    /** 校验地类型，1：口岸，2:堆场 */
+    placeType: number
+
+    /** 计划ID */
+    planId: number
+  }
+
   export class PortVO {
     /** code */
     code?: string
@@ -3665,6 +3751,9 @@ declare namespace defs {
   }
 
   export class ProductInfoVO {
+    /** 出口总货值 */
+    exportTotalAmount?: number
+
     /** 建议销售时间 */
     lastSellTime?: string
 
@@ -3683,7 +3772,7 @@ declare namespace defs {
     /** 标签 */
     tagList?: Array<defs.FileVO>
 
-    /** 总货值 */
+    /** 进口总货值 */
     totalAmount?: number
 
     /** 总重量（毛重） */
@@ -4713,9 +4802,6 @@ declare namespace defs {
     /** 发货方地址 */
     senderAddress?: string
 
-    /** 还箱交接文件 */
-    shiftFileList?: string
-
     /** 装柜方式码1：原柜 2：转柜 3：装柜 */
     shipmentMethod?: number
 
@@ -4782,34 +4868,6 @@ declare namespace defs {
     stateName?: string
   }
 
-  export class ReportGroupVO {
-    /** countPerMonth */
-    countPerMonth?: number
-
-    /** perMonthStr */
-    perMonthStr?: string
-  }
-
-  export class ReportSalesVO {
-    /** addGrowthRate */
-    addGrowthRate?: string
-
-    /** avgCabinetPerDay */
-    avgCabinetPerDay?: number
-
-    /** avgCabinetPerDayThisMonth */
-    avgCabinetPerDayThisMonth?: number
-
-    /** totalCabinetCount */
-    totalCabinetCount?: number
-
-    /** totalCabinetCountPerMonth */
-    totalCabinetCountPerMonth?: number
-
-    /** transitCabinetCount */
-    transitCabinetCount?: number
-  }
-
   export class Resource {
     /** description */
     description?: string
@@ -4865,6 +4923,9 @@ declare namespace defs {
 
     /** 收货信息-报空合计费用 */
     emptyTotalFee?: number
+
+    /** 收货信息-其他费用 */
+    otherFee?: number
 
     /** 收货信息-压车费用 */
     pressFee?: number
@@ -4947,12 +5008,6 @@ declare namespace defs {
   }
 
   export class ShipperCustomerInfoVO {
-    /** 发货方信息-工厂名称 */
-    factoryId?: number
-
-    /** 发货方信息-工厂名称 */
-    factoryName?: string
-
     /** 发货方信息-备注 */
     remark?: string
 
@@ -4985,7 +5040,7 @@ declare namespace defs {
     /** id */
     id?: number
 
-    /** 操作环节(1-国际装柜，2-堆场验货，3-转柜检验，4-销地收货，5-国内装柜) */
+    /** 操作环节(1-国际装柜，2-口岸质检，3-转柜检验，4-销地收货，5-国内装柜) */
     operation?: number
 
     /** operationName */
@@ -5078,7 +5133,7 @@ declare namespace defs {
     /** 检查项名称 */
     checkName: string
 
-    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
     checkResultType: number
 
     /** ID */
@@ -5110,7 +5165,7 @@ declare namespace defs {
     /** 检查项名称 */
     checkName: string
 
-    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
     checkResultType: number
 
     /** ID */
@@ -5193,7 +5248,7 @@ declare namespace defs {
     /** 检查题目 */
     checkName?: string
 
-    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间) */
+    /** 检查结果类型(1-单选，2-多选，3-输入,4-日期时间,5-纯图片视频) */
     checkResultType?: number
 
     /** 是否必须上传图片/视频(1:是 0：不是) */
@@ -5475,17 +5530,6 @@ declare namespace defs {
     subPortName?: string
   }
 
-  export class SupplierOrderVO {
-    /** cabinetCount */
-    cabinetCount?: number
-
-    /** goodsSource */
-    goodsSource?: number
-
-    /** goodsSourceName */
-    goodsSourceName?: string
-  }
-
   export class SysDepart {
     /** address */
     address?: string
@@ -5667,6 +5711,9 @@ declare namespace defs {
     /** longitude 经度 */
     lng?: string
 
+    /** 国际化 */
+    nameLocale?: ObjectMap<any, string>
+
     /** 组织类型列表 */
     orgCategories?: Array<number>
 
@@ -5678,6 +5725,9 @@ declare namespace defs {
 
     /** 唯一key,也是depart的id */
     parentId?: number
+
+    /** 关联品类ID */
+    productIds?: Array<number>
 
     /** 备注 */
     remark?: string
@@ -6112,6 +6162,17 @@ declare namespace defs {
     workNo?: string
   }
 
+  export class TableFactoryVO {
+    /** 工厂ID */
+    factoryId?: number
+
+    /** 工厂名称 */
+    factoryName?: string
+
+    /** 商品明细 */
+    tableVOS?: Array<defs.TableVO>
+  }
+
   export class TableVO {
     /** 表单列 */
     columns?: Array<defs.Column>
@@ -6127,157 +6188,6 @@ declare namespace defs {
 
     /** 总件数 */
     total?: number
-  }
-
-  export class TempMonitorDetailVO {
-    /** 风口 */
-    airPort?: number
-
-    /** 柜次 */
-    cabinetBatchCode?: string
-
-    /** 柜号 */
-    cabinetCode?: string
-
-    /** 装柜明细 */
-    items?: Array<defs.TableVO>
-
-    /** 温度监控id */
-    monitorId?: number
-
-    /** 是否超期 */
-    overdue?: boolean
-
-    /** planid */
-    planId?: number
-
-    /** NORMAL 正常 EXCEPTION 异常 */
-    qualityState?: string
-
-    /** 1 原柜 2 转柜 */
-    shipmentMethod?: number
-
-    /** 是否需要做转柜sop 1 需要 99 不需要 */
-    sopEnabled?: number
-
-    /** state */
-    state?: string
-
-    /** status */
-    status?: number
-
-    /** 设置温度 */
-    temperature?: number
-  }
-
-  export class TempMonitorListVO {
-    /** 风口 */
-    airPort?: number
-
-    /** 进口港 */
-    arrivePortName?: string
-
-    /** 柜次 */
-    cabinetBatchCode?: string
-
-    /** 柜号 */
-    cabinetCode?: string
-
-    /** 是否超期 */
-    overdue?: boolean
-
-    /** 计划id */
-    planId?: number
-
-    /** 计划发货时间 */
-    planStartShipTime?: string
-
-    /** 商品id */
-    productId?: string
-
-    /** 品类 */
-    productName?: string
-
-    /** 品类图片 */
-    productPic?: string
-
-    /** qualityState */
-    qualityState?: string
-
-    /** 收货方 */
-    receiverName?: Array<string>
-
-    /** 1 原柜 2转柜 3装柜 */
-    shipmentMethod?: number
-
-    /** 货运方式翻译 */
-    shipmentMethodName?: string
-
-    /** 状态 */
-    state?: string
-
-    /** 状态翻译 */
-    stateName?: string
-
-    /** 状态 1 处理 2 已处理 */
-    status?: number
-
-    /** statusName */
-    statusName?: string
-
-    /** 任务接收时间 */
-    taskDate?: string
-
-    /** 设置温度 */
-    temperature?: number
-  }
-
-  export class TempMonitorQueryDTO {
-    /** 品类id */
-    productIds?: Array<number>
-
-    /** 状态筛选 */
-    states?: Array<string>
-
-    /** 1 待处理 2 已处理 */
-    status?: number
-
-    /** 任务接受结束时间 */
-    taskEndTime?: string
-
-    /** 任务接受开始时间 */
-    taskStartTime?: string
-  }
-
-  export class TempMonitorSettingDTO {
-    /** 风口 */
-    airPort?: number
-
-    /** 计划id */
-    planId?: number
-
-    /** 是否异常 NORMAL 正常 EXCEPTION 异常 */
-    qualityState?: string
-
-    /** 温度 */
-    temperature?: number
-  }
-
-  export class TempMonitorSettingEditDTO {
-    /** 风口 */
-    airPort?: number
-
-    /** 监控id */
-    monitorId?: number
-
-    /** 计划id */
-    planId?: number
-
-    /** 是否异常 NORMAL 正常 EXCEPTION 异常 */
-    qualityState?: string
-
-    /** 温度 */
-    temperature?: number
   }
 
   export class ThirdLoginModel {
@@ -6921,11 +6831,11 @@ declare namespace API {
   }
 
   /**
-   * 客户管理接口
+   * 客户管理
    */
   export namespace customer {
     /**
-     * 客户管理-添加
+     * 新增
      * /business/customer/add
      */
     export namespace add {
@@ -6940,7 +6850,7 @@ declare namespace API {
     }
 
     /**
-     * 修改用户状态
+     * 编辑-用户状态
      * /business/customer/changeState
      */
     export namespace changeStatus {
@@ -6957,7 +6867,7 @@ declare namespace API {
     }
 
     /**
-     * 客户管理表-编辑
+     * 编辑
      * /business/customer/edit
      */
     export namespace edit {
@@ -6972,7 +6882,7 @@ declare namespace API {
     }
 
     /**
-     * 客户管理-分页列表查询
+     * 分页列表查询
      * /business/customer/list
      */
     export namespace queryPageList {
@@ -6995,7 +6905,7 @@ declare namespace API {
     }
 
     /**
-     * 根据id查询客户信息
+     * 查询详情-根据ID
      * /business/customer/queryById
      */
     export namespace queryById {
@@ -7030,13 +6940,14 @@ declare namespace API {
   }
 
   /**
-   * 客户仓库管理
+   * 客户管理-仓库管理
    */
   export namespace customerDepository {
     /**
-     * 客户仓库--校验名称 编辑时需要传主键ID+名称
-     * /business/customer/depository/checkName
-     */
+        * 校验名称
+编辑时需要上传id+名称
+        * /business/customer/depository/checkName
+        */
     export namespace checkName {
       export class Params {}
 
@@ -7049,7 +6960,7 @@ declare namespace API {
     }
 
     /**
-     * 客户仓库--启用禁用
+     * 编辑-启用禁用
      * /business/customer/depository/enable
      */
     export namespace enable {
@@ -7064,7 +6975,7 @@ declare namespace API {
     }
 
     /**
-     * 客户仓库-分页列表查询
+     * 分页列表查询
      * /business/customer/depository/list
      */
     export namespace queryPageList {
@@ -7079,7 +6990,7 @@ declare namespace API {
     }
 
     /**
-     * 客户仓库--保存
+     * 新增
      * /business/customer/depository/save
      */
     export namespace save {
@@ -7115,11 +7026,11 @@ declare namespace API {
   }
 
   /**
-   * 产地报关
+   * 国际发货-产地报关
    */
   export namespace declareCustoms {
     /**
-     * 产地报关信息新增接口
+     * 新增
      * /business/declareCustoms/add
      */
     export namespace add {
@@ -7134,7 +7045,7 @@ declare namespace API {
     }
 
     /**
-     * 产地报关列表接口
+     * 查询-分页列表接口
      * /business/declareCustoms/list
      */
     export namespace queryPageList {
@@ -7143,15 +7054,15 @@ declare namespace API {
         cabinetCode?: string
         /** 出口报关公司 */
         declareCompanyId?: number
-        /** declareEndTime */
+        /** 报关结束时间 */
         declareEndTime?: string
-        /** declareStartTime */
+        /** 报关开始时间 */
         declareStartTime?: string
         /** pageNo */
         pageNo?: number
         /** pageSize */
         pageSize?: number
-        /** state */
+        /** 状态 */
         state?: string
       }
 
@@ -7163,7 +7074,7 @@ declare namespace API {
     }
 
     /**
-     * 产地报关信息（新增/编辑）
+     * 查询-根据planId查询详情
      * /business/declareCustoms/queryDeclareByPlanId
      */
     export namespace queryById {
@@ -7180,7 +7091,7 @@ declare namespace API {
     }
 
     /**
-     * 补充资料接口
+     * 编辑-补充资料接口
      * /business/declareCustoms/renew
      */
     export namespace renew {
@@ -7195,7 +7106,7 @@ declare namespace API {
     }
 
     /**
-     * 列表状态筛选下拉接口
+     * 查询-列表状态筛选下拉
      * /business/declareCustoms/state/option
      */
     export namespace deliveryPlanStatus {
@@ -7210,11 +7121,11 @@ declare namespace API {
   }
 
   /**
-   * 产地订舱
+   * 国际发货-产地订舱
    */
   export namespace declareInfo {
     /**
-     * 确认订舱接口
+     * 新增
      * /business/declareInfo/add
      */
     export namespace add {
@@ -7229,7 +7140,7 @@ declare namespace API {
     }
 
     /**
-     * 产地订舱列表查询接口
+     * 查询-分页列表查询
      * /business/declareInfo/list
      */
     export namespace queryPageList {
@@ -7250,11 +7161,11 @@ declare namespace API {
         pageNo?: number
         /** pageSize */
         pageSize?: number
-        /** planEndTime */
+        /** 计划结束时间 */
         planEndTime?: string
-        /** planStartTime */
+        /** 计划开始时间 */
         planStartTime?: string
-        /** state */
+        /** 状态 */
         state?: string
       }
 
@@ -7266,7 +7177,7 @@ declare namespace API {
     }
 
     /**
-     * 根据planId查询订舱信息（新增/编辑）
+     * 查询-根据planId查询详情
      * /business/declareInfo/queryBookingByPlanId
      */
     export namespace queryById {
@@ -7283,7 +7194,7 @@ declare namespace API {
     }
 
     /**
-     * 船公司下拉列表
+     * 查询-船公司下拉列表
      * /business/declareInfo/ship/company/option
      */
     export namespace shipCompanyOption {
@@ -7297,7 +7208,7 @@ declare namespace API {
     }
 
     /**
-     * 列表状态筛选下拉接口
+     * 查询-列表状态筛选下拉
      * /business/declareInfo/state/option
      */
     export namespace deliveryPlanStatus {
@@ -7316,7 +7227,7 @@ declare namespace API {
    */
   export namespace deliveryEdit {
     /**
-     * 国际发货-发货编辑-基本信息编辑
+     * 编辑-基本信息
      * /modules/deliveryPlan/edit/editBaseInfo
      */
     export namespace editBaseInfo {
@@ -7331,7 +7242,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-订舱信息编辑
+     * 编辑-订舱信息
      * /modules/deliveryPlan/edit/editBookingInfo
      */
     export namespace editBookingInfo {
@@ -7346,7 +7257,22 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-出口报关信息编辑
+     * 编辑-入境口岸发货
+     * /modules/deliveryPlan/edit/editEntryDelivery
+     */
+    export namespace editEntryDelivery {
+      export class Params {}
+
+      export type Response = defs.Result<string>
+      export const init: Response
+      export function request(
+        params: Params,
+        bodyParams: defs.DeliveryEditEntryDeliveryInfoVO
+      ): Promise<defs.Result<string>>
+    }
+
+    /**
+     * 编辑-出口报关信息
      * /modules/deliveryPlan/edit/editExportInfo
      */
     export namespace editExportInfo {
@@ -7361,7 +7287,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-尾程运输信息编辑
+     * 编辑-尾程运输信息
      * /modules/deliveryPlan/edit/editFinalTransportInfo
      */
     export namespace editFinalTransportInfo {
@@ -7376,7 +7302,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-头程运输信息编辑
+     * 编辑-头程运输信息
      * /modules/deliveryPlan/edit/editHeaderTransportInfo
      */
     export namespace editHeaderTransportInfo {
@@ -7391,7 +7317,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-进口报关信息编辑
+     * 编辑-进口报关信息
      * /modules/deliveryPlan/edit/editImportInfo
      */
     export namespace editImportInfo {
@@ -7406,7 +7332,22 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-商品信息编辑
+     * 编辑-流程节点
+     * /modules/deliveryPlan/edit/editOpreLogs
+     */
+    export namespace editOpreLogs {
+      export class Params {}
+
+      export type Response = defs.Result<defs.DeliveryEditInfoVO>
+      export const init: Response
+      export function request(
+        params: Params,
+        bodyParams: defs.DeliveryEditOperateLogsDTO
+      ): Promise<defs.Result<defs.DeliveryEditInfoVO>>
+    }
+
+    /**
+     * 编辑-商品信息
      * /modules/deliveryPlan/edit/editProductInfo
      */
     export namespace editProductInfo {
@@ -7421,7 +7362,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-收货方信息编辑
+     * 编辑-收货方信息
      * /modules/deliveryPlan/edit/editReceiverInfo
      */
     export namespace editReceiverInfo {
@@ -7436,7 +7377,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-发货方信息编辑
+     * 编辑-发货方信息
      * /modules/deliveryPlan/edit/editSenderInfo
      */
     export namespace editSenderInfo {
@@ -7451,7 +7392,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-获取回滚到状态
+     * 查询-获取当前回滚状态
      * /modules/deliveryPlan/edit/getRollBackState
      */
     export namespace getRollBackState {
@@ -7466,24 +7407,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-根据ID查询详情
-     * /modules/deliveryPlan/edit/info
-     */
-    export namespace info {
-      export class Params {
-        /** id */
-        id: number
-      }
-
-      export type Response = defs.Result<defs.DeliveryEditInfoVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.DeliveryEditInfoVO>>
-    }
-
-    /**
-     * 国际发货-发货编辑-分页列表查询
+     * 查询-分页列表查询
      * /modules/deliveryPlan/edit/list
      */
     export namespace queryPageList {
@@ -7496,6 +7420,8 @@ declare namespace API {
         pageNo: number
         /** 每页条数 */
         pageSize: number
+        /** 状态值 */
+        state?: string
       }
 
       export type Response = defs.Result<defs.Page<defs.DeliveryEditListVO>>
@@ -7506,7 +7432,7 @@ declare namespace API {
     }
 
     /**
-     * 国际发货-发货编辑-回滚
+     * 编辑-回滚计划
      * /modules/deliveryPlan/edit/rollBack
      */
     export namespace rollBack {
@@ -7522,33 +7448,11 @@ declare namespace API {
   }
 
   /**
-   * 订单明细
-   */
-  export namespace deliveryOrderItem {
-    /**
-     * 根据订单ID获取商品明细
-     * /business/deliveryOrderItem/queryByOrderId
-     */
-    export namespace queryByOrderId {
-      export class Params {
-        /** orderId */
-        orderId: number
-      }
-
-      export type Response = defs.Result<Array<defs.DeliveryOrderItem>>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<Array<defs.DeliveryOrderItem>>>
-    }
-  }
-
-  /**
-   * 海外发货计划
+   * 国际发货-发货计划
    */
   export namespace deliveryPlan {
     /**
-     * 新增国际发货计划
+     * 新增
      * /modules/deliveryPlan/add
      */
     export namespace add {
@@ -7563,39 +7467,7 @@ declare namespace API {
     }
 
     /**
-     * 发货计划详情
-     * /modules/deliveryPlan/detail
-     */
-    export namespace detail {
-      export class Params {
-        /** id */
-        id: number
-      }
-
-      export type Response = defs.Result<defs.DeliveryPlanDetailVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.DeliveryPlanDetailVO>>
-    }
-
-    /**
-     * EDI推送更新接口
-     * /modules/deliveryPlan/ediUpdate
-     */
-    export namespace ediUpdate {
-      export class Params {}
-
-      export type Response = any
-      export const init: Response
-      export function request(
-        params: Params,
-        bodyParams: Array<defs.EDIUpdateInfoDTO>
-      ): Promise<any>
-    }
-
-    /**
-     * 更新国际发货计划信息
+     * 编辑
      * /modules/deliveryPlan/edit
      */
     export namespace edit {
@@ -7610,7 +7482,7 @@ declare namespace API {
     }
 
     /**
-     * 获取海外发货计划列表
+     * 查询-分页列表查询
      * /modules/deliveryPlan/list
      */
     export namespace queryPageList {
@@ -7637,7 +7509,7 @@ declare namespace API {
     }
 
     /**
-     * 根据id查询发货计划
+     * 查询-根据ID查询详情
      * /modules/deliveryPlan/queryById
      */
     export namespace queryById {
@@ -7654,7 +7526,7 @@ declare namespace API {
     }
 
     /**
-     * 列表状态筛选下拉接口
+     * 查询-列表状态筛选下拉
      * /modules/deliveryPlan/state/option
      */
     export namespace deliveryPlanStatus {
@@ -7737,6 +7609,40 @@ declare namespace API {
         departId: number
         /** orgCategory */
         orgCategory: number
+      }
+
+      export type Response = defs.Result<Array<defs.SelectOption>>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<Array<defs.SelectOption>>>
+    }
+
+    /**
+     * 根据组织类型获取组织下拉列表
+     * /sys/depart/option/depart/orgCategory/list
+     */
+    export namespace listDepartOptionByOrgCategory {
+      export class Params {
+        /** orgCategory */
+        orgCategory: number
+      }
+
+      export type Response = defs.Result<Array<defs.SelectOption>>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<Array<defs.SelectOption>>>
+    }
+
+    /**
+     * 根据品类id获取关联工厂
+     * /sys/depart/option/factory/product
+     */
+    export namespace getFactoryByProductId {
+      export class Params {
+        /** productId */
+        productId: number
       }
 
       export type Response = defs.Result<Array<defs.SelectOption>>
@@ -7877,6 +7783,23 @@ declare namespace API {
   }
 
   /**
+   * Device Controller
+   */
+  export namespace device {
+    /**
+     * 查询当前最新的安装app下载链接
+     * /app/device/url
+     */
+    export namespace getLastAndroidApp {
+      export class Params {}
+
+      export type Response = defs.Result<string>
+      export const init: Response
+      export function request(params: Params): Promise<defs.Result<string>>
+    }
+  }
+
+  /**
    * 系统字典接口（下拉，查询）
    */
   export namespace dict {
@@ -7938,6 +7861,42 @@ declare namespace API {
   }
 
   /**
+   * 报表中心-国内在途汇总
+   */
+  export namespace domesticlTraveling {
+    /**
+     * 国内在途汇总-详情-分页列表查询
+     * /reportFormsCenter/domesticTraveling/infoList
+     */
+    export namespace queryInfoList {
+      export class Params {}
+
+      export type Response = defs.Result<
+        defs.Page<defs.DomesticTravelingInfoListVO>
+      >
+      export const init: Response
+      export function request(
+        params: Params,
+        bodyParams: defs.DomesticReportPageQueryDTO
+      ): Promise<defs.Result<defs.Page<defs.DomesticTravelingInfoListVO>>>
+    }
+
+    /**
+     * 国内在途汇总
+     * /reportFormsCenter/domesticTraveling/list
+     */
+    export namespace queryList {
+      export class Params {}
+
+      export type Response = defs.Result<defs.DomesticTravelingListVO>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<defs.DomesticTravelingListVO>>
+    }
+  }
+
+  /**
    * 重复校验
    */
   export namespace duplicateCheck {
@@ -7964,11 +7923,11 @@ declare namespace API {
   }
 
   /**
-   * 入境口岸发货管理
+   * 国际发货-入境口岸发货
    */
   export namespace entryPortDelivery {
     /**
-     * 入境口岸发货管理-发货
+     * 新增
      * /entryPortDelivery/commit
      */
     export namespace commit {
@@ -7983,7 +7942,7 @@ declare namespace API {
     }
 
     /**
-     * 入境口岸发货管理-根据ID查询
+     * 查询-根据planId查询详情
      * /entryPortDelivery/getById
      */
     export namespace getById {
@@ -8000,7 +7959,7 @@ declare namespace API {
     }
 
     /**
-     * 入境口岸发货管理-分页列表查询
+     * 查询-分页列表查询
      * /entryPortDelivery/list
      */
     export namespace queryList {
@@ -8081,11 +8040,11 @@ declare namespace API {
   }
 
   /**
-   * 产地头程运输
+   * 国际发货-产地头程运输
    */
   export namespace headTransport {
     /**
-     * 头程运输信息新增接口
+     * 新增
      * /business/head/transport/add
      */
     export namespace add {
@@ -8100,7 +8059,7 @@ declare namespace API {
     }
 
     /**
-     * 头程运输列表接口
+     * 查询-分页列表查询
      * /business/head/transport/list
      */
     export namespace queryPageList {
@@ -8129,7 +8088,7 @@ declare namespace API {
     }
 
     /**
-     * 头程运输信息（新增/编辑）
+     * 查询-根据planId查询详情
      * /business/head/transport/queryHeadByPlanId
      */
     export namespace queryById {
@@ -8146,7 +8105,7 @@ declare namespace API {
     }
 
     /**
-     * 列表状态筛选下拉接口
+     * 查询-列表状态筛选下拉接口
      * /business/head/transport/state/option
      */
     export namespace deliveryPlanStatus {
@@ -8161,11 +8120,11 @@ declare namespace API {
   }
 
   /**
-   * 国内报关
+   * 国际发货-国内报关、纳税放柜
    */
   export namespace importDeclare {
     /**
-     * 国内报关-提交报关
+     * 国内报关-新增
      * /business/importDeclare/commit
      */
     export namespace commit {
@@ -8180,7 +8139,54 @@ declare namespace API {
     }
 
     /**
-     * 国内报关-分页列表查询
+     * 国内报关-导出表格
+     * /business/importDeclare/exportTable
+     */
+    export namespace exportTable {
+      export class Params {
+        /** 进口港 */
+        arrivePortId?: number
+        /** 柜号 */
+        cabinetCode?: string
+        /** 报关截止时间，格式yyyy-MM-dd */
+        declareEndDate?: string
+        /** 进口报关口岸ID */
+        declarePortId?: number
+        /** 报关起始时间，格式yyyy-MM-dd */
+        declareStartDate?: string
+        /** 运输方式 */
+        deliveryMethod?: number
+        /** 报关单号 */
+        deliveryOrderCode?: string
+        /** 进口报关公司ID（国内） */
+        domesticDeclareCompanyId?: number
+        /** 出口已送港截止时间，格式yyyy-MM-dd */
+        exportPortEndDate?: string
+        /** 出口已送港开始时间，格式yyyy-MM-dd */
+        exportPortStartDate?: string
+        /** map */
+        map?: any
+        /** 页码 */
+        pageNo: number
+        /** 每页条数 */
+        pageSize: number
+        /** 品类ID */
+        productId?: number
+        /** 船次号 */
+        shipBatchCode?: string
+        /** 商品ID */
+        spuId?: number
+        /** 状态编码 */
+        state?: string
+      }
+
+      export type Response = any
+      export const init: Response
+      export function request(params: Params): Promise<any>
+    }
+
+    /**
+     * 国内报关-查询-分页列表查询
      * /business/importDeclare/list
      */
     export namespace queryList {
@@ -8227,7 +8233,7 @@ declare namespace API {
     }
 
     /**
-     * 国内报关-根据国际计划ID查询
+     * 国内报关-查询-根据planId查询详情
      * /business/importDeclare/queryById
      */
     export namespace queryById {
@@ -8244,7 +8250,7 @@ declare namespace API {
     }
 
     /**
-     * 国内报关-补充资料
+     * 国内报关-编辑补充资料
      * /business/importDeclare/replenish
      */
     export namespace postReplenish {
@@ -8259,7 +8265,7 @@ declare namespace API {
     }
 
     /**
-     * 国内报关-获取状态类型
+     * 国内报关-查询-获取状态类型
      * /business/importDeclare/state
      */
     export namespace queryStateOptions {
@@ -8273,7 +8279,7 @@ declare namespace API {
     }
 
     /**
-     * 纳税放行-提交纳税
+     * 纳税放柜-新增
      * /business/importDeclare/tax/commit
      */
     export namespace tax {
@@ -8288,7 +8294,7 @@ declare namespace API {
     }
 
     /**
-     * 纳税放行-批量提交纳税
+     * 纳税放柜-新增-批量
      * /business/importDeclare/tax/commit/batch
      */
     export namespace taxBatch {
@@ -8303,7 +8309,7 @@ declare namespace API {
     }
 
     /**
-     * 纳税放行-分页列表查询
+     * 纳税放柜-查询-分页列表查询
      * /business/importDeclare/tax/list
      */
     export namespace queryTaxList {
@@ -8340,7 +8346,7 @@ declare namespace API {
     }
 
     /**
-     * 纳税放行-根据国际计划ID查询
+     * 纳税放柜-查询-根据国际计划ID查询
      * /business/importDeclare/tax/queryById
      */
     export namespace queryTaxById {
@@ -8354,20 +8360,6 @@ declare namespace API {
       export function request(
         params: Params
       ): Promise<defs.Result<defs.ImportDeclareTaxDetailVO>>
-    }
-
-    /**
-     * 纳税放行-获取状态类型
-     * /business/importDeclare/tax/state
-     */
-    export namespace queryTaxStateOptions {
-      export class Params {}
-
-      export type Response = defs.Result<Array<defs.SelectTextOption>>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<Array<defs.SelectTextOption>>>
     }
   }
 
@@ -8464,7 +8456,7 @@ declare namespace API {
       export const init: Response
       export function request(
         params: Params,
-        bodyParams: defs.BasePageRequest
+        bodyParams: defs.InternationalShipmentDetailQueryDTO
       ): Promise<
         defs.Result<defs.IPage<defs.InternationalShipmentDetailListVO>>
       >
@@ -8757,11 +8749,11 @@ declare namespace API {
   }
 
   /**
-   * 产地物流提货
+   * 国际发货-产地物流提货
    */
   export namespace pickGoodsInfo {
     /**
-     * 产地物流提货信息提货接口
+     * 新增
      * /business/pickGoodsInfo/add
      */
     export namespace add {
@@ -8776,7 +8768,7 @@ declare namespace API {
     }
 
     /**
-     * 产地物流提货列表接口
+     * 查询-分页列表查询
      * /business/pickGoodsInfo/list
      */
     export namespace queryPageList {
@@ -8811,7 +8803,7 @@ declare namespace API {
     }
 
     /**
-     * 根据planId查询物流提货信息（新增/编辑）
+     * 查询-根据planId查询详情
      * /business/pickGoodsInfo/queryByPlanId
      */
     export namespace queryById {
@@ -8828,7 +8820,7 @@ declare namespace API {
     }
 
     /**
-     * 列表状态筛选下拉接口
+     * 查询-列表状态筛选下拉
      * /business/pickGoodsInfo/state/option
      */
     export namespace deliveryPlanStatus {
@@ -9032,6 +9024,43 @@ declare namespace API {
       export function request(
         params: Params
       ): Promise<defs.Result<Array<defs.SelectOption>>>
+    }
+  }
+
+  /**
+   * 国际发货-口岸质检
+   */
+  export namespace portSop {
+    /**
+     * 查询-根据planId查询详情
+     * /portSop/getByPlanId
+     */
+    export namespace getByPlanId {
+      export class Params {
+        /** planId */
+        planId: number
+      }
+
+      export type Response = defs.Result<defs.PortSopInfoVO>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<defs.PortSopInfoVO>>
+    }
+
+    /**
+     * 新增或编辑
+     * /portSop/save
+     */
+    export namespace save {
+      export class Params {}
+
+      export type Response = defs.Result<string>
+      export const init: Response
+      export function request(
+        params: Params,
+        bodyParams: defs.PortSopSaveDTO
+      ): Promise<defs.Result<string>>
     }
   }
 
@@ -9578,6 +9607,23 @@ declare namespace API {
     }
 
     /**
+     * sku检查接口，根据sku选项检查是否有已生成sku,如果已生成返回sku信息
+     * /business/product/sku/getSkuInfo
+     */
+    export namespace getSkuInfo {
+      export class Params {
+        /** optionIds */
+        optionIds: Array<number>
+      }
+
+      export type Response = defs.Result<defs.ProductSkuPO>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<defs.ProductSkuPO>>
+    }
+
+    /**
      * 查询 SKU 明细
      * /business/product/sku/info
      */
@@ -9814,6 +9860,23 @@ declare namespace API {
     }
 
     /**
+     * 获取工厂下的商品下拉
+     * /business/product/spu/factory/list/options
+     */
+    export namespace factoryListOptions {
+      export class Params {
+        /** 工厂ID */
+        factoryId: number
+      }
+
+      export type Response = defs.Result<Array<defs.SelectTextOption>>
+      export const init: Response
+      export function request(
+        params: Params
+      ): Promise<defs.Result<Array<defs.SelectTextOption>>>
+    }
+
+    /**
      * SPU下拉菜单
      * /business/product/spu/list/options
      */
@@ -9954,107 +10017,6 @@ declare namespace API {
       export function request(
         params: Params
       ): Promise<defs.Result<Array<defs.SelectTextOption>>>
-    }
-  }
-
-  /**
-   * 仪表盘
-   */
-  export namespace report {
-    /**
-     * 销地分公司月度排名
-     * /business/report/companyOrder
-     */
-    export namespace companyOrder {
-      export class Params {
-        /** pageNo */
-        pageNo?: number
-        /** pageSize */
-        pageSize?: number
-      }
-
-      export type Response = defs.Result<defs.IPage<defs.CompanyOrder>>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.IPage<defs.CompanyOrder>>>
-    }
-
-    /**
-     * 工厂排名
-     * /business/report/queryFactoryOrder
-     */
-    export namespace queryFactoryOrder {
-      export class Params {}
-
-      export type Response = defs.Result<Array<defs.FactoryOrder>>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<Array<defs.FactoryOrder>>>
-    }
-
-    /**
-     * 柱状图
-     * /business/report/queryGroup
-     */
-    export namespace queryGroup {
-      export class Params {}
-
-      export type Response = defs.Result<defs.ReportGroupVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.ReportGroupVO>>
-    }
-
-    /**
-     * 报表第一部分数据
-     * /business/report/queryReportPartOne
-     */
-    export namespace queryReportPartOne {
-      export class Params {}
-
-      export type Response = defs.Result<defs.ReportSalesVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.ReportSalesVO>>
-    }
-
-    /**
-     * 供应商占比
-     * /business/report/querySupplierOrder
-     */
-    export namespace querySupplierOrder {
-      export class Params {}
-
-      export type Response = defs.Result<defs.SupplierOrderVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.SupplierOrderVO>>
-    }
-
-    /**
-     * 客户排行
-     * /business/report/selectCustomerCabinetOrder
-     */
-    export namespace selectCustomerCabinetOrder {
-      export class Params {
-        /** pageNo */
-        pageNo?: number
-        /** pageSize */
-        pageSize?: number
-      }
-
-      export type Response = defs.Result<
-        defs.IPage<defs.CustomerCabinetOrderVO>
-      >
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.IPage<defs.CustomerCabinetOrderVO>>>
     }
   }
 
@@ -10364,7 +10326,7 @@ declare namespace API {
       export class Params {
         /** 计划ID */
         id?: number
-        /** 操作环节(1-国际装柜，2-堆场验货，3-转柜检验，4-销地收货，5-国内装柜) */
+        /** 操作环节(1-国际装柜，2-口岸质检，3-转柜检验，4-销地收货，5-国内装柜) */
         operation?: number
         /** 收货方key，类型_id */
         receiverKey?: string
@@ -11860,78 +11822,6 @@ declare namespace API {
       export function request(
         params: Params
       ): Promise<defs.Result<Array<defs.DepartIdModel>>>
-    }
-  }
-
-  /**
-   * Temp Monitor Controller
-   */
-  export namespace tempMonitor {
-    /**
-     * 详情接口
-     * /transiting/temp/monitor/detail
-     */
-    export namespace detail {
-      export class Params {
-        /** planId */
-        planId: number
-      }
-
-      export type Response = defs.Result<defs.TempMonitorDetailVO>
-      export const init: Response
-      export function request(
-        params: Params
-      ): Promise<defs.Result<defs.TempMonitorDetailVO>>
-    }
-
-    /**
-     * 分页列表接口
-     * /transiting/temp/monitor/list
-     */
-    export namespace pageList {
-      export class Params {
-        /** pageNo */
-        pageNo?: number
-        /** pageSize */
-        pageSize?: number
-      }
-
-      export type Response = defs.Result<defs.Page<defs.TempMonitorListVO>>
-      export const init: Response
-      export function request(
-        params: Params,
-        bodyParams: defs.TempMonitorQueryDTO
-      ): Promise<defs.Result<defs.Page<defs.TempMonitorListVO>>>
-    }
-
-    /**
-     * 设置温度接口
-     * /transiting/temp/monitor/setting/add
-     */
-    export namespace monitorSetting {
-      export class Params {}
-
-      export type Response = defs.Result<void>
-      export const init: Response
-      export function request(
-        params: Params,
-        bodyParams: defs.TempMonitorSettingDTO
-      ): Promise<defs.Result<void>>
-    }
-
-    /**
-     * 修改温度接口
-     * /transiting/temp/monitor/setting/edit
-     */
-    export namespace monitorSettingEdit {
-      export class Params {}
-
-      export type Response = defs.Result<void>
-      export const init: Response
-      export function request(
-        params: Params,
-        bodyParams: defs.TempMonitorSettingEditDTO
-      ): Promise<defs.Result<void>>
     }
   }
 

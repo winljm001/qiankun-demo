@@ -1,5 +1,5 @@
 /**
- * @desc 新增国际发货计划
+ * @desc 新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

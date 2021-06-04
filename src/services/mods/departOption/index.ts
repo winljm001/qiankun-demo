@@ -4,6 +4,8 @@
 import * as businessTypeSelectOption from './businessTypeSelectOption'
 import * as listCountryDepartOption from './listCountryDepartOption'
 import * as listDepartOption from './listDepartOption'
+import * as listDepartOptionByOrgCategory from './listDepartOptionByOrgCategory'
+import * as getFactoryByProductId from './getFactoryByProductId'
 import * as listForeignDeclareCompanyOption from './listForeignDeclareCompanyOption'
 import * as listForeignSubCompanyOption from './listForeignSubCompanyOption'
 import * as listForeignTransportCompanyOption from './listForeignTransportCompanyOption'
@@ -18,6 +20,8 @@ export {
   businessTypeSelectOption,
   listCountryDepartOption,
   listDepartOption,
+  listDepartOptionByOrgCategory,
+  getFactoryByProductId,
   listForeignDeclareCompanyOption,
   listForeignSubCompanyOption,
   listForeignTransportCompanyOption,

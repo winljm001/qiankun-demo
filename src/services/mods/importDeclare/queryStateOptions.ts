@@ -1,5 +1,5 @@
 /**
- * @desc 国内报关-获取状态类型
+ * @desc 国内报关-查询-获取状态类型
  */
 import request from '@/utils/request'
 export class IQueryParams {}

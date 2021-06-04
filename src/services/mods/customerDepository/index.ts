@@ -1,5 +1,5 @@
 /**
- * @description 客户仓库管理
+ * @description 客户管理-仓库管理
  */
 import * as checkName from './checkName'
 import * as enable from './enable'

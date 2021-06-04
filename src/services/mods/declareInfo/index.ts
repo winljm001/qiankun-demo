@@ -1,5 +1,5 @@
 /**
- * @description 产地订舱
+ * @description 国际发货-产地订舱
  */
 import * as add from './add'
 import * as queryPageList from './queryPageList'

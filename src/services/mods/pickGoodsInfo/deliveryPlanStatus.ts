@@ -1,5 +1,5 @@
 /**
- * @desc 列表状态筛选下拉接口
+ * @desc 查询-列表状态筛选下拉
  */
 import request from '@/utils/request'
 export class IQueryParams {}

@@ -1,5 +1,5 @@
 /**
- * @desc 入境口岸发货管理-发货
+ * @desc 新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

@@ -1,5 +1,5 @@
 /**
- * @desc 修改用户状态
+ * @desc 编辑-用户状态
  */
 import request from '@/utils/request'
 export class IQueryParams {

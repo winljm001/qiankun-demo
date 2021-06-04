@@ -1,5 +1,5 @@
 /**
- * @desc 头程运输信息（新增/编辑）
+ * @desc 查询-根据planId查询详情
  */
 import request from '@/utils/request'
 export class IQueryParams {

@@ -1,5 +1,5 @@
 /**
- * @desc 确认订舱接口
+ * @desc 新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

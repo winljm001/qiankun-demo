@@ -6,6 +6,7 @@ import * as checkSpuName from './checkSpuName'
 import * as queryDetailInfo from './queryDetailInfo'
 import * as edit from './edit'
 import * as editStatus from './editStatus'
+import * as factoryListOptions from './factoryListOptions'
 import * as listOptions from './listOptions'
 import * as queryPageList from './queryPageList'
 import * as placeOptions from './placeOptions'
@@ -17,6 +18,7 @@ export {
   queryDetailInfo,
   edit,
   editStatus,
+  factoryListOptions,
   listOptions,
   queryPageList,
   placeOptions,

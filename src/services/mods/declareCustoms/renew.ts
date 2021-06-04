@@ -1,5 +1,5 @@
 /**
- * @desc 补充资料接口
+ * @desc 编辑-补充资料接口
  */
 import request from '@/utils/request'
 export class IQueryParams {}

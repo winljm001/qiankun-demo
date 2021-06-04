@@ -1,40 +1,142 @@
 import useGlobalStore from '@/stores/global';
-import { useMount } from 'ahooks';
-import { Button, Checkbox, Form, Input } from 'antd';
-import React from 'react';
+import { useMount, useCountDown } from 'ahooks';
+import { Button, Checkbox, message, Form, Input } from 'antd';
+import { SafetyOutlined, TabletOutlined } from '@ant-design/icons';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import img from './images/logo.png'
+
+import styles from './style.module.less'
 
 const Index: React.FC = () => {
+  // Form实例化
+  const [FormInstance]: any = Form.useForm()
+  // 取验证码
+  // const verificationCode = FormInstance.getFieldValue('text')
+  // console.log(verificationCode);
+
+  // 登录按钮提交的toast
+  const toastLogin = () => {
+    // if (true) {
+    //   message.success('登陆成功');
+    // } else {
+    //   message.error('网络异常，请稍后再试！');
+    // }
+  }
+
+  // 验证码toast弹窗
+  const toastVerificationCode = () => {
+    // if (true) {
+    //   message.success('获取验证码成功');
+    // } else {
+    //   message.error('网络异常，请稍后再试！');
+    // }
+  }
+
+  // 倒计时结束回调
+  // const onEnd = () => {
+  //   // console.log('111');
+
+  // };
+
+  // 倒计时ahook
+  const [countdown, setTargetDate] = useCountDown();
+
+
+
   const history = useHistory();
   const { logout } = useGlobalStore();
   useMount(() => {
     logout();
   });
   const onFinish = (values: any) => {
+    // setFlag1(false)
     // 登录逻辑
     history.push('/');
     console.log('Success:', values);
   };
+
+
+
+  // 表单提交失败
+  const onFinishFailed = () => {
+    // setFlag1(true)
+  }
+
   return (
-    <Form name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
-      <Form.Item label="Username" name="username" rules={[{ required: true, message: 'Please input your username!' }]}>
-        <Input />
-      </Form.Item>
+    <div className={styles.login}>
+      <div className={styles.bg}>
+        <div className={styles.text}>
+          <p className={styles.textCh}>全球水果链，共享幸福果</p>
+          <p className={styles.textEn}>WITH GLOBAL FRUIT CHAIN,<br /> WE SHARE THE FRUIT OF HAPPINESS.</p>
+        </div>
+      </div>
+      <div className={styles.loginBox}>
+        <img src={img} alt="" className={styles.logo} />
+        <div className={styles.title}>星桥分拣管理系统</div>
 
-      <Form.Item label="Password" name="password" rules={[{ required: true, message: 'Please input your password!' }]}>
-        <Input.Password />
-      </Form.Item>
+        <div className={styles.formBox}>
 
-      <Form.Item name="remember" valuePropName="checked">
-        <Checkbox>Remember me</Checkbox>
-      </Form.Item>
+          <Form onFinishFailed={onFinishFailed} form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
 
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          Submit
-        </Button>
-      </Form.Item>
-    </Form>
+            {/* 用户 */}
+            <Form.Item name="username" className={styles.formInput} rules={[{ required: true, message: '请输入手机号！' },
+            { pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/, message: '请输入11位正确电话号码!' }]}>
+              <Input className={styles.inputUser} placeholder="请输入手机号" prefix={<TabletOutlined />} />
+            </Form.Item>
+
+            {/* 验证码、按钮 */}
+            <Form.Item shouldUpdate>
+              {({ getFieldValue, getFieldError }) => {
+                let codeFlag = true
+                let userError = getFieldError('username')[0]
+                if (userError || !getFieldValue('username')) {
+                  codeFlag = true
+                } else {
+                  codeFlag = false
+                }
+                return <Form.Item className={styles.formInputB}>
+                  <Form.Item name="text" rules={[{ min: 6, max: 6, message: '请输入6位验证码' }, { required: true, message: '输入验证码' }]}>
+                    <Input className={styles.inputPassword} placeholder="请输入验证码" prefix={<SafetyOutlined />} />
+                  </Form.Item>
+                  <Button onClick={() => {
+                    toastVerificationCode()
+                    setTargetDate(Date.now() + 5000);
+                  }} disabled={codeFlag || countdown !== 0} className={styles.btn}>{countdown === 0 ? '获取验证码' : `${Math.round(countdown / 1000)}s`}</Button>
+                </Form.Item>
+              }}
+            </Form.Item>
+
+            {/* 登录 */}
+            <Form.Item shouldUpdate>
+              {({ getFieldError, getFieldValue }) => {
+                let disabled = true
+                const userErr = getFieldError('username')
+                const userValue = getFieldValue('username')
+                const codeErr = getFieldError('text')
+                const codeValue = getFieldValue('text')
+                if (userErr[0] || codeErr[0]) {
+                  disabled = true
+
+                } else if (!userValue || !codeValue) {
+                  disabled = true
+                } else {
+                  disabled = false
+                }
+                return (<Form.Item>
+                  <Button disabled={disabled} onClick={toastLogin} block className={styles.btnB} type="primary" htmlType="submit">
+                    登录
+              </Button>
+                </Form.Item>)
+              }}
+            </Form.Item>
+
+
+          </Form>
+        </div>
+        <div className={styles.record}>© 169 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
+      </div>
+    </div>
   );
 };
 

@@ -1,5 +1,5 @@
 /**
- * @desc 产地订舱列表查询接口
+ * @desc 查询-分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {
@@ -19,11 +19,11 @@ export class IQueryParams {
   pageNo?: number
   /** pageSize */
   pageSize?: number
-  /** planEndTime */
+  /** 计划结束时间 */
   planEndTime?: string
-  /** planStartTime */
+  /** 计划开始时间 */
   planStartTime?: string
-  /** state */
+  /** 状态 */
   state?: string
 }
 

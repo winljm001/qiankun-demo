@@ -1,5 +1,5 @@
 /**
- * @desc 船公司下拉列表
+ * @desc 查询-船公司下拉列表
  */
 import request from '@/utils/request'
 export class IQueryParams {}

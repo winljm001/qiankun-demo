@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export class IQueryParams {}
 
 export interface IParams {
-  bodyParams: defs.BasePageRequest
+  bodyParams: defs.InternationalShipmentDetailQueryDTO
 }
 
 export function getDetailList({ bodyParams }: IParams = {} as IParams) {

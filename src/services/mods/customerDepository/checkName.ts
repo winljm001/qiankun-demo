@@ -1,6 +1,7 @@
 /**
- * @desc 客户仓库--校验名称 编辑时需要传主键ID+名称
- */
+     * @desc 校验名称
+编辑时需要上传id+名称
+     */
 import request from '@/utils/request'
 export class IQueryParams {}
 

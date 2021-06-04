@@ -6,11 +6,12 @@ import * as customerDepository from './customerDepository'
 import * as declareCustoms from './declareCustoms'
 import * as declareInfo from './declareInfo'
 import * as deliveryEdit from './deliveryEdit'
-import * as deliveryOrderItem from './deliveryOrderItem'
 import * as deliveryPlan from './deliveryPlan'
 import * as deliveryPlanItem from './deliveryPlanItem'
 import * as departOption from './departOption'
+import * as device from './device'
 import * as dict from './dict'
+import * as domesticlTraveling from './domesticlTraveling'
 import * as duplicateCheck from './duplicateCheck'
 import * as entryPortDelivery from './entryPortDelivery'
 import * as erp from './erp'
@@ -22,6 +23,7 @@ import * as internationalTravelingSnapshot from './internationalTravelingSnapsho
 import * as login from './login'
 import * as pickGoodsInfo from './pickGoodsInfo'
 import * as port from './port'
+import * as portSop from './portSop'
 import * as product from './product'
 import * as productQuota from './productQuota'
 import * as productQuotaRecord from './productQuotaRecord'
@@ -32,7 +34,6 @@ import * as productSku from './productSku'
 import * as productSpec from './productSpec'
 import * as productSpu from './productSpu'
 import * as receivePlan from './receivePlan'
-import * as report from './report'
 import * as resource from './resource'
 import * as sop from './sop'
 import * as sopDetail from './sopDetail'
@@ -46,7 +47,6 @@ import * as sysPosition from './sysPosition'
 import * as sysRole from './sysRole'
 import * as sysSetting from './sysSetting'
 import * as sysUser from './sysUser'
-import * as tempMonitor from './tempMonitor'
 import * as transportation from './transportation'
 import * as upload from './upload'
 
@@ -59,11 +59,12 @@ import * as upload from './upload'
   declareCustoms,
   declareInfo,
   deliveryEdit,
-  deliveryOrderItem,
   deliveryPlan,
   deliveryPlanItem,
   departOption,
+  device,
   dict,
+  domesticlTraveling,
   duplicateCheck,
   entryPortDelivery,
   erp,
@@ -75,6 +76,7 @@ import * as upload from './upload'
   login,
   pickGoodsInfo,
   port,
+  portSop,
   product,
   productQuota,
   productQuotaRecord,
@@ -85,7 +87,6 @@ import * as upload from './upload'
   productSpec,
   productSpu,
   receivePlan,
-  report,
   resource,
   sop,
   sopDetail,
@@ -99,7 +100,6 @@ import * as upload from './upload'
   sysRole,
   sysSetting,
   sysUser,
-  tempMonitor,
   transportation,
   upload
 }

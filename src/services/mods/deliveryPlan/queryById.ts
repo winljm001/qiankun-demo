@@ -1,5 +1,5 @@
 /**
- * @desc 根据id查询发货计划
+ * @desc 查询-根据ID查询详情
  */
 import request from '@/utils/request'
 export class IQueryParams {

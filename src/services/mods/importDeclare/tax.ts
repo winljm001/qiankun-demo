@@ -1,5 +1,5 @@
 /**
- * @desc 纳税放行-提交纳税
+ * @desc 纳税放柜-新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

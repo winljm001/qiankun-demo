@@ -1,5 +1,5 @@
 /**
- * @description 入境口岸发货管理
+ * @description 国际发货-入境口岸发货
  */
 import * as commit from './commit'
 import * as getById from './getById'

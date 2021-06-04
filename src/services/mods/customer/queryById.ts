@@ -1,5 +1,5 @@
 /**
- * @desc 根据id查询客户信息
+ * @desc 查询详情-根据ID
  */
 import request from '@/utils/request'
 export class IQueryParams {

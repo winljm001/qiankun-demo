@@ -1,5 +1,5 @@
 /**
- * @desc 国际发货-发货编辑-商品信息编辑
+ * @desc 编辑-商品信息
  */
 import request from '@/utils/request'
 export class IQueryParams {}

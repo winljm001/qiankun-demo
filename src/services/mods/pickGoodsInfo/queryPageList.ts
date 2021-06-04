@@ -1,5 +1,5 @@
 /**
- * @desc 产地物流提货列表接口
+ * @desc 查询-分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {

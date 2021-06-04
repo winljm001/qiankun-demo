@@ -1,5 +1,5 @@
 /**
- * @desc 客户管理-分页列表查询
+ * @desc 分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {

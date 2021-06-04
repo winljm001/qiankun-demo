@@ -1,5 +1,5 @@
 /**
- * @desc 国际发货-发货编辑-分页列表查询
+ * @desc 查询-分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {
@@ -11,6 +11,8 @@ export class IQueryParams {
   pageNo: number
   /** 每页条数 */
   pageSize: number
+  /** 状态值 */
+  state?: string
 }
 
 export interface IParams {

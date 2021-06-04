@@ -1,5 +1,5 @@
 /**
- * @desc 国内报关-提交报关
+ * @desc 国内报关-新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}

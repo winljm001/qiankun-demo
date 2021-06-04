@@ -5,7 +5,7 @@ import request from '@/utils/request'
 export class IQueryParams {
   /** 计划ID */
   id?: number
-  /** 操作环节(1-国际装柜，2-堆场验货，3-转柜检验，4-销地收货，5-国内装柜) */
+  /** 操作环节(1-国际装柜，2-口岸质检，3-转柜检验，4-销地收货，5-国内装柜) */
   operation?: number
   /** 收货方key，类型_id */
   receiverKey?: string

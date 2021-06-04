@@ -1,5 +1,5 @@
 /**
- * @description 客户管理接口
+ * @description 客户管理
  */
 import * as add from './add'
 import * as changeStatus from './changeStatus'

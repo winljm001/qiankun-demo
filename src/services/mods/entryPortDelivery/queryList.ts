@@ -1,5 +1,5 @@
 /**
- * @desc 入境口岸发货管理-分页列表查询
+ * @desc 查询-分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {

@@ -1,5 +1,5 @@
 /**
- * @desc 获取海外发货计划列表
+ * @desc 查询-分页列表查询
  */
 import request from '@/utils/request'
 export class IQueryParams {

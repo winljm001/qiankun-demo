@@ -1,5 +1,5 @@
 /**
- * @desc 入境口岸发货管理-根据ID查询
+ * @desc 查询-根据planId查询详情
  */
 import request from '@/utils/request'
 export class IQueryParams {

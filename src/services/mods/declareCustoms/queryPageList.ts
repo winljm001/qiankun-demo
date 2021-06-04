@@ -1,5 +1,5 @@
 /**
- * @desc 产地报关列表接口
+ * @desc 查询-分页列表接口
  */
 import request from '@/utils/request'
 export class IQueryParams {
@@ -7,15 +7,15 @@ export class IQueryParams {
   cabinetCode?: string
   /** 出口报关公司 */
   declareCompanyId?: number
-  /** declareEndTime */
+  /** 报关结束时间 */
   declareEndTime?: string
-  /** declareStartTime */
+  /** 报关开始时间 */
   declareStartTime?: string
   /** pageNo */
   pageNo?: number
   /** pageSize */
   pageSize?: number
-  /** state */
+  /** 状态 */
   state?: string
 }
 

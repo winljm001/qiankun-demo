@@ -1,5 +1,5 @@
 /**
- * @desc 国内报关-根据国际计划ID查询
+ * @desc 国内报关-查询-根据planId查询详情
  */
 import request from '@/utils/request'
 export class IQueryParams {

@@ -1,5 +1,5 @@
 /**
- * @description 产地头程运输
+ * @description 国际发货-产地头程运输
  */
 import * as add from './add'
 import * as queryPageList from './queryPageList'

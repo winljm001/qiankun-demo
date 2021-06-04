@@ -1,5 +1,5 @@
 /**
- * @desc 客户仓库--保存
+ * @desc 新增
  */
 import request from '@/utils/request'
 export class IQueryParams {}
