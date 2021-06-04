@@ -4,7 +4,7 @@ import { message } from 'antd';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'querystring';
 import { omit } from 'wbd-frontend-kit';
-import { msg, handleNoCommontError } from './errorHandle';
+import { msg, handleNoCommonError } from './errorHandle';
 
 type requestOptions = AxiosRequestConfig & {
   url?: string;
@@ -26,8 +26,8 @@ axios.interceptors.response.use(
     const data = response.data;
     // 操作不成功时直接提示
     if (data?.errCode !== 200) {
-      message.error(data.message);
-      return Promise.reject(data.message);
+      message.error(data.errMsg);
+      return Promise.reject(data.errMsg);
     }
     return data as any;
   },
@@ -36,7 +36,7 @@ axios.interceptors.response.use(
       const { status, data, config } = response;
       const message = data?.message || msg.errorMsg;
       // 全局响应拦截需要重写
-      handleNoCommontError(message, config);
+      handleNoCommonError(message, config);
       return Promise.reject(message);
     } else {
       return Promise.reject(msg.networkErrorMsg);

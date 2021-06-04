@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import loadable from '@loadable/component';
 import { RouteConfig } from 'react-router-config';
 import Layouts from '@/layouts/commonLayout/index';
-import * as Icons from '@ant-design/icons';
+import * as Icons from '@ant-design/icons/lib/icons';
 import { Redirect } from 'react-router-dom';
 import { BASE_PATH } from './basePath';
 import { BreadcrumbItem } from '@/layouts/commonLayout/components/breadcrubm';
@@ -35,22 +35,6 @@ export const mainRoutes: CustomRouteConfig[] = [
     path: BASE_PATH,
     exact: true,
     component: loadable(() => import('@/pages/home')),
-    meta: {
-      menuText: '首页',
-    },
-    breadcrumb: [{ name: '首页' }, { name: '首页' }],
-    routes: [
-      {
-        path: `${BASE_PATH}/test`,
-        exact: true,
-        component: loadable(() => import('@/pages/home')),
-        breadcrumb: [{ name: '测试' }, { name: '测试' }],
-        routes: [],
-        meta: {
-          menuText: '测试',
-        },
-      },
-    ],
   },
   ...config,
 ];
