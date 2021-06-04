@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD:src/services/mods/deliveryEdit/editHeaderTransportInfo.ts
- * @desc 编辑-头程运输信息
-=======
  * @desc doUpdateCommodityEnable
->>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde:src/services/commodityService/mods/commodity/doUpdateCommodityEnable.ts
  */
 import request from '@/utils/request'
 export class IQueryParams {}

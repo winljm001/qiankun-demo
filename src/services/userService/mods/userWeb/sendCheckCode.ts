@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD:src/services/mods/deliveryEdit/rollBack.ts
- * @desc 编辑-回滚计划
-=======
  * @desc sendCheckCode
->>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde:src/services/userService/mods/userWeb/sendCheckCode.ts
  */
 import request from '@/utils/request'
 export class IQueryParams {

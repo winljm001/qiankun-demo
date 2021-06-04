@@ -3,17 +3,17 @@ import {
   commodityService
 } from './commodityService'
 
-import { defs as userServiceDefs, userService } from './userService'
-
 import { defs as authServiceDefs, authService } from './authService'
+
+import { defs as userServiceDefs, userService } from './userService'
 
 ;(window as any).defs = {
   commodityService: commodityServiceDefs,
-  userService: userServiceDefs,
-  authService: authServiceDefs
+  authService: authServiceDefs,
+  userService: userServiceDefs
 }
 ;(window as any).API = {
   commodityService,
-  userService,
-  authService
+  authService,
+  userService
 }

@@ -4,6 +4,8 @@ import { Button, Checkbox, message, Form, Input } from 'antd';
 import { SafetyOutlined, TabletOutlined } from '@ant-design/icons';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { login } from '@/services/userService/mods/userWeb/login'
+import { sendCheckCode } from '@/services/userService/mods/userWeb/sendCheckCode'
 import img from './images/logo.png'
 
 import styles from './style.module.less'
@@ -16,30 +18,30 @@ const Index: React.FC = () => {
   // console.log(verificationCode);
 
   // 登录按钮提交的toast
-  const toastLogin = () => {
-    // if (true) {
-    //   message.success('登陆成功');
-    // } else {
-    //   message.error('网络异常，请稍后再试！');
-    // }
-  }
+  // const toastLogin = () => {
 
-  // 验证码toast弹窗
+  // }
+
+
+
+  // 验证码发送
   const toastVerificationCode = () => {
-    // if (true) {
-    //   message.success('获取验证码成功');
-    // } else {
-    //   message.error('网络异常，请稍后再试！');
-    // }
+    // 取手机号码
+    const phoneNum1 = FormInstance.getFieldValue('username')
+    sendCheckCode({
+      queryParams: {
+        phoneNum: String(phoneNum1)
+      }
+    }).then(res => {
+      // console.log(res);
+      message.error('获取验证码成功！')
+    }).catch(err => {
+
+    })
   }
 
-  // 倒计时结束回调
-  // const onEnd = () => {
-  //   // console.log('111');
 
-  // };
-
-  // 倒计时ahook
+  // 创建倒计时ahook
   const [countdown, setTargetDate] = useCountDown();
 
 
@@ -50,18 +52,26 @@ const Index: React.FC = () => {
     logout();
   });
   const onFinish = (values: any) => {
-    // setFlag1(false)
+    console.log(values);
+    login({
+      bodyParams: {
+        /** 短信验证码 */
+        checkCode: values.text,
+        /** 用户电话号码 */
+        phoneNum: values.username
+      }
+    }).then(res => {
+      message.error('登陆成功！')
+      history.push('/');
+    }).catch(err => {
+      console.log(err);
+
+    })
     // 登录逻辑
-    history.push('/');
-    console.log('Success:', values);
+
+    // console.log('Success:', values);
   };
 
-
-
-  // 表单提交失败
-  const onFinishFailed = () => {
-    // setFlag1(true)
-  }
 
   return (
     <div className={styles.login}>
@@ -77,7 +87,7 @@ const Index: React.FC = () => {
 
         <div className={styles.formBox}>
 
-          <Form onFinishFailed={onFinishFailed} form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+          <Form form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
 
             {/* 用户 */}
             <Form.Item name="username" className={styles.formInput} rules={[{ required: true, message: '请输入手机号！' },
@@ -124,7 +134,7 @@ const Index: React.FC = () => {
                   disabled = false
                 }
                 return (<Form.Item>
-                  <Button disabled={disabled} onClick={toastLogin} block className={styles.btnB} type="primary" htmlType="submit">
+                  <Button disabled={disabled} block className={styles.btnB} type="primary" htmlType="submit">
                     登录
               </Button>
                 </Form.Item>)

@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD:src/services/mods/declareInfo/shipCompanyOption.ts
- * @desc 查询-船公司下拉列表
-=======
  * @desc listSpuTypeOption
->>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde:src/services/commodityService/mods/commodityType/listSpuTypeOption.ts
  */
 import request from '@/utils/request'
 export class IQueryParams {}

@@ -1,9 +1,5 @@
 /**
-<<<<<<< HEAD:src/services/mods/customer/edit.ts
- * @desc 编辑
-=======
  * @desc doUpdateSkuStatus
->>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde:src/services/commodityService/mods/commoditySku/doUpdateSkuStatus.ts
  */
 import request from '@/utils/request'
 export class IQueryParams {}

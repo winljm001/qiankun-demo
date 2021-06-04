@@ -5,11 +5,7 @@ import request from '@/utils/request'
 export class IQueryParams {}
 
 export interface IParams {
-<<<<<<< HEAD:src/services/mods/internationalShipment/getDetailList.ts
-  bodyParams: defs.InternationalShipmentDetailQueryDTO
-=======
   bodyParams: defs.commodityService.SkuListFilterCondition
->>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde:src/services/commodityService/mods/commoditySku/listSku.ts
 }
 
 export function listSku({ bodyParams }: IParams = {} as IParams) {
