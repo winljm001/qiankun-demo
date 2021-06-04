@@ -3,7 +3,12 @@ import header_logo from '@/images/header_logo.png';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import styles from './index.module.less';
 
-const AppHeader: FC = () => {
+interface IProps {
+  collapsed: boolean;
+  setCollapsed: (val: boolean) => void
+}
+
+const AppHeader: FC<IProps> = ({ collapsed, setCollapsed }) => {
   const a = Math.random()
   const CollapseIcon = a > 0.5 ? MenuUnfoldOutlined : MenuFoldOutlined;
   return (
@@ -11,7 +16,9 @@ const AppHeader: FC = () => {
       <div className={styles.left}>
         <img src={header_logo} />
         <div className={styles.name}>星桥分拣管理系统</div>
-        <CollapseIcon className={styles.collapseIcon} />
+        <CollapseIcon onClick={() => {
+          setCollapsed(!collapsed)
+        }} className={styles.collapseIcon} />
       </div>
       <div className={styles.right}>
         <span className={styles.corpName}>洪九果品重庆分公司</span>

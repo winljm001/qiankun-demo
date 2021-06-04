@@ -18,6 +18,9 @@ interface State {
   /** 默认菜单展开项keys */
   menuOpenKeys: React.Key[];
   setMenuOpenKeys: (openKeys: React.Key[]) => void;
+  /** 菜单是否收起 */
+  collapsed: boolean;
+  setCollapsed: (value: boolean) => void;
   /** 退出 */
   logout: () => void;
   [key: string]: any;
@@ -28,17 +31,21 @@ const useGlobalStore = create<State>(
     // 本地存储，其他store不需要
     persist(
       (set: SetState<State>, get: GetState<State>) => ({
-        menuList: [],
-        menuOpenKeys: [],
-        isLogin: true,
+        menuList: null,
+        collapsed: false,
+        menuOpenKeys: null,
+        isLogin: false,
         token: null,
         userInfo: null,
-        isAuthReady: true,
+        isAuthReady: false,
         setMenuList: (menuList) => {
           set({ menuList });
         },
         setMenuOpenKeys: (openKeys) => {
           set({ menuOpenKeys: openKeys });
+        },
+        setCollapsed: value => {
+          set({ collapsed: value })
         },
         logout: () => {
           set({ isLogin: false, token: '', userInfo: {} });
@@ -70,5 +77,6 @@ useGlobalStore.subscribe(
   },
   (state) => state.isLogin,
 );
+useGlobalStore.setState({ isLogin: true })
 
 export default useGlobalStore;
