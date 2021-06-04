@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Index: React.FC = () => {
+const SkuSelect: React.FC = () => {
   return (
     <div>
       <p>sku-select</p>
@@ -8,4 +8,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default SkuSelect;

@@ -1,10 +1,13 @@
+import { Card } from 'antd';
+import { CardProps } from 'antd/lib/card';
 import React from 'react';
 
-const BaseCard: React.FC = () => {
+type BaseCardInterface = CardProps;
+const BaseCard: React.FC<BaseCardInterface> = ({ children, ...props }) => {
   return (
-    <div>
-      <p>BaseCard</p>
-    </div>
+    <Card bordered={false} style={{ marginBottom: 16 }} {...props}>
+      {children}
+    </Card>
   );
 };
 

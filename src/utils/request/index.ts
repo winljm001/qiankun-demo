@@ -1,4 +1,5 @@
 import config from '@/config';
+import useGlobalStore from '@/stores/global';
 import { message } from 'antd';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 import qs from 'querystring';
@@ -48,16 +49,17 @@ axios.interceptors.request.use((config: AxiosRequestConfig) => {
 });
 export default async function request<T = any>(options: requestOptions) {
   const { url } = options;
-  const Authorization = localStorage.getItem(authKey);
+  const { getState } = useGlobalStore;
   const lang = localStorage.getItem('currentLang');
   let headers = {};
   if (options) {
     headers = options.headers || {};
   }
+  console.log(getState().token);
   const defaultOptions = {
     headers: {
       ...headers,
-      'X-Access-Token': Authorization,
+      Authorization: getState().token,
       locale: lang,
     },
     credentials: 'include',

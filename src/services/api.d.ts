@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 type ObjectMap<Key extends string | number | symbol = any, Value = any> = {
   [key in Key]: Value
 }
@@ -11962,3 +11963,8 @@ declare namespace API {
     }
   }
 }
+=======
+/// <reference path="./commodityService/api.d.ts" />
+/// <reference path="./userService/api.d.ts" />
+/// <reference path="./authService/api.d.ts" />
+>>>>>>> 68cb653d2e2217f666ff04f5c8dac15be8763dde

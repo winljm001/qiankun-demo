@@ -1,26 +1,65 @@
+import React, { CSSProperties } from 'react';
 import loadable from '@loadable/component';
 import { RouteConfig } from 'react-router-config';
 import Layouts from '@/layouts/commonLayout/index';
 
 import { Redirect } from 'react-router-dom';
 import { BASE_PATH } from './basePath';
-import React from 'react';
+import { BreadcrumbItem } from '@/layouts/commonLayout/components/breadcrubm';
+
 const modules = import.meta.globEager('./**/index.ts');
 let config: RouteConfig[] = [];
 // eslint-disable-next-line guard-for-in
 for (const path in modules) {
   config.push(...modules[path].default);
 }
-export const mainRoutes: RouteConfig[] = [
+export interface CustomRouteConfig extends RouteConfig {
+  /** 面包屑配置 */
+  breadcrumb?: BreadcrumbItem[];
+  /** 权限 */
+  authKey?: string;
+  /** 页面信息配置 */
+  meta?: {
+    /** 系统左侧菜单栏文案（为空或未配置则不会出现在菜单栏） */
+    menuText?: string;
+    /** 主内容区域padding（默认16px） */
+    contentPadding?: CSSProperties['padding'];
+  };
+  /** 子路由 */
+  routes?: CustomRouteConfig[];
+}
+export const mainRoutes: CustomRouteConfig[] = [
   {
     path: BASE_PATH,
     exact: true,
-    title: '首页',
     component: loadable(() => import('@/pages/home')),
+    meta: {
+      menuText: '首页',
+    },
+    breadcrumb: [{ name: '首页' }, { name: '首页' }],
+    routes: [
+      {
+        path: `${BASE_PATH}/test`,
+        exact: true,
+        component: loadable(() => import('@/pages/home')),
+        breadcrumb: [{ name: '测试' }, { name: '测试' }],
+        routes: [],
+        meta: {
+          menuText: '测试',
+        },
+        authority: [],
+      },
+    ],
+    authority: [],
   },
   ...config,
 ];
-const routes: RouteConfig[] = [
+const routes: CustomRouteConfig[] = [
+  {
+    path: BASE_PATH,
+    component: Layouts,
+    routes: mainRoutes,
+  },
   {
     path: '/',
     exact: true,
@@ -32,14 +71,8 @@ const routes: RouteConfig[] = [
     component: loadable(() => import('@/pages/login')),
   },
   {
-    path: BASE_PATH,
-    component: Layouts,
-    routes: mainRoutes,
-  },
-  {
     path: '*',
     component: loadable(() => import('@/pages/404/index')),
   },
 ];
-console.log(routes);
 export default routes;

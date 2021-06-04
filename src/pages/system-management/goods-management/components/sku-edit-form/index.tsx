@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Index: React.FC = () => {
+const SkuEditForm: React.FC = () => {
   return (
     <div>
       <p>sku-edit-form</p>
@@ -8,4 +8,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default SkuEditForm;

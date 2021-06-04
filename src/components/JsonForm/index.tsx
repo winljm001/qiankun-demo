@@ -18,6 +18,7 @@ import RadioGroupControl, { RadioGroupControlProps } from './controls/RadioGroup
 import TreeControl, { TreeControlProps } from './controls/TreeControl';
 import TreeSelectControl, { TreeSelectControlProps } from './controls/TreeSelectControl';
 import DatePickerControl, { DatePickerControlConfig } from './controls/DatePickerControl';
+import { fromSingleLayoutProps } from './defaultConfig';
 
 // 纯文本
 type TextControlConfig = {
@@ -226,7 +227,7 @@ const JsonForm: React.FC<FormConfig> = ({
       onFinish(values);
     }
   };
-  const formPropsResult: FormProps = { layout: 'vertical', ...formProps };
+  const formPropsResult: FormProps = { layout: 'vertical', ...fromSingleLayoutProps, ...formProps };
   // 根据表单项col props设置按钮组col props
   const { indent = formControlIndent, style = {}, groups = [], ...buttonItemProps } = callableDataReturn(buttonGroup);
   return (
