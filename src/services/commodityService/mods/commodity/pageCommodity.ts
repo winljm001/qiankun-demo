@@ -8,6 +8,8 @@ import * as request from '@/utils/fetch'
 export class Params {
   /** admin */
   admin?: boolean
+  /** commodityName */
+  commodityName?: string
   /** currentDate */
   currentDate?: string
   /** offset */
@@ -39,7 +41,9 @@ export type PageCommodityParams = Params
 export const pageCommodity = (params: PageCommodityParams, headers?: any) => {
   return request.request<
     defs.commodityService.ApiResult<
-      defs.commodityService.DefaultPageResult<defs.commodityService.CommodityVO>
+      defs.commodityService.DefaultPageResult<
+        defs.commodityService.CommoditySpuVO
+      >
     >
   >({
     ...request.buildOptions('/api/commodity/v1/spu/list', params, 'GET'),

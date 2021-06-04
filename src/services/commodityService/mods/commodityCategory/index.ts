@@ -1,7 +1,12 @@
 /**
  * @description 商品分类管理
  */
-import * as list from './list'
-import * as getCommodityGroup from './getCommodityGroup'
+import * as listSpuCategoryOption from './listSpuCategoryOption'
+import * as listCommodityOriginOption from './listCommodityOriginOption'
+import * as listCommodityVarietyOption from './listCommodityVarietyOption'
 
-export { list, getCommodityGroup }
+export {
+  listSpuCategoryOption,
+  listCommodityOriginOption,
+  listCommodityVarietyOption
+}

@@ -1,26 +1,12 @@
 class ApiResult {
   /** data */
-  data = new CommodityCategoryVO()
+  data = new CommoditySpuVO()
 
   /** errCode */
   errCode = undefined
 
   /** errMsg */
   errMsg = ''
-}
-
-class CommodityCategoryVO {
-  /** categoryId */
-  categoryId = undefined
-
-  /** categoryName */
-  categoryName = ''
-
-  /** placeOriginId */
-  placeOriginId = undefined
-
-  /** varietyId */
-  varietyId = undefined
 }
 
 class CommodityDTO {
@@ -43,14 +29,6 @@ class CommodityDTO {
   commodityVarietyId = undefined
 }
 
-class CommodityGroupVO {
-  /** 商品产地列表 */
-  commodityPlaceOriginVOS = []
-
-  /** 商品品种列表 */
-  commodityVarietyVOS = []
-}
-
 class CommodityNameDTO {
   /** 商品id */
   commodityId = undefined
@@ -59,15 +37,15 @@ class CommodityNameDTO {
   commodityName = ''
 }
 
-class CommodityPlaceOriginVO {
-  /** 品类id */
-  categoryId = undefined
+class CommoditySpecAndOptionPO {
+  /** commoditySpecId */
+  commoditySpecId = undefined
 
-  /** 产地id */
-  placeOriginId = undefined
+  /** commoditySpecName */
+  commoditySpecName = ''
 
-  /** 产地名称 */
-  placeOriginName = undefined
+  /** commoditySpecOptionPOList */
+  commoditySpecOptionPOList = []
 }
 
 class CommoditySpecDTO {
@@ -100,26 +78,15 @@ class CommoditySpecOptionDTO {
   commoditySpecOptionName = ''
 }
 
-class CommodityStatusDTO {
-  /** 商品id */
-  commodityId = undefined
+class CommoditySpecOptionPO {
+  /** commoditySpecOptionId */
+  commoditySpecOptionId = undefined
 
-  /** 激活状态 */
-  status = undefined
+  /** commoditySpecOptionName */
+  commoditySpecOptionName = ''
 }
 
-class CommodityTypeVO {
-  /** 商品类型id */
-  commodityTypeId = undefined
-
-  /** 商品类型名称 */
-  commodityTypeName = ''
-
-  /** 上级类型id */
-  parentCommodityTypeId = undefined
-}
-
-class CommodityVO {
+class CommoditySpuVO {
   /** 商品品类名称 */
   commodityCategoryName = ''
 
@@ -131,6 +98,9 @@ class CommodityVO {
 
   /** 商品产地名称 */
   commodityPlaceOriginName = ''
+
+  /** 规格信息 */
+  commoditySpecAndOptionPOS = []
 
   /** 商品类型名称 */
   commodityTypeName = ''
@@ -145,15 +115,12 @@ class CommodityVO {
   status = undefined
 }
 
-class CommodityVarietyVO {
-  /** 品类id */
-  categoryId = undefined
+class CommodityStatusDTO {
+  /** 商品id */
+  commodityId = undefined
 
-  /** 品种id */
-  varietyId = undefined
-
-  /** 品种名称 */
-  varietyName = undefined
+  /** 激活状态 */
+  status = undefined
 }
 
 class DefaultPageResult {
@@ -324,18 +291,15 @@ class SpecificationsAndTypes {
 
 export const commodityService = {
   ApiResult,
-  CommodityCategoryVO,
   CommodityDTO,
-  CommodityGroupVO,
   CommodityNameDTO,
-  CommodityPlaceOriginVO,
+  CommoditySpecAndOptionPO,
   CommoditySpecDTO,
   CommoditySpecModifyDTO,
   CommoditySpecOptionDTO,
+  CommoditySpecOptionPO,
+  CommoditySpuVO,
   CommodityStatusDTO,
-  CommodityTypeVO,
-  CommodityVO,
-  CommodityVarietyVO,
   DefaultPageResult,
   ModifyTheSkuStatus,
   ModifyTheSpu,

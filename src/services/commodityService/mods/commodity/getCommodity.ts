@@ -20,7 +20,7 @@ export type GetCommodityParams = Params
  */
 export const getCommodity = (params: GetCommodityParams, headers?: any) => {
   return request.request<
-    defs.commodityService.ApiResult<defs.commodityService.CommodityVO>
+    defs.commodityService.ApiResult<defs.commodityService.CommoditySpuVO>
   >({
     ...request.buildOptions('/api/commodity/v1/spu/{id}', params, 'GET'),
     headers

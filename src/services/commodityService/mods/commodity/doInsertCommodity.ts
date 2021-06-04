@@ -33,7 +33,7 @@ export const doInsertCommodity = (
   params: DoInsertCommodityParams,
   headers?: any
 ) => {
-  return request.request<defs.commodityService.ApiResult<boolean>>({
+  return request.request<defs.commodityService.ApiResult<number>>({
     ...request.buildOptions('/api/commodity/v1/spu/insert', params, 'POST'),
     headers
   })

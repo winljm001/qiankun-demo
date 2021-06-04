@@ -15,20 +15,6 @@ declare namespace defs {
       errMsg?: string
     }
 
-    export class CommodityCategoryVO {
-      /** categoryId */
-      categoryId?: number
-
-      /** categoryName */
-      categoryName?: string
-
-      /** placeOriginId */
-      placeOriginId?: number
-
-      /** varietyId */
-      varietyId?: number
-    }
-
     export class CommodityDTO {
       /** 商品品类id */
       commodityCategoryId?: number
@@ -49,16 +35,6 @@ declare namespace defs {
       commodityVarietyId?: number
     }
 
-    export class CommodityGroupVO {
-      /** 商品产地列表 */
-      commodityPlaceOriginVOS?: Array<
-        defs.commodityService.CommodityPlaceOriginVO
-      >
-
-      /** 商品品种列表 */
-      commodityVarietyVOS?: Array<defs.commodityService.CommodityVarietyVO>
-    }
-
     export class CommodityNameDTO {
       /** 商品id */
       commodityId?: number
@@ -67,15 +43,17 @@ declare namespace defs {
       commodityName?: string
     }
 
-    export class CommodityPlaceOriginVO {
-      /** 品类id */
-      categoryId?: number
+    export class CommoditySpecAndOptionPO {
+      /** commoditySpecId */
+      commoditySpecId?: number
 
-      /** 产地id */
-      placeOriginId?: number
+      /** commoditySpecName */
+      commoditySpecName?: string
 
-      /** 产地名称 */
-      placeOriginName?: number
+      /** commoditySpecOptionPOList */
+      commoditySpecOptionPOList?: Array<
+        defs.commodityService.CommoditySpecOptionPO
+      >
     }
 
     export class CommoditySpecDTO {
@@ -112,26 +90,15 @@ declare namespace defs {
       commoditySpecOptionName?: string
     }
 
-    export class CommodityStatusDTO {
-      /** 商品id */
-      commodityId?: number
+    export class CommoditySpecOptionPO {
+      /** commoditySpecOptionId */
+      commoditySpecOptionId?: number
 
-      /** 激活状态 */
-      status?: number
+      /** commoditySpecOptionName */
+      commoditySpecOptionName?: string
     }
 
-    export class CommodityTypeVO {
-      /** 商品类型id */
-      commodityTypeId?: number
-
-      /** 商品类型名称 */
-      commodityTypeName?: string
-
-      /** 上级类型id */
-      parentCommodityTypeId?: number
-    }
-
-    export class CommodityVO {
+    export class CommoditySpuVO {
       /** 商品品类名称 */
       commodityCategoryName?: string
 
@@ -143,6 +110,11 @@ declare namespace defs {
 
       /** 商品产地名称 */
       commodityPlaceOriginName?: string
+
+      /** 规格信息 */
+      commoditySpecAndOptionPOS?: Array<
+        defs.commodityService.CommoditySpecAndOptionPO
+      >
 
       /** 商品类型名称 */
       commodityTypeName?: string
@@ -157,15 +129,12 @@ declare namespace defs {
       status?: number
     }
 
-    export class CommodityVarietyVO {
-      /** 品类id */
-      categoryId?: number
+    export class CommodityStatusDTO {
+      /** 商品id */
+      commodityId?: number
 
-      /** 品种id */
-      varietyId?: number
-
-      /** 品种名称 */
-      varietyName?: number
+      /** 激活状态 */
+      status?: number
     }
 
     export class DefaultPageResult<T0 = any> {
@@ -372,12 +341,12 @@ declare namespace API {
           userName?: string
         }
 
-        export type Response = defs.commodityService.ApiResult<boolean>
+        export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
         export function request(
           params: Params,
           bodyParams: defs.commodityService.CommodityDTO
-        ): Promise<defs.commodityService.ApiResult<boolean>>
+        ): Promise<defs.commodityService.ApiResult<number>>
       }
 
       /**
@@ -388,6 +357,8 @@ declare namespace API {
         export class Params {
           /** admin */
           admin?: boolean
+          /** commodityName */
+          commodityName?: string
           /** currentDate */
           currentDate?: string
           /** offset */
@@ -410,7 +381,7 @@ declare namespace API {
 
         export type Response = defs.commodityService.ApiResult<
           defs.commodityService.DefaultPageResult<
-            defs.commodityService.CommodityVO
+            defs.commodityService.CommoditySpuVO
           >
         >
         export const init: Response
@@ -419,7 +390,7 @@ declare namespace API {
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<
-              defs.commodityService.CommodityVO
+              defs.commodityService.CommoditySpuVO
             >
           >
         >
@@ -495,13 +466,13 @@ declare namespace API {
         }
 
         export type Response = defs.commodityService.ApiResult<
-          defs.commodityService.CommodityVO
+          defs.commodityService.CommoditySpuVO
         >
         export const init: Response
         export function request(
           params: Params
         ): Promise<
-          defs.commodityService.ApiResult<defs.commodityService.CommodityVO>
+          defs.commodityService.ApiResult<defs.commodityService.CommoditySpuVO>
         >
       }
     }
@@ -511,44 +482,70 @@ declare namespace API {
      */
     export namespace commodityCategory {
       /**
-       * list
-       * /api/commodity/v1/category/spu/list
+       * listSpuCategoryOption
+       * /api/commodity/v1/spu/category/category/{id}/option
        */
-      export namespace list {
-        export class Params {}
-
-        export type Response = defs.commodityService.ApiResult<
-          defs.commodityService.CommodityCategoryVO
-        >
-        export const init: Response
-        export function request(
-          params: Params
-        ): Promise<
-          defs.commodityService.ApiResult<
-            defs.commodityService.CommodityCategoryVO
-          >
-        >
-      }
-
-      /**
-       * getCommodityGroup
-       * /api/commodity/v1/category/spu/{id}
-       */
-      export namespace getCommodityGroup {
+      export namespace listSpuCategoryOption {
         export class Params {
           /** id */
           id: number
         }
 
         export type Response = defs.commodityService.ApiResult<
-          defs.commodityService.CommodityGroupVO
+          Array<defs.commodityService.Option<string, number>>
         >
         export const init: Response
         export function request(
           params: Params
         ): Promise<
           defs.commodityService.ApiResult<
-            defs.commodityService.CommodityGroupVO
+            Array<defs.commodityService.Option<string, number>>
+          >
+        >
+      }
+
+      /**
+       * listCommodityOriginOption
+       * /api/commodity/v1/spu/category/origin/{id}/option
+       */
+      export namespace listCommodityOriginOption {
+        export class Params {
+          /** id */
+          id: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.Option<string, number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.Option<string, number>>
+          >
+        >
+      }
+
+      /**
+       * listCommodityVarietyOption
+       * /api/commodity/v1/spu/category/variety/{id}/option
+       */
+      export namespace listCommodityVarietyOption {
+        export class Params {
+          /** id */
+          id: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.Option<string, number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.Option<string, number>>
           >
         >
       }
@@ -701,25 +698,25 @@ declare namespace API {
     }
 
     /**
-     * 果品类型管理
+     * 商品类型管理
      */
     export namespace commodityType {
       /**
        * listSpuTypeOption
-       * /api/commodity/v1/type/spu/list
+       * /api/commodity/v1/spu/type/list
        */
       export namespace listSpuTypeOption {
         export class Params {}
 
         export type Response = defs.commodityService.ApiResult<
-          Array<defs.commodityService.CommodityTypeVO>
+          Array<defs.commodityService.Option<string, number>>
         >
         export const init: Response
         export function request(
           params: Params
         ): Promise<
           defs.commodityService.ApiResult<
-            Array<defs.commodityService.CommodityTypeVO>
+            Array<defs.commodityService.Option<string, number>>
           >
         >
       }
