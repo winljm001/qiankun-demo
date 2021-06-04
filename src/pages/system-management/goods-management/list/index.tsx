@@ -57,13 +57,13 @@ const AntdTable = () => {
               {
                 children: '规格管理',
                 onClick() {
-                  history.push(`${SPEC_MANAGEMENT}?id=${record.id}`);
+                  history.push(`${SPEC_MANAGEMENT}?commodityId=${record.commodityId}`);
                 },
               },
               {
                 children: 'SKU管理',
                 onClick() {
-                  history.push(`${SKU_MANAGEMENT}?id=${record.id}`);
+                  history.push(`${SKU_MANAGEMENT}?commodityId=${record.commodityId}`);
                 },
               },
             ]}
@@ -79,7 +79,7 @@ const AntdTable = () => {
         <SearchForm form={form} submit={submit} reset={reset} />
       </BaseCard>
       <BaseCard>
-        <Table columns={columns} rowKey="id" {...tableProps} />
+        <Table columns={columns} rowKey="commodityId" {...tableProps} />
       </BaseCard>
     </div>
   );
