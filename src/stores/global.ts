@@ -20,9 +20,6 @@ export interface State {
   /** 权限是否准备好 */
   isAuthReady: boolean;
   setMenuList: (value: CustomRouteConfig[]) => void;
-  /** 默认菜单展开项keys */
-  menuOpenKeys: React.Key[];
-  setMenuOpenKeys: (openKeys: React.Key[]) => void;
   /** 菜单是否收起 */
   collapsed: boolean;
   setCollapsed: (value: boolean) => void;
@@ -38,7 +35,6 @@ const useGlobalStore = create<State>(
       (set: SetState<State>, get: GetState<State>) => ({
         menuList: null,
         collapsed: false,
-        menuOpenKeys: null,
         isLogin: false,
         token: null,
         userInfo: {
@@ -48,9 +44,6 @@ const useGlobalStore = create<State>(
         isAuthReady: false,
         setMenuList: (menuList) => {
           set({ menuList });
-        },
-        setMenuOpenKeys: (openKeys) => {
-          set({ menuOpenKeys: openKeys });
         },
         setCollapsed: (value) => {
           set({ collapsed: value });
@@ -64,7 +57,7 @@ const useGlobalStore = create<State>(
         name: 'global-storage',
         getStorage: () => localStorage,
         // only these props will be persisted
-        whitelist: ['isLogin', 'token', 'collapsed', 'userInfo', 'menuOpenKeys'],
+        whitelist: ['isLogin', 'token', 'collapsed', 'userInfo'],
       },
     ),
   ),

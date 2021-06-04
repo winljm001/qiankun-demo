@@ -9,7 +9,7 @@ interface IProps extends MenuProps {
   menuList: CustomRouteConfig[];
 }
 
-const SideMenu: React.FC<IProps> = React.memo(({ menuList, defaultOpenKeys, defaultSelectedKeys, ...restProps }) => {
+const SideMenu: React.FC<IProps> = React.memo(({ menuList, ...restProps }) => {
   const renderMenu = (menuConfig: CustomRouteConfig[]) => {
     return menuConfig?.map((menu) => {
       const menuText = menu.meta?.menuText;
@@ -36,8 +36,6 @@ const SideMenu: React.FC<IProps> = React.memo(({ menuList, defaultOpenKeys, defa
     <Menu
       theme="dark"
       mode="inline"
-      defaultSelectedKeys={defaultSelectedKeys}
-      defaultOpenKeys={defaultOpenKeys}
       {...restProps}
       className={styles.sideMenu}>
       {renderMenu(menuList)}

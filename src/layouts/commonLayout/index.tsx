@@ -35,7 +35,7 @@ const traverseRoutes = (routes: CustomRouteConfig[], handle: (route: CustomRoute
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) => {
   const { route } = props;
-  const { isAuthReady, menuList, collapsed, setCollapsed, menuOpenKeys, setMenuOpenKeys, userInfo, logout } =
+  const { isAuthReady, menuList, collapsed, setCollapsed, userInfo, logout } =
     useGlobalStore();
   useEffect(() => {
     useGlobalStore.setState({
@@ -62,10 +62,6 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   // get openKeys by pathname
   const openKeys = useMemo(() => {
     const keys = [];
-    // menuOpenKeys has a higher priority than keys computed by pathname
-    if (menuOpenKeys) {
-      return menuOpenKeys;
-    }
     const traverse = (menu: CustomRouteConfig[]) => {
       for (let i = 0; i <= menu?.length - 1; i++) {
         const route = menu[i];
@@ -89,7 +85,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     };
     traverse(menuList);
     return keys;
-  }, [location.pathname, menuList, menuOpenKeys]);
+  }, [location.pathname, menuList]);
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
   if (!isAuthReady) {
@@ -104,14 +100,14 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
         <Sider collapsed={collapsed} trigger={null} collapsible width={208}>
           <SideMenu
             menuList={menuList}
-            selectedKeys={[matchedRouteConfig.meta?.menuText]}
-            openKeys={collapsed ? [] : openKeys}
-            onOpenChange={setMenuOpenKeys}
+            defaultSelectedKeys={[matchedRouteConfig.meta?.menuText]}
+            defaultOpenKeys={collapsed ? [] : openKeys}
+            inlineCollapsed={collapsed}
           />
         </Sider>
         <Layout>
           <AppBreadcrumb route={matchedRouteConfig} />
-          <Content style={{ padding: contentPadding === undefined ? 16 : contentPadding }}>
+          <Content className={styles.content} style={{ padding: contentPadding === undefined ? 16 : contentPadding }}>
             {renderRoutes(route?.routes)}
           </Content>
         </Layout>
