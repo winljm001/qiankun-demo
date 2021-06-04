@@ -1,15 +1,15 @@
 import React from 'react';
-import { Table } from 'antd';
+import { Button, Space, Table } from 'antd';
 import SearchForm from './search-form/index';
 import { pageCommodity } from '@/services/commodityService/mods/commodity/pageCommodity';
 import BaseCard from '@/components/BaseCard';
 import ActionGroup from '@/components/ActionGroup';
 import { useHistory } from 'react-router-dom';
-import { SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
+import { GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
 import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks';
 
-const AntdTable = () => {
+const GoodsManagementList = () => {
   const history = useHistory();
   const { tableProps, form, submit, reset } = useAsyncTable({ fetchAction: pageCommodity });
   const handleChangeStatus = (record) => {
@@ -57,13 +57,13 @@ const AntdTable = () => {
               {
                 children: '规格管理',
                 onClick() {
-                  history.push(`${SPEC_MANAGEMENT}?id=${record.id}`);
+                  history.push(`${SPEC_MANAGEMENT}?commodityId=${record.commodityId}`);
                 },
               },
               {
                 children: 'SKU管理',
                 onClick() {
-                  history.push(`${SKU_MANAGEMENT}?id=${record.id}`);
+                  history.push(`${SKU_MANAGEMENT}?commodityId=${record.commodityId}`);
                 },
               },
             ]}
@@ -77,12 +77,21 @@ const AntdTable = () => {
     <div>
       <BaseCard>
         <SearchForm form={form} submit={submit} reset={reset} />
+        <Space size={24}>
+          <Button
+            onClick={() => {
+              history.push(`${GOODS_MANAGEMENT_ADD}`);
+            }}
+            type="primary">
+            新增果品
+          </Button>
+        </Space>
       </BaseCard>
       <BaseCard>
-        <Table columns={columns} rowKey="id" {...tableProps} />
+        <Table columns={columns} rowKey="commodityId" {...tableProps} />
       </BaseCard>
     </div>
   );
 };
 
-export default AntdTable;
+export default GoodsManagementList;
