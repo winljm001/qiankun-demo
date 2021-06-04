@@ -2,7 +2,7 @@ import React, { CSSProperties } from 'react';
 import loadable from '@loadable/component';
 import { RouteConfig } from 'react-router-config';
 import Layouts from '@/layouts/commonLayout/index';
-import * as Icons from '@ant-design/icons';
+import * as Icons from '@ant-design/icons/lib/icons';
 import { Redirect } from 'react-router-dom';
 import { BASE_PATH } from './basePath';
 import { BreadcrumbItem } from '@/layouts/commonLayout/components/breadcrubm';
