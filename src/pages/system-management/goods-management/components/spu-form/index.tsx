@@ -1,4 +1,5 @@
 import JsonForm, { defineConfig, useForm } from '@/components/JsonForm';
+import { listSpuTypeOption } from '@/services/commodityService/mods/commodityType/listSpuTypeOption';
 import { FormInstance } from 'antd';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
@@ -16,10 +17,21 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
     formItems: [
       {
         label: '商品名称',
-        name: 'name',
+        name: 'commodityName',
         rules: [{ required: true, message: '请输入商品名称' }],
         control: {
           controlType: 'INPUT',
+        },
+      },
+      {
+        label: '商品类型',
+        name: 'commodityTypeId',
+        rules: [{ required: true, message: '请选择商品类型' }],
+        control: {
+          controlType: 'REMOTE_SELECT',
+          fetch: listSpuTypeOption,
+          enableDisabled: false,
+          normalize: (data) => [{ label: '全部', value: null }].concat(data),
         },
       },
     ],

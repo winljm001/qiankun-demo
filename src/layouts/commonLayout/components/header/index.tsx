@@ -10,15 +10,15 @@ type IProps = Pick<State, 'logout' | 'userInfo' | 'collapsed' | 'setCollapsed'>;
 
 const AppHeader: FC<IProps> = ({ userInfo, logout, collapsed, setCollapsed }) => {
   const CollapseIcon = collapsed ? MenuUnfoldOutlined : MenuFoldOutlined;
-  const history = useHistory()
+  const history = useHistory();
   const routeToLogin = () => {
-    location.href = '/login'
-  }
+    location.href = '/login';
+  };
   const menu = (
     <Menu>
       <Menu.Item
         onClick={() => {
-          logout(routeToLogin)
+          logout(routeToLogin);
         }}>
         退出登录
       </Menu.Item>
@@ -38,9 +38,11 @@ const AppHeader: FC<IProps> = ({ userInfo, logout, collapsed, setCollapsed }) =>
       </div>
       <div className={styles.right}>
         <span className={styles.corpName}>{userInfo?.companyName}</span>
-        <img src={header_logo} />
         <Dropdown overlay={menu} trigger={['click']}>
-          <span className={styles.userName}>{userInfo?.username}</span>
+          <div className={styles.userInfo}>
+            <img src={header_logo} />
+            <span className={styles.userName}>{userInfo?.username}</span>
+          </div>
         </Dropdown>
       </div>
     </div>

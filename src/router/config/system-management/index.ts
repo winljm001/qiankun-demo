@@ -1,7 +1,7 @@
 import React from 'react';
 import loadable from '@loadable/component';
 import BlankLayout from '@/layouts/blankLayout/index';
-import { BASE_URL, GOODS_MANAGEMENT } from './path';
+import { BASE_URL, GOODS_MANAGEMENT, GOODS_MANAGEMENT_ADD } from './path';
 import { CustomRouteConfig } from '../index';
 const routes: CustomRouteConfig[] = [
   {
@@ -17,9 +17,14 @@ const routes: CustomRouteConfig[] = [
         exact: true,
         meta: {
           menuText: '果品管理',
-          contentPadding: 0,
         },
         component: loadable(() => import('@/pages/system-management/goods-management/list/index')),
+        breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }],
+      },
+      {
+        path: GOODS_MANAGEMENT_ADD,
+        exact: true,
+        component: loadable(() => import('@/pages/system-management/goods-management/add/index')),
         breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }],
       },
     ],

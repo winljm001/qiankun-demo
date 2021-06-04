@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {
   defs as commodityServiceDefs,
   commodityService
@@ -17,3 +18,8 @@ import { defs as userServiceDefs, userService } from './userService'
   authService,
   userService
 }
+=======
+import { commodityService as defs } from './baseClass'
+export { commodityService } from './mods/'
+export { defs }
+>>>>>>> fa233df7eb1a8e0951b59c488c47b786c4ecb3f1

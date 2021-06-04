@@ -12,11 +12,11 @@ import styles from './style.module.less'
 
 const Index: React.FC = () => {
 
-  // const isLogin = useGlobalStore(state => state.isLogin)
-  useEffect(() => {
-    console.log(useGlobalStore.getState().token);
+  const { token } = useGlobalStore()
+  console.log(useGlobalStore.getState(), token, '----');
+  // useEffect(() => {
 
-  })
+  // })
 
   // 创建倒计时ahook
   const [countdown, setTargetDate] = useCountDown();
@@ -56,7 +56,19 @@ const Index: React.FC = () => {
       }
     }).then(res => {
       message.success('登陆成功！')
-      console.log(res);
+      // 用户信息
+      const userInfo = {
+        isLogin: true,
+        token: res.data.token,
+        userInfo: {
+          /** 用户名 */
+          username: res.data.userName,
+          /** 公司名 */
+          companyName: res.data.organizationName
+        }
+      }
+      console.log(userInfo);
+
       history.push('/');
     }).catch(err => {
       console.log(err);
@@ -79,9 +91,7 @@ const Index: React.FC = () => {
       <div className={styles.loginBox}>
         <img src={img} alt="" className={styles.logo} />
         <div className={styles.title}>星桥分拣管理系统</div>
-
         <div className={styles.formBox}>
-
           <Form form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
 
             {/* 用户 */}
