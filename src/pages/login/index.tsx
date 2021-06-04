@@ -11,20 +11,20 @@ import img from './images/logo.png'
 import styles from './style.module.less'
 
 const Index: React.FC = () => {
+
+  // const isLogin = useGlobalStore(state => state.isLogin)
+  useEffect(() => {
+    console.log(useGlobalStore.getState().token);
+
+  })
+
+  // 创建倒计时ahook
+  const [countdown, setTargetDate] = useCountDown();
+
   // Form实例化
   const [FormInstance]: any = Form.useForm()
-  // 取验证码
-  // const verificationCode = FormInstance.getFieldValue('text')
-  // console.log(verificationCode);
 
-  // 登录按钮提交的toast
-  // const toastLogin = () => {
-
-  // }
-
-
-
-  // 验证码发送
+  // 获取验证码
   const toastVerificationCode = () => {
     // 取手机号码
     const phoneNum1 = FormInstance.getFieldValue('username')
@@ -33,16 +33,11 @@ const Index: React.FC = () => {
         phoneNum: String(phoneNum1)
       }
     }).then(res => {
-      // console.log(res);
-      message.error('获取验证码成功！')
+      message.success('获取验证码成功！')
     }).catch(err => {
-
+      console.log(err);
     })
   }
-
-
-  // 创建倒计时ahook
-  const [countdown, setTargetDate] = useCountDown();
 
 
 
@@ -52,7 +47,6 @@ const Index: React.FC = () => {
     logout();
   });
   const onFinish = (values: any) => {
-    console.log(values);
     login({
       bodyParams: {
         /** 短信验证码 */
@@ -61,7 +55,8 @@ const Index: React.FC = () => {
         phoneNum: values.username
       }
     }).then(res => {
-      message.error('登陆成功！')
+      message.success('登陆成功！')
+      console.log(res);
       history.push('/');
     }).catch(err => {
       console.log(err);

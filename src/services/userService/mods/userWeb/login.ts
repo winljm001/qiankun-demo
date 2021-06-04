@@ -2,7 +2,7 @@
  * @desc login
  */
 import request from '@/utils/request'
-export class IQueryParams {}
+export class IQueryParams { }
 
 export interface IParams {
   bodyParams: defs.userService.LoginDto

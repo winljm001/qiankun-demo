@@ -39,8 +39,8 @@ const useGlobalStore = create<State>(
         menuList: null,
         collapsed: false,
         menuOpenKeys: null,
-        isLogin: false,
-        token: null,
+        isLogin: true,
+        token: '1111',
         userInfo: {
           companyName: 'test',
           username: 'test',
