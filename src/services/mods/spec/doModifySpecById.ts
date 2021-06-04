@@ -1,8 +1,11 @@
+// doModifySpecById 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc doModifySpecById
+ * @description doModifySpecById 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** admin */
   admin?: boolean
   /** commodityId */
@@ -19,41 +22,56 @@ export class IQueryParams {
   userName?: string
 }
 
-export interface IParams {
-  queryParams: IQueryParams
-  bodyParams: defs.commodityService.CommoditySpecModifyDTO
-}
+/**
+ * @description doModifySpecById 接口参数
+ */
+export type DoModifySpecByIdParams = Params &
+  defs.commodityService.CommoditySpecModifyDTO
 
-export function doModifySpecById(
-  { queryParams, bodyParams }: IParams = {} as IParams,
-  commodityId: string | number
-) {
-  return request<
+/**
+ * @description doModifySpecById 接口
+ */
+export const doModifySpecById = (
+  params: DoModifySpecByIdParams,
+  headers?: any
+) => {
+  return request.request<
     defs.commodityService.ApiResult<
       Array<defs.commodityService.SpecificationsAndTypes>
     >
   >({
-    url: `/api/commodity/v1/spec/modify/${commodityId}`,
-    method: 'post',
-    data: bodyParams,
-    params: queryParams
+    ...request.buildOptions(
+      '/api/commodity/v1/spec/modify/{commodityId}',
+      params,
+      'POST'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function doModifySpecByIdRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0],
-    bodyParams: restParamsData[1]
-  }
-  try {
-    const res = await doModifySpecById(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description doModifySpecById hooks 默认的 key
+ */
+export const USE_DO_MODIFY_SPEC_BY_ID_KEY =
+  '/api/commodity/v1/spec/modify/{commodityId}_POST'
+
+// export const doModifySpecByIdQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return doModifySpecById(params);
+// }
+
+// /**
+//  * @description doModifySpecById hooks
+//  */
+// export const useDoModifySpecById = (params: DoModifySpecByIdParams, headers?:any, key = 'USE_DO_MODIFY_SPEC_BY_ID_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => doModifySpecById(params, headers),
+//   })
+// }

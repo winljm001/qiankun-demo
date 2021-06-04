@@ -1,8 +1,11 @@
+// doInsertCommodity 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc doInsertCommodity
+ * @description doInsertCommodity 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** admin */
   admin?: boolean
   /** currentDate */
@@ -17,36 +20,47 @@ export class IQueryParams {
   userName?: string
 }
 
-export interface IParams {
-  queryParams: IQueryParams
-  bodyParams: defs.commodityService.CommodityDTO
-}
+/**
+ * @description doInsertCommodity 接口参数
+ */
+export type DoInsertCommodityParams = Params &
+  defs.commodityService.CommodityDTO
 
-export function doInsertCommodity(
-  { queryParams, bodyParams }: IParams = {} as IParams
-) {
-  return request<defs.commodityService.ApiResult<boolean>>({
-    url: `/api/commodity/v1/spu/insert`,
-    method: 'post',
-    data: bodyParams,
-    params: queryParams
+/**
+ * @description doInsertCommodity 接口
+ */
+export const doInsertCommodity = (
+  params: DoInsertCommodityParams,
+  headers?: any
+) => {
+  return request.request<defs.commodityService.ApiResult<boolean>>({
+    ...request.buildOptions('/api/commodity/v1/spu/insert', params, 'POST'),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function doInsertCommodityRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0],
-    bodyParams: restParamsData[1]
-  }
-  try {
-    const res = await doInsertCommodity(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description doInsertCommodity hooks 默认的 key
+ */
+export const USE_DO_INSERT_COMMODITY_KEY = '/api/commodity/v1/spu/insert_POST'
+
+// export const doInsertCommodityQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return doInsertCommodity(params);
+// }
+
+// /**
+//  * @description doInsertCommodity hooks
+//  */
+// export const useDoInsertCommodity = (params: DoInsertCommodityParams, headers?:any, key = 'USE_DO_INSERT_COMMODITY_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => doInsertCommodity(params, headers),
+//   })
+// }

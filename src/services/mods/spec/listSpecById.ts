@@ -1,8 +1,11 @@
+// listSpecById 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc listSpecById
+ * @description listSpecById 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** admin */
   admin?: boolean
   /** commodityId */
@@ -19,38 +22,52 @@ export class IQueryParams {
   userName?: string
 }
 
-export interface IParams {
-  queryParams: IQueryParams
-}
+/**
+ * @description listSpecById 接口参数
+ */
+export type ListSpecByIdParams = Params
 
-export function listSpecById(
-  { queryParams }: IParams = {} as IParams,
-  commodityId: string | number
-) {
-  return request<
+/**
+ * @description listSpecById 接口
+ */
+export const listSpecById = (params: ListSpecByIdParams, headers?: any) => {
+  return request.request<
     defs.commodityService.ApiResult<
       Array<defs.commodityService.SpecificationsAndTypes>
     >
   >({
-    url: `/api/commodity/v1/spec/list/${commodityId}`,
-    method: 'get',
-    params: queryParams
+    ...request.buildOptions(
+      '/api/commodity/v1/spec/list/{commodityId}',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function listSpecByIdRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0]
-  }
-  try {
-    const res = await listSpecById(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description listSpecById hooks 默认的 key
+ */
+export const USE_LIST_SPEC_BY_ID_KEY =
+  '/api/commodity/v1/spec/list/{commodityId}_GET'
+
+// export const listSpecByIdQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return listSpecById(params);
+// }
+
+// /**
+//  * @description listSpecById hooks
+//  */
+// export const useListSpecById = (params: ListSpecByIdParams, headers?:any, key = 'USE_LIST_SPEC_BY_ID_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => listSpecById(params, headers),
+//   })
+// }

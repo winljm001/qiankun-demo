@@ -1,39 +1,64 @@
+// listUnitOptions 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc listUnitOptions
+ * @description listUnitOptions 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** 商品类型id（1：水果，2：食品，5：sku净重） */
   commodityTypeId: number
 }
 
-export interface IParams {}
+/**
+ * @description listUnitOptions 接口参数
+ */
+export type ListUnitOptionsParams = Params
 
-export function listUnitOptions(
-  {}: IParams = {} as IParams,
-  commodityTypeId: string | number
-) {
-  return request<
+/**
+ * @description listUnitOptions 接口
+ */
+export const listUnitOptions = (
+  params: ListUnitOptionsParams,
+  headers?: any
+) => {
+  return request.request<
     defs.commodityService.ApiResult<
       Array<defs.commodityService.Option<string, number>>
     >
   >({
-    url: `/api/commodity/v1/commodity/sku/option/unit/${commodityTypeId}`,
-    method: 'get'
+    ...request.buildOptions(
+      '/api/commodity/v1/commodity/sku/option/unit/{commodityTypeId}',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function listUnitOptionsRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await listUnitOptions(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description listUnitOptions hooks 默认的 key
+ */
+export const USE_LIST_UNIT_OPTIONS_KEY =
+  '/api/commodity/v1/commodity/sku/option/unit/{commodityTypeId}_GET'
+
+// export const listUnitOptionsQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return listUnitOptions(params);
+// }
+
+// /**
+//  * @description listUnitOptions hooks
+//  */
+// export const useListUnitOptions = (params: ListUnitOptionsParams, headers?:any, key = 'USE_LIST_UNIT_OPTIONS_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => listUnitOptions(params, headers),
+//   })
+// }

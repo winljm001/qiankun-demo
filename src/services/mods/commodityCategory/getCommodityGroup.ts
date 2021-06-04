@@ -1,37 +1,62 @@
+// getCommodityGroup 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc getCommodityGroup
+ * @description getCommodityGroup 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** id */
   id: number
 }
 
-export interface IParams {}
+/**
+ * @description getCommodityGroup 接口参数
+ */
+export type GetCommodityGroupParams = Params
 
-export function getCommodityGroup(
-  {}: IParams = {} as IParams,
-  id: string | number
-) {
-  return request<
+/**
+ * @description getCommodityGroup 接口
+ */
+export const getCommodityGroup = (
+  params: GetCommodityGroupParams,
+  headers?: any
+) => {
+  return request.request<
     defs.commodityService.ApiResult<defs.commodityService.CommodityGroupVO>
   >({
-    url: `/api/commodity/v1/category/spu/${id}`,
-    method: 'get'
+    ...request.buildOptions(
+      '/api/commodity/v1/category/spu/{id}',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function getCommodityGroupRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await getCommodityGroup(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description getCommodityGroup hooks 默认的 key
+ */
+export const USE_GET_COMMODITY_GROUP_KEY =
+  '/api/commodity/v1/category/spu/{id}_GET'
+
+// export const getCommodityGroupQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return getCommodityGroup(params);
+// }
+
+// /**
+//  * @description getCommodityGroup hooks
+//  */
+// export const useGetCommodityGroup = (params: GetCommodityGroupParams, headers?:any, key = 'USE_GET_COMMODITY_GROUP_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => getCommodityGroup(params, headers),
+//   })
+// }

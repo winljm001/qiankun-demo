@@ -1,34 +1,54 @@
+// doUpdateSku 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc doUpdateSku
+ * @description doUpdateSku 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {}
+export class Params {}
 
-export interface IParams {
-  bodyParams: defs.commodityService.ModifyTheSpu
-}
+/**
+ * @description doUpdateSku 接口参数
+ */
+export type DoUpdateSkuParams = Params & defs.commodityService.ModifyTheSpu
 
-export function doUpdateSku({ bodyParams }: IParams = {} as IParams) {
-  return request<defs.commodityService.ApiResult<boolean>>({
-    url: `/api/commodity/v1/commodity/sku/update`,
-    method: 'put',
-    data: bodyParams
+/**
+ * @description doUpdateSku 接口
+ */
+export const doUpdateSku = (params: DoUpdateSkuParams, headers?: any) => {
+  return request.request<defs.commodityService.ApiResult<boolean>>({
+    ...request.buildOptions(
+      '/api/commodity/v1/commodity/sku/update',
+      params,
+      'PUT'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function doUpdateSkuRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    bodyParams: restParamsData[0]
-  }
-  try {
-    const res = await doUpdateSku(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description doUpdateSku hooks 默认的 key
+ */
+export const USE_DO_UPDATE_SKU_KEY =
+  '/api/commodity/v1/commodity/sku/update_PUT'
+
+// export const doUpdateSkuQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return doUpdateSku(params);
+// }
+
+// /**
+//  * @description doUpdateSku hooks
+//  */
+// export const useDoUpdateSku = (params: DoUpdateSkuParams, headers?:any, key = 'USE_DO_UPDATE_SKU_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => doUpdateSku(params, headers),
+//   })
+// }

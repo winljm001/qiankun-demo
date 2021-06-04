@@ -1,37 +1,62 @@
+// listSkuListColumn 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc listSkuListColumn
+ * @description listSkuListColumn 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** 商品id */
   commodityId: number
 }
 
-export interface IParams {}
+/**
+ * @description listSkuListColumn 接口参数
+ */
+export type ListSkuListColumnParams = Params
 
-export function listSkuListColumn(
-  {}: IParams = {} as IParams,
-  commodityId: string | number
-) {
-  return request<
+/**
+ * @description listSkuListColumn 接口
+ */
+export const listSkuListColumn = (
+  params: ListSkuListColumnParams,
+  headers?: any
+) => {
+  return request.request<
     defs.commodityService.ApiResult<defs.commodityService.SkuHeader>
   >({
-    url: `/api/commodity/v1/commodity/sku/column/${commodityId}`,
-    method: 'get'
+    ...request.buildOptions(
+      '/api/commodity/v1/commodity/sku/column/{commodityId}',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function listSkuListColumnRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await listSkuListColumn(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description listSkuListColumn hooks 默认的 key
+ */
+export const USE_LIST_SKU_LIST_COLUMN_KEY =
+  '/api/commodity/v1/commodity/sku/column/{commodityId}_GET'
+
+// export const listSkuListColumnQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return listSkuListColumn(params);
+// }
+
+// /**
+//  * @description listSkuListColumn hooks
+//  */
+// export const useListSkuListColumn = (params: ListSkuListColumnParams, headers?:any, key = 'USE_LIST_SKU_LIST_COLUMN_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => listSkuListColumn(params, headers),
+//   })
+// }

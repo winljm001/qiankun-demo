@@ -1,8 +1,11 @@
+// doSaveSku 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc doSaveSku
+ * @description doSaveSku 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** admin */
   admin?: boolean
   /** currentDate */
@@ -17,36 +20,43 @@ export class IQueryParams {
   userName?: string
 }
 
-export interface IParams {
-  queryParams: IQueryParams
-  bodyParams: Array<defs.commodityService.ModifyTheSpu>
-}
+/**
+ * @description doSaveSku 接口参数
+ */
+export type DoSaveSkuParams = Params & Array<defs.commodityService.ModifyTheSpu>
 
-export function doSaveSku(
-  { queryParams, bodyParams }: IParams = {} as IParams
-) {
-  return request<defs.commodityService.ApiResult<Array<number>>>({
-    url: `/api/commodity/v1/spec/save`,
-    method: 'put',
-    data: bodyParams,
-    params: queryParams
+/**
+ * @description doSaveSku 接口
+ */
+export const doSaveSku = (params: DoSaveSkuParams, headers?: any) => {
+  return request.request<defs.commodityService.ApiResult<Array<number>>>({
+    ...request.buildOptions('/api/commodity/v1/spec/save', params, 'PUT'),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function doSaveSkuRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {
-    queryParams: restParamsData[0],
-    bodyParams: restParamsData[1]
-  }
-  try {
-    const res = await doSaveSku(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description doSaveSku hooks 默认的 key
+ */
+export const USE_DO_SAVE_SKU_KEY = '/api/commodity/v1/spec/save_PUT'
+
+// export const doSaveSkuQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return doSaveSku(params);
+// }
+
+// /**
+//  * @description doSaveSku hooks
+//  */
+// export const useDoSaveSku = (params: DoSaveSkuParams, headers?:any, key = 'USE_DO_SAVE_SKU_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => doSaveSku(params, headers),
+//   })
+// }
