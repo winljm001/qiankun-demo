@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 import { Layout } from 'antd';
 import styles from './style.module.less';
@@ -8,6 +8,7 @@ import AppHeader from './components/header';
 import { matchPath, useLocation } from 'react-router-dom';
 import allRoutes, { CustomRouteConfig } from '@/router/config';
 import useGlobalStore from '@/stores/global';
+import Loading from '@/components/loading'
 const { Header, Content, Sider } = Layout;
 
 /**
@@ -37,11 +38,6 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   const { route } = props;
   const { isAuthReady, menuList, userSetting, setUserSetting, userInfo, logout } =
     useGlobalStore();
-  useEffect(() => {
-    useGlobalStore.setState({
-      isLogin: true,
-    });
-  }, []);
   const location = useLocation();
   // get current route by pathname
   const matchedRouteConfig = useMemo((): CustomRouteConfig => {
@@ -92,7 +88,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
   if (!isAuthReady) {
-    return null;
+    return <Loading />;
   }
   return (
     <Layout className={styles.layout}>

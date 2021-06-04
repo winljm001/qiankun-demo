@@ -49,6 +49,7 @@ const Index: React.FC = () => {
       useGlobalStore.setState({
         isLogin: true,
         token: res.data.token,
+        userId: res.data.userId,
         userInfo: {
           /** 用户名 */
           username: res.data.userName,
