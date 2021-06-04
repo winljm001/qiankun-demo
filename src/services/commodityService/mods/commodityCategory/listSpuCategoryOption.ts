@@ -28,7 +28,7 @@ export const listSpuCategoryOption = (
     >
   >({
     ...request.buildOptions(
-      '/api/commodity/v1/spu/category/category/{id}/option',
+      '/api/commodity/v1/spu/category/{id}/option',
       params,
       'GET'
     ),
@@ -40,7 +40,7 @@ export const listSpuCategoryOption = (
  * @description listSpuCategoryOption hooks 默认的 key
  */
 export const USE_LIST_SPU_CATEGORY_OPTION_KEY =
-  '/api/commodity/v1/spu/category/category/{id}/option_GET'
+  '/api/commodity/v1/spu/category/{id}/option_GET'
 
 // export const listSpuCategoryOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

@@ -24,7 +24,7 @@ export const listSpuTypeOption = (
       Array<defs.commodityService.Option<string, number>>
     >
   >({
-    ...request.buildOptions('/api/commodity/v1/spu/type/list', params, 'GET'),
+    ...request.buildOptions('/api/commodity/v1/spu/type/option', params, 'GET'),
     headers
   })
 }
@@ -33,7 +33,7 @@ export const listSpuTypeOption = (
  * @description listSpuTypeOption hooks 默认的 key
  */
 export const USE_LIST_SPU_TYPE_OPTION_KEY =
-  '/api/commodity/v1/spu/type/list_GET'
+  '/api/commodity/v1/spu/type/option_GET'
 
 // export const listSpuTypeOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

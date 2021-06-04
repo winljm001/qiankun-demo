@@ -483,7 +483,7 @@ declare namespace API {
     export namespace commodityCategory {
       /**
        * listSpuCategoryOption
-       * /api/commodity/v1/spu/category/category/{id}/option
+       * /api/commodity/v1/spu/category/{id}/option
        */
       export namespace listSpuCategoryOption {
         export class Params {
@@ -506,7 +506,7 @@ declare namespace API {
 
       /**
        * listCommodityOriginOption
-       * /api/commodity/v1/spu/category/origin/{id}/option
+       * /api/commodity/v1/spu/origin/{id}/option
        */
       export namespace listCommodityOriginOption {
         export class Params {
@@ -529,7 +529,7 @@ declare namespace API {
 
       /**
        * listCommodityVarietyOption
-       * /api/commodity/v1/spu/category/variety/{id}/option
+       * /api/commodity/v1/spu/variety/{id}/option
        */
       export namespace listCommodityVarietyOption {
         export class Params {
@@ -703,7 +703,7 @@ declare namespace API {
     export namespace commodityType {
       /**
        * listSpuTypeOption
-       * /api/commodity/v1/spu/type/list
+       * /api/commodity/v1/spu/type/option
        */
       export namespace listSpuTypeOption {
         export class Params {}

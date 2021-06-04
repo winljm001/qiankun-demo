@@ -28,7 +28,7 @@ export const listCommodityVarietyOption = (
     >
   >({
     ...request.buildOptions(
-      '/api/commodity/v1/spu/category/variety/{id}/option',
+      '/api/commodity/v1/spu/variety/{id}/option',
       params,
       'GET'
     ),
@@ -40,7 +40,7 @@ export const listCommodityVarietyOption = (
  * @description listCommodityVarietyOption hooks 默认的 key
  */
 export const USE_LIST_COMMODITY_VARIETY_OPTION_KEY =
-  '/api/commodity/v1/spu/category/variety/{id}/option_GET'
+  '/api/commodity/v1/spu/variety/{id}/option_GET'
 
 // export const listCommodityVarietyOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

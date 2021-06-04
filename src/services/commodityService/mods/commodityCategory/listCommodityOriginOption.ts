@@ -28,7 +28,7 @@ export const listCommodityOriginOption = (
     >
   >({
     ...request.buildOptions(
-      '/api/commodity/v1/spu/category/origin/{id}/option',
+      '/api/commodity/v1/spu/origin/{id}/option',
       params,
       'GET'
     ),
@@ -40,7 +40,7 @@ export const listCommodityOriginOption = (
  * @description listCommodityOriginOption hooks 默认的 key
  */
 export const USE_LIST_COMMODITY_ORIGIN_OPTION_KEY =
-  '/api/commodity/v1/spu/category/origin/{id}/option_GET'
+  '/api/commodity/v1/spu/origin/{id}/option_GET'
 
 // export const listCommodityOriginOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

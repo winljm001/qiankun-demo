@@ -603,7 +603,7 @@
             "description": "listSpuCategoryOption",
             "name": "listSpuCategoryOption",
             "method": "get",
-            "path": "/api/commodity/v1/spu/category/category/{id}/option",
+            "path": "/api/commodity/v1/spu/category/{id}/option",
             "response": {
               "typeArgs": [
                 {
@@ -674,7 +674,7 @@
             "description": "listCommodityOriginOption",
             "name": "listCommodityOriginOption",
             "method": "get",
-            "path": "/api/commodity/v1/spu/category/origin/{id}/option",
+            "path": "/api/commodity/v1/spu/origin/{id}/option",
             "response": {
               "typeArgs": [
                 {
@@ -745,7 +745,7 @@
             "description": "listCommodityVarietyOption",
             "name": "listCommodityVarietyOption",
             "method": "get",
-            "path": "/api/commodity/v1/spu/category/variety/{id}/option",
+            "path": "/api/commodity/v1/spu/variety/{id}/option",
             "response": {
               "typeArgs": [
                 {
@@ -1180,7 +1180,7 @@
             "description": "listSpuTypeOption",
             "name": "listSpuTypeOption",
             "method": "get",
-            "path": "/api/commodity/v1/spu/type/list",
+            "path": "/api/commodity/v1/spu/type/option",
             "response": {
               "typeArgs": [
                 {
