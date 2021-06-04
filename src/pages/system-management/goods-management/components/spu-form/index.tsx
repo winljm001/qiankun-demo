@@ -30,8 +30,6 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         control: {
           controlType: 'REMOTE_SELECT',
           fetch: listSpuTypeOption,
-          enableDisabled: false,
-          normalize: (data) => [{ label: '全部', value: null }].concat(data),
         },
       },
     ],

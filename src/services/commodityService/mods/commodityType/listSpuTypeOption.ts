@@ -1,33 +1,57 @@
+// listSpuTypeOption 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc listSpuTypeOption
+ * @description listSpuTypeOption 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {}
+export class Params {}
 
-export interface IParams {}
+/**
+ * @description listSpuTypeOption 接口参数
+ */
+export type ListSpuTypeOptionParams = Params
 
-export function listSpuTypeOption({}: IParams = {} as IParams) {
-  return request<
+/**
+ * @description listSpuTypeOption 接口
+ */
+export const listSpuTypeOption = (
+  params: ListSpuTypeOptionParams,
+  headers?: any
+) => {
+  return request.request<
     defs.commodityService.ApiResult<
       Array<defs.commodityService.CommodityTypeVO>
     >
   >({
-    url: `/api/commodity/v1/commodity/type/spu/list`,
-    method: 'get'
+    ...request.buildOptions('/api/commodity/v1/type/spu/list', params, 'GET'),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function listSpuTypeOptionRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await listSpuTypeOption(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description listSpuTypeOption hooks 默认的 key
+ */
+export const USE_LIST_SPU_TYPE_OPTION_KEY =
+  '/api/commodity/v1/type/spu/list_GET'
+
+// export const listSpuTypeOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return listSpuTypeOption(params);
+// }
+
+// /**
+//  * @description listSpuTypeOption hooks
+//  */
+// export const useListSpuTypeOption = (params: ListSpuTypeOptionParams, headers?:any, key = 'USE_LIST_SPU_TYPE_OPTION_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => listSpuTypeOption(params, headers),
+//   })
+// }

@@ -3236,5 +3236,15 @@
         "templateArgs": []
       }
     ]
+  },
+  {
+    "mods": [],
+    "name": "userService",
+    "baseClasses": []
+  },
+  {
+    "mods": [],
+    "name": "authService",
+    "baseClasses": []
   }
 ]

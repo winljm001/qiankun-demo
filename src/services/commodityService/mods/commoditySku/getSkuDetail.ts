@@ -1,37 +1,59 @@
+// getSkuDetail 接口文件
+// import { useQuery } from 'react-query'
+import * as request from '@/utils/fetch'
+
 /**
- * @desc getSkuDetail
+ * @description getSkuDetail 接口 URL 参数/GET
  */
-import request from '@/utils/request'
-export class IQueryParams {
+export class Params {
   /** sku id */
   commoditySkuId: number
 }
 
-export interface IParams {}
+/**
+ * @description getSkuDetail 接口参数
+ */
+export type GetSkuDetailParams = Params
 
-export function getSkuDetail(
-  {}: IParams = {} as IParams,
-  commoditySkuId: string | number
-) {
-  return request<
+/**
+ * @description getSkuDetail 接口
+ */
+export const getSkuDetail = (params: GetSkuDetailParams, headers?: any) => {
+  return request.request<
     defs.commodityService.ApiResult<defs.commodityService.SkuDetails>
   >({
-    url: `/api/commodity/v1/commodity/sku/detail/${commoditySkuId}`,
-    method: 'get'
+    ...request.buildOptions(
+      '/api/commodity/v1/commodity/sku/detail/{commoditySkuId}',
+      params,
+      'GET'
+    ),
+    headers
   })
 }
-interface RqParams {
-  queryKey: any
-  pageParam?: any
-}
-// 需要和react-query一起使用
-export async function getSkuDetailRq(params?: RqParams) {
-  const [_, ...restParamsData] = params.queryKey
-  const fetchParams: IParams = {}
-  try {
-    const res = await getSkuDetail(fetchParams)
-    return res
-  } catch (error) {
-    throw new Error(error)
-  }
-}
+
+/**
+ * @description getSkuDetail hooks 默认的 key
+ */
+export const USE_GET_SKU_DETAIL_KEY =
+  '/api/commodity/v1/commodity/sku/detail/{commoditySkuId}_GET'
+
+// export const getSkuDetailQuery = ({ queryKey }: {queryKey:any[]}) => {
+//   const [,params] = queryKey;
+//   return getSkuDetail(params);
+// }
+
+// /**
+//  * @description getSkuDetail hooks
+//  */
+// export const useGetSkuDetail = (params: GetSkuDetailParams, headers?:any, key = 'USE_GET_SKU_DETAIL_KEY') => {
+//   // 修正数据
+//   if(typeof headers === 'string') {
+//     key = headers;
+//     headers = null;
+//   }
+
+//   return useQuery({
+//     queryKey: [key, params],
+//     queryFn: () => getSkuDetail(params, headers),
+//   })
+// }

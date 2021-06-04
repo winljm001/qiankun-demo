@@ -5,6 +5,7 @@ import qs from 'querystring';
 import Config from '@/config';
 
 import { msg, handleNoCommonError } from './error-handle';
+import useGlobalStore from '@/stores/global';
 
 /**
  * 接口返回的数据基础结构
@@ -61,7 +62,7 @@ axios.interceptors.response.use(
  * @description 对请求简单封装，添加默认参数
  */
 export const request = <T = any>(options: AxiosRequestConfig) => {
-  const Authorization = localStorage.getItem(Config.authKey);
+  const { getState } = useGlobalStore;
   const newOptions: AxiosRequestConfig = {
     // credentials: 'include',
     timeout: 60000,
@@ -72,7 +73,7 @@ export const request = <T = any>(options: AxiosRequestConfig) => {
     ...options,
     headers: {
       // 自定义 header 的时候应该可以重置 token 字符串
-      'X-Access-Token': Authorization,
+      Authorization: getState().token,
       ...(options.headers || {}),
     },
     url: `${Config.baseUrl}${options.url}`,
