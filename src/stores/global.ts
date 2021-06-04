@@ -12,8 +12,10 @@ export interface State {
   token: string;
   /** 用户信息 */
   userInfo: {
+    /** 用户名 */
     username: string;
-    corpName: string;
+    /** 公司名 */
+    companyName: string;
   };
   /** 权限是否准备好 */
   isAuthReady: boolean;
@@ -40,7 +42,7 @@ const useGlobalStore = create<State>(
         isLogin: false,
         token: null,
         userInfo: {
-          corpName: 'test',
+          companyName: 'test',
           username: 'test',
         },
         isAuthReady: false,
