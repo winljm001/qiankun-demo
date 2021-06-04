@@ -38,7 +38,8 @@ const useGlobalStore = create<State>(
         collapsed: false,
         menuOpenKeys: null,
         isLogin: false,
-        token: null,
+        token:
+          'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdhbml6YXRpb25JZCI6MSwib3JnYW5pemF0aW9uTmFtZSI6IumHjeW6hua0quS5neaenOWTgeiCoeS7veaciemZkOWFrOWPuOmHjeW6huWIhuWFrOWPuCIsInVzZXJfbmFtZSI6Iua4uOaAuyIsInNjb3BlIjpbImFsbCJdLCJpZCI6MSwiZXhwIjoxNjIzMzEwNDQxLCJhdXRob3JpdGllcyI6WyJhZG1pbiJdLCJqdGkiOiIwYTI1M2QzMi0yMWEyLTQyZTMtYjk2ZS02ZTYxOWJhZTcxZDgiLCJwbGF0Zm9ybSI6MTAsImNsaWVudF9pZCI6ImNsaWVudC1hcHAifQ.MvEtXmZUBBNmgpAqrP229aOszEVWIgH4DMLYd_KvLqVG3NpckiFV9_JkptVk35pGgPQqC0_-WsEzFJngFjvbcenzn7eMphMVHPKzusFAxpvrIVenRfa1SNSCmQGxygfVIGL3sXBYZ76oqn_VNpenIji8Tv9spK_kul9vx2guKhw',
         userInfo: {
           corpName: 'test',
           username: 'test',
