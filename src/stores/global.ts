@@ -81,7 +81,6 @@ useGlobalStore.subscribe(
         .catch(() => {
           useGlobalStore.setState({ isAuthReady: true });
         })
-        .finally(() => {});
     }
   },
   (state) => state.isLogin,
