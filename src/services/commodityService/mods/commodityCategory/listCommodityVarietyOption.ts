@@ -1,46 +1,34 @@
 // listCommodityVarietyOption 接口文件
 // import { useQuery } from 'react-query'
-import * as request from '@/utils/fetch'
+import * as request from '@/utils/fetch';
 
 /**
  * @description listCommodityVarietyOption 接口 URL 参数/GET
  */
 export class Params {
   /** id */
-  id: number
+  id: number;
 }
 
 /**
  * @description listCommodityVarietyOption 接口参数
  */
-export type ListCommodityVarietyOptionParams = Params
+export type ListCommodityVarietyOptionParams = Params;
 
 /**
  * @description listCommodityVarietyOption 接口
  */
-export const listCommodityVarietyOption = (
-  params: ListCommodityVarietyOptionParams,
-  headers?: any
-) => {
-  return request.request<
-    defs.commodityService.ApiResult<
-      Array<defs.commodityService.Option<string, number>>
-    >
-  >({
-    ...request.buildOptions(
-      '/api/commodity/v1/spu/variety/{id}/option',
-      params,
-      'GET'
-    ),
-    headers
-  })
-}
+export const listCommodityVarietyOption = (params: ListCommodityVarietyOptionParams, headers?: any) => {
+  return request.request<defs.commodityService.ApiResult<Array<defs.commodityService.Option<string, number>>>>({
+    ...request.buildOptions('/api/commodity/v1/spu/variety/{id}/option', params, 'GET'),
+    headers,
+  });
+};
 
 /**
  * @description listCommodityVarietyOption hooks 默认的 key
  */
-export const USE_LIST_COMMODITY_VARIETY_OPTION_KEY =
-  '/api/commodity/v1/spu/variety/{id}/option_GET'
+export const USE_LIST_COMMODITY_VARIETY_OPTION_KEY = '/api/commodity/v1/spu/variety/{id}/option_GET';
 
 // export const listCommodityVarietyOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;
