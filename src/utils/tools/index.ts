@@ -7,7 +7,6 @@ import { CustomRouteConfig } from "@/router/config";
  * @returns menuList
  */
 export const getMenuList = (routes: CustomRouteConfig[], authData: any[]): CustomRouteConfig[] => {
-  console.log(routes, authData)
   return routes?.filter(({ meta, authKey }) => {
     // with authKey
     if (authKey) {

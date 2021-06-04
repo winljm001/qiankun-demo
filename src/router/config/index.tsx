@@ -47,10 +47,8 @@ export const mainRoutes: CustomRouteConfig[] = [
         meta: {
           menuText: '测试',
         },
-        authority: [],
       },
     ],
-    authority: [],
   },
   ...config,
 ];
