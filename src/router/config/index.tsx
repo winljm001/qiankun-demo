@@ -35,22 +35,6 @@ export const mainRoutes: CustomRouteConfig[] = [
     path: BASE_PATH,
     exact: true,
     component: loadable(() => import('@/pages/home')),
-    meta: {
-      menuText: '首页',
-    },
-    breadcrumb: [{ name: '首页' }, { name: '首页' }],
-    routes: [
-      {
-        path: `${BASE_PATH}/test`,
-        exact: true,
-        component: loadable(() => import('@/pages/home')),
-        breadcrumb: [{ name: '测试' }, { name: '测试' }],
-        routes: [],
-        meta: {
-          menuText: '测试',
-        },
-      },
-    ],
   },
   ...config,
 ];

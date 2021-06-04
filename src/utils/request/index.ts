@@ -26,8 +26,8 @@ axios.interceptors.response.use(
     const data = response.data;
     // 操作不成功时直接提示
     if (data?.errCode !== 200) {
-      message.error(data.message);
-      return Promise.reject(data.message);
+      message.error(data.errMsg);
+      return Promise.reject(data.errMsg);
     }
     return data as any;
   },
