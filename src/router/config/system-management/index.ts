@@ -9,6 +9,7 @@ const routes: CustomRouteConfig[] = [
     component: BlankLayout,
     meta: {
       menuText: '系统管理',
+      menuIcon: 'SettingOutlined',
     },
     routes: [
       {

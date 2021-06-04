@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 import { Layout } from 'antd';
 import styles from './style.module.less';
@@ -6,7 +6,7 @@ import SideMenu from './components/side-menu';
 import AppBreadcrumb from './components/breadcrubm';
 import AppHeader from './components/header';
 import { matchPath, useLocation } from 'react-router-dom';
-import allRoutes, { CustomRouteConfig, mainRoutes } from '@/router/config';
+import allRoutes, { CustomRouteConfig } from '@/router/config';
 import useGlobalStore from '@/stores/global';
 const { Header, Content, Sider } = Layout;
 
@@ -35,7 +35,13 @@ const traverseRoutes = (routes: CustomRouteConfig[], handle: (route: CustomRoute
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) => {
   const { route } = props;
-  const { menuList, isAuthReady, menuOpenKeys, setMenuOpenKeys } = useGlobalStore();
+  const { isAuthReady, menuList, collapsed, setCollapsed, menuOpenKeys, setMenuOpenKeys, userInfo, logout } =
+    useGlobalStore();
+  useEffect(() => {
+    useGlobalStore.setState({
+      isLogin: true,
+    });
+  }, []);
   const location = useLocation();
   // get current route by pathname
   const matchedRouteConfig = useMemo((): CustomRouteConfig => {
@@ -54,14 +60,14 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     return currentRoute;
   }, [location.pathname]);
   // get openKeys by pathname
-  const defaultOpenKeys = useMemo(() => {
+  const openKeys = useMemo(() => {
     const keys = [];
     // menuOpenKeys has a higher priority than keys computed by pathname
-    if (menuOpenKeys?.length) {
+    if (menuOpenKeys) {
       return menuOpenKeys;
     }
     const traverse = (menu: CustomRouteConfig[]) => {
-      for (let i = 0; i <= menu.length - 1; i++) {
+      for (let i = 0; i <= menu?.length - 1; i++) {
         const route = menu[i];
         // exact must be true
         const matchedRoute = matchPath(location.pathname, { ...route, exact: true });
@@ -83,24 +89,23 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     };
     traverse(menuList);
     return keys;
-  }, [location.pathname, menuList]);
+  }, [location.pathname, menuList, menuOpenKeys]);
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
-  console.log(isAuthReady);
   if (!isAuthReady) {
     return null;
   }
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
-        <AppHeader />
+        <AppHeader userInfo={userInfo} collapsed={collapsed} setCollapsed={setCollapsed} logout={logout} />
       </Header>
       <Layout>
-        <Sider collapsed={false} trigger={null} collapsible width={208}>
+        <Sider collapsed={collapsed} trigger={null} collapsible width={208}>
           <SideMenu
             menuList={menuList}
-            defaultSelectedKeys={[matchedRouteConfig.meta?.menuText]}
-            defaultOpenKeys={defaultOpenKeys}
+            selectedKeys={[matchedRouteConfig.meta?.menuText]}
+            openKeys={collapsed ? [] : openKeys}
             onOpenChange={setMenuOpenKeys}
           />
         </Sider>
