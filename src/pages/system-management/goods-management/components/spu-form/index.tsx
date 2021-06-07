@@ -98,26 +98,65 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
           }}
         />
       </Form.Item>
-      <Form.Item label="商品品类" name="commodityCategoryId" rules={[{ required: true, message: '请选择商品品类' }]}>
-        <BaseSelectByFetch
-          remote={{
-            fetch: listSpuCategoryOption,
-          }}
-        />
+      <Form.Item shouldUpdate noStyle>
+        {({ getFieldValue }) => {
+          const commodityTypeId = getFieldValue('commodityTypeId');
+          return commodityTypeId ? (
+            <Form.Item
+              label="商品品类"
+              name="commodityCategoryId"
+              rules={[{ required: true, message: '请选择商品品类' }]}>
+              <BaseSelectByFetch
+                remote={{
+                  fetch: listSpuCategoryOption,
+                  params: {
+                    id: commodityTypeId,
+                  },
+                }}
+              />
+            </Form.Item>
+          ) : null;
+        }}
       </Form.Item>
-      <Form.Item label="商品品种" name="commodityVarietyId" rules={[{ required: true, message: '请选择商品品种' }]}>
-        <BaseSelectByFetch
-          remote={{
-            fetch: listCommodityVarietyOption,
-          }}
-        />
+      <Form.Item shouldUpdate noStyle>
+        {({ getFieldValue }) => {
+          const commodityCategoryId = getFieldValue('commodityCategoryId');
+          return commodityCategoryId ? (
+            <Form.Item
+              label="商品品种"
+              name="commodityVarietyId"
+              rules={[{ required: true, message: '请选择商品品种' }]}>
+              <BaseSelectByFetch
+                remote={{
+                  fetch: listCommodityVarietyOption,
+                  params: {
+                    id: commodityCategoryId,
+                  },
+                }}
+              />
+            </Form.Item>
+          ) : null;
+        }}
       </Form.Item>
-      <Form.Item label="商品产地" name="commodityPlaceOriginId" rules={[{ required: true, message: '请选择商品产地' }]}>
-        <BaseSelectByFetch
-          remote={{
-            fetch: listCommodityOriginOption,
-          }}
-        />
+      <Form.Item shouldUpdate noStyle>
+        {({ getFieldValue }) => {
+          const commodityCategoryId = getFieldValue('commodityCategoryId');
+          return commodityCategoryId ? (
+            <Form.Item
+              label="商品产地"
+              name="commodityPlaceOriginId"
+              rules={[{ required: true, message: '请选择商品产地' }]}>
+              <BaseSelectByFetch
+                remote={{
+                  fetch: listCommodityOriginOption,
+                  params: {
+                    id: commodityCategoryId,
+                  },
+                }}
+              />
+            </Form.Item>
+          ) : null;
+        }}
       </Form.Item>
     </Form>
   );

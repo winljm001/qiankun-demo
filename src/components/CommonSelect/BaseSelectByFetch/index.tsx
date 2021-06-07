@@ -15,7 +15,7 @@ interface IProps extends SelectProps<any> {
   onChange?: (obj: any) => void;
 }
 const BaseSelectByFetch: React.FC<IProps> = ({
-  value = '',
+  value,
   hasAny = false,
   remote,
   noDisable = false,
@@ -24,13 +24,19 @@ const BaseSelectByFetch: React.FC<IProps> = ({
 }) => {
   const { fetch, normalize, params } = remote;
   const [state, setState] = useControllableValue<string>(props, {
-    defaultValue: '',
+    defaultValue: value,
   });
   const [uid] = useState(Date.now());
   // 这里的key应该是有问题
-  const { data, isLoading } = useQuery(`BaseSelectByFetch${uid}`, () => {
+  const { data, isLoading } = useQuery([`BaseSelectByFetch${uid}`, params], () => {
     return fetch(params).then((res) => {
       const list = normalize ? normalize(res?.data) : res?.data;
+      const item = list?.find((v) => {
+        return state === v?.value;
+      });
+      if (!item) {
+        setState('');
+      }
       return list;
     });
   });
@@ -40,6 +46,7 @@ const BaseSelectByFetch: React.FC<IProps> = ({
       value={state}
       onChange={(v) => {
         setState(v);
+        onChange?.(v);
       }}
       {...props}>
       {hasAny ? <Option value="">全部</Option> : null}
