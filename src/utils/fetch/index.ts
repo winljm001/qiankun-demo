@@ -78,7 +78,6 @@ export const request = <T = any>(options: AxiosRequestConfig) => {
     },
     url: `${Config.baseUrl}${options.url}`,
   };
-
   return axios.request<T>(newOptions).then((data) => data.data);
 };
 
