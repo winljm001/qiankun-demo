@@ -1,5 +1,4 @@
 import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch';
-import JsonForm, { defineConfig, useForm } from '@/components/JsonForm';
 import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
 import { isSpuNameRepeat } from '@/services/commodityService/mods/commodity/isSpuNameRepeat';
 import { listCommodityOriginOption } from '@/services/commodityService/mods/commodityCategory/listCommodityOriginOption';
@@ -8,6 +7,7 @@ import { listSpuCategoryOption } from '@/services/commodityService/mods/commodit
 import { listSpuTypeOption } from '@/services/commodityService/mods/commodityType/listSpuTypeOption';
 import { useDebounceFn } from 'ahooks';
 import { Form, FormInstance, Input } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
 import React, { forwardRef, useImperativeHandle } from 'react';
 
 interface SpuFormProps {
@@ -20,13 +20,17 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   }));
   // 商品名验重
   const { run } = useDebounceFn((rule, value, callback) => {
-    isSpuNameRepeat({ commodityName: value }).then((res) => {
-      if (res) {
-        callback();
-      } else {
-        callback('商品名已存在');
-      }
-    });
+    if (value) {
+      isSpuNameRepeat({ commodityName: value }).then((res) => {
+        if (res) {
+          callback();
+        } else {
+          callback('商品名已存在');
+        }
+      });
+    } else {
+      callback();
+    }
   });
   return (
     <Form form={form} layout="vertical" {...fromSingleLayoutProps}>

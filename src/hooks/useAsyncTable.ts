@@ -9,11 +9,13 @@ interface IProps {
   fetchAction: (params: any) => Promise<any>;
   // 是否缓存
   isCache?: boolean;
+  extraParams?: any;
 }
 const useAsyncTable = (props: IProps): any => {
-  const { fetchAction, isCache = true } = props;
+  const { fetchAction, isCache = true, extraParams = {} } = props;
+
   const getTableData = ({ current, pageSize }: PaginatedParams[0], formData: Object) => {
-    const fetchParams = { pageCurrent: current, pageSize, ...formData };
+    const fetchParams = { pageCurrent: current, pageSize, ...formData, ...extraParams };
     // 需要改生成的services,只传参数的形式
     return fetchAction(fetchParams).then((res) => {
       const {
@@ -44,8 +46,7 @@ const useAsyncTable = (props: IProps): any => {
   const defaultParamsObj = isCache ? (cacheParams ? { defaultParams: cacheParams } : {}) : {};
 
   // 缓存逻辑结束
-
-  const { tableProps, params, search } = useAntdTable(getTableData, {
+  const { tableProps, params, search, refresh } = useAntdTable(getTableData, {
     ...defaultParamsObj,
     form,
   });
@@ -54,7 +55,7 @@ const useAsyncTable = (props: IProps): any => {
     setCacheParams(params);
   }, [params]);
   const { submit, reset } = search;
-  return { tableProps, search, form, submit, reset };
+  return { tableProps, search, form, submit, reset, refresh };
 };
 
 export default useAsyncTable;
