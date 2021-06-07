@@ -3,6 +3,7 @@ import styles from './index.module.less';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined } from '@ant-design/icons';
+import { initialValues } from './initialValues';
 const specInputLayout = {
   labelCol: {
     xxl: {
@@ -60,20 +61,22 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
     ...form,
   }));
   return (
-    <Form form={form} {...specInputLayout}>
-      <Form.List name="specInfo">
+    <Form form={form} {...specInputLayout} initialValues={initialValues}>
+      <Form.List name="commoditySpec">
         {(fields, { add, remove }) => {
           return (
             <>
               {fields.map((field, idx) => {
                 return (
                   <div key={`${field.key}-${idx}`} className={styles.specBox}>
-                    <CloseOutlined
-                      className={styles.specDelIcon}
-                      onClick={() => {
-                        remove(field.name);
-                      }}
-                    />
+                    {field?.key === 0 ? null : (
+                      <CloseOutlined
+                        className={styles.specDelIcon}
+                        onClick={() => {
+                          remove(field.name);
+                        }}
+                      />
+                    )}
                     <Form.Item name={[field.name, 'id']} hidden>
                       <Input />
                     </Form.Item>
@@ -95,15 +98,17 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                                 <Form.Item name={[itemField.name, 'name']}>
                                   <Input
                                     addonAfter={
-                                      <div className={styles.optionDelIconBox}>
-                                        <div
-                                          className={styles.optionDelIcon}
-                                          onClick={() => {
-                                            removeItem(itemField.name);
-                                          }}>
-                                          <CloseOutlined />
+                                      itemField.key === 0 ? null : (
+                                        <div className={styles.optionDelIconBox}>
+                                          <div
+                                            className={styles.optionDelIcon}
+                                            onClick={() => {
+                                              removeItem(itemField.name);
+                                            }}>
+                                            <CloseOutlined />
+                                          </div>
                                         </div>
-                                      </div>
+                                      )
                                     }
                                   />
                                 </Form.Item>
