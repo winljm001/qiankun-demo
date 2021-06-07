@@ -9,3 +9,6 @@ export const GOODS_MANAGEMENT_ADD = `${BASE_URL}/goods-management-add`;
 export const SPEC_MANAGEMENT = `${BASE_URL}/spec-management`;
 /** SKU管理 */
 export const SKU_MANAGEMENT = `${BASE_URL}/sku-management`;
+
+/** 辅料管理 */
+export const INGREDIENTS_MANAGEMENT = `${BASE_URL}/ingredients-management`;

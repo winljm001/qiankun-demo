@@ -42,7 +42,7 @@ const GoodsManagementList = () => {
       render: (val, record) => <StatusChanger checked={val === 1} onConfirm={() => handleChangeStatus(record)} />,
     },
     {
-      title: '操作1',
+      title: '操作',
       dataIndex: '_',
       render: (val, record) => {
         return (
