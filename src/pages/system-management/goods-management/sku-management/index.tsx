@@ -1,9 +1,10 @@
 import React from 'react';
+import Edit from './components/edit/index'
 
 const Index: React.FC = () => {
   return (
     <div>
-      <p>Home1</p>
+      <Edit />
     </div>
   );
 };
