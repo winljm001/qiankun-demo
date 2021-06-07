@@ -23,8 +23,7 @@ const commonConfig: CommonIConfig = {
 export const envConfig: Record<typeof env, EnvIconfig> = {
   // 开发环境
   dev: {
-    // apiHost: 'https://pitaya-dev.hjgpscm.com',
-    apiHost: 'http://192.168.10.100:8081',
+    apiHost: 'https://pitaya-dev.hjgpscm.com',
     uploadHost: 'https://pitaya-dev.hjgpscm.com',
     baseUrl: '',
   },

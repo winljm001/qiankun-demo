@@ -3,9 +3,7 @@ import Edit from './components/edit/index'
 
 const Index: React.FC = () => {
   return (
-    <div>
-      <Edit />
-    </div>
+    <Edit />
   );
 };
 
