@@ -7,6 +7,7 @@ import ActionGroup from '@/components/ActionGroup';
 import { useHistory } from 'react-router-dom';
 import { GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
 import StatusChanger from '@/components/StatusChanger';
+import subRoute from '@/components/hoc/sub-route'
 import useAsyncTable from '@/hooks';
 
 const GoodsManagementList = () => {
@@ -94,4 +95,4 @@ const GoodsManagementList = () => {
   );
 };
 
-export default GoodsManagementList;
+export default subRoute(GoodsManagementList);
