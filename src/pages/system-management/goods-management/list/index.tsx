@@ -64,7 +64,7 @@ const GoodsManagementList = () => {
               {
                 children: 'SKU管理',
                 onClick() {
-                  history.push(`${SKU_MANAGEMENT}?commodityId=${record.commodityId}`);
+                  history.push(`${SKU_MANAGEMENT.replace(':id', record.commodityId)}`);
                 },
               },
             ]}

@@ -15,7 +15,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
   const { route } = props;
   const { menuList, userSetting, setUserSetting, userInfo, logout } = useGlobalStore();
   const location = useLocation();
-  // get current route by pathname
+  // 根据pathname获取当前匹配到的路由配置、菜单配置、菜单展开的key
   const [matchedRouteConfig, matchedMenuConfig, matchedOpenKeys] = useMemo(() => {
     let currentRoute: CustomRouteConfig = null;
     let currentMenu: CustomRouteConfig = null;
@@ -23,28 +23,27 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     const traverse = (menu: CustomRouteConfig[]) => {
       for (let i = 0; i <= menu?.length - 1; i++) {
         const route = menu[i];
-        // exact must be true
+        // exact需要为true
         const matchedRoute = matchPath(location.pathname, { ...route, exact: true });
         if (matchedRoute) {
           currentRoute = route;
           if (route.meta?.menuText) {
             currentMenu = route;
           }
-          // stop traversing
           return true;
         } else {
           if (route.routes?.length) {
             const subResult = traverse(route.routes);
+            // 如果子路由被匹配到
             if (subResult) {
-              // save openKey
+              // 如果已获取到当前菜单项则将父菜单的menuText存储到openKeys
               if (currentMenu) {
                 route.meta?.menuText && openKeys.push(route.meta.menuText);
               }
-              // set route as current menu
+              // 如果尚未获取到当前菜单项，则判断当前路由是否有menuText，若有则将route设置为当前菜单项
               if (!currentMenu) {
                 route.meta?.menuText && (currentMenu = route);
               }
-              // stop traversing
               return true;
             }
           }
