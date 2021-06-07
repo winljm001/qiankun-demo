@@ -1,6 +1,6 @@
 import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd';
 import styles from './index.module.less';
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined } from '@ant-design/icons';
 import { getInitialSpecValue, initialValues } from './initialValues';
@@ -60,6 +60,9 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
   useImperativeHandle(ref, () => ({
     ...form,
   }));
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data]);
   return (
     <Form form={form} {...specInputLayout} initialValues={initialValues}>
       <Form.List name="commoditySpecs">

@@ -90,13 +90,13 @@ const GoodsManagementList = () => {
               {
                 children: '规格管理',
                 onClick() {
-                  history.push(`${SPEC_MANAGEMENT}?commodityId=${record.commodityId}`);
+                  history.push(`${SPEC_MANAGEMENT}/${record.commodityId}`);
                 },
               },
               {
                 children: 'SKU管理',
                 onClick() {
-                  history.push(`${SKU_MANAGEMENT}?commodityId=${record.commodityId}`);
+                  history.push(`${SKU_MANAGEMENT}/${record.commodityId}`);
                 },
               },
             ]}
