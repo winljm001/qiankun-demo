@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { RouteConfigComponentProps, renderRoutes } from 'react-router-config';
 import { Layout } from 'antd';
 import styles from './style.module.less';
@@ -8,7 +8,7 @@ import AppHeader from './components/header';
 import { matchPath, useLocation } from 'react-router-dom';
 import allRoutes, { CustomRouteConfig } from '@/router/config';
 import useGlobalStore from '@/stores/global';
-import Loading from '@/components/loading'
+import authHOC from '@/components/auth-hoc'
 const { Header, Content, Sider } = Layout;
 
 /**
@@ -36,7 +36,7 @@ const traverseRoutes = (routes: CustomRouteConfig[], handle: (route: CustomRoute
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) => {
   const { route } = props;
-  const { isAuthReady, menuList, userSetting, setUserSetting, userInfo, logout } =
+  const { menuList, userSetting, setUserSetting, userInfo, logout } =
     useGlobalStore();
   const location = useLocation();
   // get current route by pathname
@@ -56,7 +56,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     return currentRoute;
   }, [location.pathname]);
   // get openKeys by pathname
-  const openKeys = useMemo(() => {
+  const [openKeys, setOpenKeys] = useState((() => {
     const keys = [];
     const traverse = (menu: CustomRouteConfig[]) => {
       for (let i = 0; i <= menu?.length - 1; i++) {
@@ -81,15 +81,12 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     };
     traverse(menuList);
     return keys;
-  }, [location.pathname, menuList]);
+  })())
   const setCollapsed = useCallback(collapsed => {
     setUserSetting({ collapsed })
   }, [userSetting.collapsed])
   const contentPadding = matchedRouteConfig.meta?.contentPadding;
 
-  if (!isAuthReady) {
-    return <Loading />;
-  }
   return (
     <Layout className={styles.layout}>
       <Header className={styles.header}>
@@ -100,7 +97,8 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
           <SideMenu
             menuList={menuList}
             defaultSelectedKeys={[matchedRouteConfig.meta?.menuText]}
-            defaultOpenKeys={userSetting.collapsed ? [] : openKeys}
+            openKeys={userSetting.collapsed ? [] : openKeys}
+            onOpenChange={setOpenKeys}
             inlineCollapsed={userSetting.collapsed}
           />
         </Sider>
@@ -114,4 +112,4 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = React.memo((props) 
     </Layout>
   );
 });
-export default LayoutComponent;
+export default authHOC<RouteConfigComponentProps>(LayoutComponent);
