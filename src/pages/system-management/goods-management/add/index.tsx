@@ -1,7 +1,7 @@
 import BaseCard from '@/components/BaseCard';
 import BaseFormWrap from '@/components/BaseFormWrap';
 import { FormInstance, Modal, Table } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SpecForm from '../components/spec-form';
 import SpuForm from '../components/spu-form';
@@ -9,18 +9,40 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useToggle } from 'ahooks';
 import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
 import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
+import { useQuery } from 'react-query';
+import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/spec/listSpecById';
 const GoodsManagementAdd: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();
   const spuFormRef = useRef<FormInstance>();
   const specFormRef = useRef<FormInstance>();
   const skuSelectFormRef = useRef<SkuSelectRefProps>();
+  const [id, setId] = useState(0);
+  // spec data
+  const { data: specData, refetch } = useQuery({
+    queryKey: USE_LIST_SPEC_BY_ID_KEY,
+    queryFn: () => {
+      return listSpecById({ commodityId: id }).then((res) => {
+        const { data } = res;
+        return data;
+      });
+    },
+    enabled: false,
+  });
+  useEffect(() => {
+    if (id) {
+      refetch();
+    }
+  }, [id]);
   /** 保存果品操作 */
   const handleSaveAction = () => {
     const form1 = spuFormRef.current.validateFields();
     const form2 = specFormRef.current.validateFields();
     Promise.all([form1, form2]).then(([res1, res2]) => {
-      doInsertCommodity({ ...res1, ...res2 }).then(() => {
+      doInsertCommodity({ ...res1, ...res2 }).then(({ data }) => {
+        if (data) {
+          setId(data);
+        }
         Modal.confirm({
           title: '去添加sku列表',
           icon: <ExclamationCircleOutlined />,
@@ -77,7 +99,7 @@ const GoodsManagementAdd: React.FC = () => {
         visible={visible}
         onCancel={() => toggle()}
         onOk={handleAddSku}>
-        <SkuSelect ref={skuSelectFormRef} />
+        <SkuSelect ref={skuSelectFormRef} id={id} specData={specData} />
       </Modal>
     </BaseFormWrap>
   );

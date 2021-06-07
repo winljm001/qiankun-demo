@@ -83,14 +83,13 @@ const SpecManagement: React.FC = () => {
         <SpecForm ref={specFormRef} data={{ commoditySpecs: data }} />
       </BaseCard>
       <Modal
-        maskClosable={false}
         title="选择SKU"
         okText="保存"
         cancelText="取消"
         visible={visible}
         onCancel={() => toggle()}
         onOk={handleAddSku}>
-        <SkuSelect ref={skuSelectFormRef} />
+        <SkuSelect ref={skuSelectFormRef} id={id} specData={data} />
       </Modal>
     </BaseFormWrap>
   );
