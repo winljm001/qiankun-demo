@@ -1,11 +1,18 @@
-import React from 'react';
+import { Table } from 'antd';
+import React, { forwardRef, useImperativeHandle } from 'react';
 
-const SkuSelect: React.FC = () => {
-  return (
-    <div>
-      <p>sku-select</p>
-    </div>
-  );
-};
+export interface SkuSelectRefProps {
+  getSelected?: any;
+}
+interface SkuSelectFormProps {
+  data?: any;
+}
+const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ data = [] }, ref) => {
+  useImperativeHandle(ref, () => ({
+    getSelected: () => {},
+  }));
+  const columns = [];
+  return <Table columns={columns} dataSource={data} />;
+});
 
-export default SkuSelect;
+export default SkuSelectForm;

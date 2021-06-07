@@ -364,6 +364,20 @@
             },
             "parameters": [
               {
+                "in": "query",
+                "name": "admin",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
                 "in": "body",
                 "description": "commodityNameDTO",
                 "name": "commodityNameDTO",
@@ -372,6 +386,76 @@
                   "typeArgs": [],
                   "typeName": "CommodityNameDTO",
                   "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "currentDate",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "organizationId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "organizationName",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "userId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "userName",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -409,6 +493,20 @@
             },
             "parameters": [
               {
+                "in": "query",
+                "name": "admin",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
                 "in": "body",
                 "description": "commodityStatusDTO",
                 "name": "commodityStatusDTO",
@@ -417,6 +515,76 @@
                   "typeArgs": [],
                   "typeName": "CommodityStatusDTO",
                   "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "currentDate",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "organizationId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "organizationName",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "userId",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              },
+              {
+                "in": "query",
+                "name": "userName",
+                "required": false,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -906,8 +1074,8 @@
             "consumes": [
               "application/json"
             ],
-            "description": "listSku",
-            "name": "listSku",
+            "description": "pageSku",
+            "name": "pageSku",
             "method": "post",
             "path": "/api/commodity/v1/commodity/sku/list",
             "response": {
@@ -1084,6 +1252,123 @@
             "consumes": [
               "application/json"
             ],
+            "description": "doSaveSkuList",
+            "name": "doSaveSkuList",
+            "method": "put",
+            "path": "/api/commodity/v1/commodity/sku/save",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "number",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "saveSkus",
+                "name": "saveSkus",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "CommoditySkuSaveDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "description": "listSkuSelectedCombination",
+            "name": "listSkuSelectedCombination",
+            "method": "get",
+            "path": "/api/commodity/v1/commodity/sku/selected/{commodityId}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [
+                        {
+                          "typeArgs": [],
+                          "typeName": "number",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        }
+                      ],
+                      "typeName": "Array",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "商品id",
+                "name": "commodityId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
             "description": "doUpdateSku",
             "name": "doUpdateSku",
             "method": "put",
@@ -1115,7 +1400,7 @@
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "ModifyTheSpu",
+                  "typeName": "UpdateSkuDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -1238,145 +1523,6 @@
         "description": "规格管理",
         "interfaces": [
           {
-            "consumes": [
-              "application/json"
-            ],
-            "description": "listSelectedSku",
-            "name": "listSelectedSku",
-            "method": "post",
-            "path": "/api/commodity/v1/spec/list/selected/{commodityId}",
-            "response": {
-              "typeArgs": [
-                {
-                  "typeArgs": [
-                    {
-                      "typeArgs": [],
-                      "typeName": "SkuList",
-                      "isDefsType": true,
-                      "templateIndex": -1,
-                      "compileTemplateKeyword": "#/definitions/",
-                      "enum": [],
-                      "typeProperties": []
-                    }
-                  ],
-                  "typeName": "DefaultPageResult",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "ApiResult",
-              "isDefsType": true,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "parameters": [
-              {
-                "in": "query",
-                "name": "admin",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "boolean",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "path",
-                "description": "commodityId",
-                "name": "commodityId",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "currentDate",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationName",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userName",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
-          },
-          {
             "description": "listSpecById",
             "name": "listSpecById",
             "method": "get",
@@ -1412,20 +1558,6 @@
             },
             "parameters": [
               {
-                "in": "query",
-                "name": "admin",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "boolean",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
                 "in": "path",
                 "description": "commodityId",
                 "name": "commodityId",
@@ -1433,76 +1565,6 @@
                 "dataType": {
                   "typeArgs": [],
                   "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "currentDate",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationName",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userName",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -1523,18 +1585,8 @@
             "response": {
               "typeArgs": [
                 {
-                  "typeArgs": [
-                    {
-                      "typeArgs": [],
-                      "typeName": "SpecificationsAndTypes",
-                      "isDefsType": true,
-                      "templateIndex": -1,
-                      "compileTemplateKeyword": "#/definitions/",
-                      "enum": [],
-                      "typeProperties": []
-                    }
-                  ],
-                  "typeName": "Array",
+                  "typeArgs": [],
+                  "typeName": "number",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -1627,9 +1679,19 @@
                 "name": "specModify",
                 "required": true,
                 "dataType": {
-                  "typeArgs": [],
-                  "typeName": "CommoditySpecModifyDTO",
-                  "isDefsType": true,
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "CommoditySpecModifyDTO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -1667,28 +1729,15 @@
             ]
           },
           {
-            "consumes": [
-              "application/json"
-            ],
-            "description": "doSaveSku",
-            "name": "doSaveSku",
-            "method": "put",
-            "path": "/api/commodity/v1/spec/save",
+            "description": "verifySpecName",
+            "name": "verifySpecName",
+            "method": "get",
+            "path": "/api/commodity/v1/spec/repeat",
             "response": {
               "typeArgs": [
                 {
-                  "typeArgs": [
-                    {
-                      "typeArgs": [],
-                      "typeName": "number",
-                      "isDefsType": false,
-                      "templateIndex": -1,
-                      "compileTemplateKeyword": "#/definitions/",
-                      "enum": [],
-                      "typeProperties": []
-                    }
-                  ],
-                  "typeName": "Array",
+                  "typeArgs": [],
+                  "typeName": "boolean",
                   "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -1706,103 +1755,9 @@
             "parameters": [
               {
                 "in": "query",
-                "name": "admin",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "boolean",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "currentDate",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "organizationName",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "body",
-                "description": "saveSkus",
-                "name": "saveSkus",
+                "description": "specName",
+                "name": "specName",
                 "required": true,
-                "dataType": {
-                  "typeArgs": [
-                    {
-                      "typeArgs": [],
-                      "typeName": "ModifyTheSpu",
-                      "isDefsType": true,
-                      "templateIndex": -1,
-                      "compileTemplateKeyword": "#/definitions/",
-                      "enum": [],
-                      "typeProperties": []
-                    }
-                  ],
-                  "typeName": "Array",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userId",
-                "required": false,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              },
-              {
-                "in": "query",
-                "name": "userName",
-                "required": false,
                 "dataType": {
                   "typeArgs": [],
                   "typeName": "string",
@@ -1941,7 +1896,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecDTOS",
+            "name": "commoditySpecs",
             "description": "规格信息",
             "required": false
           },
@@ -2011,7 +1966,7 @@
         "templateArgs": []
       },
       {
-        "name": "CommoditySpecAndOptionPO",
+        "name": "CommoditySkuSaveDTO",
         "properties": [
           {
             "dataType": {
@@ -2023,20 +1978,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecId",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecName",
+            "name": "commodityId",
             "required": false
           },
           {
@@ -2044,8 +1986,8 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "CommoditySpecOptionPO",
-                  "isDefsType": true,
+                  "typeName": "number",
+                  "isDefsType": false,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -2059,7 +2001,40 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecOptionPOList",
+            "name": "commoditySpecId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "",
+                      "isDefsType": false,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecOptionIdsList",
             "required": false
           }
         ],
@@ -2068,6 +2043,20 @@
       {
         "name": "CommoditySpecDTO",
         "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecId",
+            "description": "商品规格id",
+            "required": false
+          },
           {
             "dataType": {
               "typeArgs": [],
@@ -2102,7 +2091,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecOptionDTOS",
+            "name": "commoditySpecOptions",
             "description": "商品SpecificationsAndOptions",
             "required": false
           },
@@ -2129,7 +2118,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -2201,6 +2190,20 @@
           {
             "dataType": {
               "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecOptionId",
+            "description": "商品SpecificationsAndOptionsID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
               "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
@@ -2210,38 +2213,6 @@
             },
             "name": "commoditySpecOptionName",
             "description": "商品SpecificationsAndOptions名称",
-            "required": false
-          }
-        ],
-        "templateArgs": []
-      },
-      {
-        "name": "CommoditySpecOptionPO",
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionId",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionName",
             "required": false
           }
         ],
@@ -2260,56 +2231,50 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "commodityCategoryName",
+            "description": "商品品类名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityId",
+            "description": "商品id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityName",
+            "description": "商品名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "commodityPlaceOriginName",
             "description": "商品产地名称",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "CommoditySpecAndOptionPO",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecAndOptionPOS",
-            "description": "规格信息",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [
-                {
-                  "typeArgs": [],
-                  "typeName": "CommoditySpecAndOptionPO",
-                  "isDefsType": true,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              ],
-              "typeName": "Array",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecAndOptionPOS",
-            "description": "规格信息",
             "required": false
           },
           {
@@ -2528,68 +2493,6 @@
         "templateArgs": []
       },
       {
-        "name": "ModifyTheSpu",
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "status",
-            "description": "状态（1激活，0禁用）",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "totalType",
-            "description": "总计类型（sku单位；副单位）",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "unitQuantity",
-            "description": "单位数量（sku净重；换算比率）",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "unitType",
-            "description": "单位类型（sku净重单位；最小单位）",
-            "required": false
-          }
-        ],
-        "templateArgs": []
-      },
-      {
         "name": "Option",
         "properties": [
           {
@@ -2759,6 +2662,20 @@
           {
             "dataType": {
               "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalTypeName",
+            "description": "总计类型（sku单位；副单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
               "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
@@ -2782,6 +2699,20 @@
             },
             "name": "unitType",
             "description": "单位类型（sku净重单位；最小单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitTypeName",
+            "description": "单位类型名称（sku净重单位；最小单位）",
             "required": false
           }
         ],
@@ -3185,7 +3116,7 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
+              "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
               "compileTemplateKeyword": "#/definitions/",
@@ -3230,7 +3161,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecOptionVOList",
+            "name": "commoditySpecOptions",
             "description": "商品SpecificationsAndOptions",
             "required": false
           },
@@ -3246,6 +3177,92 @@
             },
             "name": "commoditySpecSort",
             "description": "商品规格排序",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UpdateSkuDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySkuIds",
+            "description": "sku id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态（1激活，0禁用）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalType",
+            "description": "总计类型（sku单位；副单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitQuantity",
+            "description": "单位数量（sku净重；换算比率）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitType",
+            "description": "单位类型（sku净重单位；最小单位）",
             "required": false
           }
         ],

@@ -7,30 +7,37 @@ import SpecForm from '../components/spec-form';
 import SpuForm from '../components/spu-form';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useToggle } from 'ahooks';
+import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
+import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
 const GoodsManagementAdd: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();
   const spuFormRef = useRef<FormInstance>();
   const specFormRef = useRef<FormInstance>();
+  const skuSelectFormRef = useRef<SkuSelectRefProps>();
   /** 保存果品操作 */
   const handleSaveAction = () => {
     const form1 = spuFormRef.current.validateFields();
     const form2 = specFormRef.current.validateFields();
     Promise.all([form1, form2]).then(([res1, res2]) => {
-      console.log(res1, res2);
-      Modal.confirm({
-        title: '去添加sku列表',
-        icon: <ExclamationCircleOutlined />,
-        content: '商品创建成功，你需要去添加sku列表',
-        okText: '去添加sku列表',
-        cancelText: '取消',
-        onOk: () => {
-          toggle();
-        },
+      doInsertCommodity({ ...res1, ...res2 }).then(() => {
+        Modal.confirm({
+          title: '去添加sku列表',
+          icon: <ExclamationCircleOutlined />,
+          content: '商品创建成功，你需要去添加sku列表',
+          okText: '去添加sku列表',
+          cancelText: '取消',
+          onOk: () => {
+            toggle();
+          },
+        });
       });
     });
   };
-  const handleAddSku = () => {};
+  const handleAddSku = () => {
+    const skus = skuSelectFormRef.current.getSelected();
+    console.log(skus);
+  };
   return (
     <BaseFormWrap
       actions={[
@@ -70,15 +77,7 @@ const GoodsManagementAdd: React.FC = () => {
         visible={visible}
         onCancel={() => toggle()}
         onOk={handleAddSku}>
-        123
-        {/* <Table
-          bordered
-          rowSelection={{ selectedRowKeys: selectedKeys, onChange: handleChangeSelection }}
-          pagination={{ pageSize: 10 }}
-          rowKey={(record) => record.filter.join('')}
-          columns={columns}
-          dataSource={dataSource}
-        /> */}
+        <SkuSelect ref={skuSelectFormRef} />
       </Modal>
     </BaseFormWrap>
   );
