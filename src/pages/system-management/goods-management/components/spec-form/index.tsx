@@ -3,7 +3,7 @@ import styles from './index.module.less';
 import React, { forwardRef, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined } from '@ant-design/icons';
-import { initialValues } from './initialValues';
+import { getInitialSpecValue, initialValues } from './initialValues';
 const specInputLayout = {
   labelCol: {
     xxl: {
@@ -95,7 +95,9 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                           <Row gutter={16}>
                             {itemFields.map((itemField) => (
                               <Col key={itemField.key} span={8}>
-                                <Form.Item name={[itemField.name, 'name']}>
+                                <Form.Item
+                                  name={[itemField.name, 'name']}
+                                  rules={[{ required: true, message: '请输入规格选项' }]}>
                                   <Input
                                     addonAfter={
                                       itemField.key === 0 ? null : (
@@ -134,7 +136,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                   </div>
                 );
               })}
-              <Button type="dashed" block onClick={() => add({ sort: fields.length + 1 })}>
+              <Button type="dashed" block onClick={() => add(getInitialSpecValue(fields))}>
                 新增规格
               </Button>
             </>
