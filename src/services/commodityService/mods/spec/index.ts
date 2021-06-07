@@ -1,9 +1,8 @@
 /**
  * @description 规格管理
  */
-import * as listSelectedSku from './listSelectedSku'
 import * as listSpecById from './listSpecById'
 import * as doModifySpecById from './doModifySpecById'
-import * as doSaveSku from './doSaveSku'
+import * as verifySpecName from './verifySpecName'
 
-export { listSelectedSku, listSpecById, doModifySpecById, doSaveSku }
+export { listSpecById, doModifySpecById, verifySpecName }

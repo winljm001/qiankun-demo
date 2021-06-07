@@ -26,7 +26,7 @@ export class Params {
  * @description doModifySpecById 接口参数
  */
 export type DoModifySpecByIdParams = Params &
-  defs.commodityService.CommoditySpecModifyDTO
+  Array<defs.commodityService.CommoditySpecModifyDTO>
 
 /**
  * @description doModifySpecById 接口
@@ -35,11 +35,7 @@ export const doModifySpecById = (
   params: DoModifySpecByIdParams,
   headers?: any
 ) => {
-  return request.request<
-    defs.commodityService.ApiResult<
-      Array<defs.commodityService.SpecificationsAndTypes>
-    >
-  >({
+  return request.request<defs.commodityService.ApiResult<number>>({
     ...request.buildOptions(
       '/api/commodity/v1/spec/modify/{commodityId}',
       params,

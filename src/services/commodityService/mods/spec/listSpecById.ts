@@ -6,20 +6,8 @@ import * as request from '@/utils/fetch'
  * @description listSpecById 接口 URL 参数/GET
  */
 export class Params {
-  /** admin */
-  admin?: boolean
   /** commodityId */
   commodityId: number
-  /** currentDate */
-  currentDate?: string
-  /** organizationId */
-  organizationId?: number
-  /** organizationName */
-  organizationName?: string
-  /** userId */
-  userId?: number
-  /** userName */
-  userName?: string
 }
 
 /**
