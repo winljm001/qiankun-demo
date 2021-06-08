@@ -63,6 +63,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
   useEffect(() => {
     form.setFieldsValue(data);
   }, [data]);
+  console.log(data);
   return (
     <Form form={form} {...specInputLayout} initialValues={initialValues}>
       <Form.List name="commoditySpecs">
@@ -85,7 +86,10 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       label="规格类型"
                       name={[field.name, 'commoditySpecName']}
                       rules={[{ required: true, message: '请输入规格类型' }]}>
-                      <Input placeholder="请输入规格类型" />
+                      <Input
+                        placeholder="请输入规格类型"
+                        disabled={data?.commoditySpecs && data?.commoditySpecs[idx]?.commoditySpecId}
+                      />
                     </Form.Item>
                     <Form.Item label="规格排序" name={[field.name, 'commoditySpecSort']}>
                       <InputNumber min={0} />
@@ -94,7 +98,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <Form.List name={[field.name, 'commoditySpecOptions']}>
                         {(itemFields, { add: addItem, remove: removeItem }) => (
                           <Row gutter={16}>
-                            {itemFields.map((itemField) => (
+                            {itemFields.map((itemField, itemIndex) => (
                               <Col key={itemField.key} span={8}>
                                 <Form.Item
                                   name={[itemField.name, 'commoditySpecOptionName']}
@@ -112,6 +116,10 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                           </div>
                                         </div>
                                       )
+                                    }
+                                    disabled={
+                                      data?.commoditySpecs &&
+                                      data?.commoditySpecs[idx]?.commoditySpecOptions[itemIndex]?.commoditySpecOptionId
                                     }
                                   />
                                 </Form.Item>
