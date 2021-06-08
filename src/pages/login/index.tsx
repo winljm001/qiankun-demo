@@ -26,7 +26,7 @@ const Index: React.FC = () => {
     }).then(res => {
       message.success('获取验证码成功！')
     }).catch(err => {
-      console.log(err);
+      // console.log(err);
     })
   }
 
@@ -127,7 +127,7 @@ const Index: React.FC = () => {
                 return (<Form.Item>
                   <Button disabled={disabled} block className={styles.btnB} type="primary" htmlType="submit">
                     登录
-              </Button>
+                  </Button>
                 </Form.Item>)
               }}
             </Form.Item>

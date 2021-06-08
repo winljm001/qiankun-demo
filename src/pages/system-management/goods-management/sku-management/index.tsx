@@ -1,3 +1,5 @@
+import Edit from './components/edit/index'
+
 import React, { useCallback, useEffect, useState } from 'react';
 import DataSuspense from '@/components/DataSuspense';
 import { useParams } from 'react-router';
@@ -32,7 +34,7 @@ const Index: React.FC = () => {
     pageNo: 1,
     pageSize: 10,
   })
-  
+
   const loadData = useCallback(() => {
     return Promise.all([
       // 获取基本信息
@@ -52,9 +54,9 @@ const Index: React.FC = () => {
   useEffect(() => {
   }, [listParams])
   const { tableProps, form, submit, reset } = useAsyncTable({ fetchAction: pageSku, extraParams: { commodityId: id } });
-  const handleBatchEdit = useCallback(() => {}, []);
-  const handleBatchEnable = useCallback(() => {}, []);
-  const handleBatchDisable = useCallback(() => {}, []);
+  const handleBatchEdit = useCallback(() => { }, []);
+  const handleBatchEnable = useCallback(() => { }, []);
+  const handleBatchDisable = useCallback(() => { }, []);
   return (
     <div className={styles.wrap}>
       <DataSuspense load={loadData}>
@@ -79,7 +81,7 @@ const Index: React.FC = () => {
               dataIndex: 'status',
               key: 'status',
               render() {
-                return <StatusChanger onConfirm={() => {}} checked={false}  />
+                return <StatusChanger onConfirm={() => { }} checked={false} />
               },
             },
             {
