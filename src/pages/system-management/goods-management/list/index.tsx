@@ -40,7 +40,7 @@ const GoodsManagementList = () => {
   });
   // 修改商品状态
   const handleChangeStatus = (record) => {
-    updateStatus.mutate({ commodityId: record?.commodityId, status: record?.status === 0 ? 99 : 0 });
+    updateStatus.mutate({ commodityId: record?.commodityId, status: record?.status === 0 ? 1 : 0 });
   };
   // 修改商品名
   const handleEditSPU = async () => {
