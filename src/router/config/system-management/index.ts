@@ -27,13 +27,13 @@ const routes: CustomRouteConfig[] = [
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }],
           },
           {
-            path: SKU_MANAGEMENT,
+            path: `${SKU_MANAGEMENT}/:id`,
             exact: true,
             component: loadable(() => import('@/pages/system-management/goods-management/sku-management')),
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }, { name: 'SKU管理' }],
           },
           {
-            path: SPEC_MANAGEMENT,
+            path: `${SPEC_MANAGEMENT}/:id`,
             exact: true,
             component: loadable(() => import('@/pages/system-management/goods-management/spec-management')),
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }, { name: '规格管理' }],

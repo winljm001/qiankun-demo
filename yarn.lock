@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ahooksjs/use-request@^2.8.6":
-  version "2.8.6"
-  resolved "https://registry.nlark.com/@ahooksjs/use-request/download/@ahooksjs/use-request-2.8.6.tgz?cache=0&sync_timestamp=1620461371963&other_urls=https%3A%2F%2Fregistry.nlark.com%2F%40ahooksjs%2Fuse-request%2Fdownload%2F%40ahooksjs%2Fuse-request-2.8.6.tgz#974d4e19c5f8f08c5d0bcfb03bb00a05d0de920b"
-  integrity sha1-l01OGcX48IxdC8+wO7AKBdDekgs=
+"@ahooksjs/use-request@^2.8.7":
+  version "2.8.7"
+  resolved "https://registry.nlark.com/@ahooksjs/use-request/download/@ahooksjs/use-request-2.8.7.tgz#35558494d6aadee023cda49477fc679b49f9ff2d"
+  integrity sha1-NVWElNaq3uAjzaSUd/xnm0n5/y0=
   dependencies:
     lodash.debounce "^4.0.8"
     lodash.throttle "^4.1.1"
@@ -580,12 +580,12 @@ aggregate-error@^3.0.0:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
 
-ahooks@^2.10.4:
-  version "2.10.4"
-  resolved "https://registry.nlark.com/ahooks/download/ahooks-2.10.4.tgz#50a71c37c72544997d55686c73cc601adcefe30f"
-  integrity sha1-UKccN8clRJl9VWhsc8xgGtzv4w8=
+ahooks@^2.10.5:
+  version "2.10.5"
+  resolved "https://registry.nlark.com/ahooks/download/ahooks-2.10.5.tgz?cache=0&sync_timestamp=1622536672932&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fahooks%2Fdownload%2Fahooks-2.10.5.tgz#a6145510160e0a5c7a62c57f0b39a47fa0c78f93"
+  integrity sha1-phRVEBYOClx6YsV/Czmkf6DHj5M=
   dependencies:
-    "@ahooksjs/use-request" "^2.8.6"
+    "@ahooksjs/use-request" "^2.8.7"
     "@types/js-cookie" "^2.2.6"
     dayjs "^1.9.1"
     intersection-observer "^0.7.0"
@@ -2056,10 +2056,15 @@ lodash.truncate@^4.4.2:
   resolved "https://registry.yarnpkg.com/lodash.truncate/-/lodash.truncate-4.4.2.tgz#5a350da0b1113b837ecfffd5812cbe58d6eae193"
   integrity sha1-WjUNoLERO4N+z//VgSy+WNbq4ZM=
 
-lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.21, lodash@^4.17.5:
+lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.5:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+lodash@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.npm.taobao.org/lodash/download/lodash-4.17.21.tgz?cache=0&sync_timestamp=1613835817439&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Flodash%2Fdownload%2Flodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
 
 log-symbols@^4.1.0:
   version "4.1.0"

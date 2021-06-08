@@ -1,4 +1,4 @@
-export const initialValues = { commoditySpec: [{ option: [{}], sort: 1 }] };
+export const initialValues = { commoditySpecs: [{ commoditySpecOptions: [{}], commoditySpecSort: 1 }] };
 export const getInitialSpecValue = (fields) => {
-  return { sort: fields.length + 1, option: [{}] };
+  return { commoditySpecSort: fields.length + 1, commoditySpecOptions: [{}] };
 };

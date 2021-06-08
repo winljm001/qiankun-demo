@@ -1,6 +1,6 @@
 import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd';
 import styles from './index.module.less';
-import React, { forwardRef, useImperativeHandle } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined } from '@ant-design/icons';
 import { getInitialSpecValue, initialValues } from './initialValues';
@@ -55,14 +55,17 @@ const optionInputLayout = {
 interface SpuFormProps {
   data?: any;
 }
-const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }, ref) => {
+const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }, ref) => {
   const [form] = useForm();
   useImperativeHandle(ref, () => ({
     ...form,
   }));
+  useEffect(() => {
+    form.setFieldsValue(data);
+  }, [data]);
   return (
     <Form form={form} {...specInputLayout} initialValues={initialValues}>
-      <Form.List name="commoditySpec">
+      <Form.List name="commoditySpecs">
         {(fields, { add, remove }) => {
           return (
             <>
@@ -77,26 +80,24 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                         }}
                       />
                     )}
-                    <Form.Item name={[field.name, 'id']} hidden>
-                      <Input />
-                    </Form.Item>
+                    <Form.Item name={[field.name, 'commoditySpecId']} hidden />
                     <Form.Item
                       label="规格类型"
-                      name={[field.name, 'name']}
+                      name={[field.name, 'commoditySpecName']}
                       rules={[{ required: true, message: '请输入规格类型' }]}>
                       <Input placeholder="请输入规格类型" />
                     </Form.Item>
-                    <Form.Item label="规格排序" name={[field.name, 'sort']}>
+                    <Form.Item label="规格排序" name={[field.name, 'commoditySpecSort']}>
                       <InputNumber min={0} />
                     </Form.Item>
                     <Form.Item label="规格选项" {...optionInputLayout}>
-                      <Form.List name={[field.name, 'option']}>
+                      <Form.List name={[field.name, 'commoditySpecOptions']}>
                         {(itemFields, { add: addItem, remove: removeItem }) => (
                           <Row gutter={16}>
                             {itemFields.map((itemField) => (
                               <Col key={itemField.key} span={8}>
                                 <Form.Item
-                                  name={[itemField.name, 'name']}
+                                  name={[itemField.name, 'commoditySpecOptionName']}
                                   rules={[{ required: true, message: '请输入规格选项' }]}>
                                   <Input
                                     addonAfter={
@@ -114,9 +115,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                                     }
                                   />
                                 </Form.Item>
-                                <Form.Item hidden name={[itemField.name, 'id']}>
-                                  <Input />
-                                </Form.Item>
+                                <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
                               </Col>
                             ))}
                             <Col span={8}>
@@ -147,4 +146,4 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   );
 });
 
-export default SpuForm;
+export default SpecForm;

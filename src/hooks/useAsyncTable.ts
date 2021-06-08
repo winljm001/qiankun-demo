@@ -21,7 +21,6 @@ const useAsyncTable = (props: IProps): any => {
       const {
         data: { totalRecords, records },
       } = res;
-      console.log(records);
       return { total: totalRecords, list: records };
     });
   };
