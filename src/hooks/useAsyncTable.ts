@@ -1,8 +1,8 @@
-import { useAntdTable, usePrevious, useSessionStorageState, useUnmount } from 'ahooks';
+import { useAntdTable, useSessionStorageState } from 'ahooks';
 import { PaginatedParams } from 'ahooks/lib/useAntdTable';
 import { Form } from 'antd';
 import { useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 let pathname = '';
 interface IProps {
   /** 请求 */
@@ -45,10 +45,15 @@ const useAsyncTable = (props: IProps): any => {
   const defaultParamsObj = isCache ? (cacheParams ? { defaultParams: cacheParams } : {}) : {};
 
   // 缓存逻辑结束
-  const { tableProps, params, search, refresh } = useAntdTable(getTableData, {
-    ...defaultParamsObj,
-    form,
-  });
+  const { tableProps, params, search, refresh } = useAntdTable(
+    (data) => {
+      return getTableData(data, form.getFieldsValue());
+    },
+    {
+      ...defaultParamsObj,
+      form,
+    },
+  );
   // params改变存进缓存
   useEffect(() => {
     setCacheParams(params);
