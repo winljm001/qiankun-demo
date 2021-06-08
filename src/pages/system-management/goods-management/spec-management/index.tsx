@@ -28,6 +28,9 @@ const SpecManagement: React.FC = () => {
         return data;
       });
     },
+    onSuccess: (data) => {
+      specFormRef.current.setFieldsValue({ commoditySpecs: data });
+    },
   });
   const skuSelectFormRef = useRef<SkuSelectRefProps>();
   // 修改商品状态接口
@@ -79,6 +82,7 @@ const SpecManagement: React.FC = () => {
       commoditySpecOptionIdsList: commoditySpecOptionIdsList,
     });
   };
+  console.log(data);
   return (
     <BaseFormWrap
       actions={[

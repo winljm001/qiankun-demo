@@ -84,6 +84,14 @@ class CommoditySpecModifyDTO {
   commoditySpecSort = undefined
 }
 
+class CommoditySpecOptionConditionDTO {
+  /** 规格id */
+  commoditySpecId = undefined
+
+  /** SpecificationsAndOptionsid */
+  commoditySpecOptionId = undefined
+}
+
 class CommoditySpecOptionDTO {
   /** 商品SpecificationsAndOptionsID */
   commoditySpecOptionId = undefined
@@ -229,12 +237,12 @@ class SkuList {
   unitQuantityText = ''
 }
 
-class SkuListFilterCondition {
+class SkuListConditionDTO {
   /** 商品id */
   commodityId = undefined
 
   /** SpecificationsAndOptions */
-  commoditySpecOptionDTOList = []
+  commoditySpecOptionConditionDTOList = []
 
   /** pageCurrent */
   pageCurrent = undefined
@@ -263,14 +271,6 @@ class SkuSpecificationOptionsHeaderList {
 }
 
 class SpecificationsAndOptions {
-  /** SpecificationsAndOptionsid */
-  commoditySpecOptionId = undefined
-
-  /** SpecificationsAndOptions名称 */
-  commoditySpecOptionName = ''
-}
-
-class SpecificationsAndOptions0 {
   /** SpecificationsAndOptionsid */
   commoditySpecOptionId = undefined
 
@@ -317,6 +317,7 @@ export const commodityService = {
   CommoditySkuSaveDTO,
   CommoditySpecDTO,
   CommoditySpecModifyDTO,
+  CommoditySpecOptionConditionDTO,
   CommoditySpecOptionDTO,
   CommoditySpuVO,
   CommodityStatusDTO,
@@ -328,11 +329,10 @@ export const commodityService = {
   SkuDetails,
   SkuHeader,
   SkuList,
-  SkuListFilterCondition,
+  SkuListConditionDTO,
   SkuListHeader,
   SkuSpecificationOptionsHeaderList,
   SpecificationsAndOptions,
-  SpecificationsAndOptions0,
   SpecificationsAndTypes,
   UpdateSkuDTO
 }

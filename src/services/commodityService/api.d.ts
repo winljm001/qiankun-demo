@@ -90,6 +90,14 @@ declare namespace defs {
       commoditySpecSort?: number
     }
 
+    export class CommoditySpecOptionConditionDTO {
+      /** 规格id */
+      commoditySpecId?: number
+
+      /** SpecificationsAndOptionsid */
+      commoditySpecOptionId?: number
+    }
+
     export class CommoditySpecOptionDTO {
       /** 商品SpecificationsAndOptionsID */
       commoditySpecOptionId?: number
@@ -182,7 +190,7 @@ declare namespace defs {
 
       /** SpecificationsAndOptions */
       commoditySpecOptionVOList?: Array<
-        defs.commodityService.SpecificationsAndOptions0
+        defs.commodityService.SpecificationsAndOptions
       >
     }
 
@@ -241,13 +249,13 @@ declare namespace defs {
       unitQuantityText?: string
     }
 
-    export class SkuListFilterCondition {
+    export class SkuListConditionDTO {
       /** 商品id */
       commodityId?: number
 
       /** SpecificationsAndOptions */
-      commoditySpecOptionDTOList?: Array<
-        defs.commodityService.SpecificationsAndOptions
+      commoditySpecOptionConditionDTOList?: Array<
+        defs.commodityService.CommoditySpecOptionConditionDTO
       >
 
       /** pageCurrent */
@@ -277,14 +285,6 @@ declare namespace defs {
     }
 
     export class SpecificationsAndOptions {
-      /** SpecificationsAndOptionsid */
-      commoditySpecOptionId?: number
-
-      /** SpecificationsAndOptions名称 */
-      commoditySpecOptionName?: string
-    }
-
-    export class SpecificationsAndOptions0 {
       /** SpecificationsAndOptionsid */
       commoditySpecOptionId?: number
 
@@ -647,7 +647,7 @@ declare namespace API {
         export const init: Response
         export function request(
           params: Params,
-          bodyParams: defs.commodityService.SkuListFilterCondition
+          bodyParams: defs.commodityService.SkuListConditionDTO
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<

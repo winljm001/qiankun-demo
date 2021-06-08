@@ -10,8 +10,7 @@ export class Params {}
 /**
  * @description pageSku 接口参数
  */
-export type PageSkuParams = Params &
-  defs.commodityService.SkuListFilterCondition
+export type PageSkuParams = Params & defs.commodityService.SkuListConditionDTO
 
 /**
  * @description pageSku 接口

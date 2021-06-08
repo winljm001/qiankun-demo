@@ -31,6 +31,9 @@ const GoodsManagementAdd: React.FC = () => {
       });
     },
     enabled: false,
+    onSuccess: (data) => {
+      specFormRef.current.setFieldsValue({ commoditySpecs: data });
+    },
   });
   //  保存选中的sku
   const modifySaveSkuList = useMutation(doSaveSkuList, {

@@ -14,6 +14,8 @@ import { pageSku } from '@/services/commodityService/mods/commoditySku/pageSku';
 import { doUpdateSkuStatus } from '@/services/commodityService/mods/commoditySku/doUpdateSkuStatus';
 import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
+import EditModal from './components/edit'
+import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail'
 
 type SKUPageParams = {
   id: string;
@@ -23,6 +25,7 @@ const Index: React.FC = () => {
   const params = useParams() as SKUPageParams;
   const id = Number(params.id);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
+  const [showEditModal, setShowEditModal] = useState(false)
 
   const loadData = useCallback(() => {
     return Promise.all([
@@ -66,7 +69,10 @@ const Index: React.FC = () => {
       })
       .catch(() => {});
   }, []);
-
+  // 单个编辑
+  const handleSingleEdit = () => {
+    setShowEditModal(true)
+  }
   return (
     <div className={styles.wrap}>
 
@@ -115,6 +121,7 @@ const Index: React.FC = () => {
                     actions={[
                       {
                         children: '编辑sku',
+                        onClick: handleSingleEdit,
                       },
                     ]}
                   />
@@ -169,6 +176,8 @@ const Index: React.FC = () => {
                   onChange: setSelectedKeys,
                 }}
               />
+              {/* 编辑弹窗 */}
+              <EditModal visible={showEditModal} setVisible={setShowEditModal} ids={[]} initialValues={{}} />
             </Space>
           );
         }}

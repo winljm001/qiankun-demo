@@ -60,10 +60,6 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
   useImperativeHandle(ref, () => ({
     ...form,
   }));
-  useEffect(() => {
-    form.setFieldsValue(data);
-  }, [data]);
-  console.log(data);
   return (
     <Form form={form} {...specInputLayout} initialValues={initialValues}>
       <Form.List name="commoditySpecs">
@@ -73,7 +69,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
               {fields.map((field, idx) => {
                 return (
                   <div key={`${field.key}-${idx}`} className={styles.specBox}>
-                    {field?.key === 0 ? null : (
+                    {fields.length === 1 ? null : (
                       <CloseOutlined
                         className={styles.specDelIcon}
                         onClick={() => {
