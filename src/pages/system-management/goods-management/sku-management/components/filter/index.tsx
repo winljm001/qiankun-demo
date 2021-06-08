@@ -1,42 +1,65 @@
 import React, { FC, useMemo } from 'react';
-import JsonFilter, { defineConfig, FormItemConfig } from '@/components/JsonFilter';
+import { Form, Select, FormInstance, Button } from 'antd';
+import SearchFormLayout from '@/components/SearchFormLayout';
+import Space from '@/components/Space';
 
 interface IProps {
   items: defs.commodityService.ScreeningSkuList[];
-  onFilter: (values: any) => void,
+  form: FormInstance;
+  submit: () => void;
+  reset: () => void;
 }
 
-const baseOptions = [{
-  label: '全部',
-  value: null,
-}]
-const Filter: FC<IProps> = ({ items, onFilter }) => {
-  // 遍历生成select控件配置和控件初始值
-  const [fieldsData, formItems] = useMemo(() => {
-    const values = {};
-    const controls: FormItemConfig[] = items.map((item) => {
-      values[item.commoditySpecId] = null;
-      return {
-        key: item.commoditySpecId,
-        label: item.commoditySpecName,
-        name: item.commoditySpecId,
-        control: {
-          controlType: 'SELECT',
-          options: baseOptions.concat(item.commoditySpecOptionVOList.map(optionItem => ({
-            label: optionItem.commoditySpecOptionName,
-            value: optionItem.commoditySpecOptionId,
-          })))
-        },
-      };
-    });
-    return [values, controls];
-  }, [items]);
-  const config = defineConfig({
-    fieldsData,
-    formItems,
-    onFilter,
-  });
-  return <JsonFilter {...config} />;
+const baseOptions = [
+  {
+    label: '全部',
+    value: null,
+  },
+];
+const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
+  return (
+    <Form form={form}>
+      <SearchFormLayout
+        list={[
+          ...items.map((item, index) => {
+            return (
+              <Form.Item key={item.commoditySpecId} name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']} label={item.commoditySpecName}>
+                <Select style={{ width: '100%' }}>
+                  {baseOptions
+                    .concat(
+                      item.commoditySpecOptionVOList.map((optionItem) => ({
+                        label: optionItem.commoditySpecOptionName,
+                        value: optionItem.commoditySpecOptionId,
+                      })),
+                    )
+                    .map((item) => {
+                      return (
+                        <Select.Option key={item.value} value={item.value}>
+                          {item.label}
+                        </Select.Option>
+                      );
+                    })}
+                </Select>
+              </Form.Item>
+            );
+          }),
+          <Form.Item key="2">
+            <Space size={24}>
+              <Button type="primary" htmlType="submit" onClick={() => {
+                console.log(form.getFieldsValue())
+                submit()
+              }}>
+                查询
+              </Button>
+              <Button type="default" htmlType="reset" onClick={reset}>
+                重置
+              </Button>
+            </Space>
+          </Form.Item>,
+        ]}
+      />
+    </Form>
+  );
 };
 
 export default Filter;

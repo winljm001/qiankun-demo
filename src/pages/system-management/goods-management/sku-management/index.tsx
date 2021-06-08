@@ -10,9 +10,10 @@ import ActionGroup from '@/components/ActionGroup';
 import { getCommodity } from '@/services/commodityService/mods/commodity/getCommodity';
 import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition'
 import { listSkuListColumn } from '@/services/commodityService/mods/commoditySku/listSkuListColumn';
-import { listSku } from '@/services/commodityService/mods/commoditySku/listSku';
+import { pageSku } from '@/services/commodityService/mods/commoditySku/pageSku';
 import { useSetState } from 'ahooks';
 import StatusChanger from '@/components/StatusChanger';
+import useAsyncTable from '@/hooks/useAsyncTable';
 
 type SKUPageParams = {
   id: string;
@@ -25,6 +26,7 @@ type ListParams = {
 
 const Index: React.FC = () => {
   const params = useParams() as SKUPageParams;
+  const id = Number(params.id)
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
   const [listParams, setListParams] = useSetState<ListParams>({
     pageNo: 1,
@@ -32,7 +34,6 @@ const Index: React.FC = () => {
   })
   
   const loadData = useCallback(() => {
-    const id = Number(params.id)
     return Promise.all([
       // 获取基本信息
       getCommodity({ id: id })
@@ -47,13 +48,10 @@ const Index: React.FC = () => {
         .then((data) => data.data)
         .catch((err) => Promise.reject(err)),
     ]);
-  }, [params.id]);
+  }, [id]);
   useEffect(() => {
-    listSku({})
   }, [listParams])
-  const onFilter = useCallback((values) => {
-    console.log(values, '---filter values');
-  }, []);
+  const { tableProps, form, submit, reset } = useAsyncTable({ fetchAction: pageSku, extraParams: { commodityId: id } });
   const handleBatchEdit = useCallback(() => {}, []);
   const handleBatchEnable = useCallback(() => {}, []);
   const handleBatchDisable = useCallback(() => {}, []);
@@ -67,6 +65,9 @@ const Index: React.FC = () => {
               title: item.commoditySpecName,
               dataIndex: item.commoditySpecId,
               key: item.commoditySpecId,
+              render(text, record) {
+                return record.skuCommoditySpecOptionMap[item.commoditySpecId]
+              },
             })),
             ...columnData.skuListColumnCommoditySkuUnitVOList.map((item) => ({
               title: item.title,
@@ -100,7 +101,7 @@ const Index: React.FC = () => {
           return (
             <Space direction="vertical" size={16}>
               <BaseInfo data={baseData} />
-              {selectData.length > 0 && <Filter items={selectData} onFilter={onFilter} />}
+              {selectData.length > 0 && <Filter form={form} submit={submit} reset={reset} items={selectData} on />}
               <Space size={16}>
                 <Button type="primary" disabled={selectedKeys.length === 0} onClick={handleBatchEdit}>
                   批量编辑sku
@@ -113,8 +114,8 @@ const Index: React.FC = () => {
                 </Button>
               </Space>
               <Table
+                {...tableProps}
                 bordered
-                dataSource={[{}, {}]}
                 columns={columns}
                 rowKey="commoditySkuId"
                 rowSelection={{
