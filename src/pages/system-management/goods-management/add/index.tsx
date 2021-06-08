@@ -9,8 +9,10 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useToggle } from 'ahooks';
 import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
 import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/spec/listSpecById';
+import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
+import { getColumns } from '../components/sku-select/utils';
 const GoodsManagementAdd: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();
@@ -28,6 +30,21 @@ const GoodsManagementAdd: React.FC = () => {
       });
     },
     enabled: false,
+  });
+  //  保存选中的sku
+  const modifySaveSkuList = useMutation(doSaveSkuList, {
+    onSuccess: () => {
+      Modal.confirm({
+        title: '去管理sku',
+        icon: <ExclamationCircleOutlined />,
+        content: 'sku添加成功，你需要去管理sku',
+        okText: '去管理sku',
+        cancelText: '留在本页面',
+        onOk: () => {
+          toggle();
+        },
+      });
+    },
   });
   useEffect(() => {
     if (id) {
@@ -57,8 +74,14 @@ const GoodsManagementAdd: React.FC = () => {
     });
   };
   const handleAddSku = () => {
-    const skus = skuSelectFormRef.current.getSelected();
-    console.log(skus);
+    const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
+    const col = getColumns(specData);
+
+    modifySaveSkuList.mutate({
+      commodityId: id,
+      commoditySpecId: col?.map((v) => v.dataIndex),
+      commoditySpecOptionIdsList: commoditySpecOptionIdsList,
+    });
   };
   return (
     <BaseFormWrap
@@ -92,7 +115,7 @@ const GoodsManagementAdd: React.FC = () => {
         <SpecForm ref={specFormRef} />
       </BaseCard>
       <Modal
-        maskClosable={false}
+        destroyOnClose={true}
         title="选择SKU"
         okText="保存"
         cancelText="取消"

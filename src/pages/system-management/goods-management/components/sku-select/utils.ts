@@ -50,12 +50,16 @@ export const getAllSpecDescartes = (
         return false;
       }
     });
-    // return findRes ? false : true;
-    return findRes ? true : false;
+    return findRes ? false : true;
   });
   resArr = resArr.map((v) => {
     const resObj = {};
     v.forEach((item) => {
+      if (!Array.isArray(resObj['commoditySpecOptionIdsList'])) {
+        resObj['commoditySpecOptionIdsList'] = [item?.commoditySpecOptionId];
+      } else {
+        resObj['commoditySpecOptionIdsList'].push(item?.commoditySpecOptionId);
+      }
       resObj[item?.commoditySpecId] = item?.commoditySpecOptionName;
     });
     return resObj;
