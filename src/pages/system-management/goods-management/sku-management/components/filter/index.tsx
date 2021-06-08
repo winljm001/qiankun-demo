@@ -17,13 +17,26 @@ const baseOptions = [
   },
 ];
 const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
+  const initialValues = useMemo(() => {
+    const result = {
+      commoditySpecOptionDTOList: [],
+    };
+    items.forEach(() => {
+      result.commoditySpecOptionDTOList.push({ commoditySpecOptionId: null });
+    });
+    return result;
+  }, [items]);
+  console.log(initialValues);
   return (
-    <Form form={form}>
+    <Form form={form} initialValues={initialValues}>
       <SearchFormLayout
         list={[
           ...items.map((item, index) => {
             return (
-              <Form.Item key={item.commoditySpecId} name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']} label={item.commoditySpecName}>
+              <Form.Item
+                key={item.commoditySpecId}
+                name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']}
+                label={item.commoditySpecName}>
                 <Select style={{ width: '100%' }}>
                   {baseOptions
                     .concat(
@@ -45,10 +58,13 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
           }),
           <Form.Item key="2">
             <Space size={24}>
-              <Button type="primary" htmlType="submit" onClick={() => {
-                console.log(form.getFieldsValue())
-                submit()
-              }}>
+              <Button
+                type="primary"
+                htmlType="submit"
+                onClick={() => {
+                  console.log(form.getFieldsValue());
+                  submit();
+                }}>
                 查询
               </Button>
               <Button type="default" htmlType="reset" onClick={reset}>
