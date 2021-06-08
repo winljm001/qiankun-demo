@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import DataSuspense from '@/components/DataSuspense';
 import { useParams } from 'react-router';
 import BaseInfo from './components/base-info';
@@ -16,6 +16,7 @@ import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
 import EditModal from './components/edit';
 import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail';
+import { useUpdateEffect } from 'ahooks';
 
 type SKUPageParams = {
   id: string;
@@ -29,7 +30,7 @@ const Index: React.FC = () => {
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const editIds = useRef<number[]>([]);
-  const editInitialValues = useRef<defs.commodityService.SkuDetails>(null);
+  const editInitialValues = useRef<defs.commodityService.SkuDetails>({});
   const editMode = useRef<EditMode>(null);
 
   const loadData = useCallback(() => {
@@ -73,6 +74,14 @@ const Index: React.FC = () => {
       setShowEditModal(true);
     }
   }, []);
+  useUpdateEffect(() => {
+    // 清空编辑相关数据
+    if (!showEditModal) {
+      editIds.current = [];
+      editInitialValues.current = {};
+      editMode.current = null;
+    }
+  }, [showEditModal])
   /**
    * 编辑成功事件
    */
@@ -81,13 +90,10 @@ const Index: React.FC = () => {
     if (mode === 'batch') {
       setSelectedKeys([]);
     }
-    // 清空编辑相关数据
-    editIds.current = [];
-    editInitialValues.current = null;
-    editMode.current = null;
     // 刷新列表
     submit();
   }, []);
+  
   /**
    * 修改状态（支持批量和单个修改）
    * @param ids 需要修改状态的id

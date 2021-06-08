@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button, message } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Modal, Button, message, FormInstance } from 'antd';
 import FruitForm from './components/fruit-form';
 import FoodForm from './components/food-form';
-import { useForm } from 'antd/lib/form/Form';
 import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku';
 
 type IProps = {
@@ -14,43 +13,51 @@ type IProps = {
   ids: number[];
   // 表单初始值
   initialValues: defs.commodityService.SkuDetails;
-  onSuccess: () => void
+  onSuccess: () => void;
 };
 
+export type FormRef = {
+  form: FormInstance
+}
+
 const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuccess }) => {
-  const [form] = useForm();
   const [submitting, setSubmitting] = useState(false);
+  const formRef = useRef<FormRef>()
   // 保存
   const handleSave = () => {
-    form
+    formRef.current.form
       .validateFields()
       .then((values) => {
         setSubmitting(true);
         doUpdateSku({
           commoditySkuIds: ids,
           ...values,
+          status: Number(values.status),
         })
           .then(() => {
             message.success('编辑sku成功');
             // 关闭弹窗
             setVisible(false);
-            onSuccess?.()
+            onSuccess?.();
           })
-          .catch(() => { })
+          .catch(() => {})
           .finally(() => {
             setSubmitting(false);
           });
         console.log(values);
       })
-      .catch(() => { });
+      .catch(() => {});
   };
   return (
     <Modal
       title="编辑sku"
       width={600}
       visible={visible}
-      onCancel={() => { setVisible(false); }}
+      onCancel={() => {
+        setVisible(false);
+      }}
       centered
+      destroyOnClose
       footer={[
         <Button
           key="back"
@@ -59,12 +66,16 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuc
             setVisible(false);
           }}>
           取消
-                </Button>,
+        </Button>,
         <Button key="submit" type="primary" loading={submitting} onClick={handleSave}>
           保存
-                </Button>,
+        </Button>,
       ]}>
-      {initialValues.status ? <FruitForm form={form} initialValues={initialValues} /> : <FoodForm form={form} initialValues={initialValues} />}
+      {initialValues.status ? (
+        <FruitForm ref={formRef} initialValues={initialValues} />
+      ) : (
+        <FoodForm ref={formRef} initialValues={initialValues} />
+      )}
     </Modal>
   );
 };

@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Form, Input, Select, FormInstance } from 'antd';
+import React, { useState, useEffect, useImperativeHandle, Ref } from 'react';
+import { Switch, Form, Input, Select } from 'antd';
 import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
 const { Option } = Select;
 import styles from './style.module.less';
+import { useForm } from 'antd/lib/form/Form';
+import { FormRef } from '../../index'
 
 type IProps = {
-  form: FormInstance;
+  ref: React.Ref<FormRef>
   initialValues: defs.commodityService.SkuDetails;
 };
 
-const FruitForm: React.FC<IProps> = ({ form, initialValues }) => {
+const FruitForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
-
+  const [ form ] = useForm()
+  useImperativeHandle(ref, () => ({
+    form,
+  }))
   // 生命周期请求数据
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 5 })
@@ -64,6 +69,6 @@ const FruitForm: React.FC<IProps> = ({ form, initialValues }) => {
       </Form.Item>
     </Form >
   );
-};
+});
 
 export default FruitForm;
