@@ -31,10 +31,13 @@ const FruitForm: React.FC<IProps> = ({ form, initialValues }) => {
       .catch((err) => {
         console.log(err);
       });
-  }, [])
+  }, []);
 
   const selectAfter = (
-    <Form.Item name="unitType" className={styles.select_after} rules={[{ required: true, message: '请选择sku净重单位!' }]}>
+    <Form.Item
+      name="unitType"
+      className={styles.select_after}
+      rules={[{ required: true, message: '请选择sku净重单位!' }]}>
       <Select placeholder="单位" style={{ width: 80 }}>
         {weightArr.map((item) => {
           return (
@@ -48,7 +51,7 @@ const FruitForm: React.FC<IProps> = ({ form, initialValues }) => {
   );
 
   return (
-    <Form form={form} name="basic" initialValues={initialValues} className={styles.formBox} >
+    <Form form={form} name="basic" initialValues={initialValues} className={styles.formBox}>
       <Form.Item
         label="sku净重"
         name="unitQuantity"
@@ -62,7 +65,7 @@ const FruitForm: React.FC<IProps> = ({ form, initialValues }) => {
       <Form.Item label="状态" name="status" valuePropName="checked" className={styles.switch}>
         <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />
       </Form.Item>
-    </Form >
+    </Form>
   );
 };
 

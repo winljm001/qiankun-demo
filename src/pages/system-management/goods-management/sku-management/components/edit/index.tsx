@@ -14,7 +14,7 @@ type IProps = {
   ids: number[];
   // 表单初始值
   initialValues: defs.commodityService.SkuDetails;
-  onSuccess: () => void
+  onSuccess: () => void;
 };
 
 const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuccess }) => {
@@ -34,22 +34,24 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuc
             message.success('编辑sku成功');
             // 关闭弹窗
             setVisible(false);
-            onSuccess?.()
+            onSuccess?.();
           })
-          .catch(() => { })
+          .catch(() => {})
           .finally(() => {
             setSubmitting(false);
           });
         console.log(values);
       })
-      .catch(() => { });
+      .catch(() => {});
   };
   return (
     <Modal
       title="编辑sku"
       width={600}
       visible={visible}
-      onCancel={() => { setVisible(false); }}
+      onCancel={() => {
+        setVisible(false);
+      }}
       centered
       footer={[
         <Button
@@ -59,12 +61,16 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuc
             setVisible(false);
           }}>
           取消
-                </Button>,
+        </Button>,
         <Button key="submit" type="primary" loading={submitting} onClick={handleSave}>
           保存
-                </Button>,
+        </Button>,
       ]}>
-      {initialValues.status ? <FruitForm form={form} initialValues={initialValues} /> : <FoodForm form={form} initialValues={initialValues} />}
+      {initialValues.status ? (
+        <FruitForm form={form} initialValues={initialValues} />
+      ) : (
+        <FoodForm form={form} initialValues={initialValues} />
+      )}
     </Modal>
   );
 };

@@ -4,8 +4,8 @@ import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/l
 import styles from './style.module.less';
 
 type IProps = {
-  form: FormInstance
-  initialValues: defs.commodityService.SkuDetails
+  form: FormInstance;
+  initialValues: defs.commodityService.SkuDetails;
 };
 
 const FoodForm: React.FC<IProps> = ({ form, initialValues }) => {
