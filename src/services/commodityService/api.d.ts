@@ -35,6 +35,14 @@ declare namespace defs {
       commodityVarietyId?: number
     }
 
+    export class CommodityModifyDTO {
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品规格对象 */
+      commoditySpecs?: Array<defs.commodityService.CommoditySpecModifyDTO>
+    }
+
     export class CommodityNameDTO {
       /** 商品id */
       commodityId?: number
@@ -76,9 +84,7 @@ declare namespace defs {
       commoditySpecName?: string
 
       /** 商品SpecificationsAndOptions */
-      commoditySpecOptionDTOS?: Array<
-        defs.commodityService.CommoditySpecOptionDTO
-      >
+      commoditySpecOptions?: Array<defs.commodityService.CommoditySpecOptionDTO>
 
       /** 商品规格排序 */
       commoditySpecSort?: number
@@ -809,14 +815,12 @@ declare namespace API {
 
       /**
        * doModifySpecById
-       * /api/commodity/v1/spec/modify/{commodityId}
+       * /api/commodity/v1/spec/modify
        */
       export namespace doModifySpecById {
         export class Params {
           /** admin */
           admin?: boolean
-          /** commodityId */
-          commodityId: number
           /** currentDate */
           currentDate?: string
           /** organizationId */
@@ -833,7 +837,7 @@ declare namespace API {
         export const init: Response
         export function request(
           params: Params,
-          bodyParams: Array<defs.commodityService.CommoditySpecModifyDTO>
+          bodyParams: defs.commodityService.CommodityModifyDTO
         ): Promise<defs.commodityService.ApiResult<number>>
       }
 
