@@ -40,5 +40,5 @@ export const getHomepageUrl = (menuList: CustomRouteConfig[]) => {
   while (menu.routes?.length) {
     menu = menu.routes[0]
   }
-  return menu?.path
+  return Array.isArray(menu?.path) ? menu.path[0] : menu?.path
 }
