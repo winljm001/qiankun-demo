@@ -8,8 +8,6 @@ import * as request from '@/utils/fetch'
 export class Params {
   /** admin */
   admin?: boolean
-  /** commodityName */
-  commodityName: string
   /** currentDate */
   currentDate?: string
   /** organizationId */
@@ -25,7 +23,8 @@ export class Params {
 /**
  * @description isSpuNameRepeat 接口参数
  */
-export type IsSpuNameRepeatParams = Params
+export type IsSpuNameRepeatParams = Params &
+  defs.commodityService.CommodityVerifyDTO
 
 /**
  * @description isSpuNameRepeat 接口

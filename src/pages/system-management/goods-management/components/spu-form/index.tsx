@@ -22,7 +22,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   // 商品名验重
   const { run } = useDebounceFn((rule, value, callback) => {
     if (value) {
-      isSpuNameRepeat({ commodityName: value }).then(({ data }) => {
+      isSpuNameRepeat({ commodityName: value, commodityId: data?.commodityId }).then(({ data }) => {
         if (data) {
           callback();
         } else {

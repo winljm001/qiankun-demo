@@ -8,7 +8,7 @@ const formatSpecToArr = (specData: defs.commodityService.SpecificationsAndTypes[
 };
 
 const calcDescartes = (array) => {
-  if (array.length < 2) return array[0] || [];
+  if (array.length < 2) return [array[0]] || [];
 
   return array.reduce((total, currentValue) => {
     let res = [];
@@ -39,10 +39,12 @@ export const getAllSpecDescartes = (
   }
   // 所有的规格组合
   const specArr = calcDescartes(formatSpecToArr(specData));
+  console.log(specArr);
   // 过滤掉已经选过的
   let resArr = specArr.filter((v) => {
+    console.log(v);
     const ids = v?.map((v) => v.commoditySpecOptionId);
-
+    console.log(ids, selectedSpecOptions);
     const findRes = selectedSpecOptions.find((item) => {
       if (item.length === ids.length && _.intersection(item, ids).length === ids.length) {
         return true;
@@ -50,12 +52,17 @@ export const getAllSpecDescartes = (
         return false;
       }
     });
-    // return findRes ? false : true;
-    return findRes ? true : false;
+    // console.log(findRes);
+    return findRes ? false : true;
   });
   resArr = resArr.map((v) => {
     const resObj = {};
     v.forEach((item) => {
+      if (!Array.isArray(resObj['commoditySpecOptionIdsList'])) {
+        resObj['commoditySpecOptionIdsList'] = [item?.commoditySpecOptionId];
+      } else {
+        resObj['commoditySpecOptionIdsList'].push(item?.commoditySpecOptionId);
+      }
       resObj[item?.commoditySpecId] = item?.commoditySpecOptionName;
     });
     return resObj;

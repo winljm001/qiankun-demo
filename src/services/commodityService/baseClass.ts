@@ -29,6 +29,14 @@ class CommodityDTO {
   commodityVarietyId = undefined
 }
 
+class CommodityModifyDTO {
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品规格对象 */
+  commoditySpecs = []
+}
+
 class CommodityNameDTO {
   /** 商品id */
   commodityId = undefined
@@ -70,7 +78,7 @@ class CommoditySpecModifyDTO {
   commoditySpecName = ''
 
   /** 商品SpecificationsAndOptions */
-  commoditySpecOptionDTOS = []
+  commoditySpecOptions = []
 
   /** 商品规格排序 */
   commoditySpecSort = undefined
@@ -116,6 +124,14 @@ class CommodityStatusDTO {
 
   /** 激活状态 */
   status = undefined
+}
+
+class CommodityVerifyDTO {
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
 }
 
 class DefaultPageResult {
@@ -296,6 +312,7 @@ class UpdateSkuDTO {
 export const commodityService = {
   ApiResult,
   CommodityDTO,
+  CommodityModifyDTO,
   CommodityNameDTO,
   CommoditySkuSaveDTO,
   CommoditySpecDTO,
@@ -303,6 +320,7 @@ export const commodityService = {
   CommoditySpecOptionDTO,
   CommoditySpuVO,
   CommodityStatusDTO,
+  CommodityVerifyDTO,
   DefaultPageResult,
   ModifyTheSkuStatus,
   Option,

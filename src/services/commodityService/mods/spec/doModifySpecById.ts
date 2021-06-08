@@ -8,8 +8,6 @@ import * as request from '@/utils/fetch'
 export class Params {
   /** admin */
   admin?: boolean
-  /** commodityId */
-  commodityId: number
   /** currentDate */
   currentDate?: string
   /** organizationId */
@@ -26,7 +24,7 @@ export class Params {
  * @description doModifySpecById 接口参数
  */
 export type DoModifySpecByIdParams = Params &
-  Array<defs.commodityService.CommoditySpecModifyDTO>
+  defs.commodityService.CommodityModifyDTO
 
 /**
  * @description doModifySpecById 接口
@@ -36,11 +34,7 @@ export const doModifySpecById = (
   headers?: any
 ) => {
   return request.request<defs.commodityService.ApiResult<number>>({
-    ...request.buildOptions(
-      '/api/commodity/v1/spec/modify/{commodityId}',
-      params,
-      'POST'
-    ),
+    ...request.buildOptions('/api/commodity/v1/spec/modify', params, 'POST'),
     headers
   })
 }
@@ -48,8 +42,7 @@ export const doModifySpecById = (
 /**
  * @description doModifySpecById hooks 默认的 key
  */
-export const USE_DO_MODIFY_SPEC_BY_ID_KEY =
-  '/api/commodity/v1/spec/modify/{commodityId}_POST'
+export const USE_DO_MODIFY_SPEC_BY_ID_KEY = '/api/commodity/v1/spec/modify_POST'
 
 // export const doModifySpecByIdQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

@@ -3,7 +3,7 @@ import {
   USE_LIST_SKU_SELECTED_COMBINATION_KEY,
 } from '@/services/commodityService/mods/commoditySku/listSkuSelectedCombination';
 import { Table } from 'antd';
-import React, { forwardRef, useEffect, useImperativeHandle, useMemo } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAllSpecDescartes, getColumns } from './utils';
 
@@ -15,8 +15,11 @@ interface SkuSelectFormProps {
   specData?: defs.commodityService.SpecificationsAndTypes[];
 }
 const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, specData = [] }, ref) => {
+  const [selected, setSelected] = useState([]);
   useImperativeHandle(ref, () => ({
-    getSelected: () => {},
+    getSelected: () => {
+      return selected;
+    },
   }));
   const { data: selectedSpecOptions } = useQuery({
     queryKey: USE_LIST_SKU_SELECTED_COMBINATION_KEY,
@@ -35,7 +38,13 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   const columns = useMemo(() => {
     return getColumns(specData);
   }, [specData]);
-  return <Table columns={columns} dataSource={data} />;
+
+  const rowSelection = {
+    onChange: (e) => {
+      setSelected(e);
+    },
+  };
+  return <Table rowSelection={rowSelection} columns={columns} dataSource={data} rowKey="commoditySpecOptionIdsList" />;
 });
 
 export default SkuSelectForm;
