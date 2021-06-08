@@ -5,7 +5,7 @@ import * as request from '@/utils/fetch'
 /**
  * @description login 接口 URL 参数/GET
  */
-export class Params {}
+export class Params { }
 
 /**
  * @description login 接口参数
