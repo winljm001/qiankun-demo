@@ -1115,7 +1115,7 @@
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "SkuListFilterCondition",
+                  "typeName": "SkuListConditionDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2204,6 +2204,40 @@
         "templateArgs": []
       },
       {
+        "name": "CommoditySpecOptionConditionDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecId",
+            "description": "规格id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecOptionId",
+            "description": "SpecificationsAndOptionsid",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "CommoditySpecOptionDTO",
         "properties": [
           {
@@ -2645,7 +2679,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "SpecificationsAndOptions0",
+                  "typeName": "SpecificationsAndOptions",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2935,7 +2969,7 @@
         "templateArgs": []
       },
       {
-        "name": "SkuListFilterCondition",
+        "name": "SkuListConditionDTO",
         "properties": [
           {
             "dataType": {
@@ -2956,7 +2990,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "SpecificationsAndOptions",
+                  "typeName": "CommoditySpecOptionConditionDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2971,7 +3005,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecOptionDTOList",
+            "name": "commoditySpecOptionConditionDTOList",
             "description": "SpecificationsAndOptions",
             "required": false
           },
@@ -3097,40 +3131,6 @@
       },
       {
         "name": "SpecificationsAndOptions",
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionId",
-            "description": "SpecificationsAndOptionsid",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionName",
-            "description": "SpecificationsAndOptions名称",
-            "required": false
-          }
-        ],
-        "templateArgs": []
-      },
-      {
-        "name": "SpecificationsAndOptions0",
         "properties": [
           {
             "dataType": {
@@ -3324,13 +3324,498 @@
     ]
   },
   {
-    "mods": [],
+    "mods": [
+      {
+        "description": "web-用户模块",
+        "interfaces": [
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "login",
+            "name": "login",
+            "method": "post",
+            "path": "/api/user/v1/web/user/login",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "UserLoginResponseVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "body",
+                "description": "loginDto",
+                "name": "loginDto",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "LoginDto",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
+            "consumes": [
+              "application/json"
+            ],
+            "description": "sendCheckCode",
+            "name": "sendCheckCode",
+            "method": "post",
+            "path": "/api/user/v1/web/user/sendCheckCode",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "boolean",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "phoneNum",
+                "name": "phoneNum",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "string",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "userWeb"
+      }
+    ],
     "name": "userService",
-    "baseClasses": []
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "UserLoginResponseVO",
+              "isDefsType": true,
+              "templateIndex": 0,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errMsg",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "UserLoginResponseVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "LoginDto",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "checkCode",
+            "description": "短信验证码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "phoneNum",
+            "description": "用户电话号码",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [
+                "'APP'",
+                "'WEB'"
+              ],
+              "typeProperties": []
+            },
+            "name": "userPlatform",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "UserLoginResponseVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationId",
+            "description": "公司ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "organizationName",
+            "description": "公司名称",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "token",
+            "description": "用户token",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userId",
+            "description": "用户ID",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "userName",
+            "description": "用户名称",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      }
+    ]
   },
   {
-    "mods": [],
+    "mods": [
+      {
+        "description": "角色权限管理",
+        "interfaces": [
+          {
+            "description": "根据用户ID获取权限列表",
+            "name": "authListByUserId",
+            "method": "get",
+            "path": "/api/auth/v1/role/authListByUserId",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [],
+                      "typeName": "AuthDTO",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "query",
+                "description": "userId",
+                "name": "userId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          }
+        ],
+        "name": "role"
+      }
+    ],
     "name": "authService",
-    "baseClasses": []
+    "baseClasses": [
+      {
+        "name": "ApiResult",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "AuthDTO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "data",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errCode",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "errMsg",
+            "required": false
+          }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [
+              {
+                "typeArgs": [],
+                "typeName": "AuthDTO",
+                "isDefsType": true,
+                "templateIndex": -1,
+                "compileTemplateKeyword": "#/definitions/",
+                "enum": [],
+                "typeProperties": []
+              }
+            ],
+            "typeName": "Array",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ]
+      },
+      {
+        "name": "AuthDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authId",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authKey",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authName",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "authPath",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "leaf",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      }
+    ]
   }
 ]
