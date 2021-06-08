@@ -60,10 +60,6 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
   useImperativeHandle(ref, () => ({
     ...form,
   }));
-  useEffect(() => {
-    form.setFieldsValue(data);
-  }, [data]);
-  console.log(data);
   return (
     <Form form={form} {...specInputLayout} initialValues={initialValues}>
       <Form.List name="commoditySpecs">
