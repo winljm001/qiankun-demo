@@ -1,5 +1,5 @@
-import React from 'react';
-import { Button, Space, Table } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Button, FormInstance, Modal, Space, Table } from 'antd';
 import SearchForm from './search-form/index';
 import { pageCommodity } from '@/services/commodityService/mods/commodity/pageCommodity';
 import BaseCard from '@/components/BaseCard';
@@ -7,13 +7,45 @@ import ActionGroup from '@/components/ActionGroup';
 import { useHistory } from 'react-router-dom';
 import { GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
 import StatusChanger from '@/components/StatusChanger';
-import useAsyncTable from '@/hooks';
+import subRoute from '@/components/hoc/sub-route';
+import useAsyncTable from '@/hooks/useAsyncTable';
+import { useToggle } from 'ahooks';
+import SpuForm from '../components/spu-form';
+import { useMutation, useQuery } from 'react-query';
+import {
+  doUpdateCommodityName,
+  USE_DO_UPDATE_COMMODITY_NAME_KEY,
+} from '@/services/commodityService/mods/commodity/doUpdateCommodityName';
+import { doUpdateCommodityStatus } from '@/services/commodityService/mods/commodity/doUpdateCommodityStatus';
 
 const GoodsManagementList = () => {
   const history = useHistory();
-  const { tableProps, form, submit, reset } = useAsyncTable({ fetchAction: pageCommodity });
+  const spuFormRef = useRef<FormInstance>();
+  const [visible, { toggle }] = useToggle();
+  const { tableProps, form, submit, reset, refresh } = useAsyncTable({ fetchAction: pageCommodity });
+  const [editData, setEditData] = useState();
+
+  // 修改商品状态接口
+  const updateName = useMutation(doUpdateCommodityName, {
+    onSuccess: () => {
+      toggle();
+      refresh();
+    },
+  });
+  // 修改商品名接口
+  const updateStatus = useMutation(doUpdateCommodityStatus, {
+    onSuccess: () => {
+      refresh();
+    },
+  });
+  // 修改商品状态
   const handleChangeStatus = (record) => {
-    console.log(record);
+    updateStatus.mutate({ commodityId: record?.commodityId, status: record?.status === 0 ? 99 : 0 });
+  };
+  // 修改商品名
+  const handleEditSPU = async () => {
+    const res = await spuFormRef.current.validateFields();
+    updateName.mutate(res);
   };
   const columns = [
     {
@@ -39,10 +71,10 @@ const GoodsManagementList = () => {
     {
       title: '状态',
       dataIndex: 'status',
-      render: (val, record) => <StatusChanger checked={val === 1} onConfirm={() => handleChangeStatus(record)} />,
+      render: (val, record) => <StatusChanger checked={val === 99} onConfirm={() => handleChangeStatus(record)} />,
     },
     {
-      title: '操作1',
+      title: '操作',
       dataIndex: '_',
       render: (val, record) => {
         return (
@@ -51,19 +83,20 @@ const GoodsManagementList = () => {
               {
                 children: '修改SPU',
                 onClick() {
-                  console.log('修改spu');
+                  setEditData(record);
+                  toggle();
                 },
               },
               {
                 children: '规格管理',
                 onClick() {
-                  history.push(`${SPEC_MANAGEMENT}?commodityId=${record.commodityId}`);
+                  history.push(`${SPEC_MANAGEMENT}/${record.commodityId}`);
                 },
               },
               {
                 children: 'SKU管理',
                 onClick() {
-                  history.push(`${SKU_MANAGEMENT}?commodityId=${record.commodityId}`);
+                  history.push(`${SKU_MANAGEMENT}/${record.commodityId}`);
                 },
               },
             ]}
@@ -90,8 +123,18 @@ const GoodsManagementList = () => {
       <BaseCard>
         <Table columns={columns} rowKey="commodityId" {...tableProps} />
       </BaseCard>
+      <Modal
+        title="修改SPU"
+        okText="保存"
+        cancelText="取消"
+        visible={visible}
+        onCancel={() => toggle()}
+        confirmLoading={updateName.isLoading}
+        onOk={handleEditSPU}>
+        <SpuForm ref={spuFormRef} data={editData} />
+      </Modal>
     </div>
   );
 };
 
-export default GoodsManagementList;
+export default subRoute(GoodsManagementList);

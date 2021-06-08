@@ -1,22 +1,22 @@
-// listSku 接口文件
+// pageSku 接口文件
 // import { useQuery } from 'react-query'
 import * as request from '@/utils/fetch'
 
 /**
- * @description listSku 接口 URL 参数/GET
+ * @description pageSku 接口 URL 参数/GET
  */
 export class Params {}
 
 /**
- * @description listSku 接口参数
+ * @description pageSku 接口参数
  */
-export type ListSkuParams = Params &
+export type PageSkuParams = Params &
   defs.commodityService.SkuListFilterCondition
 
 /**
- * @description listSku 接口
+ * @description pageSku 接口
  */
-export const listSku = (params: ListSkuParams, headers?: any) => {
+export const pageSku = (params: PageSkuParams, headers?: any) => {
   return request.request<
     defs.commodityService.ApiResult<
       defs.commodityService.DefaultPageResult<defs.commodityService.SkuList>
@@ -32,19 +32,19 @@ export const listSku = (params: ListSkuParams, headers?: any) => {
 }
 
 /**
- * @description listSku hooks 默认的 key
+ * @description pageSku hooks 默认的 key
  */
-export const USE_LIST_SKU_KEY = '/api/commodity/v1/commodity/sku/list_POST'
+export const USE_PAGE_SKU_KEY = '/api/commodity/v1/commodity/sku/list_POST'
 
-// export const listSkuQuery = ({ queryKey }: {queryKey:any[]}) => {
+// export const pageSkuQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;
-//   return listSku(params);
+//   return pageSku(params);
 // }
 
 // /**
-//  * @description listSku hooks
+//  * @description pageSku hooks
 //  */
-// export const useListSku = (params: ListSkuParams, headers?:any, key = 'USE_LIST_SKU_KEY') => {
+// export const usePageSku = (params: PageSkuParams, headers?:any, key = 'USE_PAGE_SKU_KEY') => {
 //   // 修正数据
 //   if(typeof headers === 'string') {
 //     key = headers;
@@ -53,6 +53,6 @@ export const USE_LIST_SKU_KEY = '/api/commodity/v1/commodity/sku/list_POST'
 
 //   return useQuery({
 //     queryKey: [key, params],
-//     queryFn: () => listSku(params, headers),
+//     queryFn: () => pageSku(params, headers),
 //   })
 // }

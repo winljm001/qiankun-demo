@@ -87,8 +87,5 @@ useGlobalStore.subscribe(
   },
   (state) => state.isLogin,
 );
-useGlobalStore.subscribe((state) => {
-  console.log(state, '------log')
-})
 
 export default useGlobalStore;
