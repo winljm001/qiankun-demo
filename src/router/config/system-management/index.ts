@@ -7,6 +7,7 @@ const routes: CustomRouteConfig[] = [
   {
     path: BASE_URL,
     component: BlankLayout,
+    authKey: '211',
     meta: {
       menuText: '系统管理',
       menuIcon: 'SettingOutlined',
@@ -14,6 +15,7 @@ const routes: CustomRouteConfig[] = [
     routes: [
       {
         path: GOODS_MANAGEMENT,
+        authKey: '211011',
         meta: {
           menuText: '果品管理',
         },
@@ -24,19 +26,19 @@ const routes: CustomRouteConfig[] = [
             path: GOODS_MANAGEMENT_ADD,
             exact: true,
             component: loadable(() => import('@/pages/system-management/goods-management/add/index')),
-            breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }],
+            breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }],
           },
           {
             path: `${SKU_MANAGEMENT}/:id`,
             exact: true,
             component: loadable(() => import('@/pages/system-management/goods-management/sku-management')),
-            breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }, { name: 'SKU管理' }],
+            breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }, { name: 'SKU管理' }],
           },
           {
             path: `${SPEC_MANAGEMENT}/:id`,
             exact: true,
             component: loadable(() => import('@/pages/system-management/goods-management/spec-management')),
-            breadcrumb: [{ name: '系统管理' }, { name: '果品管理' }, { name: '规格管理' }],
+            breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }, { name: '规格管理' }],
           },
         ],
       },
