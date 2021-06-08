@@ -73,7 +73,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
               {fields.map((field, idx) => {
                 return (
                   <div key={`${field.key}-${idx}`} className={styles.specBox}>
-                    {field?.key === 0 ? null : (
+                    {fields.length === 1 ? null : (
                       <CloseOutlined
                         className={styles.specDelIcon}
                         onClick={() => {

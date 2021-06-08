@@ -594,9 +594,12 @@
             ]
           },
           {
+            "consumes": [
+              "application/json"
+            ],
             "description": "isSpuNameRepeat",
             "name": "isSpuNameRepeat",
-            "method": "get",
+            "method": "post",
             "path": "/api/commodity/v1/spu/verify/name",
             "response": {
               "typeArgs": [
@@ -1115,7 +1118,7 @@
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "SkuListFilterCondition",
+                  "typeName": "SkuListConditionDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2204,6 +2207,40 @@
         "templateArgs": []
       },
       {
+        "name": "CommoditySpecOptionConditionDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecId",
+            "description": "规格id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySpecOptionId",
+            "description": "SpecificationsAndOptionsid",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
         "name": "CommoditySpecOptionDTO",
         "properties": [
           {
@@ -2645,7 +2682,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "SpecificationsAndOptions0",
+                  "typeName": "SpecificationsAndOptions",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2935,7 +2972,7 @@
         "templateArgs": []
       },
       {
-        "name": "SkuListFilterCondition",
+        "name": "SkuListConditionDTO",
         "properties": [
           {
             "dataType": {
@@ -2956,7 +2993,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "SpecificationsAndOptions",
+                  "typeName": "CommoditySpecOptionConditionDTO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -2971,7 +3008,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "name": "commoditySpecOptionDTOList",
+            "name": "commoditySpecOptionConditionDTOList",
             "description": "SpecificationsAndOptions",
             "required": false
           },
@@ -3097,40 +3134,6 @@
       },
       {
         "name": "SpecificationsAndOptions",
-        "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionId",
-            "description": "SpecificationsAndOptionsid",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commoditySpecOptionName",
-            "description": "SpecificationsAndOptions名称",
-            "required": false
-          }
-        ],
-        "templateArgs": []
-      },
-      {
-        "name": "SpecificationsAndOptions0",
         "properties": [
           {
             "dataType": {

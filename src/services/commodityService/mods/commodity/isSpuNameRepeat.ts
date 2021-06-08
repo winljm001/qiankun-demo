@@ -34,7 +34,11 @@ export const isSpuNameRepeat = (
   headers?: any
 ) => {
   return request.request<defs.commodityService.ApiResult<boolean>>({
-    ...request.buildOptions('/api/commodity/v1/spu/verify/name', params, 'GET'),
+    ...request.buildOptions(
+      '/api/commodity/v1/spu/verify/name',
+      params,
+      'POST'
+    ),
     headers
   })
 }
@@ -43,7 +47,7 @@ export const isSpuNameRepeat = (
  * @description isSpuNameRepeat hooks 默认的 key
  */
 export const USE_IS_SPU_NAME_REPEAT_KEY =
-  '/api/commodity/v1/spu/verify/name_GET'
+  '/api/commodity/v1/spu/verify/name_POST'
 
 // export const isSpuNameRepeatQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;
