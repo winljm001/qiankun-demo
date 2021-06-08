@@ -59,6 +59,7 @@ const Index: React.FC = () => {
   const handleBatchDisable = useCallback(() => { }, []);
   return (
     <div className={styles.wrap}>
+
       <DataSuspense load={loadData}>
         {({ data }) => {
           const [baseData, selectData, columnData] = data;
