@@ -14,9 +14,11 @@ type IProps = {
   ids: number[];
   // 表单初始值
   initialValues: defs.commodityService.SkuDetails;
+	// 编辑成功事件
+	onSuccess: () => void
 };
 
-const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues }) => {
+const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuccess }) => {
   const [form] = useForm();
   const [submitting, setSubmitting] = useState(false);
   // 保存
@@ -33,6 +35,7 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues }) => 
             message.success('编辑sku成功');
             // 关闭弹窗
             setVisible(false);
+						onSuccess?.()
           })
           .catch(() => {})
           .finally(() => {
