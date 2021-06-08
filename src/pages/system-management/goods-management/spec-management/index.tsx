@@ -14,6 +14,7 @@ import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityServi
 import { doModifySpecById } from '@/services/commodityService/mods/spec/doModifySpecById';
 import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
 import { getColumns } from '../components/sku-select/utils';
+import { SKU_MANAGEMENT } from '@/router/config/system-management/path';
 const SpecManagement: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();
@@ -48,6 +49,7 @@ const SpecManagement: React.FC = () => {
   //  保存选中的sku
   const modifySaveSkuList = useMutation(doSaveSkuList, {
     onSuccess: () => {
+      toggle();
       Modal.confirm({
         title: '去管理sku',
         icon: <ExclamationCircleOutlined />,
@@ -55,7 +57,7 @@ const SpecManagement: React.FC = () => {
         okText: '去管理sku',
         cancelText: '留在本页面',
         onOk: () => {
-          toggle();
+          history.push(`${SKU_MANAGEMENT}/${id}`);
         },
       });
     },
