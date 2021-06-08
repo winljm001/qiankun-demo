@@ -633,14 +633,14 @@
                 }
               },
               {
-                "in": "query",
-                "description": "commodityName",
-                "name": "commodityName",
+                "in": "body",
+                "description": "commodityVerifyDTO",
+                "name": "commodityVerifyDTO",
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
+                  "typeName": "CommodityVerifyDTO",
+                  "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -2384,6 +2384,40 @@
             },
             "name": "status",
             "description": "激活状态",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "CommodityVerifyDTO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityId",
+            "description": "商品id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityName",
+            "description": "商品名称",
             "required": false
           }
         ],

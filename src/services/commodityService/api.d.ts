@@ -132,6 +132,14 @@ declare namespace defs {
       status?: number
     }
 
+    export class CommodityVerifyDTO {
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+    }
+
     export class DefaultPageResult<T0 = any> {
       /** pageCurrent */
       pageCurrent?: number
@@ -464,8 +472,6 @@ declare namespace API {
         export class Params {
           /** admin */
           admin?: boolean
-          /** commodityName */
-          commodityName: string
           /** currentDate */
           currentDate?: string
           /** organizationId */
@@ -481,7 +487,8 @@ declare namespace API {
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
         export function request(
-          params: Params
+          params: Params,
+          bodyParams: defs.commodityService.CommodityVerifyDTO
         ): Promise<defs.commodityService.ApiResult<boolean>>
       }
 

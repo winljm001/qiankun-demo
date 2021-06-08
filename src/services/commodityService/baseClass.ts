@@ -126,6 +126,14 @@ class CommodityStatusDTO {
   status = undefined
 }
 
+class CommodityVerifyDTO {
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+}
+
 class DefaultPageResult {
   /** pageCurrent */
   pageCurrent = undefined
@@ -312,6 +320,7 @@ export const commodityService = {
   CommoditySpecOptionDTO,
   CommoditySpuVO,
   CommodityStatusDTO,
+  CommodityVerifyDTO,
   DefaultPageResult,
   ModifyTheSkuStatus,
   Option,
