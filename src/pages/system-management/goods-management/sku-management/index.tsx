@@ -149,7 +149,7 @@ const Index: React.FC = () => {
               },
             },
             {
-              title: '操作1',
+              title: '操作',
               dataIndex: '_',
               render: (_, record: defs.commodityService.SkuList) => {
                 return (
