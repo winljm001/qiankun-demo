@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
-import { Modal, Form, Button, message } from 'antd';
+import React, { useRef, useState } from 'react';
+import { Modal, Button, message, FormInstance } from 'antd';
 import FruitForm from './components/fruit-form';
 import FoodForm from './components/food-form';
-import { useForm } from 'antd/lib/form/Form';
 import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku';
 
 type IProps = {
@@ -17,18 +16,23 @@ type IProps = {
   onSuccess: () => void;
 };
 
+export type FormRef = {
+  form: FormInstance;
+};
+
 const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuccess }) => {
-  const [form] = useForm();
   const [submitting, setSubmitting] = useState(false);
+  const formRef = useRef<FormRef>();
   // 保存
   const handleSave = () => {
-    form
+    formRef.current.form
       .validateFields()
       .then((values) => {
         setSubmitting(true);
         doUpdateSku({
           commoditySkuIds: ids,
           ...values,
+          status: Number(values.status),
         })
           .then(() => {
             message.success('编辑sku成功');
@@ -53,6 +57,7 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuc
         setVisible(false);
       }}
       centered
+      destroyOnClose
       footer={[
         <Button
           key="back"
@@ -67,9 +72,9 @@ const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuc
         </Button>,
       ]}>
       {initialValues.status ? (
-        <FruitForm form={form} initialValues={initialValues} />
+        <FruitForm ref={formRef} initialValues={initialValues} />
       ) : (
-        <FoodForm form={form} initialValues={initialValues} />
+        <FoodForm ref={formRef} initialValues={initialValues} />
       )}
     </Modal>
   );
