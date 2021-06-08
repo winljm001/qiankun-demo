@@ -21,8 +21,8 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
     const result = {
       commoditySpecOptionDTOList: [],
     };
-    items.forEach(() => {
-      result.commoditySpecOptionDTOList.push({ commoditySpecOptionId: null });
+    items.forEach((item) => {
+      result.commoditySpecOptionDTOList.push({ commoditySpecOptionId: null, commoditySpecId: item.commoditySpecId });
     });
     return result;
   }, [items]);
@@ -33,27 +33,29 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
         list={[
           ...items.map((item, index) => {
             return (
-              <Form.Item
-                key={item.commoditySpecId}
-                name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']}
-                label={item.commoditySpecName}>
-                <Select style={{ width: '100%' }}>
-                  {baseOptions
-                    .concat(
-                      item.commoditySpecOptionVOList.map((optionItem) => ({
-                        label: optionItem.commoditySpecOptionName,
-                        value: optionItem.commoditySpecOptionId,
-                      })),
-                    )
-                    .map((item) => {
-                      return (
-                        <Select.Option key={item.value} value={item.value}>
-                          {item.label}
-                        </Select.Option>
-                      );
-                    })}
-                </Select>
-              </Form.Item>
+              <React.Fragment key={item.commoditySpecId}>
+                <Form.Item hidden name={['commoditySpecOptionDTOList', index, 'commoditySpecId']} />
+                <Form.Item
+                  name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']}
+                  label={item.commoditySpecName}>
+                  <Select style={{ width: '100%' }}>
+                    {baseOptions
+                      .concat(
+                        item.commoditySpecOptionVOList.map((optionItem) => ({
+                          label: optionItem.commoditySpecOptionName,
+                          value: optionItem.commoditySpecOptionId,
+                        })),
+                      )
+                      .map((item) => {
+                        return (
+                          <Select.Option key={item.value} value={item.value}>
+                            {item.label}
+                          </Select.Option>
+                        );
+                      })}
+                  </Select>
+                </Form.Item>
+              </React.Fragment>
             );
           }),
           <Form.Item key="2">

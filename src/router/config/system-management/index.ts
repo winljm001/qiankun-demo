@@ -7,6 +7,7 @@ const routes: CustomRouteConfig[] = [
   {
     path: BASE_URL,
     component: BlankLayout,
+    authKey: '211',
     meta: {
       menuText: '系统管理',
       menuIcon: 'SettingOutlined',
@@ -14,6 +15,7 @@ const routes: CustomRouteConfig[] = [
     routes: [
       {
         path: GOODS_MANAGEMENT,
+        authKey: '211011',
         meta: {
           menuText: '果品管理',
         },

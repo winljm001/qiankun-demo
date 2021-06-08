@@ -4,8 +4,8 @@ import qs from 'querystring';
 
 import Config from '@/config';
 
-import { msg, handleNoCommonError } from './error-handle';
-import useGlobalStore from '@/stores/global';
+import { msgs, handleNoCommonError } from './error-handle';
+import { name as globalStoreName } from '@/stores/global';
 
 /**
  * 接口返回的数据基础结构
@@ -37,7 +37,7 @@ axios.interceptors.response.use(
   ({ response }: AxiosError<ResponseBase>) => {
     if (response) {
       const { data, config } = response;
-      const message = data?.errMsg || msg.errorMsg;
+      const message = data?.errMsg || msgs.errorMsg;
 
       // 全局响应拦截需要重写
       handleNoCommonError(message, config);
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
       throw new Error(message);
       // return Promise.reject(message);
     } else {
-      throw new Error(msg.networkErrorMsg);
+      throw new Error(msgs.networkErrorMsg);
       // return Promise.reject(msg.networkErrorMsg);
     }
   },
@@ -62,7 +62,7 @@ axios.interceptors.response.use(
  * @description 对请求简单封装，添加默认参数
  */
 export const request = <T = any>(options: AxiosRequestConfig) => {
-  const Authorization = JSON.parse(localStorage.getItem('global-storage'))?.state?.token || '';
+  const Authorization = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token || '';
   const newOptions: AxiosRequestConfig = {
     // credentials: 'include',
     timeout: 60000,
