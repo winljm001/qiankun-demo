@@ -11,7 +11,7 @@ import { getCommodity } from '@/services/commodityService/mods/commodity/getComm
 import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition';
 import { listSkuListColumn } from '@/services/commodityService/mods/commoditySku/listSkuListColumn';
 import { pageSku } from '@/services/commodityService/mods/commoditySku/pageSku';
-import { doUpdateSkuStatus } from '@/services/commodityService/mods/commoditySku/doUpdateSkuStatus'
+import { doUpdateSkuStatus } from '@/services/commodityService/mods/commoditySku/doUpdateSkuStatus';
 import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
 
@@ -40,7 +40,10 @@ const Index: React.FC = () => {
         .catch((err) => Promise.reject(err)),
     ]);
   }, [id]);
-  const { tableProps, form, submit, reset, refresh } = useAsyncTable({ fetchAction: pageSku, extraParams: { commodityId: id } });
+  const { tableProps, form, submit, reset, refresh } = useAsyncTable({
+    fetchAction: pageSku,
+    extraParams: { commodityId: id },
+  });
   const handleBatchEdit = useCallback(() => {}, []);
   /**
    * @param ids 需要修改状态的id
@@ -52,17 +55,18 @@ const Index: React.FC = () => {
       commoditySkuIds: ids,
       status,
     })
-    .then(() => {
-      const msg =  `${mode === 'batch' ? '批量' : ''}${status ? '启用' : '禁用'}成功`
-      message.success(msg)
-      // 批量操作需清空选中的项
-      if (mode === 'batch') {
-        setSelectedKeys([])
-      }
-      refresh()
-    })
-    .catch(() => {})
+      .then(() => {
+        const msg = `${mode === 'batch' ? '批量' : ''}${status ? '启用' : '禁用'}成功`;
+        message.success(msg);
+        // 批量操作需清空选中的项
+        if (mode === 'batch') {
+          setSelectedKeys([]);
+        }
+        refresh();
+      })
+      .catch(() => {});
   }, []);
+
   return (
     <div className={styles.wrap}>
       <DataSuspense load={loadData}>

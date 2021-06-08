@@ -61,7 +61,7 @@ const Index: React.FC = () => {
             companyName: res.data.organizationName,
           },
         });
-        history.replace(BASE_PATH)
+        history.replace(BASE_PATH);
       })
       .catch((err) => {
         console.log(err);

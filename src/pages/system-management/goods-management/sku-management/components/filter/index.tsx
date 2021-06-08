@@ -19,10 +19,10 @@ const baseOptions = [
 const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
   const initialValues = useMemo(() => {
     const result = {
-      commoditySpecOptionDTOList: [],
+      commoditySpecOptionConditionDTOList: [],
     };
     items.forEach((item) => {
-      result.commoditySpecOptionDTOList.push({ commoditySpecOptionId: null, commoditySpecId: item.commoditySpecId });
+      result.commoditySpecOptionConditionDTOList.push({ commoditySpecOptionId: null, commoditySpecId: item.commoditySpecId });
     });
     return result;
   }, [items]);
@@ -34,9 +34,9 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
           ...items.map((item, index) => {
             return (
               <React.Fragment key={item.commoditySpecId}>
-                <Form.Item hidden name={['commoditySpecOptionDTOList', index, 'commoditySpecId']} />
+                <Form.Item hidden name={['commoditySpecOptionConditionDTOList', index, 'commoditySpecId']} />
                 <Form.Item
-                  name={['commoditySpecOptionDTOList', index, 'commoditySpecOptionId']}
+                  name={['commoditySpecOptionConditionDTOList', index, 'commoditySpecOptionId']}
                   label={item.commoditySpecName}>
                   <Select style={{ width: '100%' }}>
                     {baseOptions
