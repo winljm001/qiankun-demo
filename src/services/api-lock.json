@@ -594,9 +594,12 @@
             ]
           },
           {
+            "consumes": [
+              "application/json"
+            ],
             "description": "isSpuNameRepeat",
             "name": "isSpuNameRepeat",
-            "method": "get",
+            "method": "post",
             "path": "/api/commodity/v1/spu/verify/name",
             "response": {
               "typeArgs": [
