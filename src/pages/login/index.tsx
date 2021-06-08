@@ -12,6 +12,8 @@ import img from './images/logo.png';
 import styles from './style.module.less';
 
 const Index: React.FC = () => {
+  // 创建loading
+  const [loading, setLoading] = useState(false)
   // 创建倒计时ahook
   const [countdown, setTargetDate] = useCountDown();
 
@@ -41,6 +43,7 @@ const Index: React.FC = () => {
 
   // 登录按钮提交
   const onFinish = (values: any) => {
+    setLoading(true)
     login({
       /** 短信验证码 */
       checkCode: values.text,
@@ -48,7 +51,8 @@ const Index: React.FC = () => {
       phoneNum: values.username,
     })
       .then((res) => {
-        message.success('登陆成功！');
+        setLoading(false)
+        message.success('登录成功！');
         // 存入globalState
         useGlobalStore.setState({
           isLogin: true,
@@ -64,6 +68,7 @@ const Index: React.FC = () => {
         history.replace(BASE_PATH);
       })
       .catch((err) => {
+        setLoading(false)
         console.log(err);
       });
   };
@@ -159,7 +164,7 @@ const Index: React.FC = () => {
                 }
                 return (
                   <Form.Item>
-                    <Button disabled={disabled} block className={styles.btnB} type="primary" htmlType="submit">
+                    <Button loading={loading} disabled={disabled} block className={styles.btnB} type="primary" htmlType="submit">
                       登录
                     </Button>
                   </Form.Item>
