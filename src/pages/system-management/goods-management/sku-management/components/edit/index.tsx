@@ -20,12 +20,12 @@ type IProps = {
 };
 
 export type FormRef = {
-  form: FormInstance
-}
+  form: FormInstance;
+};
 
 const Edit: React.FC<IProps> = ({ commodityCategory, visible, setVisible, ids, initialValues, onSuccess }) => {
   const [submitting, setSubmitting] = useState(false);
-  const formRef = useRef<FormRef>()
+  const formRef = useRef<FormRef>();
   // 保存
   const handleSave = () => {
     formRef.current.form

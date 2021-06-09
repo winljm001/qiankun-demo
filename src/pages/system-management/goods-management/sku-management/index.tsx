@@ -81,7 +81,7 @@ const Index: React.FC = () => {
       editInitialValues.current = {};
       editMode.current = null;
     }
-  }, [showEditModal])
+  }, [showEditModal]);
   /**
    * 编辑成功事件
    */
@@ -93,7 +93,7 @@ const Index: React.FC = () => {
     // 刷新列表
     submit();
   }, []);
-  
+
   /**
    * 修改状态（支持批量和单个修改）
    * @param ids 需要修改状态的id
@@ -118,7 +118,6 @@ const Index: React.FC = () => {
   }, []);
   return (
     <div className={styles.wrap}>
-
       <DataSuspense load={loadData}>
         {({ data }) => {
           const [baseData, selectData, columnData] = data;

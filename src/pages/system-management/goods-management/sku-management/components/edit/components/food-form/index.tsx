@@ -3,7 +3,7 @@ import { Form, Input, Select, FormInstance, Switch } from 'antd';
 import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
 import styles from './style.module.less';
 import { useForm } from '@/components/JsonForm';
-import { FormRef } from '../../index'
+import { FormRef } from '../../index';
 
 type IProps = {
   initialValues: defs.commodityService.SkuDetails
@@ -11,10 +11,10 @@ type IProps = {
 
 const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
-  const [ form ] = useForm()
+  const [form] = useForm();
   useImperativeHandle(ref, () => ({
     form,
-  }))
+  }));
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 2 })
       .then((res) => {
@@ -32,14 +32,14 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
         name="unitType"
         rules={[{ required: true, message: '请选择单位!' }]}
         className={styles.company}>
-        <Select style={{ width: '70%' }} options={skuUnitOptions} placeholder="请选择" />
+        <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item
         label="副单位"
         name="totalType"
         rules={[{ required: true, message: '请选择单位!' }]}
         className={styles.copyCompany}>
-        <Select style={{ width: '70%' }} options={skuUnitOptions} placeholder="请选择" />
+        <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item
         label="换算比率:"
@@ -48,7 +48,7 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
         className={styles.ratio}>
         <Input addonBefore="一件=" suffix="个" />
       </Form.Item>
-      <Form.Item label="状态" name="status" valuePropName="checked">
+      <Form.Item className={styles.switch} label="状态" name="status" valuePropName="checked">
         <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />
       </Form.Item>
     </Form>

@@ -13,7 +13,7 @@ import styles from './style.module.less';
 
 const Index: React.FC = () => {
   // 创建loading
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
   // 创建倒计时ahook
   const [countdown, setTargetDate] = useCountDown();
 
@@ -43,7 +43,7 @@ const Index: React.FC = () => {
 
   // 登录按钮提交
   const onFinish = (values: any) => {
-    setLoading(true)
+    setLoading(true);
     login({
       /** 短信验证码 */
       checkCode: values.text,
@@ -51,7 +51,7 @@ const Index: React.FC = () => {
       phoneNum: values.username,
     })
       .then((res) => {
-        setLoading(false)
+        setLoading(false);
         message.success('登录成功！');
         // 存入globalState
         useGlobalStore.setState({
@@ -68,7 +68,7 @@ const Index: React.FC = () => {
         history.replace(BASE_PATH);
       })
       .catch((err) => {
-        setLoading(false)
+        setLoading(false);
         console.log(err);
       });
   };
@@ -164,7 +164,13 @@ const Index: React.FC = () => {
                 }
                 return (
                   <Form.Item>
-                    <Button loading={loading} disabled={disabled} block className={styles.btnB} type="primary" htmlType="submit">
+                    <Button
+                      loading={loading}
+                      disabled={disabled}
+                      block
+                      className={styles.btnB}
+                      type="primary"
+                      htmlType="submit">
                       登录
                     </Button>
                   </Form.Item>
