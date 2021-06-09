@@ -4,20 +4,20 @@ import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/l
 const { Option } = Select;
 import styles from './style.module.less';
 import { useForm } from 'antd/lib/form/Form';
-import { FormRef } from '../../index'
+import { FormRef } from '../../index';
 
 type IProps = {
-  ref: React.Ref<FormRef>
+  ref: React.Ref<FormRef>;
   initialValues: defs.commodityService.SkuDetails;
 };
 
 const FruitForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
-  const [ form ] = useForm()
+  const [form] = useForm();
   useImperativeHandle(ref, () => ({
     form,
-  }))
+  }));
   // 生命周期请求数据
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 5 })
@@ -46,7 +46,7 @@ const FruitForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) =>
       <Select placeholder="单位" style={{ width: 80 }}>
         {weightArr.map((item) => {
           return (
-            <Option key={item.value} value={`${item.value}`}>
+            <Option key={item.value} value={item.value}>
               {item.label}
             </Option>
           );
