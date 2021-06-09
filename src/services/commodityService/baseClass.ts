@@ -190,6 +190,9 @@ class SkuDetails {
   /** sku id */
   commoditySkuId = undefined
 
+  /** 商品类型，1水果，2食品 */
+  commodityTypeId = undefined
+
   /** 状态（1激活，0禁用） */
   status = undefined
 
