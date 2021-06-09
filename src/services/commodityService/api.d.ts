@@ -51,6 +51,32 @@ declare namespace defs {
       commodityName?: string
     }
 
+    export class CommodityPageVO {
+      /** 商品品类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品产地名称 */
+      commodityPlaceOriginName?: string
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
+
+      /** 商品品种名称 */
+      commodityVarietyName?: string
+
+      /** sku总数 */
+      skuSum?: number
+
+      /** 激活状态 */
+      status?: number
+    }
+
     export class CommoditySkuSaveDTO {
       /** commodityId */
       commodityId: number
@@ -107,6 +133,9 @@ declare namespace defs {
     }
 
     export class CommoditySpuVO {
+      /** 商品品类id */
+      commodityCategoryId?: number
+
       /** 商品品类名称 */
       commodityCategoryName?: string
 
@@ -118,6 +147,9 @@ declare namespace defs {
 
       /** 商品产地名称 */
       commodityPlaceOriginName?: string
+
+      /** 规格信息 */
+      commoditySpecs?: Array<defs.commodityService.SpecificationsAndTypes>
 
       /** 商品类型名称 */
       commodityTypeName?: string
@@ -396,7 +428,7 @@ declare namespace API {
 
         export type Response = defs.commodityService.ApiResult<
           defs.commodityService.DefaultPageResult<
-            defs.commodityService.CommoditySpuVO
+            defs.commodityService.CommodityPageVO
           >
         >
         export const init: Response
@@ -405,7 +437,7 @@ declare namespace API {
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<
-              defs.commodityService.CommoditySpuVO
+              defs.commodityService.CommodityPageVO
             >
           >
         >

@@ -42,7 +42,7 @@ export const pageCommodity = (params: PageCommodityParams, headers?: any) => {
   return request.request<
     defs.commodityService.ApiResult<
       defs.commodityService.DefaultPageResult<
-        defs.commodityService.CommoditySpuVO
+        defs.commodityService.CommodityPageVO
       >
     >
   >({
