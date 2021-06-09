@@ -31,9 +31,12 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      '/api': {
+      '/pitaya-app/api': {
         target: envConfig.dev.apiHost,
         changeOrigin: true,
+        rewrite(path) {
+          return path
+        },
       },
       '/_files': {
         target: envConfig.dev.uploadHost,

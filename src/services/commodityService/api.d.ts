@@ -53,7 +53,7 @@ declare namespace defs {
 
     export class CommoditySkuSaveDTO {
       /** commodityId */
-      commodityId?: number
+      commodityId: number
 
       /** commoditySpecId */
       commoditySpecId?: Array<number>
@@ -197,6 +197,9 @@ declare namespace defs {
     export class SkuDetails {
       /** sku id */
       commoditySkuId?: number
+
+      /** 商品类型，1水果，2食品 */
+      commodityTypeId?: number
 
       /** 状态（1激活，0禁用） */
       status?: number

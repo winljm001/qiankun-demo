@@ -2001,7 +2001,7 @@
               "typeProperties": []
             },
             "name": "commodityId",
-            "required": false
+            "required": true
           },
           {
             "dataType": {
@@ -2719,6 +2719,20 @@
             },
             "name": "commoditySkuId",
             "description": "sku id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityTypeId",
+            "description": "商品类型，1水果，2食品",
             "required": false
           },
           {
