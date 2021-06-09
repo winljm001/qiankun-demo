@@ -8,6 +8,7 @@ interface IProps extends SelectProps<any> {
     fetch: (val: any) => Promise<any>;
     params?: any;
     normalize?: (val: any) => void;
+    onFetched?: (obj: any) => void;
   };
   noDisable?: any;
   hasAny?: any;
@@ -22,7 +23,7 @@ const BaseSelectByFetch: React.FC<IProps> = ({
   onChange,
   ...props
 }) => {
-  const { fetch, normalize, params } = remote;
+  const { fetch, normalize, params, onFetched } = remote;
   const [state, setState] = useControllableValue<string>(props, {
     defaultValue: value,
   });
@@ -31,6 +32,7 @@ const BaseSelectByFetch: React.FC<IProps> = ({
   const { data, isLoading } = useQuery([`BaseSelectByFetch${uid}`, params], () => {
     return fetch(params).then((res) => {
       const list = normalize ? normalize(res?.data) : res?.data;
+      onFetched?.(list);
       const item = list?.find((v) => {
         return state === v?.value;
       });
