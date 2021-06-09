@@ -65,7 +65,7 @@ const FruitForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) =>
         <Input addonAfter={selectAfter} />
       </Form.Item>
       <Form.Item label="sku单位" name="totalType" rules={[{ required: true, message: '请选择单位!' }]}>
-        <Select style={{ width: '70%' }} options={skuUnitOptions} placeholder="请选择" />
+        <Select loading options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item label="状态" name="status" valuePropName="checked" className={styles.switch}>
         <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />

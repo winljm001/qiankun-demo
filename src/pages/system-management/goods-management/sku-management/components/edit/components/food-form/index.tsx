@@ -33,14 +33,14 @@ const FoodForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) => 
         name="unitType"
         rules={[{ required: true, message: '请选择单位!' }]}
         className={styles.company}>
-        <Select style={{ width: '70%' }} options={skuUnitOptions} placeholder="请选择" />
+        <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item
         label="副单位"
         name="totalType"
         rules={[{ required: true, message: '请选择单位!' }]}
         className={styles.copyCompany}>
-        <Select style={{ width: '70%' }} options={skuUnitOptions} placeholder="请选择" />
+        <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item
         label="换算比率:"
