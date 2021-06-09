@@ -232,6 +232,7 @@ const Index: React.FC = () => {
               {/* 编辑弹窗 */}
               <EditModal
                 visible={showEditModal}
+                commodityCategory={baseData.commodityCategoryId}
                 setVisible={setShowEditModal}
                 ids={editIds.current}
                 onSuccess={onEditSuccess}
