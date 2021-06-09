@@ -6,11 +6,10 @@ import { useForm } from '@/components/JsonForm';
 import { FormRef } from '../../index'
 
 type IProps = {
-  ref: React.Ref<FormRef>
   initialValues: defs.commodityService.SkuDetails
 };
 
-const FoodForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) => {
+const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [ form ] = useForm()
   useImperativeHandle(ref, () => ({
