@@ -265,7 +265,7 @@ const SkuManagement: React.FC = () => {
               {/* 编辑弹窗 */}
               <EditModal
                 visible={showEditModal}
-                commodityCategory={baseData.commodityCategoryId}
+                commodityTypeId={baseData.commodityTypeId}
                 setVisible={setShowEditModal}
                 ids={editIds.current}
                 onSuccess={onEditSuccess}
