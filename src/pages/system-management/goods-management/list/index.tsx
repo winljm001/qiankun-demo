@@ -71,7 +71,7 @@ const GoodsManagementList = () => {
     {
       title: '状态',
       dataIndex: 'status',
-      render: (val, record) => <StatusChanger checked={val === 99} onConfirm={() => handleChangeStatus(record)} />,
+      render: (val, record) => <StatusChanger checked={val === 1} onConfirm={() => handleChangeStatus(record)} />,
     },
     {
       title: '操作',
