@@ -101,7 +101,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                   rules={[{ required: true, message: '请输入规格选项' }]}>
                                   <Input
                                     addonAfter={
-                                      itemField.key === 0 ? null : (
+                                      itemFields.length === 1 ? null : (
                                         <div className={styles.optionDelIconBox}>
                                           <div
                                             className={styles.optionDelIcon}
