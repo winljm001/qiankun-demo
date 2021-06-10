@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import DataSuspense from '@/components/DataSuspense';
 import { useParams } from 'react-router';
 import BaseInfo from './components/base-info';
@@ -6,7 +6,6 @@ import Filter from './components/filter';
 import styles from './index.module.less';
 import Space from '@/components/Space';
 import { Button, message, Modal, Table } from 'antd';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
 import ActionGroup from '@/components/ActionGroup';
 import { getCommodity } from '@/services/commodityService/mods/commodity/getCommodity';
 import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition';
@@ -19,11 +18,9 @@ import EditModal from './components/edit';
 import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail';
 import { useToggle, useUpdateEffect } from 'ahooks';
 import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
-import { useHistory } from 'react-router-dom';
 import { getColumns } from '../components/sku-select/utils';
-import { useMutation } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
-import { SKU_MANAGEMENT } from '@/router/config/system-management/path';
 
 type SKUPageParams = {
   id: string;
@@ -31,7 +28,7 @@ type SKUPageParams = {
 
 type EditMode = 'single' | 'batch';
 
-const Index: React.FC = () => {
+const SkuManagement: React.FC = () => {
   const params = useParams() as SKUPageParams;
   const id = Number(params.id);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
@@ -56,6 +53,9 @@ const Index: React.FC = () => {
         .catch((err) => Promise.reject(err)),
     ]);
   }, [id]);
+  // 获取页面数据
+  const { isLoading, isError, data } = useQuery(['skuBaseData', id], loadData)
+  // 获取表格数据
   const { tableProps, form, submit, reset } = useAsyncTable({
     fetchAction: pageSku,
     extraParams: { commodityId: id },
@@ -128,25 +128,16 @@ const Index: React.FC = () => {
   const modifySaveSkuList = useMutation(doSaveSkuList, {
     onSuccess: () => {
       toggle();
-      // reload()
+      // 刷新列表
+      submit();
     },
   });
   return (
     <div className={styles.wrap}>
-      <DataSuspense load={loadData}>
-        {({ data, reload }) => {
+      <DataSuspense loading={isLoading} error={isError}>
+        {() => {
           const [baseData, selectData, columnData] = data;
-          const handleAddSku = () => {
-            const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
-            const col = getColumns(baseData?.commoditySpecs);
-
-            modifySaveSkuList.mutate({
-              commodityId: id,
-              commoditySpecId: col?.map((v) => v.dataIndex),
-              commoditySpecOptionIdsList: commoditySpecOptionIdsList,
-            });
-          };
-
+          // 表格列
           const columns = [
             ...columnData.skuListColumnCommoditySpecVOList.map((item) => ({
               title: item.commoditySpecName,
@@ -199,6 +190,16 @@ const Index: React.FC = () => {
               },
             },
           ];
+          // 添加sku
+          const handleAddSku = () => {
+            const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
+            const col = getColumns(baseData?.commoditySpecs);
+            modifySaveSkuList.mutate({
+              commodityId: id,
+              commoditySpecId: col?.map((v) => v.dataIndex),
+              commoditySpecOptionIdsList: commoditySpecOptionIdsList,
+            });
+          };
           return (
             <Space direction="vertical" size={16}>
               {/* 基本信息 */}
@@ -290,4 +291,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default SkuManagement;
