@@ -45,8 +45,12 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
       <>
         <Form.Item label="商品类型">{data?.commodityTypeName}</Form.Item>
         <Form.Item label="商品品类">{data?.commodityCategoryName}</Form.Item>
-        <Form.Item label="商品品种">{data?.commodityVarietyName}</Form.Item>
-        <Form.Item label="商品产地">{data?.commodityPlaceOriginName}</Form.Item>
+        <Form.Item label="商品品种" hidden={!data?.commodityVarietyName}>
+          {data?.commodityVarietyName}
+        </Form.Item>
+        <Form.Item label="商品产地" hidden={!data?.commodityPlaceOriginName}>
+          {data?.commodityPlaceOriginName}
+        </Form.Item>
       </>
     );
   };
