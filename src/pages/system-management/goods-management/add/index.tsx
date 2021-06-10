@@ -44,7 +44,10 @@ const GoodsManagementAdd: React.FC = () => {
         icon: <ExclamationCircleOutlined />,
         content: 'sku添加成功，你需要去管理sku',
         okText: '去管理sku',
-        cancelText: '留在本页面',
+        cancelText: '取消',
+        onCancel: () => {
+          history.goBack();
+        },
         onOk: () => {
           history.push(`${SKU_MANAGEMENT}/${id}`);
         },
@@ -71,6 +74,10 @@ const GoodsManagementAdd: React.FC = () => {
           content: '商品创建成功，你需要去添加sku列表',
           okText: '去添加sku列表',
           cancelText: '取消',
+          onCancel: () => {
+            history.goBack();
+            toggle();
+          },
           onOk: () => {
             toggle();
           },
@@ -99,17 +106,10 @@ const GoodsManagementAdd: React.FC = () => {
         },
         {
           type: 'primary',
-          children: '保存果品',
+          loading: modifySaveSkuList.isLoading,
+          children: '保存',
           onClick: () => {
             handleSaveAction();
-          },
-        },
-        {
-          type: 'primary',
-          ghost: true,
-          children: '添加sku列表',
-          onClick: () => {
-            toggle();
           },
         },
       ]}>
@@ -125,7 +125,10 @@ const GoodsManagementAdd: React.FC = () => {
         okText="保存"
         cancelText="取消"
         visible={visible}
-        onCancel={() => toggle()}
+        onCancel={() => {
+          history.goBack();
+          toggle();
+        }}
         onOk={handleAddSku}>
         <SkuSelect ref={skuSelectFormRef} id={id} specData={specData} />
       </Modal>

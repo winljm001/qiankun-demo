@@ -5,8 +5,8 @@ import FoodForm from './components/food-form';
 import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku';
 
 type IProps = {
-  // 商品类型
-  commodityCategory: number;
+  // 商品类型（1-水果，2-食品）
+  commodityTypeId: number;
   // modal显示状态
   visible: boolean;
   // 设置modal显示状态
@@ -23,7 +23,7 @@ export type FormRef = {
   form: FormInstance;
 };
 
-const Edit: React.FC<IProps> = ({ commodityCategory, visible, setVisible, ids, initialValues, onSuccess }) => {
+const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, initialValues, onSuccess }) => {
   const [submitting, setSubmitting] = useState(false);
   const formRef = useRef<FormRef>();
   // 保存
@@ -74,7 +74,7 @@ const Edit: React.FC<IProps> = ({ commodityCategory, visible, setVisible, ids, i
           保存
         </Button>,
       ]}>
-      {commodityCategory === 1 ? (
+      {commodityTypeId === 1 ? (
         <FruitForm ref={formRef} initialValues={initialValues} />
       ) : (
         <FoodForm ref={formRef} initialValues={initialValues} />

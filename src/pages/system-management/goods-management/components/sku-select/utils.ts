@@ -8,7 +8,7 @@ const formatSpecToArr = (specData: defs.commodityService.SpecificationsAndTypes[
 };
 
 const calcDescartes = (array) => {
-  if (array.length < 2) return [array[0]] || [];
+  if (array.length < 2) return array[0].map((v) => [v]) || [];
 
   return array.reduce((total, currentValue) => {
     let res = [];
@@ -42,9 +42,7 @@ export const getAllSpecDescartes = (
   console.log(specArr);
   // 过滤掉已经选过的
   let resArr = specArr.filter((v) => {
-    console.log(v);
     const ids = v?.map((v) => v.commoditySpecOptionId);
-    console.log(ids, selectedSpecOptions);
     const findRes = selectedSpecOptions.find((item) => {
       if (item.length === ids.length && _.intersection(item, ids).length === ids.length) {
         return true;

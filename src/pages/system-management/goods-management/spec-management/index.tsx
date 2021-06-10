@@ -43,6 +43,10 @@ const SpecManagement: React.FC = () => {
         content: '商品保存成功，你需要去添加sku列表',
         okText: '去添加sku列表',
         cancelText: '取消',
+        onCancel: () => {
+          history.goBack();
+          toggle();
+        },
         onOk: () => {
           toggle();
         },
@@ -58,7 +62,11 @@ const SpecManagement: React.FC = () => {
         icon: <ExclamationCircleOutlined />,
         content: 'sku添加成功，你需要去管理sku',
         okText: '去管理sku',
-        cancelText: '留在本页面',
+        cancelText: '取消',
+        onCancel: () => {
+          history.goBack();
+          toggle();
+        },
         onOk: () => {
           history.push(`${SKU_MANAGEMENT}/${id}`);
         },
@@ -82,7 +90,6 @@ const SpecManagement: React.FC = () => {
       commoditySpecOptionIdsList: commoditySpecOptionIdsList,
     });
   };
-  console.log(data);
   return (
     <BaseFormWrap
       actions={[
@@ -94,18 +101,10 @@ const SpecManagement: React.FC = () => {
         },
         {
           type: 'primary',
-          children: '保存规格',
+          children: '保存',
           loading: modifySpecById.isLoading,
           onClick: () => {
             handleSaveAction();
-          },
-        },
-        {
-          type: 'primary',
-          ghost: true,
-          children: '添加sku列表',
-          onClick: () => {
-            toggle();
           },
         },
       ]}>
@@ -118,7 +117,10 @@ const SpecManagement: React.FC = () => {
         okText="保存"
         cancelText="取消"
         visible={visible}
-        onCancel={() => toggle()}
+        onCancel={() => {
+          history.goBack();
+          toggle();
+        }}
         onOk={handleAddSku}>
         <SkuSelect ref={skuSelectFormRef} id={id} specData={data} />
       </Modal>

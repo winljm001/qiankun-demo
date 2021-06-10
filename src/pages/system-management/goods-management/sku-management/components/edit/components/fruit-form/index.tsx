@@ -7,11 +7,10 @@ import { useForm } from 'antd/lib/form/Form';
 import { FormRef } from '../../index';
 
 type IProps = {
-  ref: React.Ref<FormRef>;
   initialValues: defs.commodityService.SkuDetails;
 };
 
-const FruitForm: React.FC<IProps> = React.forwardRef(({ initialValues }, ref) => {
+const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
   const [form] = useForm();

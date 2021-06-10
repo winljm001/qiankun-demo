@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import DataSuspense from '@/components/DataSuspense';
 import { useParams } from 'react-router';
 import BaseInfo from './components/base-info';
 import Filter from './components/filter';
 import styles from './index.module.less';
 import Space from '@/components/Space';
-import { Button, message, Table } from 'antd';
+import { Button, message, Modal, Table } from 'antd';
 import ActionGroup from '@/components/ActionGroup';
 import { getCommodity } from '@/services/commodityService/mods/commodity/getCommodity';
 import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition';
@@ -16,7 +16,11 @@ import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
 import EditModal from './components/edit';
 import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail';
-import { useUpdateEffect } from 'ahooks';
+import { useToggle, useUpdateEffect } from 'ahooks';
+import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
+import { getColumns } from '../components/sku-select/utils';
+import { useQuery, useMutation } from 'react-query';
+import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
 
 type SKUPageParams = {
   id: string;
@@ -24,7 +28,7 @@ type SKUPageParams = {
 
 type EditMode = 'single' | 'batch';
 
-const Index: React.FC = () => {
+const SkuManagement: React.FC = () => {
   const params = useParams() as SKUPageParams;
   const id = Number(params.id);
   const [selectedKeys, setSelectedKeys] = useState<React.Key[]>([]);
@@ -32,7 +36,7 @@ const Index: React.FC = () => {
   const editIds = useRef<number[]>([]);
   const editInitialValues = useRef<defs.commodityService.SkuDetails>({});
   const editMode = useRef<EditMode>(null);
-
+  const [visible, { toggle }] = useToggle();
   const loadData = useCallback(() => {
     return Promise.all([
       // 获取基本信息
@@ -49,6 +53,9 @@ const Index: React.FC = () => {
         .catch((err) => Promise.reject(err)),
     ]);
   }, [id]);
+  // 获取页面数据
+  const { isLoading, isError, data } = useQuery(['skuBaseData', id], loadData)
+  // 获取表格数据
   const { tableProps, form, submit, reset } = useAsyncTable({
     fetchAction: pageSku,
     extraParams: { commodityId: id },
@@ -116,11 +123,21 @@ const Index: React.FC = () => {
       })
       .catch(() => {});
   }, []);
+  const skuSelectFormRef = useRef<SkuSelectRefProps>();
+  //  保存选中的sku
+  const modifySaveSkuList = useMutation(doSaveSkuList, {
+    onSuccess: () => {
+      toggle();
+      // 刷新列表
+      submit();
+    },
+  });
   return (
     <div className={styles.wrap}>
-      <DataSuspense load={loadData}>
-        {({ data }) => {
+      <DataSuspense loading={isLoading} error={isError}>
+        {() => {
           const [baseData, selectData, columnData] = data;
+          // 表格列
           const columns = [
             ...columnData.skuListColumnCommoditySpecVOList.map((item) => ({
               title: item.commoditySpecName,
@@ -173,6 +190,16 @@ const Index: React.FC = () => {
               },
             },
           ];
+          // 添加sku
+          const handleAddSku = () => {
+            const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
+            const col = getColumns(baseData?.commoditySpecs);
+            modifySaveSkuList.mutate({
+              commodityId: id,
+              commoditySpecId: col?.map((v) => v.dataIndex),
+              commoditySpecOptionIdsList: commoditySpecOptionIdsList,
+            });
+          };
           return (
             <Space direction="vertical" size={16}>
               {/* 基本信息 */}
@@ -181,6 +208,13 @@ const Index: React.FC = () => {
               {selectData.length > 0 && <Filter form={form} submit={submit} reset={reset} items={selectData} />}
               {/* 按钮 */}
               <Space size={16}>
+                <Button
+                  type="primary"
+                  onClick={() => {
+                    toggle();
+                  }}>
+                  添加sku
+                </Button>
                 <Button
                   type="primary"
                   disabled={selectedKeys.length === 0}
@@ -231,12 +265,24 @@ const Index: React.FC = () => {
               {/* 编辑弹窗 */}
               <EditModal
                 visible={showEditModal}
-                commodityCategory={baseData.commodityCategoryId}
+                commodityTypeId={baseData.commodityTypeId}
                 setVisible={setShowEditModal}
                 ids={editIds.current}
                 onSuccess={onEditSuccess}
                 initialValues={editInitialValues.current}
               />
+              <Modal
+                destroyOnClose={true}
+                title="选择SKU"
+                okText="保存"
+                cancelText="取消"
+                visible={visible}
+                onCancel={() => {
+                  toggle();
+                }}
+                onOk={handleAddSku}>
+                <SkuSelect ref={skuSelectFormRef} id={id} specData={baseData?.commoditySpecs} />
+              </Modal>
             </Space>
           );
         }}
@@ -245,4 +291,4 @@ const Index: React.FC = () => {
   );
 };
 
-export default Index;
+export default SkuManagement;
