@@ -133,9 +133,6 @@ declare namespace defs {
     }
 
     export class CommoditySpuVO {
-      /** 商品品类id */
-      commodityCategoryId?: number
-
       /** 商品品类名称 */
       commodityCategoryName?: string
 
@@ -150,6 +147,9 @@ declare namespace defs {
 
       /** 规格信息 */
       commoditySpecs?: Array<defs.commodityService.SpecificationsAndTypes>
+
+      /** 商品类型id */
+      commodityTypeId?: number
 
       /** 商品类型名称 */
       commodityTypeName?: string

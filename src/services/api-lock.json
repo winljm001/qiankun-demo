@@ -3,7 +3,6 @@
     "mods": [
       {
         "description": "商品管理",
-        "name": "commodity",
         "interfaces": [
           {
             "consumes": [
@@ -765,11 +764,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "commodity"
       },
       {
         "description": "商品分类管理",
-        "name": "commodityCategory",
         "interfaces": [
           {
             "description": "listSpuCategoryOption",
@@ -984,11 +983,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "commodityCategory"
       },
       {
         "description": "sku管理",
-        "name": "commoditySku",
         "interfaces": [
           {
             "description": "listSkuListColumn",
@@ -1459,11 +1458,11 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "commoditySku"
       },
       {
         "description": "商品类型管理",
-        "name": "commodityType",
         "interfaces": [
           {
             "description": "listSpuTypeOption",
@@ -1520,11 +1519,11 @@
             },
             "parameters": []
           }
-        ]
+        ],
+        "name": "commodityType"
       },
       {
         "description": "规格管理",
-        "name": "spec",
         "interfaces": [
           {
             "description": "listSpecById",
@@ -1749,24 +1748,14 @@
               }
             ]
           }
-        ]
+        ],
+        "name": "spec"
       }
     ],
     "name": "commodityService",
     "baseClasses": [
       {
         "name": "ApiResult",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "CommoditySpuVO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -1807,11 +1796,21 @@
             "name": "errMsg",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "CommoditySpuVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "CommodityDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1907,11 +1906,11 @@
             "description": "商品品种id",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommodityModifyDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1951,11 +1950,11 @@
             "description": "商品规格对象",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommodityNameDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -1985,11 +1984,11 @@
             "description": "商品名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommodityPageVO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2103,11 +2102,11 @@
             "description": "激活状态",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySkuSaveDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2178,11 +2177,11 @@
             "name": "commoditySpecOptionIdsList",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySpecDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2250,11 +2249,11 @@
             "description": "商品规格排序",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySpecModifyDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2322,11 +2321,11 @@
             "description": "商品规格排序",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySpecOptionConditionDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2356,11 +2355,11 @@
             "description": "SpecificationsAndOptionsid",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySpecOptionDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2390,26 +2389,12 @@
             "description": "商品SpecificationsAndOptions名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommoditySpuVO",
-        "templateArgs": [],
         "properties": [
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commodityCategoryId",
-            "description": "商品品类id",
-            "required": false
-          },
           {
             "dataType": {
               "typeArgs": [],
@@ -2493,6 +2478,20 @@
           {
             "dataType": {
               "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityTypeId",
+            "description": "商品类型id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
               "typeName": "string",
               "isDefsType": false,
               "templateIndex": -1,
@@ -2546,11 +2545,11 @@
             "description": "激活状态",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommodityStatusDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2580,11 +2579,11 @@
             "description": "激活状态",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "CommodityVerifyDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2614,21 +2613,11 @@
             "description": "商品名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "DefaultPageResult",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "CommodityPageVO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -2692,11 +2681,21 @@
             "name": "totalRecords",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "CommodityPageVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "ModifyTheSkuStatus",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2736,30 +2735,11 @@
             "description": "状态（1激活，0禁用）",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "Option",
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "string",
-            "isDefsType": false,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          },
-          {
-            "typeArgs": [],
-            "typeName": "number",
-            "isDefsType": false,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
-        ],
         "properties": [
           {
             "dataType": {
@@ -2800,11 +2780,30 @@
             "name": "value",
             "required": false
           }
+        ],
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "string",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          },
+          {
+            "typeArgs": [],
+            "typeName": "number",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
         ]
       },
       {
         "name": "ScreeningSkuList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2858,11 +2857,11 @@
             "description": "SpecificationsAndOptions",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuDetails",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -2976,11 +2975,11 @@
             "description": "单位类型名称（sku净重单位；最小单位）",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuHeader",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3030,11 +3029,11 @@
             "description": "SkuList规格表头",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3139,11 +3138,11 @@
             "description": "单位数量（sku净重；换算比率）",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuListConditionDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3232,11 +3231,11 @@
             "name": "sortBys",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuListHeader",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3266,11 +3265,11 @@
             "description": "title",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SkuSpecificationOptionsHeaderList",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3300,11 +3299,11 @@
             "description": "规格名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SpecificationsAndOptions",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3334,11 +3333,11 @@
             "description": "SpecificationsAndOptions名称",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "SpecificationsAndTypes",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3406,11 +3405,11 @@
             "description": "商品规格排序",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       },
       {
         "name": "UpdateSkuDTO",
-        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -3492,7 +3491,8 @@
             "description": "单位类型（sku净重单位；最小单位）",
             "required": false
           }
-        ]
+        ],
+        "templateArgs": []
       }
     ]
   },
