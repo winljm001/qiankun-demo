@@ -107,6 +107,7 @@ const GoodsManagementAdd: React.FC = () => {
         {
           type: 'primary',
           ghost: true,
+          disabled: !id,
           children: '添加sku列表',
           onClick: () => {
             toggle();

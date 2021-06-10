@@ -25,6 +25,9 @@ const routes: CustomRouteConfig[] = [
           {
             path: GOODS_MANAGEMENT_ADD,
             exact: true,
+            meta: {
+              contentPadding: 0,
+            },
             component: loadable(() => import('@/pages/system-management/goods-management/add/index')),
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }],
           },
