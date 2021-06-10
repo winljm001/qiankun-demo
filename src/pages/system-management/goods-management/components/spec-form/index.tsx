@@ -4,31 +4,32 @@ import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { getInitialSpecValue, initialValues } from './initialValues';
+import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
 
-const specInputLayout = {
-  labelCol: {
-    xxl: {
-      span: 3,
-    },
-    md: {
-      span: 4,
-    },
-    xs: {
-      span: 6,
-    },
-  },
-  wrapperCol: {
-    xxl: {
-      span: 6,
-    },
-    md: {
-      span: 8,
-    },
-    xs: {
-      span: 18,
-    },
-  },
-};
+// const specInputLayout = {
+//   labelCol: {
+//     xxl: {
+//       span: 3,
+//     },
+//     md: {
+//       span: 4,
+//     },
+//     xs: {
+//       span: 6,
+//     },
+//   },
+//   wrapperCol: {
+//     xxl: {
+//       span: 6,
+//     },
+//     md: {
+//       span: 8,
+//     },
+//     xs: {
+//       span: 18,
+//     },
+//   },
+// };
 const optionInputLayout = {
   labelCol: {
     xxl: {
@@ -62,7 +63,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
     ...form,
   }));
   return (
-    <Form form={form} {...specInputLayout} initialValues={initialValues}>
+    <Form form={form} layout="vertical" {...fromSingleLayoutProps} initialValues={initialValues}>
       <Form.List name="commoditySpecs">
         {(fields, { add, remove }) => {
           return (
@@ -95,34 +96,43 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <Form.List name={[field.name, 'commoditySpecOptions']}>
                         {(itemFields, { add: addItem, remove: removeItem }) => (
                           <Row gutter={16}>
-                            {itemFields.map((itemField, itemIndex) => (
-                              <Col key={itemField.key} span={8}>
-                                <Form.Item
-                                  name={[itemField.name, 'commoditySpecOptionName']}
-                                  rules={[{ required: true, message: '请输入规格选项' }]}>
-                                  <Input
-                                    addonAfter={
-                                      itemFields.length === 1 ? null : (
-                                        <div className={styles.optionDelIconBox}>
-                                          <div
-                                            className={styles.optionDelIcon}
-                                            onClick={() => {
-                                              removeItem(itemField.name);
-                                            }}>
-                                            <CloseOutlined />
+                            {itemFields.map((itemField, itemIndex) => {
+                              return (
+                                <Col key={itemField.key} span={8}>
+                                  <Form.Item
+                                    shouldUpdate
+                                    name={[itemField.name, 'commoditySpecOptionName']}
+                                    rules={[{ required: true, message: '请输入规格选项' }]}>
+                                    <Input
+                                      addonAfter={
+                                        itemFields.length === 1 ? null : (
+                                          <div className={styles.optionDelIconBox}>
+                                            <div
+                                              className={styles.optionDelIcon}
+                                              onClick={() => {
+                                                removeItem(itemField.name);
+                                              }}>
+                                              <CloseOutlined />
+                                            </div>
                                           </div>
-                                        </div>
-                                      )
-                                    }
-                                    disabled={
-                                      data?.commoditySpecs &&
-                                      data?.commoditySpecs[idx]?.commoditySpecOptions[itemIndex]?.commoditySpecOptionId
-                                    }
-                                  />
-                                </Form.Item>
-                                <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
-                              </Col>
-                            ))}
+                                        )
+                                      }
+                                      disabled={
+                                        data?.commoditySpecs &&
+                                        form.getFieldValue([
+                                          'commoditySpecs',
+                                          field.name,
+                                          'commoditySpecOptions',
+                                          itemField.name,
+                                          'commoditySpecOptionId',
+                                        ])
+                                      }
+                                    />
+                                  </Form.Item>
+                                  <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
+                                </Col>
+                              );
+                            })}
                             <Col span={8}>
                               <Button
                                 icon={<PlusOutlined />}
@@ -141,9 +151,19 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                   </div>
                 );
               })}
-              <Button type="dashed" icon={<PlusOutlined />} block onClick={() => add(getInitialSpecValue(fields))}>
-                新增规格
-              </Button>
+              <div style={{ padding: '0 24px' }}>
+                <Row>
+                  <Col {...fromSingleLayoutProps.wrapperCol}>
+                    <Button
+                      type="dashed"
+                      icon={<PlusOutlined />}
+                      block
+                      onClick={() => add(getInitialSpecValue(fields))}>
+                      新增规格
+                    </Button>
+                  </Col>
+                </Row>
+              </div>
             </>
           );
         }}
