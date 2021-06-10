@@ -108,22 +108,24 @@ const SpecManagement: React.FC = () => {
           },
         },
       ]}>
-      <BaseCard title="规格信息">
-        <SpecForm ref={specFormRef} data={{ commoditySpecs: data }} />
-      </BaseCard>
-      <Modal
-        destroyOnClose={true}
-        title="选择SKU"
-        okText="保存"
-        cancelText="取消"
-        visible={visible}
-        onCancel={() => {
-          history.goBack();
-          toggle();
-        }}
-        onOk={handleAddSku}>
-        <SkuSelect ref={skuSelectFormRef} id={id} specData={data} />
-      </Modal>
+      <div style={{ padding: '16px 16px 0' }}>
+        <BaseCard title="规格信息">
+          <SpecForm ref={specFormRef} data={{ commoditySpecs: data }} />
+        </BaseCard>
+        <Modal
+          destroyOnClose={true}
+          title="选择SKU"
+          okText="保存"
+          cancelText="取消"
+          visible={visible}
+          onCancel={() => {
+            history.goBack();
+            toggle();
+          }}
+          onOk={handleAddSku}>
+          <SkuSelect ref={skuSelectFormRef} id={id} specData={data} />
+        </Modal>
+      </div>
     </BaseFormWrap>
   );
 };

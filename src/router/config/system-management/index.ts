@@ -40,6 +40,9 @@ const routes: CustomRouteConfig[] = [
           {
             path: `${SPEC_MANAGEMENT}/:id`,
             exact: true,
+            meta: {
+              contentPadding: 0,
+            },
             component: loadable(() => import('@/pages/system-management/goods-management/spec-management')),
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }, { name: '规格管理' }],
           },

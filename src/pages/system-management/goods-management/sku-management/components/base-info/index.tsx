@@ -13,8 +13,8 @@ const BaseInfo: FC<IProps> = ({ data }) => {
       <Descriptions title="商品信息" column={4}>
         <Item label="商品名称">{data.commodityName}</Item>
         <Item label="商品品类">{data.commodityCategoryName}</Item>
-        <Item label="商品品种">{data.commodityVarietyName}</Item>
-        <Item label="商品产地">{data.commodityPlaceOriginName}</Item>
+        {data.commodityVarietyName && <Item label="商品品种">{data.commodityVarietyName}</Item>}
+        {data.commodityPlaceOriginName && <Item label="商品产地">{data.commodityPlaceOriginName}</Item>}
       </Descriptions>
     </div>
   );
