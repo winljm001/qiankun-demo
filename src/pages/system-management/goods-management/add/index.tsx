@@ -106,6 +106,7 @@ const GoodsManagementAdd: React.FC = () => {
         },
         {
           type: 'primary',
+          loading: modifySaveSkuList.isLoading,
           children: '保存',
           onClick: () => {
             handleSaveAction();
