@@ -115,7 +115,9 @@ const GoodsManagementAdd: React.FC = () => {
       ]}>
       <div style={{ padding: '16px 16px 0' }}>
         <BaseCard title="SPU信息">
-          <SpuForm ref={spuFormRef} />
+          <div style={{ padding: '0 24px' }}>
+            <SpuForm ref={spuFormRef} />
+          </div>
         </BaseCard>
         <BaseCard title="规格信息">
           <SpecForm ref={specFormRef} />
