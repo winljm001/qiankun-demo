@@ -95,34 +95,68 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <Form.List name={[field.name, 'commoditySpecOptions']}>
                         {(itemFields, { add: addItem, remove: removeItem }) => (
                           <Row gutter={16}>
-                            {itemFields.map((itemField, itemIndex) => (
-                              <Col key={itemField.key} span={8}>
-                                <Form.Item
-                                  name={[itemField.name, 'commoditySpecOptionName']}
-                                  rules={[{ required: true, message: '请输入规格选项' }]}>
-                                  <Input
-                                    addonAfter={
-                                      itemFields.length === 1 ? null : (
-                                        <div className={styles.optionDelIconBox}>
-                                          <div
-                                            className={styles.optionDelIcon}
-                                            onClick={() => {
-                                              removeItem(itemField.name);
-                                            }}>
-                                            <CloseOutlined />
+                            {itemFields.map((itemField, itemIndex) => {
+                              return (
+                                <Col key={itemField.key} span={8}>
+                                  <Form.Item
+                                    shouldUpdate
+                                    name={[itemField.name, 'commoditySpecOptionName']}
+                                    rules={[{ required: true, message: '请输入规格选项' }]}>
+                                    <Input
+                                      addonAfter={
+                                        itemFields.length === 1 ? null : (
+                                          <div className={styles.optionDelIconBox}>
+                                            <div
+                                              className={styles.optionDelIcon}
+                                              onClick={() => {
+                                                removeItem(itemField.name);
+                                              }}>
+                                              <CloseOutlined />
+                                            </div>
                                           </div>
-                                        </div>
-                                      )
-                                    }
-                                    disabled={
-                                      data?.commoditySpecs &&
-                                      data?.commoditySpecs[idx]?.commoditySpecOptions[itemIndex]?.commoditySpecOptionId
-                                    }
-                                  />
-                                </Form.Item>
-                                <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
-                              </Col>
-                            ))}
+                                        )
+                                      }
+                                      disabled={
+                                        data?.commoditySpecs &&
+                                        form.getFieldValue([
+                                          'commoditySpecs',
+                                          field.name,
+                                          'commoditySpecOptions',
+                                          itemField.name,
+                                          'commoditySpecOptionId',
+                                        ])
+                                      }
+                                    />
+                                    {/* {({ getFieldValue }) => {
+                                      console.log(getFieldValue(itemField.name));
+                                      return (
+                                        <Input
+                                          addonAfter={
+                                            itemFields.length === 1 ? null : (
+                                              <div className={styles.optionDelIconBox}>
+                                                <div
+                                                  className={styles.optionDelIcon}
+                                                  onClick={() => {
+                                                    removeItem(itemField.name);
+                                                  }}>
+                                                  <CloseOutlined />
+                                                </div>
+                                              </div>
+                                            )
+                                          }
+                                          disabled={
+                                            data?.commoditySpecs &&
+                                            data?.commoditySpecs[idx]?.commoditySpecOptions[itemIndex]
+                                              ?.commoditySpecOptionId
+                                          }
+                                        />
+                                      );
+                                    }} */}
+                                  </Form.Item>
+                                  <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
+                                </Col>
+                              );
+                            })}
                             <Col span={8}>
                               <Button
                                 icon={<PlusOutlined />}
