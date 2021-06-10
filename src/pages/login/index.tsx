@@ -1,8 +1,8 @@
 import useGlobalStore from '@/stores/global';
 import { useMount, useCountDown } from 'ahooks';
-import { Button, Checkbox, message, Form, Input } from 'antd';
+import { Button, message, Form, Input } from 'antd';
 import { SafetyOutlined, TabletOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '@/services/userService/mods/userWeb/login';
 import { sendCheckCode } from '@/services/userService/mods/userWeb/sendCheckCode';

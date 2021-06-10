@@ -14,9 +14,16 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
   const [form] = useForm();
+  const [isTrue, setIsTrue] = useState(true);
   useImperativeHandle(ref, () => ({
     form,
   }));
+
+  const setIsTrueSwitch = () => {
+    const newIsTrue = !isTrue;
+    setIsTrue(newIsTrue);
+  };
+
   // 生命周期请求数据
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 5 })
@@ -33,7 +40,7 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
         setSkuUnitOptions(data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, []);
 
@@ -55,7 +62,7 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
   );
 
   return (
-    <Form form={form} name="basic" initialValues={initialValues} className={styles.formBox}>
+    <Form form={form} name="basic" initialValues={{ status: true, ...initialValues }} className={styles.formBox}>
       <Form.Item
         label="sku净重"
         name="unitQuantity"
@@ -67,7 +74,7 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
         <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
       <Form.Item label="状态" name="status" valuePropName="checked" className={styles.switch}>
-        <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />
+        <Switch checkedChildren="开启" unCheckedChildren="关闭" />
       </Form.Item>
     </Form>
   );
