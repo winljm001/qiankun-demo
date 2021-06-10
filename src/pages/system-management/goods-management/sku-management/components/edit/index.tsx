@@ -6,7 +6,7 @@ import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpd
 
 type IProps = {
   // 商品类型
-  commodityCategory: number,
+  commodityCategory: number;
   // modal显示状态
   visible: boolean;
   // 设置modal显示状态

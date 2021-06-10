@@ -25,14 +25,13 @@ const Index: React.FC = () => {
     // 取手机号码
     const phoneNum1 = FormInstance.getFieldValue('username');
     sendCheckCode({
-      phoneNum: String(phoneNum1),
+      // phoneNum: String(phoneNum1),
+      phoneNum: phoneNum1,
     })
       .then((res) => {
         message.success('获取验证码成功！');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const history = useHistory();
@@ -44,6 +43,8 @@ const Index: React.FC = () => {
   // 登录按钮提交
   const onFinish = (values: any) => {
     setLoading(true);
+    console.log(values);
+
     login({
       /** 短信验证码 */
       checkCode: values.text,
