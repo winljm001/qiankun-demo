@@ -29,7 +29,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         if (data) {
           callback();
         } else {
-          callback('商品名已存在');
+          callback('该商品名称已存在');
         }
       });
     } else {

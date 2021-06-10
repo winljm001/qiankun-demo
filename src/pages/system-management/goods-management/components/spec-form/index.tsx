@@ -2,8 +2,9 @@ import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd';
 import styles from './index.module.less';
 import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
-import { CloseOutlined } from '@ant-design/icons';
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
 import { getInitialSpecValue, initialValues } from './initialValues';
+
 const specInputLayout = {
   labelCol: {
     xxl: {
@@ -124,6 +125,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                             ))}
                             <Col span={8}>
                               <Button
+                                icon={<PlusOutlined />}
                                 type="dashed"
                                 block
                                 onClick={() => {
@@ -139,7 +141,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                   </div>
                 );
               })}
-              <Button type="dashed" block onClick={() => add(getInitialSpecValue(fields))}>
+              <Button type="dashed" icon={<PlusOutlined />} block onClick={() => add(getInitialSpecValue(fields))}>
                 新增规格
               </Button>
             </>
