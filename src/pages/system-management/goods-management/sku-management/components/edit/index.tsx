@@ -6,7 +6,7 @@ import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpd
 
 type IProps = {
   // 商品类型（1-水果，2-食品）
-  commodityTypeId: number,
+  commodityTypeId: number;
   // modal显示状态
   visible: boolean;
   // 设置modal显示状态
@@ -47,7 +47,6 @@ const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, ini
           .finally(() => {
             setSubmitting(false);
           });
-        console.log(values);
       })
       .catch(() => {});
   };

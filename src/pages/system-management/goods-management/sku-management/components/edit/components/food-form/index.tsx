@@ -6,11 +6,12 @@ import { useForm } from '@/components/JsonForm';
 import { FormRef } from '../../index';
 
 type IProps = {
-  initialValues: defs.commodityService.SkuDetails
+  initialValues: defs.commodityService.SkuDetails;
 };
 
 const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
+  const [totalTypeOptions, setTotalTypeOptions] = useState([]);
   const [form] = useForm();
   useImperativeHandle(ref, () => ({
     form,
@@ -19,6 +20,7 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
     listUnitOptions({ commodityTypeId: 2 })
       .then((res) => {
         const data = res.data;
+        setTotalTypeOptions(data);
         setSkuUnitOptions(data);
       })
       .catch((err) => {
@@ -39,14 +41,34 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
         name="totalType"
         rules={[{ required: true, message: '请选择单位!' }]}
         className={styles.copyCompany}>
-        <Select options={skuUnitOptions} placeholder="请选择" />
+        <Select options={totalTypeOptions} placeholder="请选择" />
       </Form.Item>
-      <Form.Item
-        label="换算比率:"
-        name="unitQuantity"
-        rules={[{ required: true, message: '请填写换算比率!' }]}
-        className={styles.ratio}>
-        <Input addonBefore="一件=" suffix="个" />
+      <Form.Item shouldUpdate>
+        {({ getFieldValue }) => {
+          let unitTypeValue = getFieldValue('unitType');
+          const newUnitTypeValue = skuUnitOptions.filter((item) => {
+            return item.value === unitTypeValue;
+          });
+          let toNewUnitTypeValue = newUnitTypeValue[0]?.label;
+
+          let totalTypeValue = getFieldValue('totalType');
+          const newTotalTypeValue = totalTypeOptions.filter((item) => {
+            return item.value === totalTypeValue;
+          });
+          let toNewTotalTypeValue = newTotalTypeValue[0]?.label;
+          return (
+            <Form.Item
+              label="换算比率:"
+              name="unitQuantity"
+              rules={[{ required: true, message: '请填写换算比率!' }]}
+              className={styles.ratio}>
+              <Input
+                addonBefore={toNewUnitTypeValue ? `一${toNewUnitTypeValue}=` : ''}
+                suffix={toNewTotalTypeValue ? `${toNewTotalTypeValue}` : ''}
+              />
+            </Form.Item>
+          );
+        }}
       </Form.Item>
       <Form.Item className={styles.switch} label="状态" name="status" valuePropName="checked">
         <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />
