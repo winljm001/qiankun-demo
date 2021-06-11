@@ -51,7 +51,6 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
     const res = data?.filter((v) => {
       let hasKey = false;
       Object.keys(v).forEach((key) => {
-        console.log(key);
         if (typeof v[key] === 'string' && v[key]?.indexOf(k) !== -1) {
           hasKey = true;
         }
