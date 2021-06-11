@@ -13,8 +13,8 @@
 **代码**
 
 ```ts
-import React from 'react'
-import ActionGroup from '@/components/ActionGroup'
+import React from 'react';
+import ActionGroup from '@/components/ActionGroup';
 
 const Demo: React.FC<{}> = () => {
   const actions = [
@@ -30,9 +30,9 @@ const Demo: React.FC<{}> = () => {
         // logic
       },
     },
-  ]
-  return <ActionGroup actions={actions} />
-}
+  ];
+  return <ActionGroup actions={actions} />;
+};
 ```
 
 ## API
@@ -71,8 +71,8 @@ table th:nth-of-type(4) {
 ```ts
 interface ButtonConfig extends ButtonProps {
   // 是否显示
-  show?: boolean | (() => boolean)
+  show?: boolean | (() => boolean);
   // 自定义渲染函数，会以ButtonNode为渲染函数参数
-  render?: (ButtonNode: React.ReactNode) => React.ReactNode
+  render?: (ButtonNode: React.ReactNode) => React.ReactNode;
 }
 ```

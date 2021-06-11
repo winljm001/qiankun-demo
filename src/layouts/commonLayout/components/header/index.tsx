@@ -3,7 +3,7 @@ import { Menu, Dropdown } from 'antd';
 import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons';
 import { State } from '@/stores/global';
 import header_logo from '@/images/header_logo.png';
-import avatar from '@/images/avatar.png'
+import avatar from '@/images/avatar.png';
 import styles from './index.module.less';
 
 type IProps = Pick<State, 'logout' | 'userInfo'> & {

@@ -1,44 +1,44 @@
-import React, { useState, useEffect } from 'react'
-import { Tree, Spin, TreeProps } from 'antd'
+import React, { useState, useEffect } from 'react';
+import { Tree, Spin, TreeProps } from 'antd';
 
 export interface TreeControlProps extends TreeProps {
-  value?: any[]
-  onChange?: (val: any[]) => void
+  value?: any[];
+  onChange?: (val: any[]) => void;
   remote?: {
-    fetch: () => Promise<any>
-    normalize?: (val: any) => any
-  }
+    fetch: () => Promise<any>;
+    normalize?: (val: any) => any;
+  };
 }
 
 const TreeControl: React.FC<TreeControlProps> = ({ value, onChange, treeData, remote, ...treeProps }) => {
-  const [loading, setLoading] = useState(!!remote)
-  const [remoteTreeData, setRemoteTreeData] = useState([])
+  const [loading, setLoading] = useState(!!remote);
+  const [remoteTreeData, setRemoteTreeData] = useState([]);
 
   useEffect(() => {
     if (remote) {
-      fetchTreeData()
+      fetchTreeData();
     }
-  }, [])
+  }, []);
   const fetchTreeData = () => {
-    const { fetch, normalize } = remote
+    const { fetch, normalize } = remote;
     fetch()
-      .then(res => {
-        let result = []
-        result = typeof normalize === 'function' ? normalize(res.result) : res.result
-        setRemoteTreeData(result)
+      .then((res) => {
+        let result = [];
+        result = typeof normalize === 'function' ? normalize(res.result) : res.result;
+        setRemoteTreeData(result);
       })
       .finally(() => {
-        setLoading(false)
-      })
-  }
+        setLoading(false);
+      });
+  };
   const handleCheck = (...arg: any[]) => {
-    onChange?.(arg[0])
-  }
+    onChange?.(arg[0]);
+  };
   if (loading) {
-    return <Spin />
+    return <Spin />;
   }
-  const _treeData = (remote ? remoteTreeData : treeData) || []
-  return <Tree {...treeProps} treeData={_treeData} checkable onCheck={handleCheck} checkedKeys={value} />
-}
+  const _treeData = (remote ? remoteTreeData : treeData) || [];
+  return <Tree {...treeProps} treeData={_treeData} checkable onCheck={handleCheck} checkedKeys={value} />;
+};
 
-export default TreeControl
+export default TreeControl;

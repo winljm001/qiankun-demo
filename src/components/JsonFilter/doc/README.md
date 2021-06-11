@@ -13,20 +13,20 @@
 **代码**
 
 ```tsx
-import React, { useRef, memo } from 'react'
-import { FormInstance } from 'antd'
-import JsonFilter, { defineConfig } from '@/components/JsonFilter'
-import { selectList as queryProductSelect } from '@/services/mods/product/selectList'
-import { selectList as queryProductPlaceSelect } from '@/services/mods/productPlace/selectList'
+import React, { useRef, memo } from 'react';
+import { FormInstance } from 'antd';
+import JsonFilter, { defineConfig } from '@/components/JsonFilter';
+import { selectList as queryProductSelect } from '@/services/mods/product/selectList';
+import { selectList as queryProductPlaceSelect } from '@/services/mods/productPlace/selectList';
 
 interface FilterParams {
-  productId: number
-  productPlaceId: number
+  productId: number;
+  productPlaceId: number;
 }
 interface IProps<Values> {}
 
 const Filter: React.FC<IProps<FilterParams>> = () => {
-  const filter = useRef<FormInstance<FilterParams>>()
+  const filter = useRef<FormInstance<FilterParams>>();
 
   const config = defineConfig<FilterParams>({
     fieldsData: {
@@ -34,7 +34,7 @@ const Filter: React.FC<IProps<FilterParams>> = () => {
       productPlaceId: null,
     },
     onCreated(filterIns) {
-      filter.current = filterIns
+      filter.current = filterIns;
     },
     formItems: [
       {
@@ -46,7 +46,7 @@ const Filter: React.FC<IProps<FilterParams>> = () => {
           controlType: 'REMOTE_SELECT',
           fetch: queryProductSelect,
           enableDisabled: false,
-          normalize: data => [{ label: '全部', value: null }].concat(data),
+          normalize: (data) => [{ label: '全部', value: null }].concat(data),
         },
       },
       {
@@ -59,31 +59,31 @@ const Filter: React.FC<IProps<FilterParams>> = () => {
           controlType: 'REMOTE_SELECT',
           fetch: queryProductPlaceSelect,
           fetchable() {
-            return !!filter.current?.getFieldValue('productId')
+            return !!filter.current?.getFieldValue('productId');
           },
           params() {
             return {
               queryParams: {
                 productId: filter.current?.getFieldValue('productId'),
               },
-            }
+            };
           },
           enableDisabled: false,
-          normalize: data => [{ label: '全部', value: null }].concat(data),
+          normalize: (data) => [{ label: '全部', value: null }].concat(data),
           onOptionsChange(options) {
-            filter.current?.setFieldsValue({ productPlaceId: options[0]?.value })
+            filter.current?.setFieldsValue({ productPlaceId: options[0]?.value });
           },
         },
       },
     ],
     onFilter(params) {
-      console.log(params)
+      console.log(params);
     },
-  })
-  return <JsonFilter {...config} />
-}
+  });
+  return <JsonFilter {...config} />;
+};
 
-export default memo(Filter)
+export default memo(Filter);
 ```
 
 ## API
@@ -91,7 +91,7 @@ export default memo(Filter)
 #### defineConfig
 
 ```ts
-const config = defineConfig(options)
+const config = defineConfig(options);
 ```
 
 生成配置工厂函数（为了支持 TS 类型推断）
@@ -115,13 +115,13 @@ _FormItemObjectConfig_
 ```ts
 interface FormItemObjectConfig extends FormItemProps {
   // 组件key
-  key: React.Key
+  key: React.Key;
   // 为true时不会渲染和收集（hidden会收集字段值）
-  excluded?: boolean
+  excluded?: boolean;
   // 控件配置
-  control?: ControlConfig
+  control?: ControlConfig;
   // 自定义渲染函数-未内置的控件可以通过customRender实现（注意：该控件不会受配置影响）
-  customRender?: (form: FormInstance) => React.ReactNode
+  customRender?: (form: FormInstance) => React.ReactNode;
 }
 ```
 
@@ -136,32 +136,32 @@ type ControlConfig =
   | RemoteSelectControlConfig
   | TreeSelectConfig
   | DatePickerConfig
-  | CustomControlConfig
+  | CustomControlConfig;
 // 输入框
 type InputControlConfig = {
-  controlType: 'INPUT'
-} & InputControlProps
+  controlType: 'INPUT';
+} & InputControlProps;
 // 下拉框
 type SelectControlConfig = {
-  controlType: 'SELECT'
-} & SelectControlProps
+  controlType: 'SELECT';
+} & SelectControlProps;
 // 异步数据下拉框
 type RemoteSelectControlConfig = {
-  controlType: 'REMOTE_SELECT'
-} & RemoteSelectControlProps
+  controlType: 'REMOTE_SELECT';
+} & RemoteSelectControlProps;
 // 树形下拉选项控件
 type TreeSelectConfig = {
-  controlType: 'TREE_SELECT'
-} & TreeSelectControlProps
+  controlType: 'TREE_SELECT';
+} & TreeSelectControlProps;
 // 时间选择控件
 type DatePickerConfig = {
-  controlType: 'DATE'
-} & DatePickerControlConfig
+  controlType: 'DATE';
+} & DatePickerControlConfig;
 // 自定义控件
 type CustomControlConfig = {
-  controlType: 'CUSTOM'
-  render: () => React.ReactElement
-}
+  controlType: 'CUSTOM';
+  render: () => React.ReactElement;
+};
 ```
 
 #### options.actions

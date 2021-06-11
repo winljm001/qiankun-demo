@@ -1,13 +1,13 @@
-import React from 'react'
-import { UploadProps } from 'antd/lib/upload/interface'
+import React from 'react';
+import { UploadProps } from 'antd/lib/upload/interface';
 
 export interface UploadControlProps extends UploadProps {
-  readonly?: boolean
+  readonly?: boolean;
 }
 
 const UploadControl: React.FC<UploadControlProps> = ({ onChange, readonly, ...uploadProps }) => {
   // TODO:
-  return null
-}
+  return null;
+};
 
-export default UploadControl
+export default UploadControl;

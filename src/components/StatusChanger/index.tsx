@@ -1,25 +1,31 @@
-import { Popconfirm, Switch } from 'antd'
-import React, { useEffect, useState } from 'react'
+import { Popconfirm, Switch } from 'antd';
+import React, { useEffect, useState } from 'react';
 
 interface IProps {
-  onConfirm: (callback?: () => void) => void
-  checked: boolean
-  disable?: boolean
-  checkedChildren?: string
-  unCheckedChildren?: string
+  onConfirm: (callback?: () => void) => void;
+  checked: boolean;
+  disable?: boolean;
+  checkedChildren?: string;
+  unCheckedChildren?: string;
 }
 
 /**
  * 受控的switch组件，修改状态需要二次确认
  * @param param0
  */
-const StatusChanger: React.FC<IProps> = ({ checked, onConfirm, disable, checkedChildren = '启用', unCheckedChildren = '禁用' }) => {
-  const [visible, setVisible] = useState(checked)
+const StatusChanger: React.FC<IProps> = ({
+  checked,
+  onConfirm,
+  disable,
+  checkedChildren = '启用',
+  unCheckedChildren = '禁用',
+}) => {
+  const [visible, setVisible] = useState(checked);
   useEffect(() => {
-    setVisible(checked)
-  }, [checked])
+    setVisible(checked);
+  }, [checked]);
   function handleConfirm() {
-    onConfirm(() => setVisible(!visible))
+    onConfirm(() => setVisible(!visible));
   }
   return (
     <Popconfirm
@@ -28,9 +34,14 @@ const StatusChanger: React.FC<IProps> = ({ checked, onConfirm, disable, checkedC
       okText={visible ? unCheckedChildren : checkedChildren}
       cancelText="取消"
       onConfirm={handleConfirm}>
-      <Switch disabled={disable} checked={visible} checkedChildren={checkedChildren} unCheckedChildren={unCheckedChildren} />
+      <Switch
+        disabled={disable}
+        checked={visible}
+        checkedChildren={checkedChildren}
+        unCheckedChildren={unCheckedChildren}
+      />
     </Popconfirm>
-  )
-}
+  );
+};
 
-export default StatusChanger
+export default StatusChanger;

@@ -3,9 +3,9 @@ import { devtools, persist } from 'zustand/middleware';
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index';
 import { getMenuList, getHomepageUrl, getCurrentRouteAndMenuInfo } from '@/utils/tools';
 import { history } from '@/router';
-import { BASE_PATH } from '@/router/config/basePath'
+import { BASE_PATH } from '@/router/config/basePath';
 import { authListByUserId } from '@/services/authService/mods/role/authListByUserId';
-import { Modal } from 'antd'
+import { Modal } from 'antd';
 
 export type State = {
   /** menuList */
@@ -84,13 +84,13 @@ useGlobalStore.subscribe(
       setTimeout(() => {
         authListByUserId({ userId: useGlobalStore.getState().userId })
           .then((resp) => {
-            const [currentRoute] = getCurrentRouteAndMenuInfo(location.pathname)
-            const authKeys = resp.data || []
-            let noAuth = false
-            let menuList = []
+            const [currentRoute] = getCurrentRouteAndMenuInfo(location.pathname);
+            const authKeys = resp.data || [];
+            let noAuth = false;
+            let menuList = [];
             // 如果用户没有当前路由权限
-            if (currentRoute.authKey && !authKeys.some(item => item.authKey === currentRoute.authKey)) {
-              noAuth = true
+            if (currentRoute.authKey && !authKeys.some((item) => item.authKey === currentRoute.authKey)) {
+              noAuth = true;
             } else {
               menuList = getMenuList(mainRoutes, authKeys);
               const homepageUrl = getHomepageUrl(menuList);
@@ -100,7 +100,7 @@ useGlobalStore.subscribe(
                 if (homepageUrl) {
                   history.replace(homepageUrl);
                 } else {
-                  noAuth = true
+                  noAuth = true;
                 }
               }
             }
@@ -110,7 +110,7 @@ useGlobalStore.subscribe(
                 content: '暂无访问权限',
                 okText: '知道了',
                 onOk() {
-                  history.push('/login')
+                  history.push('/login');
                 },
               });
             }

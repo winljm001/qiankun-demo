@@ -22,7 +22,10 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
       commoditySpecOptionConditionDTOList: [],
     };
     items.forEach((item) => {
-      result.commoditySpecOptionConditionDTOList.push({ commoditySpecOptionId: null, commoditySpecId: item.commoditySpecId });
+      result.commoditySpecOptionConditionDTOList.push({
+        commoditySpecOptionId: null,
+        commoditySpecId: item.commoditySpecId,
+      });
     });
     return result;
   }, [items]);

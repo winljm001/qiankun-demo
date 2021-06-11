@@ -1,10 +1,10 @@
-import React from 'react'
-import styles from './index.module.less'
+import React from 'react';
+import styles from './index.module.less';
 
 interface IProps {
-  children?: React.ReactNode
-  colon?: boolean
-  label?: React.ReactNode
+  children?: React.ReactNode;
+  colon?: boolean;
+  label?: React.ReactNode;
 }
 
 const LabelControl: React.FC<IProps> = ({ children, label, colon = true }) => {
@@ -18,7 +18,7 @@ const LabelControl: React.FC<IProps> = ({ children, label, colon = true }) => {
       )}
       <div className={styles.control}>{children}</div>
     </div>
-  )
-}
+  );
+};
 
-export default LabelControl
+export default LabelControl;
