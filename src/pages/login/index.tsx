@@ -55,7 +55,6 @@ const Index: React.FC = () => {
     })
       .then((res) => {
         setLoading(false);
-        message.success('登录成功！');
         // 存入globalState
         useGlobalStore.setState({
           isLogin: true,
