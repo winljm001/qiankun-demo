@@ -5,15 +5,12 @@ import * as request from '@/utils/fetch'
 /**
  * @description sendCheckCode 接口 URL 参数/GET
  */
-export class Params {
-  /** phoneNum */
-  phoneNum: string
-}
+export class Params {}
 
 /**
  * @description sendCheckCode 接口参数
  */
-export type SendCheckCodeParams = Params
+export type SendCheckCodeParams = Params & defs.userService.MobileDto
 
 /**
  * @description sendCheckCode 接口

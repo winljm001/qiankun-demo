@@ -3576,14 +3576,14 @@
             },
             "parameters": [
               {
-                "in": "query",
-                "description": "phoneNum",
-                "name": "phoneNum",
+                "in": "body",
+                "description": "mobileDto",
+                "name": "mobileDto",
                 "required": true,
                 "dataType": {
                   "typeArgs": [],
-                  "typeName": "string",
-                  "isDefsType": false,
+                  "typeName": "MobileDto",
+                  "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
                   "enum": [],
@@ -3698,6 +3698,26 @@
               "typeProperties": []
             },
             "name": "userPlatform",
+            "required": false
+          }
+        ]
+      },
+      {
+        "name": "MobileDto",
+        "templateArgs": [],
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "phoneNum",
+            "description": "手机号",
             "required": false
           }
         ]

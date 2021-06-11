@@ -1,8 +1,8 @@
 import useGlobalStore from '@/stores/global';
 import { useMount, useCountDown } from 'ahooks';
-import { Button, Checkbox, message, Form, Input } from 'antd';
+import { Button, message, Form, Input } from 'antd';
 import { SafetyOutlined, TabletOutlined } from '@ant-design/icons';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { login } from '@/services/userService/mods/userWeb/login';
 import { sendCheckCode } from '@/services/userService/mods/userWeb/sendCheckCode';
@@ -25,14 +25,13 @@ const Index: React.FC = () => {
     // 取手机号码
     const phoneNum1 = FormInstance.getFieldValue('username');
     sendCheckCode({
-      phoneNum: String(phoneNum1),
+      // phoneNum: String(phoneNum1),
+      phoneNum: phoneNum1,
     })
       .then((res) => {
         message.success('获取验证码成功！');
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const history = useHistory();
@@ -44,6 +43,8 @@ const Index: React.FC = () => {
   // 登录按钮提交
   const onFinish = (values: any) => {
     setLoading(true);
+    console.log(values);
+
     login({
       /** 短信验证码 */
       checkCode: values.text,
@@ -136,7 +137,7 @@ const Index: React.FC = () => {
                     <Button
                       onClick={() => {
                         toastVerificationCode();
-                        setTargetDate(Date.now() + 5000);
+                        setTargetDate(Date.now() + 60000);
                       }}
                       disabled={codeFlag || countdown !== 0}
                       className={styles.btn}>

@@ -26,6 +26,11 @@ declare namespace defs {
       userPlatform?: 'APP' | 'WEB'
     }
 
+    export class MobileDto {
+      /** 手机号 */
+      phoneNum?: string
+    }
+
     export class UserLoginResponseVO {
       /** 公司ID */
       organizationId?: number
@@ -75,15 +80,13 @@ declare namespace API {
        * /api/user/v1/web/user/sendCheckCode
        */
       export namespace sendCheckCode {
-        export class Params {
-          /** phoneNum */
-          phoneNum: string
-        }
+        export class Params {}
 
         export type Response = defs.userService.ApiResult<boolean>
         export const init: Response
         export function request(
-          params: Params
+          params: Params,
+          bodyParams: defs.userService.MobileDto
         ): Promise<defs.userService.ApiResult<boolean>>
       }
     }

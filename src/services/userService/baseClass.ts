@@ -20,6 +20,11 @@ class LoginDto {
   userPlatform = 'APP'
 }
 
+class MobileDto {
+  /** 手机号 */
+  phoneNum = ''
+}
+
 class UserLoginResponseVO {
   /** 公司ID */
   organizationId = undefined
@@ -40,5 +45,6 @@ class UserLoginResponseVO {
 export const userService = {
   ApiResult,
   LoginDto,
+  MobileDto,
   UserLoginResponseVO
 }
