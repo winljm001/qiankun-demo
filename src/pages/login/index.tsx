@@ -31,6 +31,7 @@ const Index: React.FC = () => {
       .then((res) => {
         if (res.data === true) {
           message.success('获取验证码成功！');
+          setTargetDate(Date.now() + 60000);
         } else {
           message.error(res.errMsg);
         }
@@ -137,7 +138,6 @@ const Index: React.FC = () => {
                     <Button
                       onClick={() => {
                         toastVerificationCode();
-                        setTargetDate(Date.now() + 60000);
                       }}
                       disabled={codeFlag || countdown !== 0}
                       className={styles.btn}>
