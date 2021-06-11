@@ -58,7 +58,10 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
             <Form.Item
               label="换算比率:"
               name="unitQuantity"
-              rules={[{ required: true, message: '请填写换算比率!' }]}
+              rules={[
+                { required: true, message: '请填写换算比率!' },
+                { pattern: /^[1-9]\d*(\.\d+)?$/, message: '输入大于0的数' },
+              ]}
               className={styles.ratio}>
               <Input
                 addonBefore={toNewTotalTypeValue ? `一${toNewTotalTypeValue}=` : ''}
