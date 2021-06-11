@@ -23,9 +23,7 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
         setTotalTypeOptions(data);
         setSkuUnitOptions(data);
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   }, []);
   return (
     <Form form={form} initialValues={initialValues} name="basic" className={styles.formBox}>
@@ -63,8 +61,8 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
               rules={[{ required: true, message: '请填写换算比率!' }]}
               className={styles.ratio}>
               <Input
-                addonBefore={toNewUnitTypeValue ? `一${toNewUnitTypeValue}=` : ''}
-                suffix={toNewTotalTypeValue ? `${toNewTotalTypeValue}` : ''}
+                addonBefore={toNewTotalTypeValue ? `一${toNewTotalTypeValue}=` : ''}
+                suffix={toNewUnitTypeValue ? `${toNewUnitTypeValue}` : ''}
               />
             </Form.Item>
           );

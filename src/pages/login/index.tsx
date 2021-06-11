@@ -43,8 +43,6 @@ const Index: React.FC = () => {
   // 登录按钮提交
   const onFinish = (values: any) => {
     setLoading(true);
-    console.log(values);
-
     login({
       /** 短信验证码 */
       checkCode: values.text,
@@ -70,7 +68,6 @@ const Index: React.FC = () => {
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err);
       });
   };
 

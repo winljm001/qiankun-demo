@@ -14,7 +14,6 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
   const [form] = useForm();
-  const [isTrue, setIsTrue] = useState(true);
   useImperativeHandle(ref, () => ({
     form,
   }));
@@ -33,9 +32,7 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
         const data = res.data;
         setSkuUnitOptions(data);
       })
-      .catch((err) => {
-        // console.log(err);
-      });
+      .catch((err) => {});
   }, []);
 
   const selectAfter = (
