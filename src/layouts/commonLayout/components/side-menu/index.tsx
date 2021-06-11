@@ -14,7 +14,7 @@ const SideMenu: React.FC<IProps> = React.memo(({ menuList, ...restProps }) => {
     return menuConfig?.map((menu) => {
       const menuText = menu.meta?.menuText;
       const subRoutes = menu.routes;
-      const icon = menu?.meta?.menuIcon ? React.createElement(Icons[menu.meta.menuIcon]) : null
+      const icon = menu?.meta?.menuIcon ? React.createElement(Icons[menu.meta.menuIcon]) : null;
       if (subRoutes?.length > 0) {
         return (
           <Menu.SubMenu icon={icon} title={menuText} key={menuText}>
@@ -33,11 +33,7 @@ const SideMenu: React.FC<IProps> = React.memo(({ menuList, ...restProps }) => {
     });
   };
   return (
-    <Menu
-      theme="dark"
-      mode="inline"
-      {...restProps}
-      className={styles.sideMenu}>
+    <Menu theme="dark" mode="inline" {...restProps} className={styles.sideMenu}>
       {renderMenu(menuList)}
     </Menu>
   );

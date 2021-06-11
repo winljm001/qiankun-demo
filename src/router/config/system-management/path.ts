@@ -9,4 +9,3 @@ export const GOODS_MANAGEMENT_ADD = `${GOODS_MANAGEMENT}/add`;
 export const SPEC_MANAGEMENT = `${GOODS_MANAGEMENT}/spec-management`;
 /** SKU管理 */
 export const SKU_MANAGEMENT = `${GOODS_MANAGEMENT}/sku-management`;
-

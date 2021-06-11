@@ -127,6 +127,9 @@ class CommoditySpecOptionDTO {
 }
 
 class CommoditySpuVO {
+  /** 商品品类id */
+  commodityCategoryId = undefined
+
   /** 商品品类名称 */
   commodityCategoryName = ''
 
@@ -141,9 +144,6 @@ class CommoditySpuVO {
 
   /** 规格信息 */
   commoditySpecs = []
-
-  /** 商品类型id */
-  commodityTypeId = undefined
 
   /** 商品类型名称 */
   commodityTypeName = ''

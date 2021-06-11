@@ -9,7 +9,7 @@ export interface BreadcrumbItem {
   path?: string;
 }
 interface IProps {
-  route: CustomRouteConfig
+  route: CustomRouteConfig;
 }
 
 const AppBreadcrumb: FC<IProps> = ({ route }) => {

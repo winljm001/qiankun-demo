@@ -6,9 +6,9 @@ function subRoute<T extends RouteConfigComponentProps>(Component: React.FC<T>): 
   return (props) => {
     const location = useLocation();
     if (matchPath(location.pathname, { ...props.route, exact: true })) {
-      return <Component {...props} />
+      return <Component {...props} />;
     }
-    return renderRoutes(props.route.routes)
+    return renderRoutes(props.route.routes);
   };
 }
 

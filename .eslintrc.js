@@ -1,5 +1,6 @@
 module.exports = {
-  extends: ['alloy', 'alloy/react', 'alloy/typescript'],
+  extends: ['alloy', 'alloy/react', 'alloy/typescript', 'plugin:prettier/recommended'],
+  plugins: ['prettier'],
   env: {
     // 你的环境变量（包含多个预定义的全局变量）
     //
@@ -19,7 +20,7 @@ module.exports = {
     // 自定义你的规则
     '@typescript-eslint/consistent-type-definitions': 0,
     'no-undef': 0,
-    "max-nested-callbacks": "off"
+    'max-nested-callbacks': 'off',
   },
   settings: {
     react: {

@@ -7,7 +7,7 @@ interface IProps {
   error: boolean;
   errorImage?: React.ReactNode;
   errorText?: string;
-  children: () => React.ReactNode
+  children: () => React.ReactNode;
 }
 
 const DataSuspense: React.FC<IProps> = ({

@@ -7,24 +7,28 @@ import allRoutes, { CustomRouteConfig } from '@/router/config';
  * @param authData 权限数据
  */
 export const getMenuList = (routes: CustomRouteConfig[], authData: any[]): defs.authService.AuthDTO[] => {
-  return routes?.filter(({ meta, authKey }) => {
-    // 如果路由配置了authKey
-    if (authKey) {
-      // 如果拥有权限
-      if (authData.some(item => item.authKey === authKey)) {
-        // 如果路由配置了menuText
-        return !!meta?.menuText
-      }
-      // 无权限
-      return false
-    }
-    // 如果路由没有配置authKey则默认有权限
-    return !!meta?.menuText
-  }).map(item => ({
-    ...item,
-    // 递归处理
-    routes: getMenuList(item.routes, authData)
-  })) || []
+  return (
+    routes
+      ?.filter(({ meta, authKey }) => {
+        // 如果路由配置了authKey
+        if (authKey) {
+          // 如果拥有权限
+          if (authData.some((item) => item.authKey === authKey)) {
+            // 如果路由配置了menuText
+            return !!meta?.menuText;
+          }
+          // 无权限
+          return false;
+        }
+        // 如果路由没有配置authKey则默认有权限
+        return !!meta?.menuText;
+      })
+      .map((item) => ({
+        ...item,
+        // 递归处理
+        routes: getMenuList(item.routes, authData),
+      })) || []
+  );
 };
 
 /**
@@ -32,17 +36,17 @@ export const getMenuList = (routes: CustomRouteConfig[], authData: any[]): defs.
  * @param menuList 菜单列表
  */
 export const getHomepageUrl = (menuList: CustomRouteConfig[]) => {
-  let menu: CustomRouteConfig  = menuList.find(item => {
+  let menu: CustomRouteConfig = menuList.find((item) => {
     if (item.routes?.length) {
-      return getHomepageUrl(item.routes)
+      return getHomepageUrl(item.routes);
     }
-    return item.meta?.menuText
-  })
+    return item.meta?.menuText;
+  });
   while (menu?.routes?.length) {
-    menu = menu.routes[0]
+    menu = menu.routes[0];
   }
-  return Array.isArray(menu?.path) ? menu.path[0] : menu?.path
-}
+  return Array.isArray(menu?.path) ? menu.path[0] : menu?.path;
+};
 /**
  * 根据pathname匹配路由和菜单
  * @param pathname location.pathname
@@ -85,4 +89,4 @@ export const getCurrentRouteAndMenuInfo = (pathname: string): [CustomRouteConfig
   };
   traverse(allRoutes);
   return [currentRoute, currentMenu, openKeys];
-}
+};

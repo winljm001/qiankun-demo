@@ -7,7 +7,7 @@ import { useHistory } from 'react-router';
 function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
   return (props) => {
     const { authStatus } = useGlobalStore();
-    const history = useHistory()
+    const history = useHistory();
     useEffect(() => {
       const token = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token;
       if (!token) {
@@ -16,7 +16,7 @@ function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
           content: '您尚未登录',
           okText: '知道了',
           onOk() {
-            history.push('/login')
+            history.push('/login');
           },
         });
       }
