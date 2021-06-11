@@ -60,7 +60,7 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
               name="unitQuantity"
               rules={[
                 { required: true, message: '请填写换算比率!' },
-                { pattern: /^[1-9]\d*(\.\d+)?$/, message: '输入大于0的数' },
+                { pattern: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^\d\.\d{1,2}$)/, message: '请输入正确数值' },
               ]}
               className={styles.ratio}>
               <Input

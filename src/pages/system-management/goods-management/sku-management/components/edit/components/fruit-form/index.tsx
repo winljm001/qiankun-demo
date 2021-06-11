@@ -57,7 +57,10 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
       <Form.Item
         label="sku净重"
         name="unitQuantity"
-        rules={[{ required: true, message: '请输入净重!' }]}
+        rules={[
+          { required: true, message: '请输入净重!' },
+          { pattern: /(^[1-9](\d+)?(\.\d{1,2})?$)|(^\d\.\d{1,2}$)/, message: '请输入正确数值' },
+        ]}
         className={styles.weight}>
         <Input addonAfter={selectAfter} />
       </Form.Item>
