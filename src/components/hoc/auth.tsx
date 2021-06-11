@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Loading from '@/components/loading';
 import useGlobalStore, { name as globalStoreName } from '@/stores/global';
 import { Modal } from 'antd';
@@ -6,13 +6,11 @@ import { useHistory } from 'react-router';
 
 function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
   return (props) => {
-    const { isAuthReady } = useGlobalStore();
-    const [noLogin, setNoLogin] = useState(false);
+    const { authStatus } = useGlobalStore();
     const history = useHistory()
     useEffect(() => {
       const token = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token;
       if (!token) {
-        setNoLogin(true);
         Modal.info({
           title: '系统提示',
           content: '您尚未登录',
@@ -23,13 +21,13 @@ function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
         });
       }
     }, []);
-    if (noLogin) {
+    if (authStatus === 'fail') {
       return null;
     }
-    if (!isAuthReady) {
-      return <Loading />;
+    if (authStatus === 'ok') {
+      return <Component {...props} />;
     }
-    return <Component {...props} />;
+    return <Loading />;
   };
 }
 

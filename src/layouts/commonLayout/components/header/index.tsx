@@ -40,7 +40,7 @@ const AppHeader: FC<IProps> = ({ userInfo, logout, collapsed, setCollapsed }) =>
       </div>
       <div className={styles.right}>
         <span className={styles.corpName}>{userInfo?.companyName}</span>
-        <Dropdown overlay={menu} trigger={['click']}>
+        <Dropdown overlay={menu} trigger={['hover', 'click']}>
           <div className={styles.userInfo}>
             <img src={avatar} />
             <span className={styles.userName}>{userInfo?.username}</span>

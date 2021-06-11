@@ -1,11 +1,11 @@
 import create, { SetState, GetState } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index';
-import { getMenuList, getHomepageUrl } from '@/utils/tools';
+import { getMenuList, getHomepageUrl, getCurrentRouteAndMenuInfo } from '@/utils/tools';
 import { history } from '@/router';
 import { BASE_PATH } from '@/router/config/basePath'
-import { Modal } from 'antd';
 import { authListByUserId } from '@/services/authService/mods/role/authListByUserId';
+import { Modal } from 'antd'
 
 export type State = {
   /** menuList */
@@ -23,8 +23,13 @@ export type State = {
     /** 公司名 */
     companyName: string;
   };
-  /** 权限是否准备好 */
-  isAuthReady: boolean;
+  /**
+   * 权限是否准备好
+   * - fail 获取失败
+   * - ok 获取成功
+   * - null 初始状态
+   * */
+  authStatus: 'fail' | 'ok' | null;
   /** 用户设置 */
   userSetting: {
     /** 菜单是否收起 */
@@ -41,7 +46,7 @@ const useGlobalStore = create<State>(
     persist(
       (set: SetState<State>, get: GetState<State>) => ({
         menuList: null,
-        isLogin: false,
+        isLogin: null,
         userId: null,
         token: null,
         userInfo: {
@@ -49,9 +54,9 @@ const useGlobalStore = create<State>(
           username: '',
         },
         userSetting: {
-          collapsed: false,
+          collapsed: null,
         },
-        isAuthReady: false,
+        authStatus: null,
         setUserSetting: (value) => {
           set({ userSetting: { ...get().userSetting, ...value } });
         },
@@ -74,28 +79,45 @@ useGlobalStore.subscribe(
   (isLogin) => {
     // 登录成功执行操作
     if (isLogin) {
-      // 延迟执行（因为此时token还未存储到localStorage，请求中拿不到token）
+      // 延迟执行（因为此时token可能还未存储到localStorage，请求中拿不到token）
+      useGlobalStore.setState({ authStatus: null });
       setTimeout(() => {
         authListByUserId({ userId: useGlobalStore.getState().userId })
           .then((resp) => {
-            const menuList = getMenuList(mainRoutes, resp.data || []);
-            if (location.pathname === BASE_PATH) {
+            const [currentRoute] = getCurrentRouteAndMenuInfo(location.pathname)
+            const authKeys = resp.data || []
+            let noAuth = false
+            let menuList = []
+            // 如果用户没有当前路由权限
+            if (currentRoute.authKey && !authKeys.some(item => item.authKey === currentRoute.authKey)) {
+              noAuth = true
+            } else {
+              menuList = getMenuList(mainRoutes, authKeys);
               const homepageUrl = getHomepageUrl(menuList);
-              // 获取首页路由（第一个可选中菜单项），若无可跳转路由，则提示无访问权限
-              if (homepageUrl) {
-                history.replace(homepageUrl);
-              } else {
-                Modal.warning({
-                  title: '系统提示',
-                  content: '暂无访问权限',
-                  okText: '知道了',
-                });
+              // 若路由处于BASE_PATH，则需要跳转
+              if (location.pathname === BASE_PATH) {
+                // 获取首页路由（第一个可选中菜单项），若无可跳转路由，则提示无访问权限
+                if (homepageUrl) {
+                  history.replace(homepageUrl);
+                } else {
+                  noAuth = true
+                }
               }
             }
-            useGlobalStore.setState({ isAuthReady: true, menuList: menuList });
+            if (noAuth) {
+              Modal.info({
+                title: '系统提示',
+                content: '暂无访问权限',
+                okText: '知道了',
+                onOk() {
+                  history.push('/login')
+                },
+              });
+            }
+            useGlobalStore.setState({ authStatus: noAuth ? 'fail' : 'ok', menuList });
           })
           .catch(() => {
-            useGlobalStore.setState({ isAuthReady: true });
+            useGlobalStore.setState({ authStatus: 'fail' });
           });
       });
     } else {
