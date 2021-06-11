@@ -13,7 +13,7 @@ export const fromSingleLayoutProps = {
   },
   wrapperCol: {
     xxl: {
-      span: 8,
+      span: 6,
     },
     md: {
       span: 12,
