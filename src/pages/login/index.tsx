@@ -29,7 +29,11 @@ const Index: React.FC = () => {
       phoneNum: phoneNum1,
     })
       .then((res) => {
-        message.success('获取验证码成功！');
+        if (res.data === true) {
+          message.success('获取验证码成功！');
+        } else {
+          message.error(res.errMsg);
+        }
       })
       .catch((err) => {});
   };
