@@ -54,7 +54,7 @@ const SkuManagement: React.FC = () => {
     ]);
   }, [id]);
   // 获取页面数据
-  const { isLoading, isError, data } = useQuery(['skuBaseData', id], loadData)
+  const { isLoading, isError, data } = useQuery(['skuBaseData', id], loadData);
   // 获取表格数据
   const { tableProps, form, submit, reset } = useAsyncTable({
     fetchAction: pageSku,
@@ -210,13 +210,13 @@ const SkuManagement: React.FC = () => {
               <Space size={16}>
                 <Button
                   type="primary"
+                  ghost
                   onClick={() => {
                     toggle();
                   }}>
                   添加sku
                 </Button>
                 <Button
-                  type="primary"
                   disabled={selectedKeys.length === 0}
                   onClick={() => {
                     handleEdit(
@@ -227,7 +227,6 @@ const SkuManagement: React.FC = () => {
                   批量编辑sku
                 </Button>
                 <Button
-                  type="primary"
                   disabled={selectedKeys.length === 0}
                   onClick={() => {
                     handleStatusChange(
@@ -239,7 +238,6 @@ const SkuManagement: React.FC = () => {
                   批量启用
                 </Button>
                 <Button
-                  type="primary"
                   disabled={selectedKeys.length === 0}
                   onClick={() => {
                     handleStatusChange(
