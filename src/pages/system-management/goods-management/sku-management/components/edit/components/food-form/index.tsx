@@ -26,7 +26,7 @@ const FoodForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       .catch((err) => {});
   }, []);
   return (
-    <Form form={form} initialValues={initialValues} name="basic" className={styles.formBox}>
+    <Form form={form} initialValues={{ status: true, ...initialValues }} name="basic" className={styles.formBox}>
       <Form.Item
         label="最小单位"
         name="unitType"
