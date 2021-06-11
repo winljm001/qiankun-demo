@@ -51,7 +51,6 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
     const res = data?.filter((v) => {
       let hasKey = false;
       Object.keys(v).forEach((key) => {
-        console.log(key);
         if (typeof v[key] === 'string' && v[key]?.indexOf(k) !== -1) {
           hasKey = true;
         }
@@ -63,7 +62,7 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   };
   return (
     <div>
-      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton />
+      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
       <Divider />
       <Table rowSelection={rowSelection} columns={columns} dataSource={resData} rowKey="commoditySpecOptionIdsList" />
     </div>
