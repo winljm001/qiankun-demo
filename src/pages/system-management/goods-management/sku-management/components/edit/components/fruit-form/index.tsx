@@ -18,12 +18,6 @@ const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => 
   useImperativeHandle(ref, () => ({
     form,
   }));
-
-  const setIsTrueSwitch = () => {
-    const newIsTrue = !isTrue;
-    setIsTrue(newIsTrue);
-  };
-
   // 生命周期请求数据
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 5 })

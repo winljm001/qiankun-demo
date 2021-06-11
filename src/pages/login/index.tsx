@@ -137,7 +137,7 @@ const Index: React.FC = () => {
                     <Button
                       onClick={() => {
                         toastVerificationCode();
-                        setTargetDate(Date.now() + 5000);
+                        setTargetDate(Date.now() + 60000);
                       }}
                       disabled={codeFlag || countdown !== 0}
                       className={styles.btn}>

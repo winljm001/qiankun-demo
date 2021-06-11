@@ -32,8 +32,6 @@ const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, ini
       .validateFields()
       .then((values) => {
         setSubmitting(true);
-        console.log(values);
-
         doUpdateSku({
           commoditySkuIds: ids,
           ...values,
@@ -49,7 +47,6 @@ const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, ini
           .finally(() => {
             setSubmitting(false);
           });
-        // console.log(values + '900000000000');
       })
       .catch(() => {});
   };
