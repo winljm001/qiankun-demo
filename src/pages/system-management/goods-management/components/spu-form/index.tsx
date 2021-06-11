@@ -55,7 +55,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
     );
   };
   return (
-    <Form form={form} layout="vertical" {...fromSingleLayoutProps}>
+    <Form form={form} {...(data?.commodityId ? {} : { layout: 'vertical', ...fromSingleLayoutProps })}>
       <Form.Item name="commodityId" hidden />
       <Form.Item
         label="商品名称"
