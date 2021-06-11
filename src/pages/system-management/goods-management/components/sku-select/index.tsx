@@ -63,7 +63,7 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   };
   return (
     <div>
-      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton />
+      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
       <Divider />
       <Table rowSelection={rowSelection} columns={columns} dataSource={resData} rowKey="commoditySpecOptionIdsList" />
     </div>
