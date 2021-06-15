@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { Form, Select, FormInstance, Button } from 'antd';
 import SearchFormLayout from '@/components/SearchFormLayout';
 import Space from '@/components/Space';
@@ -29,7 +29,9 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
     });
     return result;
   }, [items]);
-  console.log(initialValues);
+  useEffect(() => {
+    form.resetFields();
+  }, [initialValues]);
   return (
     <Form form={form} initialValues={initialValues}>
       <SearchFormLayout

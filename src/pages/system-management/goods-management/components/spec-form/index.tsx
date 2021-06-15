@@ -137,6 +137,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                             })}
                             <Col span={8}>
                               <Button
+                                style={{ marginBottom: 24 }}
                                 icon={<PlusOutlined />}
                                 type="dashed"
                                 block
