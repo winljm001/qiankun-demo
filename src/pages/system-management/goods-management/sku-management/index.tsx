@@ -21,6 +21,7 @@ import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
 import { getColumns } from '../components/sku-select/utils';
 import { useQuery, useMutation } from 'react-query';
 import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
+import BaseCard from '@/components/BaseCard';
 
 type SKUPageParams = {
   id: string;
@@ -133,75 +134,75 @@ const SkuManagement: React.FC = () => {
     },
   });
   return (
-    <div className={styles.wrap}>
-      <DataSuspense loading={isLoading} error={isError}>
-        {() => {
-          const [baseData, selectData, columnData] = data;
-          // 表格列
-          const columns = [
-            ...columnData.skuListColumnCommoditySpecVOList.map((item) => ({
-              title: item.commoditySpecName,
-              dataIndex: item.commoditySpecId,
-              key: item.commoditySpecId,
-              render(text, record) {
-                return record.skuCommoditySpecOptionMap?.[item.commoditySpecId];
-              },
-            })),
-            ...columnData.skuListColumnCommoditySkuUnitVOList.map((item) => ({
-              title: item.title,
-              dataIndex: item.key,
-              key: item.key,
-            })),
-            {
-              title: '状态',
-              dataIndex: 'status',
-              key: 'status',
-              render(_, record: defs.commodityService.SkuList) {
-                return (
-                  <StatusChanger
-                    onConfirm={() => {
-                      // change为0时表示需要完善信息，不能启用
-                      if (record.change === 0 && record.status === 0) {
-                        return message.warning('sku信息未完善，不允许启用');
-                      }
-                      handleStatusChange([record.commoditySkuId], 1 ^ record.status, 'single');
-                    }}
-                    checked={!!record.status}
-                  />
-                );
-              },
+    <DataSuspense loading={isLoading} error={isError}>
+      {() => {
+        const [baseData, selectData, columnData] = data;
+        // 表格列
+        const columns = [
+          ...columnData.skuListColumnCommoditySpecVOList.map((item) => ({
+            title: item.commoditySpecName,
+            dataIndex: item.commoditySpecId,
+            key: item.commoditySpecId,
+            render(text, record) {
+              return record.skuCommoditySpecOptionMap?.[item.commoditySpecId];
             },
-            {
-              title: '操作',
-              dataIndex: '_',
-              render: (_, record: defs.commodityService.SkuList) => {
-                return (
-                  <ActionGroup
-                    actions={[
-                      {
-                        children: '编辑sku',
-                        onClick: () => {
-                          handleEdit([record.commoditySkuId], 'single');
-                        },
+          })),
+          ...columnData.skuListColumnCommoditySkuUnitVOList.map((item) => ({
+            title: item.title,
+            dataIndex: item.key,
+            key: item.key,
+          })),
+          {
+            title: '状态',
+            dataIndex: 'status',
+            key: 'status',
+            render(_, record: defs.commodityService.SkuList) {
+              return (
+                <StatusChanger
+                  onConfirm={() => {
+                    // change为0时表示需要完善信息，不能启用
+                    if (record.change === 0 && record.status === 0) {
+                      return message.warning('sku信息未完善，不允许启用');
+                    }
+                    handleStatusChange([record.commoditySkuId], 1 ^ record.status, 'single');
+                  }}
+                  checked={!!record.status}
+                />
+              );
+            },
+          },
+          {
+            title: '操作',
+            dataIndex: '_',
+            render: (_, record: defs.commodityService.SkuList) => {
+              return (
+                <ActionGroup
+                  actions={[
+                    {
+                      children: '编辑sku',
+                      onClick: () => {
+                        handleEdit([record.commoditySkuId], 'single');
                       },
-                    ]}
-                  />
-                );
-              },
+                    },
+                  ]}
+                />
+              );
             },
-          ];
-          // 添加sku
-          const handleAddSku = () => {
-            const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
-            const col = getColumns(baseData?.commoditySpecs);
-            modifySaveSkuList.mutate({
-              commodityId: id,
-              commoditySpecId: col?.map((v) => v.dataIndex),
-              commoditySpecOptionIdsList: commoditySpecOptionIdsList,
-            });
-          };
-          return (
-            <Space direction="vertical" size={16}>
+          },
+        ];
+        // 添加sku
+        const handleAddSku = () => {
+          const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
+          const col = getColumns(baseData?.commoditySpecs);
+          modifySaveSkuList.mutate({
+            commodityId: id,
+            commoditySpecId: col?.map((v) => v.dataIndex),
+            commoditySpecOptionIdsList: commoditySpecOptionIdsList,
+          });
+        };
+        return (
+          <Space direction="vertical" size={16}>
+            <BaseCard>
               {/* 基本信息 */}
               <BaseInfo data={baseData} />
               {/* 筛选 */}
@@ -249,6 +250,8 @@ const SkuManagement: React.FC = () => {
                   批量禁用
                 </Button>
               </Space>
+            </BaseCard>
+            <BaseCard>
               {/* 表格 */}
               <Table<defs.commodityService.SkuList>
                 {...tableProps}
@@ -260,32 +263,32 @@ const SkuManagement: React.FC = () => {
                   onChange: setSelectedKeys,
                 }}
               />
-              {/* 编辑弹窗 */}
-              <EditModal
-                visible={showEditModal}
-                commodityTypeId={baseData.commodityTypeId}
-                setVisible={setShowEditModal}
-                ids={editIds.current}
-                onSuccess={onEditSuccess}
-                initialValues={editInitialValues.current}
-              />
-              <Modal
-                destroyOnClose={true}
-                title="选择SKU"
-                okText="保存"
-                cancelText="取消"
-                visible={visible}
-                onCancel={() => {
-                  toggle();
-                }}
-                onOk={handleAddSku}>
-                <SkuSelect ref={skuSelectFormRef} id={id} specData={baseData?.commoditySpecs} />
-              </Modal>
-            </Space>
-          );
-        }}
-      </DataSuspense>
-    </div>
+            </BaseCard>
+            {/* 编辑弹窗 */}
+            <EditModal
+              visible={showEditModal}
+              commodityTypeId={baseData.commodityTypeId}
+              setVisible={setShowEditModal}
+              ids={editIds.current}
+              onSuccess={onEditSuccess}
+              initialValues={editInitialValues.current}
+            />
+            <Modal
+              destroyOnClose={true}
+              title="选择SKU"
+              okText="保存"
+              cancelText="取消"
+              visible={visible}
+              onCancel={() => {
+                toggle();
+              }}
+              onOk={handleAddSku}>
+              <SkuSelect ref={skuSelectFormRef} id={id} specData={baseData?.commoditySpecs} />
+            </Modal>
+          </Space>
+        );
+      }}
+    </DataSuspense>
   );
 };
 
