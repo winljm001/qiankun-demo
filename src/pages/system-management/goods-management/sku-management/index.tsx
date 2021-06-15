@@ -206,7 +206,17 @@ const SkuManagement: React.FC = () => {
               {/* 基本信息 */}
               <BaseInfo data={baseData} />
               {/* 筛选 */}
-              {selectData.length > 0 && <Filter form={form} submit={submit} reset={reset} items={selectData} />}
+              {selectData.length > 0 && (
+                <Filter
+                  form={form}
+                  submit={() => {
+                    submit();
+                    setSelectedKeys([]);
+                  }}
+                  reset={reset}
+                  items={selectData}
+                />
+              )}
               {/* 按钮 */}
               <Space size={16}>
                 <Button
