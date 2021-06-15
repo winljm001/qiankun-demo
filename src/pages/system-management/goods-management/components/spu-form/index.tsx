@@ -89,6 +89,10 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
                   name="commodityCategoryId"
                   rules={[{ required: true, message: '请选择商品品类' }]}>
                   <BaseSelectByFetch
+                    onChange={() => {
+                      showCommodityVarietyToggle(true);
+                      showCommodityPlaceOriginToggle(true);
+                    }}
                     remote={{
                       fetch: listSpuCategoryOption,
                       params: {
