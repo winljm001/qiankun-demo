@@ -201,7 +201,7 @@ const SkuManagement: React.FC = () => {
           });
         };
         return (
-          <Space direction="vertical" size={16}>
+          <div>
             <BaseCard>
               {/* 基本信息 */}
               <BaseInfo data={baseData} />
@@ -285,7 +285,7 @@ const SkuManagement: React.FC = () => {
               onOk={handleAddSku}>
               <SkuSelect ref={skuSelectFormRef} id={id} specData={baseData?.commoditySpecs} />
             </Modal>
-          </Space>
+          </div>
         );
       }}
     </DataSuspense>
