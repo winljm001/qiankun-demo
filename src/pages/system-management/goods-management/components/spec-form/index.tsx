@@ -85,6 +85,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       name={[field.name, 'commoditySpecName']}
                       rules={[{ required: true, message: '请输入规格类型' }]}>
                       <Input
+                        autoComplete="off"
                         placeholder="请输入规格类型"
                         disabled={data?.commoditySpecs && data?.commoditySpecs[idx]?.commoditySpecId}
                       />
@@ -104,6 +105,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                     name={[itemField.name, 'commoditySpecOptionName']}
                                     rules={[{ required: true, message: '请输入规格选项' }]}>
                                     <Input
+                                      autoComplete="off"
                                       addonAfter={
                                         itemFields.length === 1 ? null : (
                                           <div className={styles.optionDelIconBox}>

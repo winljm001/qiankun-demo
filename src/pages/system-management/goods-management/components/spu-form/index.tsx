@@ -66,7 +66,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
             validator: run,
           },
         ]}>
-        <Input />
+        <Input autoComplete="off" />
       </Form.Item>
       {/* 当有id时是编辑 */}
       {data?.commodityId ? (
