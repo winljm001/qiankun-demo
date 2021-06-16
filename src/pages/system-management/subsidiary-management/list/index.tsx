@@ -54,16 +54,8 @@ const GoodsManagementList = () => {
       dataIndex: 'commodityName',
     },
     {
-      title: '商品品类',
-      dataIndex: 'commodityCategoryName',
-    },
-    {
-      title: '品种',
+      title: '商品分类',
       dataIndex: 'commodityVarietyName',
-    },
-    {
-      title: '产地',
-      dataIndex: 'commodityPlaceOriginName',
     },
     {
       title: 'SKU数',
@@ -116,7 +108,7 @@ const GoodsManagementList = () => {
               history.push(`${SUBSIDIARY_MANAGEMENT_ADD}`);
             }}
             type="primary">
-            新增果品
+            新增辅料
           </Button>
         </Space>
       </BaseCard>

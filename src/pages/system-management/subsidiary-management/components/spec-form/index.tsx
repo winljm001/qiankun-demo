@@ -6,30 +6,6 @@ import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
 import { getInitialSpecValue, initialValues } from './initialValues';
 import styles from './index.module.less';
 
-// const specInputLayout = {
-//   labelCol: {
-//     xxl: {
-//       span: 3,
-//     },
-//     md: {
-//       span: 4,
-//     },
-//     xs: {
-//       span: 6,
-//     },
-//   },
-//   wrapperCol: {
-//     xxl: {
-//       span: 6,
-//     },
-//     md: {
-//       span: 8,
-//     },
-//     xs: {
-//       span: 18,
-//     },
-//   },
-// };
 const optionInputLayout = {
   labelCol: {
     xxl: {
