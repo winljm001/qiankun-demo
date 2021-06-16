@@ -69,7 +69,7 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
         columns={columns}
         dataSource={resData}
         rowKey="commoditySpecOptionIdsList"
-        pagination={{ showQuickJumper: true, showTotal: (total) => `共 ${total} 记录` }}
+        pagination={{ showSizeChanger: true, showTotal: (total) => `共 ${total} 记录` }}
       />
     </div>
   );
