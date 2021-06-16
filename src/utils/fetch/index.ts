@@ -1,9 +1,9 @@
-import { message } from 'antd';
+import { message, Modal } from 'antd';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
 import qs from 'querystring';
 
 import Config from '@/config';
-
+import { history } from '@/router/index';
 import { msgs, handleNoCommonError } from './error-handle';
 import { name as globalStoreName } from '@/stores/global';
 
@@ -22,6 +22,7 @@ interface ResponseBase {
 }
 
 // Axios 拦截器，同意处理错误
+let loginModalIsShown = false;
 axios.interceptors.response.use(
   (response: AxiosResponse<ResponseBase>) => {
     const data = response.data;
@@ -36,9 +37,23 @@ axios.interceptors.response.use(
   },
   ({ response }: AxiosError<ResponseBase>) => {
     if (response) {
-      const { data, config } = response;
+      const { data, config, status } = response;
       const message = data?.errMsg || msgs.errorMsg;
-
+      if (status === 401) {
+        if (!loginModalIsShown) {
+          loginModalIsShown = true;
+          Modal.warning({
+            title: '系统提示',
+            content: '登录状态已失效，请重新登录',
+            onOk() {
+              loginModalIsShown = false;
+              history.replace('/login');
+            },
+            okText: '确定',
+          });
+        }
+        return;
+      }
       // 全局响应拦截需要重写
       handleNoCommonError(message, config);
 
