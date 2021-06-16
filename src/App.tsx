@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import Router from './router';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
+import Router from './router';
 
 // import Login from './pages/login/index'
 

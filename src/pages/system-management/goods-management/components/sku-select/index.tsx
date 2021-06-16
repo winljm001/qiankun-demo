@@ -1,10 +1,10 @@
+import { Divider, Input, Table } from 'antd';
+import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
+import { useQuery } from 'react-query';
 import {
   listSkuSelectedCombination,
   USE_LIST_SKU_SELECTED_COMBINATION_KEY,
 } from '@/services/commodityService/mods/commoditySku/listSkuSelectedCombination';
-import { Divider, Input, Table } from 'antd';
-import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
-import { useQuery } from 'react-query';
 import { getAllSpecDescartes, getColumns } from './utils';
 
 export interface SkuSelectRefProps {

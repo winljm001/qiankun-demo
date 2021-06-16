@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
+import { useHistory } from 'react-router';
 import Loading from '@/components/loading';
 import useGlobalStore, { name as globalStoreName } from '@/stores/global';
-import { useHistory } from 'react-router';
 
 function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
   return (props) => {

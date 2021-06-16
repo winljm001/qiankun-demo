@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useImperativeHandle, Ref } from 'react';
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Switch, Form, Input, Select } from 'antd';
-import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
-const { Option } = Select;
-import styles from './style.module.less';
 import { useForm } from 'antd/lib/form/Form';
+import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
 import { FormRef } from '../../index';
+import styles from './style.module.less';
 
 type IProps = {
   initialValues: defs.commodityService.SkuDetails;
 };
 
-const FruitForm = React.forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
+const { Option } = Select;
+
+const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([]);
   const [weightArr, setWeightArr] = useState([]);
   const [form] = useForm();

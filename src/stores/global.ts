@@ -1,11 +1,11 @@
 import create, { SetState, GetState } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
+import { Modal } from 'antd';
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index';
 import { getMenuList, getHomepageUrl, getCurrentRouteAndMenuInfo } from '@/utils/tools';
 import { history } from '@/router';
 import { BASE_PATH } from '@/router/config/basePath';
 import { authListByUserId } from '@/services/authService/mods/role/authListByUserId';
-import { Modal } from 'antd';
 
 export type State = {
   /** menuList */

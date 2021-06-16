@@ -1,19 +1,19 @@
 import React, { useRef, useState } from 'react';
 import { Button, FormInstance, Modal, Space, Table } from 'antd';
-import SearchForm from './search-form/index';
+import { useHistory } from 'react-router-dom';
+import { useToggle } from 'ahooks';
+import { useMutation } from 'react-query';
 import { pageCommodity } from '@/services/commodityService/mods/commodity/pageCommodity';
 import BaseCard from '@/components/BaseCard';
 import ActionGroup from '@/components/ActionGroup';
-import { useHistory } from 'react-router-dom';
 import { GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from '@/router/config/system-management/path';
 import StatusChanger from '@/components/StatusChanger';
 import subRoute from '@/components/hoc/sub-route';
 import useAsyncTable from '@/hooks/useAsyncTable';
-import { useToggle } from 'ahooks';
-import SpuForm from '../components/spu-form';
-import { useMutation } from 'react-query';
 import { doUpdateCommodityName } from '@/services/commodityService/mods/commodity/doUpdateCommodityName';
 import { doUpdateCommodityStatus } from '@/services/commodityService/mods/commodity/doUpdateCommodityStatus';
+import SpuForm from '../components/spu-form';
+import SearchForm from './search-form/index';
 
 const GoodsManagementList = () => {
   const history = useHistory();

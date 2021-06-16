@@ -1,10 +1,10 @@
 import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd';
-import styles from './index.module.less';
-import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
+import React, { forwardRef, useImperativeHandle } from 'react';
 import { useForm } from 'antd/lib/form/Form';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
-import { getInitialSpecValue, initialValues } from './initialValues';
 import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
+import { getInitialSpecValue, initialValues } from './initialValues';
+import styles from './index.module.less';
 
 // const specInputLayout = {
 //   labelCol: {

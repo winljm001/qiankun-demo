@@ -1,6 +1,6 @@
-import { listSearchFromItemProps } from '@/config/defaultSettings';
-import { Col, Row } from 'antd';
 import React from 'react';
+import { Col, Row } from 'antd';
+import { listSearchFromItemProps } from '@/config/defaultSettings';
 interface IProps {
   list?: any[];
 }

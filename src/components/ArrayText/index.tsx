@@ -1,7 +1,7 @@
 import React from 'react';
 import { Popover, PopoverProps } from 'antd';
 import classnames from 'classnames';
-import styles from './index.module.scss';
+import styles from './index.module.less';
 
 type IProps = {
   // 字段值

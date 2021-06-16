@@ -1,9 +1,9 @@
-import config from '@/config';
-import useGlobalStore from '@/stores/global';
+import qs from 'querystring';
 import { message } from 'antd';
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import qs from 'querystring';
 import { omit } from 'wbd-frontend-kit';
+import config from '@/config';
+import useGlobalStore from '@/stores/global';
 import { msg, handleNoCommonError } from './errorHandle';
 
 type requestOptions = AxiosRequestConfig & {
@@ -19,7 +19,7 @@ interface IErrorData {
   timestamp: number;
 }
 
-const { baseUrl, authKey } = config;
+const { baseUrl } = config;
 
 axios.interceptors.response.use(
   (response: AxiosResponse<any>) => {
@@ -33,7 +33,7 @@ axios.interceptors.response.use(
   },
   ({ response }: AxiosError<IErrorData>) => {
     if (response) {
-      const { status, data, config } = response;
+      const { data, config } = response;
       const message = data?.message || msg.errorMsg;
       // 全局响应拦截需要重写
       handleNoCommonError(message, config);

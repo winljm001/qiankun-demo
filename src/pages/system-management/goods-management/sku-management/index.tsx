@@ -1,11 +1,9 @@
 import React, { useCallback, useRef, useState } from 'react';
-import DataSuspense from '@/components/DataSuspense';
 import { useParams } from 'react-router';
-import BaseInfo from './components/base-info';
-import Filter from './components/filter';
-import styles from './index.module.less';
-import Space from '@/components/Space';
 import { Button, message, Modal, Table } from 'antd';
+import { useToggle, useUpdateEffect } from 'ahooks';
+import { useQuery, useMutation } from 'react-query';
+import Space from '@/components/Space';
 import ActionGroup from '@/components/ActionGroup';
 import { getCommodity } from '@/services/commodityService/mods/commodity/getCommodity';
 import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition';
@@ -14,14 +12,16 @@ import { pageSku } from '@/services/commodityService/mods/commoditySku/pageSku';
 import { doUpdateSkuStatus } from '@/services/commodityService/mods/commoditySku/doUpdateSkuStatus';
 import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
-import EditModal from './components/edit';
 import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail';
-import { useToggle, useUpdateEffect } from 'ahooks';
-import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
-import { getColumns } from '../components/sku-select/utils';
-import { useQuery, useMutation } from 'react-query';
+import DataSuspense from '@/components/DataSuspense';
 import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
 import BaseCard from '@/components/BaseCard';
+import { getColumns } from '../components/sku-select/utils';
+import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
+import EditModal from './components/edit';
+// import styles from './index.module.less';
+import Filter from './components/filter';
+import BaseInfo from './components/base-info';
 
 type SKUPageParams = {
   id: string;

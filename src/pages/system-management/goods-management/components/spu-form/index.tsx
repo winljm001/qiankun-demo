@@ -1,3 +1,7 @@
+import { useDebounceFn } from 'ahooks';
+import { Form, FormInstance, Input } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
+import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch';
 import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
 import { isSpuNameRepeat } from '@/services/commodityService/mods/commodity/isSpuNameRepeat';
@@ -5,10 +9,6 @@ import { listCommodityOriginOption } from '@/services/commodityService/mods/comm
 import { listCommodityVarietyOption } from '@/services/commodityService/mods/commodityCategory/listCommodityVarietyOption';
 import { listSpuCategoryOption } from '@/services/commodityService/mods/commodityCategory/listSpuCategoryOption';
 import { listSpuTypeOption } from '@/services/commodityService/mods/commodityType/listSpuTypeOption';
-import { useDebounceFn, useToggle } from 'ahooks';
-import { Form, FormInstance, Input } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
 
 interface SpuFormProps {
   data?: defs.commodityService.CommoditySpuVO;

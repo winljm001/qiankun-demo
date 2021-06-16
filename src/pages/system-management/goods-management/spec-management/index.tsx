@@ -1,20 +1,21 @@
-import BaseCard from '@/components/BaseCard';
-import BaseFormWrap from '@/components/BaseFormWrap';
 import { FormInstance, Modal } from 'antd';
 import React, { useRef } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import SpecForm from '../components/spec-form';
-import SpuForm from '../components/spu-form';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { useToggle } from 'ahooks';
-import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
-import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
 import { useMutation, useQuery } from 'react-query';
+// import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
+import BaseFormWrap from '@/components/BaseFormWrap';
+import BaseCard from '@/components/BaseCard';
 import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/spec/listSpecById';
 import { doModifySpecById } from '@/services/commodityService/mods/spec/doModifySpecById';
 import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
-import { getColumns } from '../components/sku-select/utils';
 import { SKU_MANAGEMENT } from '@/router/config/system-management/path';
+import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
+// import SpuForm from '../components/spu-form';
+import SpecForm from '../components/spec-form';
+import { getColumns } from '../components/sku-select/utils';
+
 const SpecManagement: React.FC = () => {
   const history = useHistory();
   const [visible, { toggle }] = useToggle();

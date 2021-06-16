@@ -1,8 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { Modal, Button, message, FormInstance } from 'antd';
+import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku';
 import FruitForm from './components/fruit-form';
 import FoodForm from './components/food-form';
-import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku';
 
 type IProps = {
   // 商品类型（1-水果，2-食品）
