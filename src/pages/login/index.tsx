@@ -18,10 +18,12 @@ const Index: React.FC = () => {
   const [countdown, setTargetDate] = useCountDown();
 
   // Form实例化
-  const [FormInstance]: any = Form.useForm();
+  const [FormInstance] = Form.useForm();
 
   // 获取验证码
   const toastVerificationCode = () => {
+    setTargetDate(Date.now() + 60000);
+
     // 取手机号码
     const phoneNum1 = FormInstance.getFieldValue('username');
     sendCheckCode({
@@ -29,14 +31,16 @@ const Index: React.FC = () => {
       phoneNum: phoneNum1,
     })
       .then((res) => {
-        if (res.data === true) {
+        if (res.data) {
           message.success('获取验证码成功！');
-          setTargetDate(Date.now() + 60000);
         } else {
           message.error(res.errMsg);
+          setTargetDate(undefined);
         }
       })
-      .catch((err) => {});
+      .catch(() => {
+        setTargetDate(undefined);
+      });
   };
 
   const history = useHistory();
@@ -87,7 +91,7 @@ const Index: React.FC = () => {
         </div>
       </div>
       <div className={styles.loginBox}>
-        <img src={img} alt="" className={styles.logo} />
+        <img src={img} alt="星桥分拣管理系统" className={styles.logo} />
         <div className={styles.title}>星桥分拣管理系统</div>
         <div className={styles.formBox}>
           <Form form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
@@ -180,7 +184,7 @@ const Index: React.FC = () => {
             </Form.Item>
           </Form>
         </div>
-        <div className={styles.record}>© 169 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
+        <div className={styles.record}>&copy; 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
       </div>
     </div>
   );
