@@ -1,6 +1,7 @@
-import { Divider, Input, Table } from 'antd';
+import { Divider, Input, Table, Col, Row } from 'antd';
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
+
 import {
   listSkuSelectedCombination,
   USE_LIST_SKU_SELECTED_COMBINATION_KEY,
@@ -62,9 +63,19 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   };
   return (
     <div>
-      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
+      <Row>
+        <Col span={12}>
+          <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
+        </Col>
+      </Row>
       <Divider />
-      <Table rowSelection={rowSelection} columns={columns} dataSource={resData} rowKey="commoditySpecOptionIdsList" />
+      <Table
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={resData}
+        rowKey="commoditySpecOptionIdsList"
+        pagination={{ showSizeChanger: true, showTotal: (total) => `共 ${total} 记录` }}
+      />
     </div>
   );
 });
