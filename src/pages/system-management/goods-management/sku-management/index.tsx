@@ -284,6 +284,7 @@ const SkuManagement: React.FC = () => {
               initialValues={editInitialValues.current}
             />
             <Modal
+              width="750px"
               destroyOnClose={true}
               title="选择SKU"
               okText="保存"

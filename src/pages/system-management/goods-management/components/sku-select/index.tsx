@@ -2,7 +2,7 @@ import {
   listSkuSelectedCombination,
   USE_LIST_SKU_SELECTED_COMBINATION_KEY,
 } from '@/services/commodityService/mods/commoditySku/listSkuSelectedCombination';
-import { Divider, Input, Table } from 'antd';
+import { Col, Divider, Input, Row, Table } from 'antd';
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react';
 import { useQuery } from 'react-query';
 import { getAllSpecDescartes, getColumns } from './utils';
@@ -62,7 +62,11 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   };
   return (
     <div>
-      <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
+      <Row>
+        <Col span={12}>
+          <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
+        </Col>
+      </Row>
       <Divider />
       <Table
         rowSelection={rowSelection}
