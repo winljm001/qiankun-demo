@@ -2,7 +2,7 @@
   "origins": [
     {
       "name": "commodityService",
-      "originUrl": "https://pitaya-dev.hjgpscm.com/pitaya-app/api/commodity/v2/api-docs?group=web"
+      "originUrl": "http://192.168.10.47:8081/api/commodity/v2/api-docs?group=web"
     },
     {
       "name": "userService",

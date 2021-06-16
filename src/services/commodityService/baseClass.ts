@@ -327,6 +327,65 @@ class SpecificationsAndTypes {
   commoditySpecSort = undefined
 }
 
+class SubsidiaryDTO {
+  /** 商品品类id */
+  commodityCategoryId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 规格信息 */
+  commoditySpecs = []
+}
+
+class SubsidiaryPageVo {
+  /** 商品分类名称（原品类） */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** sku总数 */
+  skuSum = undefined
+
+  /** 激活状态 */
+  status = undefined
+}
+
+class SubsidiarySpuVO {
+  /** 商品分类名称（原品类） */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 规格信息 */
+  commoditySpecs = []
+
+  /** sku总数 */
+  skuSum = undefined
+
+  /** 激活状态 */
+  status = undefined
+}
+
+class SubsidiaryUpdateDTO {
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品分类id */
+  commodityTypeId = undefined
+}
+
 class UpdateSkuDTO {
   /** sku id */
   commoditySkuIds = []
@@ -370,5 +429,9 @@ export const commodityService = {
   SkuSpecificationOptionsHeaderList,
   SpecificationsAndOptions,
   SpecificationsAndTypes,
+  SubsidiaryDTO,
+  SubsidiaryPageVo,
+  SubsidiarySpuVO,
+  SubsidiaryUpdateDTO,
   UpdateSkuDTO
 }

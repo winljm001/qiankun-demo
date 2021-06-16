@@ -35,8 +35,8 @@ export const envConfig: Record<typeof env, EnvIconfig> = {
   },
   // 生产环境
   prod: {
-    apiHost: 'https://durian.hjgpscm.com',
-    uploadHost: 'https://durian.hjgpscm.com',
+    apiHost: 'https://pitaya.hjgpscm.com',
+    uploadHost: 'https://pitaya.hjgpscm.com',
     baseUrl: '/pitaya-app',
   },
 };

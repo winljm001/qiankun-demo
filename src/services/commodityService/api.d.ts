@@ -343,6 +343,65 @@ declare namespace defs {
       commoditySpecSort?: number
     }
 
+    export class SubsidiaryDTO {
+      /** 商品品类id */
+      commodityCategoryId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 规格信息 */
+      commoditySpecs?: Array<defs.commodityService.CommoditySpecDTO>
+    }
+
+    export class SubsidiaryPageVo {
+      /** 商品分类名称（原品类） */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku总数 */
+      skuSum?: number
+
+      /** 激活状态 */
+      status?: number
+    }
+
+    export class SubsidiarySpuVO {
+      /** 商品分类名称（原品类） */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 规格信息 */
+      commoditySpecs?: Array<defs.commodityService.SpecificationsAndTypes>
+
+      /** sku总数 */
+      skuSum?: number
+
+      /** 激活状态 */
+      status?: number
+    }
+
+    export class SubsidiaryUpdateDTO {
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品分类id */
+      commodityTypeId?: number
+    }
+
     export class UpdateSkuDTO {
       /** sku id */
       commoditySkuIds?: Array<number>
@@ -809,6 +868,395 @@ declare namespace API {
       /**
        * verifySpecName
        * /api/commodity/v1/spec/repeat
+       */
+      export namespace verifySpecName {
+        export class Params {
+          /** specName */
+          specName: string
+        }
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+    }
+
+    /**
+     * 辅料SPU管理
+     */
+    export namespace subsidiary {
+      /**
+       * doInsertCommodity
+       * /api/commodity/v1/spu/subsidiary/insert
+       */
+      export namespace doInsertCommodity {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<number>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.SubsidiaryDTO
+        ): Promise<defs.commodityService.ApiResult<number>>
+      }
+
+      /**
+       * pageCommodity
+       * /api/commodity/v1/spu/subsidiary/list
+       */
+      export namespace pageCommodity {
+        export class Params {
+          /** commodityName */
+          commodityName?: string
+          /** offset */
+          offset?: number
+          /** pageCurrent */
+          pageCurrent?: number
+          /** pageSize */
+          pageSize?: number
+          /** sortBys */
+          sortBys?: Array<string>
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.DefaultPageResult<
+            defs.commodityService.SubsidiaryPageVo
+          >
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.DefaultPageResult<
+              defs.commodityService.SubsidiaryPageVo
+            >
+          >
+        >
+      }
+
+      /**
+       * doUpdateCommodityName
+       * /api/commodity/v1/spu/subsidiary/update
+       */
+      export namespace doUpdateCommodityName {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.SubsidiaryUpdateDTO
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+
+      /**
+       * doUpdateCommodityStatus
+       * /api/commodity/v1/spu/subsidiary/update/status
+       */
+      export namespace doUpdateCommodityStatus {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.CommodityStatusDTO
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+
+      /**
+       * isSpuNameRepeat
+       * /api/commodity/v1/spu/subsidiary/verify/name
+       */
+      export namespace isSpuNameRepeat {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.CommodityVerifyDTO
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+
+      /**
+       * getCommodity
+       * /api/commodity/v1/spu/subsidiary/{id}
+       */
+      export namespace getCommodity {
+        export class Params {
+          /** id */
+          id: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.SubsidiarySpuVO
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<defs.commodityService.SubsidiarySpuVO>
+        >
+      }
+    }
+
+    /**
+     * 辅料分类管理
+     */
+    export namespace subsidiaryCategory {
+      /**
+       * listSpuCategoryOption
+       * /api/commodity/v1/spu/subsidiary/category/{id}/option
+       */
+      export namespace listSpuCategoryOption {
+        export class Params {
+          /** id */
+          id: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.Option<string, number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.Option<string, number>>
+          >
+        >
+      }
+    }
+
+    /**
+     * 辅料sku管理
+     */
+    export namespace subsidiarySku {
+      /**
+       * listSkuListColumn
+       * /api/commodity/v1/commodity/sku/subsidiary/column/{commodityId}
+       */
+      export namespace listSkuListColumn {
+        export class Params {
+          /** 商品id */
+          commodityId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.SkuHeader
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<defs.commodityService.SkuHeader>
+        >
+      }
+
+      /**
+       * getSkuDetail
+       * /api/commodity/v1/commodity/sku/subsidiary/detail/{commoditySkuId}
+       */
+      export namespace getSkuDetail {
+        export class Params {
+          /** sku id */
+          commoditySkuId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.SkuDetails
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<defs.commodityService.SkuDetails>
+        >
+      }
+
+      /**
+       * pageSku
+       * /api/commodity/v1/commodity/sku/subsidiary/list
+       */
+      export namespace pageSku {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.DefaultPageResult<defs.commodityService.SkuList>
+        >
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.SkuListConditionDTO
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.DefaultPageResult<
+              defs.commodityService.SkuList
+            >
+          >
+        >
+      }
+
+      /**
+       * listUnitOptions
+       * /api/commodity/v1/commodity/sku/subsidiary/option/unit/{commodityTypeId}
+       */
+      export namespace listUnitOptions {
+        export class Params {
+          /** 商品类型id（1：水果，2：食品，5：sku净重） */
+          commodityTypeId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.Option<string, number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.Option<string, number>>
+          >
+        >
+      }
+
+      /**
+       * listSkuQueryCondition
+       * /api/commodity/v1/commodity/sku/subsidiary/options/{commodityId}
+       */
+      export namespace listSkuQueryCondition {
+        export class Params {
+          /** 商品id */
+          commodityId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.ScreeningSkuList>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.ScreeningSkuList>
+          >
+        >
+      }
+
+      /**
+       * doSaveSkuList
+       * /api/commodity/v1/commodity/sku/subsidiary/save
+       */
+      export namespace doSaveSkuList {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<Array<number>>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.CommoditySkuSaveDTO
+        ): Promise<defs.commodityService.ApiResult<Array<number>>>
+      }
+
+      /**
+       * listSkuSelectedCombination
+       * /api/commodity/v1/commodity/sku/subsidiary/selected/{commodityId}
+       */
+      export namespace listSkuSelectedCombination {
+        export class Params {
+          /** 商品id */
+          commodityId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<Array<number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<defs.commodityService.ApiResult<Array<Array<number>>>>
+      }
+
+      /**
+       * doUpdateSku
+       * /api/commodity/v1/commodity/sku/subsidiary/update
+       */
+      export namespace doUpdateSku {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.UpdateSkuDTO
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+
+      /**
+       * doUpdateSkuStatus
+       * /api/commodity/v1/commodity/sku/subsidiary/update/status
+       */
+      export namespace doUpdateSkuStatus {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.ModifyTheSkuStatus
+        ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+    }
+
+    /**
+     * 辅料规格管理
+     */
+    export namespace subsidiarySpec {
+      /**
+       * listSpecById
+       * /api/commodity/v1/subsidiary/spec/list/{commodityId}
+       */
+      export namespace listSpecById {
+        export class Params {
+          /** commodityId */
+          commodityId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.SpecificationsAndTypes>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.SpecificationsAndTypes>
+          >
+        >
+      }
+
+      /**
+       * doModifySpecById
+       * /api/commodity/v1/subsidiary/spec/modify
+       */
+      export namespace doModifySpecById {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<number>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.CommodityModifyDTO
+        ): Promise<defs.commodityService.ApiResult<number>>
+      }
+
+      /**
+       * verifySpecName
+       * /api/commodity/v1/subsidiary/spec/repeat
        */
       export namespace verifySpecName {
         export class Params {
