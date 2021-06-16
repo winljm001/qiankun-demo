@@ -1,26 +1,26 @@
-import React from 'react';
-import { Popover, PopoverProps } from 'antd';
-import classnames from 'classnames';
-import styles from './index.module.less';
+import React from 'react'
+import { Popover, PopoverProps } from 'antd'
+import classnames from 'classnames'
+import styles from './index.module.less'
 
 type IProps = {
   // 字段值
-  text: string | number | (string | number)[];
+  text: string | number | (string | number)[]
   // 字段为undefined null时展示的文本
-  nullText?: React.ReactNode;
+  nullText?: React.ReactNode
   // 文本最长宽度
-  width?: number | string;
+  width?: number | string
   // popover高度
-  maxHeight?: number | string;
+  maxHeight?: number | string
   // 文本超出后是否展示...
-  ellipsis?: boolean;
+  ellipsis?: boolean
   // 数组文本分隔符
-  split?: React.ReactNode;
+  split?: React.ReactNode
   // 显示个数
-  limit?: number;
-} & Omit<PopoverProps, 'content'>;
+  limit?: number
+} & Omit<PopoverProps, 'content'>
 
-const isNull = (text: any): boolean => [undefined, null].includes(text);
+const isNull = (text: any): boolean => [undefined, null].includes(text)
 
 const renderTextContent = (
   text: (string | number)[],
@@ -34,12 +34,12 @@ const renderTextContent = (
         {index < text.length - 1 && split}
         {index === text.length - 1 && tail}
       </React.Fragment>
-    );
-  });
-};
+    )
+  })
+}
 
 const ArrayText: React.FC<IProps> = ({ text, nullText, width, maxHeight, ellipsis, split, limit, ...popProps }) => {
-  if (isNull(text)) return nullText as React.ReactElement<any, any>;
+  if (isNull(text)) return nullText as React.ReactElement<any, any>
   if (Array.isArray(text)) {
     if (text.length > limit) {
       return (
@@ -51,20 +51,20 @@ const ArrayText: React.FC<IProps> = ({ text, nullText, width, maxHeight, ellipsi
             {renderTextContent(text.slice(0, limit), split, <span className={styles.dots}>···</span>)}
           </div>
         </Popover>
-      );
+      )
     }
     return (
       <div className={classnames({ [styles.ellipsis]: ellipsis })} style={{ maxWidth: width }}>
         {renderTextContent(text.slice(0, limit), split)}
       </div>
-    );
+    )
   }
   return (
     <div className={classnames({ [styles.ellipsis]: ellipsis })} style={{ maxWidth: width }}>
       {text}
     </div>
-  );
-};
+  )
+}
 
 ArrayText.defaultProps = {
   nullText: null,
@@ -73,6 +73,6 @@ ArrayText.defaultProps = {
   ellipsis: true,
   split: <br />,
   limit: 1,
-};
+}
 
-export default ArrayText;
+export default ArrayText

@@ -1,12 +1,12 @@
-import React, { memo } from 'react';
-import { Button, Form, FormInstance, Input, Space } from 'antd';
+import React, { memo } from 'react'
+import { Button, Form, FormInstance, Input, Space } from 'antd'
 // import JsonFilter, { defineConfig } from '@/components/JsonFilter';
-import SearchFormLayout from '@/components/SearchFormLayout';
+import SearchFormLayout from '@/components/SearchFormLayout'
 
 interface IProps {
-  form: FormInstance;
-  submit: () => void;
-  reset: () => void;
+  form: FormInstance
+  submit: () => void
+  reset: () => void
 }
 
 const SearchForm: React.FC<IProps> = ({ form, submit, reset }) => {
@@ -30,7 +30,7 @@ const SearchForm: React.FC<IProps> = ({ form, submit, reset }) => {
         ]}
       />
     </Form>
-  );
-};
+  )
+}
 
-export default memo(SearchForm);
+export default memo(SearchForm)

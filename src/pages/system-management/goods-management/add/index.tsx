@@ -1,45 +1,45 @@
-import { FormInstance, Modal } from 'antd';
-import React, { useEffect, useRef, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { ExclamationCircleOutlined } from '@ant-design/icons';
-import { useToggle } from 'ahooks';
-import { useMutation, useQuery } from 'react-query';
-import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity';
-import BaseFormWrap from '@/components/BaseFormWrap';
-import BaseCard from '@/components/BaseCard';
-import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/spec/listSpecById';
-import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
-import { SKU_MANAGEMENT } from '@/router/config/system-management/path';
-import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
-import SpuForm from '../components/spu-form';
-import SpecForm from '../components/spec-form';
-import { getColumns } from '../components/sku-select/utils';
+import { FormInstance, Modal } from 'antd'
+import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router-dom'
+import { ExclamationCircleOutlined } from '@ant-design/icons'
+import { useToggle } from 'ahooks'
+import { useMutation, useQuery } from 'react-query'
+import { doInsertCommodity } from '@/services/commodityService/mods/commodity/doInsertCommodity'
+import BaseFormWrap from '@/components/BaseFormWrap'
+import BaseCard from '@/components/BaseCard'
+import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/spec/listSpecById'
+import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList'
+import { SKU_MANAGEMENT } from '@/router/config/system-management/path'
+import SkuSelect, { SkuSelectRefProps } from '../components/sku-select'
+import SpuForm from '../components/spu-form'
+import SpecForm from '../components/spec-form'
+import { getColumns } from '../components/sku-select/utils'
 
 const GoodsManagementAdd: React.FC = () => {
-  const history = useHistory();
-  const [visible, { toggle }] = useToggle();
-  const spuFormRef = useRef<FormInstance>();
-  const specFormRef = useRef<FormInstance>();
-  const skuSelectFormRef = useRef<SkuSelectRefProps>();
-  const [id, setId] = useState(0);
+  const history = useHistory()
+  const [visible, { toggle }] = useToggle()
+  const spuFormRef = useRef<FormInstance>()
+  const specFormRef = useRef<FormInstance>()
+  const skuSelectFormRef = useRef<SkuSelectRefProps>()
+  const [id, setId] = useState(0)
   // spec data
   const { data: specData, refetch } = useQuery({
     queryKey: USE_LIST_SPEC_BY_ID_KEY,
     queryFn: () => {
       return listSpecById({ commodityId: id }).then((res) => {
-        const { data } = res;
-        return data;
-      });
+        const { data } = res
+        return data
+      })
     },
     enabled: false,
     onSuccess: (data) => {
-      specFormRef.current.setFieldsValue({ commoditySpecs: data });
+      specFormRef.current.setFieldsValue({ commoditySpecs: data })
     },
-  });
+  })
   //  保存选中的sku
   const modifySaveSkuList = useMutation(doSaveSkuList, {
     onSuccess: () => {
-      toggle();
+      toggle()
       Modal.confirm({
         title: '去管理sku',
         icon: <ExclamationCircleOutlined />,
@@ -47,27 +47,27 @@ const GoodsManagementAdd: React.FC = () => {
         okText: '去管理sku',
         cancelText: '取消',
         onCancel: () => {
-          history.goBack();
+          history.goBack()
         },
         onOk: () => {
-          history.push(`${SKU_MANAGEMENT}/${id}`);
+          history.push(`${SKU_MANAGEMENT}/${id}`)
         },
-      });
+      })
     },
-  });
+  })
   useEffect(() => {
     if (id) {
-      refetch();
+      refetch()
     }
-  }, [id]);
+  }, [id])
   /** 保存果品操作 */
   const handleSaveAction = () => {
-    const form1 = spuFormRef.current.validateFields();
-    const form2 = specFormRef.current.validateFields();
+    const form1 = spuFormRef.current.validateFields()
+    const form2 = specFormRef.current.validateFields()
     Promise.all([form1, form2]).then(([res1, res2]) => {
       doInsertCommodity({ ...res1, ...res2 }).then(({ data }) => {
         if (data) {
-          setId(data);
+          setId(data)
         }
         Modal.confirm({
           title: '去添加sku列表',
@@ -76,33 +76,33 @@ const GoodsManagementAdd: React.FC = () => {
           okText: '去添加sku列表',
           cancelText: '取消',
           onCancel: () => {
-            history.goBack();
-            toggle();
+            history.goBack()
+            toggle()
           },
           onOk: () => {
-            toggle();
+            toggle()
           },
-        });
-      });
-    });
-  };
+        })
+      })
+    })
+  }
   const handleAddSku = () => {
-    const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected();
-    const col = getColumns(specData);
+    const commoditySpecOptionIdsList = skuSelectFormRef.current.getSelected()
+    const col = getColumns(specData)
 
     modifySaveSkuList.mutate({
       commodityId: id,
       commoditySpecId: col?.map((v) => v.dataIndex),
       commoditySpecOptionIdsList: commoditySpecOptionIdsList,
-    });
-  };
+    })
+  }
   return (
     <BaseFormWrap
       actions={[
         {
           children: '返回',
           onClick: () => {
-            history.goBack();
+            history.goBack()
           },
         },
         {
@@ -110,7 +110,7 @@ const GoodsManagementAdd: React.FC = () => {
           loading: modifySaveSkuList.isLoading,
           children: '保存',
           onClick: () => {
-            handleSaveAction();
+            handleSaveAction()
           },
         },
       ]}>
@@ -131,14 +131,14 @@ const GoodsManagementAdd: React.FC = () => {
         cancelText="取消"
         visible={visible}
         onCancel={() => {
-          history.goBack();
-          toggle();
+          history.goBack()
+          toggle()
         }}
         onOk={handleAddSku}>
         <SkuSelect ref={skuSelectFormRef} id={id} specData={specData} />
       </Modal>
     </BaseFormWrap>
-  );
-};
+  )
+}
 
-export default GoodsManagementAdd;
+export default GoodsManagementAdd

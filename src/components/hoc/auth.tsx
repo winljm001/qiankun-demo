@@ -1,26 +1,26 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router';
-import Loading from '@/components/loading';
-import useGlobalStore, { name as globalStoreName } from '@/stores/global';
+import React, { useEffect } from 'react'
+import { useHistory } from 'react-router'
+import Loading from '@/components/loading'
+import useGlobalStore, { name as globalStoreName } from '@/stores/global'
 
 function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
   return (props) => {
-    const { authStatus } = useGlobalStore();
-    const history = useHistory();
+    const { authStatus } = useGlobalStore()
+    const history = useHistory()
     useEffect(() => {
-      const token = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token;
+      const token = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token
       if (!token) {
-        history.replace('/login');
+        history.replace('/login')
       }
-    }, []);
+    }, [])
     if (authStatus === null || authStatus === 'fail') {
-      return null;
+      return null
     }
     if (authStatus === 'ok') {
-      return <Component {...props} />;
+      return <Component {...props} />
     }
-    return <Loading />;
-  };
+    return <Loading />
+  }
 }
 
-export default auth;
+export default auth

@@ -22,4 +22,4 @@ export const fromSingleLayoutProps = {
       span: 12,
     },
   },
-};
+}

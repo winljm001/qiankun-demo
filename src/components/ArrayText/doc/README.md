@@ -13,13 +13,13 @@
 **代码**
 
 ```tsx
-import React from 'react';
-import ArrayText from '@/components/ArrayText';
+import React from 'react'
+import ArrayText from '@/components/ArrayText'
 
 const Demo: React.FC<{}> = () => {
-  const text = ['testEDit', 'testEDit', 'test——mapping', 'test1'];
-  return <ArrayText text={text} />;
-};
+  const text = ['testEDit', 'testEDit', 'test——mapping', 'test1']
+  return <ArrayText text={text} />
+}
 ```
 
 ## API

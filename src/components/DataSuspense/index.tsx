@@ -1,13 +1,13 @@
-import React from 'react';
-import { Spin, Empty } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
+import React from 'react'
+import { Spin, Empty } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
 
 interface IProps {
-  loading: boolean;
-  error: boolean;
-  errorImage?: React.ReactNode;
-  errorText?: string;
-  children: () => React.ReactNode;
+  loading: boolean
+  error: boolean
+  errorImage?: React.ReactNode
+  errorText?: string
+  children: () => React.ReactNode
 }
 
 const DataSuspense: React.FC<IProps> = ({
@@ -22,12 +22,12 @@ const DataSuspense: React.FC<IProps> = ({
       <div style={{ height: '100%', minHeight: 400, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Spin indicator={<LoadingOutlined style={{ fontSize: 24 }} />} />
       </div>
-    );
+    )
   }
   if (error) {
-    return <Empty image={errorImage} description={errorText} />;
+    return <Empty image={errorImage} description={errorText} />
   }
-  return <>{children()}</>;
-};
+  return <>{children()}</>
+}
 
-export default DataSuspense;
+export default DataSuspense

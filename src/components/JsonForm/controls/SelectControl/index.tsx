@@ -1,10 +1,10 @@
-import React from 'react';
-import { Select, SelectProps } from 'antd';
+import React from 'react'
+import { Select, SelectProps } from 'antd'
 
-export type SelectControlProps = SelectProps<any>;
+export type SelectControlProps = SelectProps<any>
 
 const SelectControl: React.FC<SelectControlProps> = (props) => {
-  return <Select {...props} />;
-};
+  return <Select {...props} />
+}
 
-export default SelectControl;
+export default SelectControl
