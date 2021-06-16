@@ -59,6 +59,8 @@ const useAsyncTable = (props: IProps): any => {
     setCacheParams(params);
   }, [params]);
   const { submit, reset } = search;
+  tableProps['pagination'].showSizeChanger = true;
+  tableProps['pagination'].showTotal = (total) => `共 ${total} 记录`;
   return { tableProps, search, form, submit, reset, refresh };
 };
 
