@@ -1,70 +1,70 @@
-import qs from 'querystring';
-import { message, Modal } from 'antd';
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios';
+import qs from 'querystring'
+import { message, Modal } from 'antd'
+import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios'
 
-import Config from '@/config';
-import { history } from '@/router/index';
-import { name as globalStoreName } from '@/stores/global';
-import { msgs, handleNoCommonError } from './error-handle';
+import Config from '@/config'
+import { history } from '@/router/index'
+import { name as globalStoreName } from '@/stores/global'
+import { msgs, handleNoCommonError } from './error-handle'
 
 /**
  * 接口返回的数据基础结构
  */
 interface ResponseBase {
   /** data */
-  data?: any;
+  data?: any
 
   /** errCode */
-  errCode?: number;
+  errCode?: number
 
   /** errMsg */
-  errMsg?: string;
+  errMsg?: string
 }
 
 // Axios 拦截器，同意处理错误
-let loginModalIsShown = false;
+let loginModalIsShown = false
 axios.interceptors.response.use(
   (response: AxiosResponse<ResponseBase>) => {
-    const data = response.data;
+    const data = response.data
 
     // 操作不成功时直接提示
     if (data.errCode !== 200) {
-      message.error(data.errMsg);
-      return Promise.reject(data.errMsg);
+      message.error(data.errMsg)
+      return Promise.reject(data.errMsg)
     }
 
-    return response;
+    return response
   },
   ({ response }: AxiosError<ResponseBase>) => {
     if (response) {
-      const { data, config, status } = response;
-      const message = data?.errMsg || msgs.errorMsg;
+      const { data, config, status } = response
+      const message = data?.errMsg || msgs.errorMsg
       if (status === 401) {
         if (!loginModalIsShown) {
-          loginModalIsShown = true;
+          loginModalIsShown = true
           Modal.warning({
             title: '系统提示',
             content: '登录状态已失效，请重新登录',
             onOk() {
-              loginModalIsShown = false;
-              history.replace('/login');
+              loginModalIsShown = false
+              history.replace('/login')
             },
             okText: '确定',
-          });
+          })
         }
-        return;
+        return
       }
       // 全局响应拦截需要重写
-      handleNoCommonError(message, config);
+      handleNoCommonError(message, config)
 
-      throw new Error(message);
+      throw new Error(message)
       // return Promise.reject(message);
     } else {
-      throw new Error(msgs.networkErrorMsg);
+      throw new Error(msgs.networkErrorMsg)
       // return Promise.reject(msg.networkErrorMsg);
     }
   },
-);
+)
 
 // 在 buildOptions 的时候已经把 GET 类的参数添加到了 URL 上，这里就可以不需要序列化
 // axios.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -77,13 +77,13 @@ axios.interceptors.response.use(
  * @description 对请求简单封装，添加默认参数
  */
 export const request = <T = any>(options: AxiosRequestConfig) => {
-  const Authorization = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token || '';
+  const Authorization = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token || ''
   const newOptions: AxiosRequestConfig = {
     // credentials: 'include',
     timeout: 60000,
     withCredentials: true,
     validateStatus(status: any) {
-      return status >= 200 && status < 300;
+      return status >= 200 && status < 300
     },
     ...options,
     headers: {
@@ -92,9 +92,9 @@ export const request = <T = any>(options: AxiosRequestConfig) => {
       ...(options.headers || {}),
     },
     url: `${Config.baseUrl}${options.url}`,
-  };
-  return axios.request<T>(newOptions).then((data) => data.data);
-};
+  }
+  return axios.request<T>(newOptions).then((data) => data.data)
+}
 
 /**
  * 构建接口参数
@@ -102,29 +102,29 @@ export const request = <T = any>(options: AxiosRequestConfig) => {
 export const buildOptions = (path: string, queryParams: Record<string, any>, method: Method): AxiosRequestConfig => {
   const params = {
     ...(queryParams || {}),
-  };
-  const isGet = method === 'GET' || method === 'DELETE' || method === 'HEAD' || method === 'OPTIONS';
+  }
+  const isGet = method === 'GET' || method === 'DELETE' || method === 'HEAD' || method === 'OPTIONS'
   let url = path.replace(/\{([^\\}]*(?:\\.[^\\}]*)*)\}/gm, (_, key) => {
     // eslint-disable-next-line no-param-reassign
-    key = key.trim();
+    key = key.trim()
 
     if (params[key] !== undefined) {
-      const value = params[key];
-      delete params[key];
-      return value;
+      const value = params[key]
+      delete params[key]
+      return value
     }
-    console.warn('Please set value for template key: ', key);
-    return '';
-  });
+    console.warn('Please set value for template key: ', key)
+    return ''
+  })
 
   // GET 请求参数放置 URL 上
   if (isGet && Object.keys(params).length) {
-    url = `${url}?${qs.stringify(params)}`;
+    url = `${url}?${qs.stringify(params)}`
   }
 
   return {
     url,
     method,
     data: isGet ? null : params,
-  };
-};
+  }
+}

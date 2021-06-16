@@ -1,8 +1,8 @@
 // import React from 'react';
-import loadable from '@loadable/component';
-import BlankLayout from '@/layouts/blankLayout/index';
-import { CustomRouteConfig } from '../index';
-import { BASE_URL, GOODS_MANAGEMENT, GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from './path';
+import loadable from '@loadable/component'
+import BlankLayout from '@/layouts/blankLayout/index'
+import { CustomRouteConfig } from '../index'
+import { BASE_URL, GOODS_MANAGEMENT, GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from './path'
 const routes: CustomRouteConfig[] = [
   {
     path: BASE_URL,
@@ -50,6 +50,6 @@ const routes: CustomRouteConfig[] = [
       },
     ],
   },
-];
+]
 
-export default routes;
+export default routes

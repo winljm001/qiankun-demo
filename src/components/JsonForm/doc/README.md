@@ -14,15 +14,15 @@
 
 ```tsx
 const Edit: React.FC<IProps> = ({ data }) => {
-  const dispatch = useDispatch();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const history = useHistory();
-  const [form] = useForm();
+  const dispatch = useDispatch()
+  const [submitting, setSubmitting] = useState<boolean>(false)
+  const history = useHistory()
+  const [form] = useForm()
 
   const taxPayer = {
     SELF_PAY: '洪九果品',
     WITHHOLD: data.expressCompany,
-  };
+  }
   const config = defineConfig({
     form,
     initialValues: data,
@@ -56,12 +56,12 @@ const Edit: React.FC<IProps> = ({ data }) => {
           name: 'taxPayer',
           hidden: !form.getFieldValue('taxType'),
           shouldUpdate(prevValues, curValues) {
-            return prevValues.taxType !== curValues.taxType;
+            return prevValues.taxType !== curValues.taxType
           },
           control: {
             controlType: 'TEXT',
           },
-        };
+        }
       },
       {
         label: '纳税文件',
@@ -87,13 +87,13 @@ const Edit: React.FC<IProps> = ({ data }) => {
     },
     onValuesChange(values) {
       if (values.taxType !== undefined) {
-        form.setFieldsValue({ taxPayer: taxPayer[values.taxType] });
+        form.setFieldsValue({ taxPayer: taxPayer[values.taxType] })
       }
     },
     onFinish(values) {},
-  });
-  return <JsonForm {...config} />;
-};
+  })
+  return <JsonForm {...config} />
+}
 ```
 
 [自定义表单控件](https://durian-test.hjgpscm.com/international_delivery/shipment_entry/edit?id=3048)
@@ -102,10 +102,10 @@ const Edit: React.FC<IProps> = ({ data }) => {
 
 ```tsx
 const Edit: React.FC<IProps> = ({ data }) => {
-  const dispatch = useDispatch();
-  const [submitting, setSubmitting] = useState<boolean>(false);
-  const history = useHistory();
-  const [form] = useForm();
+  const dispatch = useDispatch()
+  const [submitting, setSubmitting] = useState<boolean>(false)
+  const history = useHistory()
+  const [form] = useForm()
   const config = defineConfig({
     form,
     initialValues: { ...data },
@@ -121,7 +121,7 @@ const Edit: React.FC<IProps> = ({ data }) => {
       },
       {
         customRender() {
-          return <ReceiversControl key="receivers" name="receivers" skuList={data.table.records} form={form} />;
+          return <ReceiversControl key="receivers" name="receivers" skuList={data.table.records} form={form} />
         },
       },
       {
@@ -148,15 +148,15 @@ const Edit: React.FC<IProps> = ({ data }) => {
               wrapperCol={{ span: 24 }}
               style={{ padding: `0 ${formControlIndent}px` }}
               shouldUpdate={(prevValues, curValues) => {
-                return !isEqual(prevValues.receivers, curValues.receivers);
+                return !isEqual(prevValues.receivers, curValues.receivers)
               }}>
               {({ getFieldValue }) => {
                 return (
                   <ProductTableControl scroll receivers={getFieldValue('receivers')} value={getFieldValue('table')} />
-                );
+                )
               }}
             </Form.Item>
-          );
+          )
         },
       },
     ],
@@ -176,20 +176,20 @@ const Edit: React.FC<IProps> = ({ data }) => {
     },
     onValuesChange(changedValues) {
       if (changedValues.receivers) {
-        const receivers = changedValues.receivers;
-        const fieldsToValidate = [];
+        const receivers = changedValues.receivers
+        const fieldsToValidate = []
         receivers.forEach((receiver, receiverIndex) => {
           receiver.products?.forEach((product, productIndex) => {
-            fieldsToValidate.push(['receivers', receiverIndex, 'products', productIndex, 'splitQuantity']);
-          });
-        });
-        form.validateFields(fieldsToValidate);
+            fieldsToValidate.push(['receivers', receiverIndex, 'products', productIndex, 'splitQuantity'])
+          })
+        })
+        form.validateFields(fieldsToValidate)
       }
     },
     onFinish(values) {},
-  });
-  return <JsonForm {...config} />;
-};
+  })
+  return <JsonForm {...config} />
+}
 ```
 
 ## API
@@ -197,7 +197,7 @@ const Edit: React.FC<IProps> = ({ data }) => {
 #### defineConfig
 
 ```ts
-const config = defineConfig(options);
+const config = defineConfig(options)
 ```
 
 生成配置工厂函数（为了支持 TS 类型推断）
@@ -221,13 +221,13 @@ _FormItemConfig_
 ```ts
 interface FormItemObjectConfig extends FormItemProps {
   // 是否隐藏该控件（表单值不会收集和校验该字段）
-  excluded: boolean;
+  excluded: boolean
   // 控件行首缩进（为了适配UI规范）
-  indent?: number;
+  indent?: number
   // 控件配置
-  control?: ControlConfig;
+  control?: ControlConfig
   // 自定义渲染函数-未内置的控件可以通过customRender实现（注意：该控件不会受配置影响）
-  customRender?: (form: FormInstance) => React.ReactNode;
+  customRender?: (form: FormInstance) => React.ReactNode
 }
 ```
 
@@ -247,52 +247,52 @@ type ControlConfig =
   | TreeConfig
   | TreeSelectConfig
   | DatePickerConfig
-  | CustomControlConfig;
+  | CustomControlConfig
 // 纯文本
 type TextControlConfig = {
-  controlType: 'TEXT';
-} & TextControlProps;
+  controlType: 'TEXT'
+} & TextControlProps
 // 输入框
 type InputControlConfig = {
-  controlType: 'INPUT';
-} & InputControlProps;
+  controlType: 'INPUT'
+} & InputControlProps
 // 下拉框
 type SelectControlConfig = {
-  controlType: 'SELECT';
-} & SelectControlProps;
+  controlType: 'SELECT'
+} & SelectControlProps
 // 远程数据下拉框
 type RemoteSelectControlConfig = {
-  controlType: 'REMOTE_SELECT';
-} & RemoteSelectControlProps;
+  controlType: 'REMOTE_SELECT'
+} & RemoteSelectControlProps
 // 文本域
 type TextAreaControlConfig = {
-  controlType: 'TEXTAREA';
-} & TextAreaControlProps;
+  controlType: 'TEXTAREA'
+} & TextAreaControlProps
 // 文件上传
 type UploadControlConfig = {
-  controlType: 'UPLOAD';
-} & UploadControlProps;
+  controlType: 'UPLOAD'
+} & UploadControlProps
 // 单选按钮
 type RadioGroupControlConfig = {
-  controlType: 'RADIO_GROUP';
-} & RadioGroupControlProps;
+  controlType: 'RADIO_GROUP'
+} & RadioGroupControlProps
 // 树形控件
 type TreeConfig = {
-  controlType: 'TREE';
-} & TreeControlProps;
+  controlType: 'TREE'
+} & TreeControlProps
 // 树形下拉选项控件
 type TreeSelectConfig = {
-  controlType: 'TREE_SELECT';
-} & TreeSelectControlProps;
+  controlType: 'TREE_SELECT'
+} & TreeSelectControlProps
 // 时间选择控件
 type DatePickerConfig = {
-  controlType: 'DATE';
-} & DatePickerControlConfig;
+  controlType: 'DATE'
+} & DatePickerControlConfig
 // 自定义控件
 type CustomControlConfig = {
-  controlType: 'CUSTOM';
-  render: () => React.ReactElement;
-};
+  controlType: 'CUSTOM'
+  render: () => React.ReactElement
+}
 ```
 
 #### options.buttonGroup
@@ -300,7 +300,7 @@ type CustomControlConfig = {
 按钮组配置
 
 ```ts
-ButtonConfig | (() => ButtonConfig);
+ButtonConfig | (() => ButtonConfig)
 ```
 
 _ButtonConfig_
@@ -308,9 +308,9 @@ _ButtonConfig_
 ```ts
 interface ButtonConfig extends FormItemProps {
   // 按钮组缩进
-  indent?: number;
+  indent?: number
   // 按钮组（继承自antd ButtonProps）
-  groups?: ({ text: string } & ButtonProps)[];
+  groups?: ({ text: string } & ButtonProps)[]
 }
 ```
 

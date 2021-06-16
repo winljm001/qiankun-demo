@@ -1,69 +1,69 @@
-import React, { useEffect } from 'react';
-import { Form, Button } from 'antd';
-import { FormInstance } from 'antd/lib/form/hooks/useForm';
-import { FormProps, FormItemProps } from 'antd/lib/form';
-import { ButtonProps } from 'antd/lib/button/button';
-import { NamePath } from 'rc-field-form/lib/interface';
-import { get as _get, set as _set } from 'lodash';
-import moment from 'moment';
-import Space from '@/components/Space';
-import { formControlIndent } from '@/config/defaultSettings';
-import TextControl, { TextControlProps } from './controls/TextControl';
-import InputControl, { InputControlProps } from './controls/InputControl';
-import SelectControl, { SelectControlProps } from './controls/SelectControl';
-import RemoteSelectControl, { RemoteSelectControlProps } from './controls/RemoteSelectControl';
-import TextAreaControl, { TextAreaControlProps } from './controls/TextAreaControl';
-import UploadControl, { UploadControlProps } from './controls/UploadControl';
-import RadioGroupControl, { RadioGroupControlProps } from './controls/RadioGroupControl';
-import TreeControl, { TreeControlProps } from './controls/TreeControl';
-import TreeSelectControl, { TreeSelectControlProps } from './controls/TreeSelectControl';
-import DatePickerControl, { DatePickerControlConfig } from './controls/DatePickerControl';
-import { fromSingleLayoutProps } from './defaultConfig';
+import React, { useEffect } from 'react'
+import { Form, Button } from 'antd'
+import { FormInstance } from 'antd/lib/form/hooks/useForm'
+import { FormProps, FormItemProps } from 'antd/lib/form'
+import { ButtonProps } from 'antd/lib/button/button'
+import { NamePath } from 'rc-field-form/lib/interface'
+import { get as _get, set as _set } from 'lodash'
+import moment from 'moment'
+import Space from '@/components/Space'
+import { formControlIndent } from '@/config/defaultSettings'
+import TextControl, { TextControlProps } from './controls/TextControl'
+import InputControl, { InputControlProps } from './controls/InputControl'
+import SelectControl, { SelectControlProps } from './controls/SelectControl'
+import RemoteSelectControl, { RemoteSelectControlProps } from './controls/RemoteSelectControl'
+import TextAreaControl, { TextAreaControlProps } from './controls/TextAreaControl'
+import UploadControl, { UploadControlProps } from './controls/UploadControl'
+import RadioGroupControl, { RadioGroupControlProps } from './controls/RadioGroupControl'
+import TreeControl, { TreeControlProps } from './controls/TreeControl'
+import TreeSelectControl, { TreeSelectControlProps } from './controls/TreeSelectControl'
+import DatePickerControl, { DatePickerControlConfig } from './controls/DatePickerControl'
+import { fromSingleLayoutProps } from './defaultConfig'
 
 // 纯文本
 type TextControlConfig = {
-  controlType: 'TEXT';
-} & TextControlProps;
+  controlType: 'TEXT'
+} & TextControlProps
 // 输入框
 type InputControlConfig = {
-  controlType: 'INPUT';
-} & InputControlProps;
+  controlType: 'INPUT'
+} & InputControlProps
 // 下拉框
 type SelectControlConfig = {
-  controlType: 'SELECT';
-} & SelectControlProps;
+  controlType: 'SELECT'
+} & SelectControlProps
 // 远程数据下拉框
 type RemoteSelectControlConfig = {
-  controlType: 'REMOTE_SELECT';
-} & RemoteSelectControlProps;
+  controlType: 'REMOTE_SELECT'
+} & RemoteSelectControlProps
 // 文本域
 type TextAreaControlConfig = {
-  controlType: 'TEXTAREA';
-} & TextAreaControlProps;
+  controlType: 'TEXTAREA'
+} & TextAreaControlProps
 // 文件上传
 type UploadControlConfig = {
-  controlType: 'UPLOAD';
-} & UploadControlProps;
+  controlType: 'UPLOAD'
+} & UploadControlProps
 // 单选按钮
 type RadioGroupControlConfig = {
-  controlType: 'RADIO_GROUP';
-} & RadioGroupControlProps;
+  controlType: 'RADIO_GROUP'
+} & RadioGroupControlProps
 // 树形控件
 type TreeConfig = {
-  controlType: 'TREE';
-} & TreeControlProps;
+  controlType: 'TREE'
+} & TreeControlProps
 // 树形下拉选项控件
 type TreeSelectConfig = {
-  controlType: 'TREE_SELECT';
-} & TreeSelectControlProps;
+  controlType: 'TREE_SELECT'
+} & TreeSelectControlProps
 // 时间选择控件
 type DatePickerConfig = {
-  controlType: 'DATE';
-} & DatePickerControlConfig;
+  controlType: 'DATE'
+} & DatePickerControlConfig
 // 自定义控件
 interface CustomControlConfig {
-  controlType: 'CUSTOM';
-  render: () => React.ReactElement;
+  controlType: 'CUSTOM'
+  render: () => React.ReactElement
 }
 // 表单控件
 type ControlConfig =
@@ -77,62 +77,62 @@ type ControlConfig =
   | TreeConfig
   | TreeSelectConfig
   | DatePickerConfig
-  | CustomControlConfig;
+  | CustomControlConfig
 // 表单项
 interface FormItemObjectConfig extends FormItemProps {
-  excluded?: boolean;
-  indent?: number;
-  control?: ControlConfig;
-  customRender?: (form: FormInstance) => React.ReactNode;
+  excluded?: boolean
+  indent?: number
+  control?: ControlConfig
+  customRender?: (form: FormInstance) => React.ReactNode
 }
 // 按钮项
-export type ButtonItem = { text: string } & ButtonProps;
+export type ButtonItem = { text: string } & ButtonProps
 export interface ButtonConfig extends FormItemProps {
-  indent?: number;
-  groups?: ButtonItem[];
+  indent?: number
+  groups?: ButtonItem[]
 }
-export type FormItemConfig = FormItemObjectConfig | (() => FormItemObjectConfig);
+export type FormItemConfig = FormItemObjectConfig | (() => FormItemObjectConfig)
 export interface FormConfig extends FormProps {
-  form?: FormInstance;
-  onFormCreated?: (form: FormInstance) => void;
-  normalize?: (values: any) => any;
+  form?: FormInstance
+  onFormCreated?: (form: FormInstance) => void
+  normalize?: (values: any) => any
   // 表单项列表
-  formItems: FormItemConfig[];
+  formItems: FormItemConfig[]
   // 底部按钮组
-  buttonGroup?: ButtonConfig | (() => ButtonConfig);
+  buttonGroup?: ButtonConfig | (() => ButtonConfig)
 }
 
 interface InitialValues {
-  [prop: string]: any;
+  [prop: string]: any
 }
 const convertDateValue = (values: InitialValues, name: NamePath, control: DatePickerConfig) => {
-  const { pickerType } = control;
-  let result = null;
+  const { pickerType } = control
+  let result = null
   switch (pickerType) {
     case 'DATE': {
-      const date = _get(values, name);
-      result = date ? moment(date) : null;
-      break;
+      const date = _get(values, name)
+      result = date ? moment(date) : null
+      break
     }
   }
-  _set(values, name, result);
-};
+  _set(values, name, result)
+}
 const convertInitialValues = (values: InitialValues, formItems: FormItemConfig[]) => {
   formItems.forEach((formItem) => {
-    const item: FormItemObjectConfig = typeof formItem === 'function' ? formItem() : formItem;
+    const item: FormItemObjectConfig = typeof formItem === 'function' ? formItem() : formItem
     switch (item.control?.controlType) {
       case 'DATE':
-        convertDateValue(values, item.name, item.control);
-        break;
+        convertDateValue(values, item.name, item.control)
+        break
     }
-  });
-};
+  })
+}
 function callableDataReturn<T>(executableData: T | (() => T)): T {
   switch (typeof executableData) {
     case 'function':
-      return (executableData as () => T)();
+      return (executableData as () => T)()
     default:
-      return executableData;
+      return executableData
   }
 }
 const JsonForm: React.FC<FormConfig> = ({
@@ -144,52 +144,52 @@ const JsonForm: React.FC<FormConfig> = ({
   ...formProps
 }) => {
   // 如果开发者未传递form，则自动生成form实例
-  const defaultForm = Form.useForm()[0];
-  Object.assign(formProps, { form: formProps.form || defaultForm });
+  const defaultForm = Form.useForm()[0]
+  Object.assign(formProps, { form: formProps.form || defaultForm })
   // 转换表单初始值（如时间需moment）
-  convertInitialValues(formProps.initialValues, formItems);
+  convertInitialValues(formProps.initialValues, formItems)
   useEffect(() => {
-    onFormCreated?.(defaultForm);
-  }, []);
+    onFormCreated?.(defaultForm)
+  }, [])
   /**
    * 渲染控件
    * @param config 控件配置
    */
   const renderControl = (config: ControlConfig, label?: React.ReactNode) => {
-    const { controlType, ...controlConfig } = config;
+    const { controlType, ...controlConfig } = config
     switch (controlType) {
       case 'TEXT':
-        return <TextControl label={label} {...(controlConfig as TextControlProps)} />;
+        return <TextControl label={label} {...(controlConfig as TextControlProps)} />
       case 'INPUT':
-        return <InputControl {...(controlConfig as InputControlProps)} />;
+        return <InputControl {...(controlConfig as InputControlProps)} />
       case 'SELECT':
-        return <SelectControl {...(controlConfig as SelectControlProps)} />;
+        return <SelectControl {...(controlConfig as SelectControlProps)} />
       case 'REMOTE_SELECT':
-        return <RemoteSelectControl {...(controlConfig as RemoteSelectControlProps)} />;
+        return <RemoteSelectControl {...(controlConfig as RemoteSelectControlProps)} />
       case 'TEXTAREA':
-        return <TextAreaControl {...(controlConfig as TextAreaControlProps)} />;
+        return <TextAreaControl {...(controlConfig as TextAreaControlProps)} />
       case 'UPLOAD':
-        return <UploadControl {...(controlConfig as UploadControlProps)} />;
+        return <UploadControl {...(controlConfig as UploadControlProps)} />
       case 'RADIO_GROUP':
-        return <RadioGroupControl {...(controlConfig as RadioGroupControlProps)} />;
+        return <RadioGroupControl {...(controlConfig as RadioGroupControlProps)} />
       case 'TREE':
-        return <TreeControl {...(controlConfig as TreeControlProps)} />;
+        return <TreeControl {...(controlConfig as TreeControlProps)} />
       case 'TREE_SELECT':
-        return <TreeSelectControl {...(controlConfig as TreeSelectControlProps)} />;
+        return <TreeSelectControl {...(controlConfig as TreeSelectControlProps)} />
       case 'DATE':
-        return <DatePickerControl {...(config as DatePickerControlConfig)} />;
+        return <DatePickerControl {...(config as DatePickerControlConfig)} />
       case 'CUSTOM':
-        return (config as CustomControlConfig).render();
+        return (config as CustomControlConfig).render()
       default:
-        throw new Error(`unkown controlType: ${controlType}`);
+        throw new Error(`unkown controlType: ${controlType}`)
     }
-  };
+  }
 
   const renderFormItem = (formItemConfig: FormItemObjectConfig, index: number) => {
-    const { indent = formControlIndent, style = {}, label, control, ...formItemProps } = formItemConfig;
-    delete formItemProps.excluded;
-    delete formItemProps.shouldUpdate;
-    delete formItemProps.customRender;
+    const { indent = formControlIndent, style = {}, label, control, ...formItemProps } = formItemConfig
+    delete formItemProps.excluded
+    delete formItemProps.shouldUpdate
+    delete formItemProps.customRender
     return (
       <Form.Item
         key={index}
@@ -198,38 +198,38 @@ const JsonForm: React.FC<FormConfig> = ({
         {...formItemProps}>
         {renderControl(control, label)}
       </Form.Item>
-    );
-  };
+    )
+  }
   const handleFormItemRenderLogic = (formItem: FormItemConfig, index: number) => {
-    const formItemConfig = callableDataReturn(formItem);
-    const { shouldUpdate, customRender, excluded } = callableDataReturn(formItem);
+    const formItemConfig = callableDataReturn(formItem)
+    const { shouldUpdate, customRender, excluded } = callableDataReturn(formItem)
     if (customRender) {
-      return customRender(formProps.form);
+      return customRender(formProps.form)
     }
     if (shouldUpdate) {
       return (
         <Form.Item key={index} shouldUpdate={shouldUpdate} noStyle>
           {() => {
-            const formItemConfig = callableDataReturn(formItem);
-            if (formItemConfig.excluded) return null;
-            return renderFormItem(formItemConfig, index);
+            const formItemConfig = callableDataReturn(formItem)
+            if (formItemConfig.excluded) return null
+            return renderFormItem(formItemConfig, index)
           }}
         </Form.Item>
-      );
+      )
     }
-    if (excluded) return null;
-    return renderFormItem(formItemConfig, index);
-  };
+    if (excluded) return null
+    return renderFormItem(formItemConfig, index)
+  }
 
   const onFormFinish = (values) => {
-    normalize?.(values);
+    normalize?.(values)
     if (onFinish) {
-      onFinish(values);
+      onFinish(values)
     }
-  };
-  const formPropsResult: FormProps = { layout: 'vertical', ...fromSingleLayoutProps, ...formProps };
+  }
+  const formPropsResult: FormProps = { layout: 'vertical', ...fromSingleLayoutProps, ...formProps }
   // 根据表单项col props设置按钮组col props
-  const { indent = formControlIndent, style = {}, groups = [], ...buttonItemProps } = callableDataReturn(buttonGroup);
+  const { indent = formControlIndent, style = {}, groups = [], ...buttonItemProps } = callableDataReturn(buttonGroup)
   return (
     <Form {...formPropsResult} onFinish={onFormFinish}>
       {/* 控件列表 */}
@@ -243,15 +243,15 @@ const JsonForm: React.FC<FormConfig> = ({
                 <Button key={text} {...props}>
                   {text}
                 </Button>
-              );
+              )
             })}
           </Space>
         </Form.Item>
       )}
     </Form>
-  );
-};
+  )
+}
 
-export const useForm = Form.useForm;
-export const defineConfig: (config: FormConfig) => FormConfig = (config) => config;
-export default JsonForm;
+export const useForm = Form.useForm
+export const defineConfig: (config: FormConfig) => FormConfig = (config) => config
+export default JsonForm

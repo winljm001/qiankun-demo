@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { TreeSelect, TreeSelectProps } from 'antd';
+import React, { useState, useEffect } from 'react'
+import { TreeSelect, TreeSelectProps } from 'antd'
 
 export interface TreeSelectControlProps extends TreeSelectProps<any> {
   remote?: {
-    fetch: () => Promise<any>;
-    normalize?: (val: any) => any;
-  };
+    fetch: () => Promise<any>
+    normalize?: (val: any) => any
+  }
 }
 
 const TreeControl: React.FC<TreeSelectControlProps> = ({
@@ -16,27 +16,27 @@ const TreeControl: React.FC<TreeSelectControlProps> = ({
   showCheckedStrategy = TreeSelect.SHOW_PARENT,
   ...treeProps
 }) => {
-  const [loading, setLoading] = useState(!!remote);
-  const [remoteTreeData, setRemoteTreeData] = useState([]);
+  const [loading, setLoading] = useState(!!remote)
+  const [remoteTreeData, setRemoteTreeData] = useState([])
 
   useEffect(() => {
     if (remote) {
-      fetchTreeData();
+      fetchTreeData()
     }
-  }, []);
+  }, [])
   const fetchTreeData = () => {
-    const { fetch, normalize } = remote;
+    const { fetch, normalize } = remote
     fetch()
       .then((res) => {
-        let result = [];
-        result = typeof normalize === 'function' ? normalize(res?.result) : res?.result;
-        setRemoteTreeData(result || []);
+        let result = []
+        result = typeof normalize === 'function' ? normalize(res?.result) : res?.result
+        setRemoteTreeData(result || [])
       })
       .finally(() => {
-        setLoading(false);
-      });
-  };
-  const _treeData = (remote ? remoteTreeData : treeData) || [];
+        setLoading(false)
+      })
+  }
+  const _treeData = (remote ? remoteTreeData : treeData) || []
   return (
     <TreeSelect
       style={{ width: '100%', ...style }}
@@ -46,7 +46,7 @@ const TreeControl: React.FC<TreeSelectControlProps> = ({
       treeCheckable={treeCheckable}
       {...treeProps}
     />
-  );
-};
+  )
+}
 
-export default TreeControl;
+export default TreeControl

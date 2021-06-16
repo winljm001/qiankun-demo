@@ -1,40 +1,40 @@
-import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
-import { Switch, Form, Input, Select } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
-import { FormRef } from '../../index';
-import styles from './style.module.less';
+import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react'
+import { Switch, Form, Input, Select } from 'antd'
+import { useForm } from 'antd/lib/form/Form'
+import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions'
+import { FormRef } from '../../index'
+import styles from './style.module.less'
 
 type IProps = {
-  initialValues: defs.commodityService.SkuDetails;
-};
+  initialValues: defs.commodityService.SkuDetails
+}
 
-const { Option } = Select;
+const { Option } = Select
 
 const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
-  const [skuUnitOptions, setSkuUnitOptions] = useState([]);
-  const [weightArr, setWeightArr] = useState([]);
-  const [form] = useForm();
+  const [skuUnitOptions, setSkuUnitOptions] = useState([])
+  const [weightArr, setWeightArr] = useState([])
+  const [form] = useForm()
   useImperativeHandle(ref, () => ({
     form,
-  }));
+  }))
   // 生命周期请求数据
   useEffect(() => {
     listUnitOptions({ commodityTypeId: 5 })
       .then((res) => {
-        const data = res.data;
-        setWeightArr(data);
+        const data = res.data
+        setWeightArr(data)
       })
       .catch((err) => {
-        console.log(err);
-      });
+        console.log(err)
+      })
     listUnitOptions({ commodityTypeId: 1 })
       .then((res) => {
-        const data = res.data;
-        setSkuUnitOptions(data);
+        const data = res.data
+        setSkuUnitOptions(data)
       })
-      .catch((err) => {});
-  }, []);
+      .catch((err) => {})
+  }, [])
 
   const selectAfter = (
     <Form.Item
@@ -47,11 +47,11 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
             <Option key={item.value} value={item.value}>
               {item.label}
             </Option>
-          );
+          )
         })}
       </Select>
     </Form.Item>
-  );
+  )
 
   return (
     <Form form={form} name="basic" initialValues={{ status: true, ...initialValues }} className={styles.formBox}>
@@ -72,7 +72,7 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
         <Switch checkedChildren="开启" unCheckedChildren="关闭" />
       </Form.Item>
     </Form>
-  );
-});
+  )
+})
 
-export default FruitForm;
+export default FruitForm
