@@ -376,14 +376,14 @@ class SubsidiarySpuVO {
 }
 
 class SubsidiaryUpdateDTO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
   /** 商品id */
   commodityId = undefined
 
   /** 商品名称 */
   commodityName = ''
-
-  /** 商品分类id */
-  commodityTypeId = undefined
 }
 
 class UpdateSkuDTO {

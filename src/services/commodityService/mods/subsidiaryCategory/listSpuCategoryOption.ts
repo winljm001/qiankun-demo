@@ -5,10 +5,7 @@ import * as request from '@/utils/fetch'
 /**
  * @description listSpuCategoryOption 接口 URL 参数/GET
  */
-export class Params {
-  /** id */
-  id: number
-}
+export class Params {}
 
 /**
  * @description listSpuCategoryOption 接口参数
@@ -28,7 +25,7 @@ export const listSpuCategoryOption = (
     >
   >({
     ...request.buildOptions(
-      '/api/commodity/v1/spu/subsidiary/category/{id}/option',
+      '/api/commodity/v1/spu/subsidiary/category',
       params,
       'GET'
     ),
@@ -40,7 +37,7 @@ export const listSpuCategoryOption = (
  * @description listSpuCategoryOption hooks 默认的 key
  */
 export const USE_LIST_SPU_CATEGORY_OPTION_KEY =
-  '/api/commodity/v1/spu/subsidiary/category/{id}/option_GET'
+  '/api/commodity/v1/spu/subsidiary/category_GET'
 
 // export const listSpuCategoryOptionQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

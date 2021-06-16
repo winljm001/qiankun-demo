@@ -392,14 +392,14 @@ declare namespace defs {
     }
 
     export class SubsidiaryUpdateDTO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
       /** 商品id */
       commodityId?: number
 
       /** 商品名称 */
       commodityName?: string
-
-      /** 商品分类id */
-      commodityTypeId?: number
     }
 
     export class UpdateSkuDTO {
@@ -683,6 +683,29 @@ declare namespace API {
             defs.commodityService.DefaultPageResult<
               defs.commodityService.SkuList
             >
+          >
+        >
+      }
+
+      /**
+       * listPropertyOptions
+       * /api/commodity/v1/commodity/sku/option/property/{commodityTypeId}
+       */
+      export namespace listPropertyOptions {
+        export class Params {
+          /** commodityTypeId */
+          commodityTypeId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.Option<string, number>>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.Option<string, number>>
           >
         >
       }
@@ -1010,13 +1033,10 @@ declare namespace API {
     export namespace subsidiaryCategory {
       /**
        * listSpuCategoryOption
-       * /api/commodity/v1/spu/subsidiary/category/{id}/option
+       * /api/commodity/v1/spu/subsidiary/category
        */
       export namespace listSpuCategoryOption {
-        export class Params {
-          /** id */
-          id: number
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<
           Array<defs.commodityService.Option<string, number>>

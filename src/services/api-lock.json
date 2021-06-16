@@ -709,6 +709,77 @@
             ]
           },
           {
+            "description": "listPropertyOptions",
+            "name": "listPropertyOptions",
+            "method": "get",
+            "path": "/api/commodity/v1/commodity/sku/option/property/{commodityTypeId}",
+            "response": {
+              "typeArgs": [
+                {
+                  "typeArgs": [
+                    {
+                      "typeArgs": [
+                        {
+                          "typeArgs": [],
+                          "typeName": "string",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        },
+                        {
+                          "typeArgs": [],
+                          "typeName": "number",
+                          "isDefsType": false,
+                          "templateIndex": -1,
+                          "compileTemplateKeyword": "#/definitions/",
+                          "enum": [],
+                          "typeProperties": []
+                        }
+                      ],
+                      "typeName": "Option",
+                      "isDefsType": true,
+                      "templateIndex": -1,
+                      "compileTemplateKeyword": "#/definitions/",
+                      "enum": [],
+                      "typeProperties": []
+                    }
+                  ],
+                  "typeName": "Array",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "ApiResult",
+              "isDefsType": true,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "parameters": [
+              {
+                "in": "path",
+                "description": "commodityTypeId",
+                "name": "commodityTypeId",
+                "required": true,
+                "dataType": {
+                  "typeArgs": [],
+                  "typeName": "number",
+                  "isDefsType": false,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              }
+            ]
+          },
+          {
             "description": "listUnitOptions",
             "name": "listUnitOptions",
             "method": "get",
@@ -1600,7 +1671,7 @@
             "description": "listSpuCategoryOption",
             "name": "listSpuCategoryOption",
             "method": "get",
-            "path": "/api/commodity/v1/spu/subsidiary/category/{id}/option",
+            "path": "/api/commodity/v1/spu/subsidiary/category",
             "response": {
               "typeArgs": [
                 {
@@ -1649,23 +1720,7 @@
               "enum": [],
               "typeProperties": []
             },
-            "parameters": [
-              {
-                "in": "path",
-                "description": "id",
-                "name": "id",
-                "required": true,
-                "dataType": {
-                  "typeArgs": [],
-                  "typeName": "number",
-                  "isDefsType": false,
-                  "templateIndex": -1,
-                  "compileTemplateKeyword": "#/definitions/",
-                  "enum": [],
-                  "typeProperties": []
-                }
-              }
-            ]
+            "parameters": []
           }
         ],
         "name": "subsidiaryCategory"
@@ -4194,6 +4249,20 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "commodityCategoryId",
+            "description": "商品分类id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "commodityId",
             "description": "商品id",
             "required": false
@@ -4210,20 +4279,6 @@
             },
             "name": "commodityName",
             "description": "商品名称",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
-              "typeName": "number",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "commodityTypeId",
-            "description": "商品分类id",
             "required": false
           }
         ],
@@ -4321,6 +4376,7 @@
     "mods": [
       {
         "description": "web-用户模块",
+        "name": "userWeb",
         "interfaces": [
           {
             "consumes": [
@@ -4412,14 +4468,24 @@
               }
             ]
           }
-        ],
-        "name": "userWeb"
+        ]
       }
     ],
     "name": "userService",
     "baseClasses": [
       {
         "name": "ApiResult",
+        "templateArgs": [
+          {
+            "typeArgs": [],
+            "typeName": "UserLoginResponseVO",
+            "isDefsType": true,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ],
         "properties": [
           {
             "dataType": {
@@ -4460,21 +4526,11 @@
             "name": "errMsg",
             "required": false
           }
-        ],
-        "templateArgs": [
-          {
-            "typeArgs": [],
-            "typeName": "UserLoginResponseVO",
-            "isDefsType": true,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
         ]
       },
       {
         "name": "LoginDto",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4520,11 +4576,11 @@
             "name": "userPlatform",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "MobileDto",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4540,11 +4596,11 @@
             "description": "手机号",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       },
       {
         "name": "UserLoginResponseVO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4616,8 +4672,7 @@
             "description": "用户名称",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   },
@@ -4625,6 +4680,7 @@
     "mods": [
       {
         "description": "角色权限管理",
+        "name": "role",
         "interfaces": [
           {
             "description": "根据用户ID获取权限列表",
@@ -4678,14 +4734,34 @@
               }
             ]
           }
-        ],
-        "name": "role"
+        ]
       }
     ],
     "name": "authService",
     "baseClasses": [
       {
         "name": "ApiResult",
+        "templateArgs": [
+          {
+            "typeArgs": [
+              {
+                "typeArgs": [],
+                "typeName": "AuthDTO",
+                "isDefsType": true,
+                "templateIndex": -1,
+                "compileTemplateKeyword": "#/definitions/",
+                "enum": [],
+                "typeProperties": []
+              }
+            ],
+            "typeName": "Array",
+            "isDefsType": false,
+            "templateIndex": -1,
+            "compileTemplateKeyword": "#/definitions/",
+            "enum": [],
+            "typeProperties": []
+          }
+        ],
         "properties": [
           {
             "dataType": {
@@ -4736,31 +4812,11 @@
             "name": "errMsg",
             "required": false
           }
-        ],
-        "templateArgs": [
-          {
-            "typeArgs": [
-              {
-                "typeArgs": [],
-                "typeName": "AuthDTO",
-                "isDefsType": true,
-                "templateIndex": -1,
-                "compileTemplateKeyword": "#/definitions/",
-                "enum": [],
-                "typeProperties": []
-              }
-            ],
-            "typeName": "Array",
-            "isDefsType": false,
-            "templateIndex": -1,
-            "compileTemplateKeyword": "#/definitions/",
-            "enum": [],
-            "typeProperties": []
-          }
         ]
       },
       {
         "name": "AuthDTO",
+        "templateArgs": [],
         "properties": [
           {
             "dataType": {
@@ -4827,8 +4883,7 @@
             "name": "leaf",
             "required": false
           }
-        ],
-        "templateArgs": []
+        ]
       }
     ]
   }

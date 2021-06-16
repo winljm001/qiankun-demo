@@ -4,6 +4,7 @@
 import * as listSkuListColumn from './listSkuListColumn'
 import * as getSkuDetail from './getSkuDetail'
 import * as pageSku from './pageSku'
+import * as listPropertyOptions from './listPropertyOptions'
 import * as listUnitOptions from './listUnitOptions'
 import * as listSkuQueryCondition from './listSkuQueryCondition'
 import * as doSaveSkuList from './doSaveSkuList'
@@ -15,6 +16,7 @@ export {
   listSkuListColumn,
   getSkuDetail,
   pageSku,
+  listPropertyOptions,
   listUnitOptions,
   listSkuQueryCondition,
   doSaveSkuList,
