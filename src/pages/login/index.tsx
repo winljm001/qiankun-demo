@@ -184,7 +184,7 @@ const Index: React.FC = () => {
             </Form.Item>
           </Form>
         </div>
-        <div className={styles.record}>© 169 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
+        <div className={styles.record}>&copy; 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
       </div>
     </div>
   );
