@@ -3,7 +3,6 @@ import { Button, FormInstance, Modal, Space, Table } from 'antd';
 import { useHistory } from 'react-router-dom';
 import { useToggle } from 'ahooks';
 import { useMutation } from 'react-query';
-import { pageCommodity } from '@/services/commodityService/mods/commodity/pageCommodity';
 import BaseCard from '@/components/BaseCard';
 import ActionGroup from '@/components/ActionGroup';
 import {
@@ -14,8 +13,9 @@ import {
 import StatusChanger from '@/components/StatusChanger';
 import subRoute from '@/components/hoc/sub-route';
 import useAsyncTable from '@/hooks/useAsyncTable';
-import { doUpdateCommodityName } from '@/services/commodityService/mods/commodity/doUpdateCommodityName';
-import { doUpdateCommodityStatus } from '@/services/commodityService/mods/commodity/doUpdateCommodityStatus';
+import { pageCommodity } from '@/services/commodityService/mods/subsidiary/pageCommodity';
+import { doUpdateCommodityName } from '@/services/commodityService/mods/subsidiary/doUpdateCommodityName';
+import { doUpdateCommodityStatus } from '@/services/commodityService/mods/subsidiary/doUpdateCommodityStatus';
 import SpuForm from '../components/spu-form';
 import SearchForm from './search-form/index';
 

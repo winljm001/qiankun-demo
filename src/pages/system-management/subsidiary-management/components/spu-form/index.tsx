@@ -1,14 +1,11 @@
 import { useDebounceFn } from 'ahooks';
 import { Form, FormInstance, Input } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
 import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch';
 import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
-import { isSpuNameRepeat } from '@/services/commodityService/mods/commodity/isSpuNameRepeat';
-import { listCommodityOriginOption } from '@/services/commodityService/mods/commodityCategory/listCommodityOriginOption';
-import { listCommodityVarietyOption } from '@/services/commodityService/mods/commodityCategory/listCommodityVarietyOption';
-import { listSpuCategoryOption } from '@/services/commodityService/mods/commodityCategory/listSpuCategoryOption';
-import { listSpuTypeOption } from '@/services/commodityService/mods/commodityType/listSpuTypeOption';
+import { isSpuNameRepeat } from '@/services/commodityService/mods/subsidiary/isSpuNameRepeat';
+import { listSpuCategoryOption } from '@/services/commodityService/mods/subsidiaryCategory/listSpuCategoryOption';
 
 interface SpuFormProps {
   data?: defs.commodityService.CommoditySpuVO;
@@ -16,8 +13,6 @@ interface SpuFormProps {
 const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }, ref) => {
   const [form] = useForm();
 
-  const [showCommodityVariety, showCommodityVarietyToggle] = useState(true);
-  const [showCommodityPlaceOrigin, showCommodityPlaceOriginToggle] = useState(true);
   useImperativeHandle(ref, () => ({
     ...form,
   }));
@@ -44,13 +39,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
     return (
       <>
         <Form.Item label="商品类型">{data?.commodityTypeName}</Form.Item>
-        <Form.Item label="商品品类">{data?.commodityCategoryName}</Form.Item>
-        <Form.Item label="商品品种" hidden={!data?.commodityVarietyName}>
-          {data?.commodityVarietyName}
-        </Form.Item>
-        <Form.Item label="商品产地" hidden={!data?.commodityPlaceOriginName}>
-          {data?.commodityPlaceOriginName}
-        </Form.Item>
+        <Form.Item label="商品分类">{data?.commodityCategoryName}</Form.Item>
       </>
     );
   };
@@ -72,85 +61,18 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
       {data?.commodityId ? (
         displayItem()
       ) : (
-        <>
-          <Form.Item label="商品类型" name="commodityTypeId" rules={[{ required: true, message: '请选择商品类型' }]}>
+        <Form.Item shouldUpdate noStyle>
+          <Form.Item
+            label="商品分类"
+            name="commodityCategoryId"
+            rules={[{ required: true, message: '请选择商品分类' }]}>
             <BaseSelectByFetch
               remote={{
-                fetch: listSpuTypeOption,
+                fetch: listSpuCategoryOption,
               }}
             />
           </Form.Item>
-          <Form.Item shouldUpdate noStyle>
-            {({ getFieldValue }) => {
-              const commodityTypeId = getFieldValue('commodityTypeId');
-              return commodityTypeId ? (
-                <Form.Item
-                  label="商品品类"
-                  name="commodityCategoryId"
-                  rules={[{ required: true, message: '请选择商品品类' }]}>
-                  <BaseSelectByFetch
-                    onChange={() => {
-                      showCommodityVarietyToggle(true);
-                      showCommodityPlaceOriginToggle(true);
-                    }}
-                    remote={{
-                      fetch: listSpuCategoryOption,
-                      params: {
-                        id: commodityTypeId,
-                      },
-                    }}
-                  />
-                </Form.Item>
-              ) : null;
-            }}
-          </Form.Item>
-          <Form.Item shouldUpdate noStyle>
-            {({ getFieldValue }) => {
-              const commodityCategoryId = getFieldValue('commodityCategoryId');
-              return showCommodityVariety && commodityCategoryId ? (
-                <Form.Item
-                  label="商品品种"
-                  name="commodityVarietyId"
-                  rules={[{ required: true, message: '请选择商品品种' }]}>
-                  <BaseSelectByFetch
-                    remote={{
-                      fetch: listCommodityVarietyOption,
-                      onFetched: (list) => {
-                        showCommodityVarietyToggle(list?.length > 0 ? true : false);
-                      },
-                      params: {
-                        id: commodityCategoryId,
-                      },
-                    }}
-                  />
-                </Form.Item>
-              ) : null;
-            }}
-          </Form.Item>
-          <Form.Item shouldUpdate noStyle>
-            {({ getFieldValue }) => {
-              const commodityCategoryId = getFieldValue('commodityCategoryId');
-              return showCommodityPlaceOrigin && commodityCategoryId ? (
-                <Form.Item
-                  label="商品产地"
-                  name="commodityPlaceOriginId"
-                  rules={[{ required: true, message: '请选择商品产地' }]}>
-                  <BaseSelectByFetch
-                    remote={{
-                      fetch: listCommodityOriginOption,
-                      onFetched: (list) => {
-                        showCommodityPlaceOriginToggle(list?.length > 0 ? true : false);
-                      },
-                      params: {
-                        id: commodityCategoryId,
-                      },
-                    }}
-                  />
-                </Form.Item>
-              ) : null;
-            }}
-          </Form.Item>
-        </>
+        </Form.Item>
       )}
     </Form>
   );

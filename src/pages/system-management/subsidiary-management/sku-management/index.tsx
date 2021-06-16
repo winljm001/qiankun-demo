@@ -5,23 +5,22 @@ import { useToggle, useUpdateEffect } from 'ahooks';
 import { useQuery, useMutation } from 'react-query';
 import Space from '@/components/Space';
 import ActionGroup from '@/components/ActionGroup';
-import { getCommodity } from '@/services/commodityService/mods/commodity/getCommodity';
-import { listSkuQueryCondition } from '@/services/commodityService/mods/commoditySku/listSkuQueryCondition';
-import { listSkuListColumn } from '@/services/commodityService/mods/commoditySku/listSkuListColumn';
-import { pageSku } from '@/services/commodityService/mods/commoditySku/pageSku';
-import { doUpdateSkuStatus } from '@/services/commodityService/mods/commoditySku/doUpdateSkuStatus';
 import StatusChanger from '@/components/StatusChanger';
 import useAsyncTable from '@/hooks/useAsyncTable';
-import { getSkuDetail } from '@/services/commodityService/mods/commoditySku/getSkuDetail';
 import DataSuspense from '@/components/DataSuspense';
-import { doSaveSkuList } from '@/services/commodityService/mods/commoditySku/doSaveSkuList';
 import BaseCard from '@/components/BaseCard';
-import { getColumns } from '../components/sku-select/utils';
+import { getCommodity } from '@/services/commodityService/mods/subsidiary/getCommodity';
+import { listSkuQueryCondition } from '@/services/commodityService/mods/subsidiarySku/listSkuQueryCondition';
+import { listSkuListColumn } from '@/services/commodityService/mods/subsidiarySku/listSkuListColumn';
+import { getSkuDetail } from '@/services/commodityService/mods/subsidiarySku/getSkuDetail';
+import { pageSku } from '@/services/commodityService/mods/subsidiarySku/pageSku';
+import { doUpdateSkuStatus } from '@/services/commodityService/mods/subsidiarySku/doUpdateSkuStatus';
+import { doSaveSkuList } from '@/services/commodityService/mods/subsidiarySku/doSaveSkuList';
 import SkuSelect, { SkuSelectRefProps } from '../components/sku-select';
-import EditModal from './components/edit';
-// import styles from './index.module.less';
-import Filter from './components/filter';
+import { getColumns } from '../components/sku-select/utils';
 import BaseInfo from './components/base-info';
+import Filter from './components/filter';
+import EditModal from './components/edit';
 
 type SKUPageParams = {
   id: string;
@@ -277,7 +276,7 @@ const SkuManagement: React.FC = () => {
             {/* 编辑弹窗 */}
             <EditModal
               visible={showEditModal}
-              commodityTypeId={baseData.commodityTypeId}
+              commodityTypeId={baseData.commodityId}
               setVisible={setShowEditModal}
               ids={editIds.current}
               onSuccess={onEditSuccess}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'react';
 import { Switch, Form, Input, Select } from 'antd';
 import { useForm } from 'antd/lib/form/Form';
-import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions';
+import { listUnitOptions } from '@/services/commodityService/mods/subsidiarySku/listUnitOptions';
 import { FormRef } from '../../index';
 import styles from './style.module.less';
 
