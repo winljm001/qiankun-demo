@@ -64,7 +64,13 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
     <div>
       <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
       <Divider />
-      <Table rowSelection={rowSelection} columns={columns} dataSource={resData} rowKey="commoditySpecOptionIdsList" />
+      <Table
+        rowSelection={rowSelection}
+        columns={columns}
+        dataSource={resData}
+        rowKey="commoditySpecOptionIdsList"
+        pagination={{ showQuickJumper: true, showTotal: (total) => `共 ${total} 记录` }}
+      />
     </div>
   );
 });

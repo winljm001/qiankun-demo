@@ -102,7 +102,6 @@ const GoodsManagementList = () => {
       },
     },
   ];
-  console.log(tableProps);
   return (
     <div>
       <BaseCard>
