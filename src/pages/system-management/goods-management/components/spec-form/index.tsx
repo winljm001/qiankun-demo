@@ -135,18 +135,20 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                 </Col>
                               );
                             })}
-                            <Col span={8}>
-                              <Button
-                                style={{ marginBottom: 24 }}
-                                icon={<PlusOutlined />}
-                                type="dashed"
-                                block
-                                onClick={() => {
-                                  addItem();
-                                }}>
-                                新增
-                              </Button>
-                            </Col>
+                            {itemFields?.length < 20 ? (
+                              <Col span={8}>
+                                <Button
+                                  style={{ marginBottom: 24 }}
+                                  icon={<PlusOutlined />}
+                                  type="dashed"
+                                  block
+                                  onClick={() => {
+                                    addItem();
+                                  }}>
+                                  新增
+                                </Button>
+                              </Col>
+                            ) : null}
                           </Row>
                         )}
                       </Form.List>
@@ -154,19 +156,21 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                   </div>
                 );
               })}
-              <div style={{ padding: '0 24px' }}>
-                <Row>
-                  <Col {...fromSingleLayoutProps.wrapperCol}>
-                    <Button
-                      type="dashed"
-                      icon={<PlusOutlined />}
-                      block
-                      onClick={() => add(getInitialSpecValue(fields))}>
-                      新增规格
-                    </Button>
-                  </Col>
-                </Row>
-              </div>
+              {fields?.length < 3 ? (
+                <div style={{ padding: '0 24px' }}>
+                  <Row>
+                    <Col {...fromSingleLayoutProps.wrapperCol}>
+                      <Button
+                        type="dashed"
+                        icon={<PlusOutlined />}
+                        block
+                        onClick={() => add(getInitialSpecValue(fields))}>
+                        新增规格
+                      </Button>
+                    </Col>
+                  </Row>
+                </div>
+              ) : null}
             </>
           );
         }}

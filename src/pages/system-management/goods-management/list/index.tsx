@@ -11,11 +11,8 @@ import subRoute from '@/components/hoc/sub-route';
 import useAsyncTable from '@/hooks/useAsyncTable';
 import { useToggle } from 'ahooks';
 import SpuForm from '../components/spu-form';
-import { useMutation, useQuery } from 'react-query';
-import {
-  doUpdateCommodityName,
-  USE_DO_UPDATE_COMMODITY_NAME_KEY,
-} from '@/services/commodityService/mods/commodity/doUpdateCommodityName';
+import { useMutation } from 'react-query';
+import { doUpdateCommodityName } from '@/services/commodityService/mods/commodity/doUpdateCommodityName';
 import { doUpdateCommodityStatus } from '@/services/commodityService/mods/commodity/doUpdateCommodityStatus';
 
 const GoodsManagementList = () => {
@@ -105,7 +102,7 @@ const GoodsManagementList = () => {
       },
     },
   ];
-
+  console.log(tableProps);
   return (
     <div>
       <BaseCard>
