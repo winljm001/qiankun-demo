@@ -1,25 +1,25 @@
 /* eslint-disable @typescript-eslint/explicit-member-accessibility */
-import { Interface, CodeGenerator } from 'pont-engine';
+import { Interface, CodeGenerator } from 'pont-engine'
 
-const REQUEST_PARAM_KEY = 'Params';
+const REQUEST_PARAM_KEY = 'Params'
 
 /**
  * 格式化为常量的字符串
  * @example 'saveSomeData' -> 'SAVE_SOME_DATA'
  */
-const formatConstStr = (s: string) => s.replace(/\B([A-Z])/g, '_$1').toUpperCase();
+const formatConstStr = (s: string) => s.replace(/\B([A-Z])/g, '_$1').toUpperCase()
 export default class MyGenerator extends CodeGenerator {
   getInterfaceContent(inter: Interface) {
-    const method = inter.method.toUpperCase();
-    const paramsCode = inter.getParamsCode(REQUEST_PARAM_KEY, this.surrounding);
-    const paramList = inter.getParamList().filter((param) => param.paramType);
-    const hasBody = paramList.filter((p) => p.paramKey === 'body');
-    const APIUpName = inter.name.replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
-    const paramsTypeName = `${APIUpName}Params`;
-    const paramsTypeCode = `${REQUEST_PARAM_KEY}${hasBody.length ? ` & ${hasBody[0].paramType}` : ''}`;
-    const requestParamsStr = `params: ${paramsTypeName}, headers?:any`;
-    const useQueryKeyName = formatConstStr(`Use${APIUpName}Key`);
-    const useQueryKeyValue = `${inter.path}_${method}`;
+    const method = inter.method.toUpperCase()
+    const paramsCode = inter.getParamsCode(REQUEST_PARAM_KEY, this.surrounding)
+    const paramList = inter.getParamList().filter((param) => param.paramType)
+    const hasBody = paramList.filter((p) => p.paramKey === 'body')
+    const APIUpName = inter.name.replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
+    const paramsTypeName = `${APIUpName}Params`
+    const paramsTypeCode = `${REQUEST_PARAM_KEY}${hasBody.length ? ` & ${hasBody[0].paramType}` : ''}`
+    const requestParamsStr = `params: ${paramsTypeName}, headers?:any`
+    const useQueryKeyName = formatConstStr(`Use${APIUpName}Key`)
+    const useQueryKeyValue = `${inter.path}_${method}`
 
     return `
 // ${inter.description} 接口文件
@@ -68,6 +68,6 @@ export const ${useQueryKeyName} = '${useQueryKeyValue}';
 //     queryFn: () => ${inter.name}(params, headers),
 //   })
 // }
-   `;
+   `
   }
 }
