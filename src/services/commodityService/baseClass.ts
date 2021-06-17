@@ -455,9 +455,6 @@ class SkuDetails {
   /** 商品类型，1水果，2食品 */
   commodityTypeId = undefined
 
-  /** sku属性 */
-  commodityTypes = []
-
   /** 状态（1激活，0禁用） */
   status = undefined
 
@@ -668,6 +665,23 @@ class UpdateSkuDTO {
   unitType = undefined
 }
 
+class UpdateSubSkuDTO {
+  /** sku id */
+  commoditySkuIds = []
+
+  /** 状态（1激活，0禁用） */
+  status = undefined
+
+  /** 总计类型（sku单位；副单位） */
+  totalType = undefined
+
+  /** 单位数量（sku净重；换算比率） */
+  unitQuantity = undefined
+
+  /** 单位类型（sku净重单位；最小单位） */
+  unitType = undefined
+}
+
 export const commodityService = {
   ApiResult,
   CommodityBomDetailDTO,
@@ -709,5 +723,6 @@ export const commodityService = {
   SubsidiarySpuVO,
   SubsidiaryUpdateDTO,
   UpdateCommodityBomDTO,
-  UpdateSkuDTO
+  UpdateSkuDTO,
+  UpdateSubSkuDTO
 }

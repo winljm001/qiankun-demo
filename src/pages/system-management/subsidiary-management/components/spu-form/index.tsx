@@ -34,15 +34,6 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
-  // 编辑的时候显示的内容
-  const displayItem = () => {
-    return (
-      <>
-        <Form.Item label="商品类型">{data?.commodityTypeName}</Form.Item>
-        <Form.Item label="商品分类">{data?.commodityCategoryName}</Form.Item>
-      </>
-    )
-  }
   return (
     <Form form={form} {...(data?.commodityId ? {} : { layout: 'vertical', ...fromSingleLayoutProps })}>
       <Form.Item name="commodityId" hidden />
@@ -57,23 +48,13 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         ]}>
         <Input autoComplete="off" />
       </Form.Item>
-      {/* 当有id时是编辑 */}
-      {data?.commodityId ? (
-        displayItem()
-      ) : (
-        <Form.Item shouldUpdate noStyle>
-          <Form.Item
-            label="商品分类"
-            name="commodityCategoryId"
-            rules={[{ required: true, message: '请选择商品分类' }]}>
-            <BaseSelectByFetch
-              remote={{
-                fetch: listSpuCategoryOption,
-              }}
-            />
-          </Form.Item>
-        </Form.Item>
-      )}
+      <Form.Item label="商品分类" name="commodityCategoryId" rules={[{ required: true, message: '请选择商品分类' }]}>
+        <BaseSelectByFetch
+          remote={{
+            fetch: listSpuCategoryOption,
+          }}
+        />
+      </Form.Item>
     </Form>
   )
 })

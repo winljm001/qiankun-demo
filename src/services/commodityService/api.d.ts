@@ -465,9 +465,6 @@ declare namespace defs {
       /** 商品类型，1水果，2食品 */
       commodityTypeId?: number
 
-      /** sku属性 */
-      commodityTypes?: Array<defs.commodityService.CommodityTypeVO>
-
       /** 状态（1激活，0禁用） */
       status?: number
 
@@ -672,6 +669,23 @@ declare namespace defs {
     }
 
     export class UpdateSkuDTO {
+      /** sku id */
+      commoditySkuIds?: Array<number>
+
+      /** 状态（1激活，0禁用） */
+      status?: number
+
+      /** 总计类型（sku单位；副单位） */
+      totalType?: number
+
+      /** 单位数量（sku净重；换算比率） */
+      unitQuantity?: number
+
+      /** 单位类型（sku净重单位；最小单位） */
+      unitType?: number
+    }
+
+    export class UpdateSubSkuDTO {
       /** sku id */
       commoditySkuIds?: Array<number>
 
@@ -1724,7 +1738,7 @@ declare namespace API {
         export const init: Response
         export function request(
           params: Params,
-          bodyParams: defs.commodityService.UpdateSkuDTO
+          bodyParams: defs.commodityService.UpdateSubSkuDTO
         ): Promise<defs.commodityService.ApiResult<boolean>>
       }
 

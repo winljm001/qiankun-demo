@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Modal, Button, message, FormInstance } from 'antd'
 import { doUpdateSku } from '@/services/commodityService/mods/subsidiarySku/doUpdateSku'
-import FruitForm from './components/fruit-form'
 import FoodForm from './components/food-form'
 
 type IProps = {
@@ -23,7 +22,7 @@ export type FormRef = {
   form: FormInstance
 }
 
-const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, initialValues, onSuccess }) => {
+const Edit: React.FC<IProps> = ({ visible, setVisible, ids, initialValues, onSuccess }) => {
   const [submitting, setSubmitting] = useState(false)
   const formRef = useRef<FormRef>()
   // 保存
@@ -73,11 +72,7 @@ const Edit: React.FC<IProps> = ({ commodityTypeId, visible, setVisible, ids, ini
           保存
         </Button>,
       ]}>
-      {commodityTypeId === 1 ? (
-        <FruitForm ref={formRef} initialValues={initialValues} />
-      ) : (
-        <FoodForm ref={formRef} initialValues={initialValues} />
-      )}
+      <FoodForm ref={formRef} initialValues={initialValues} />
     </Modal>
   )
 }

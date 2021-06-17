@@ -52,12 +52,7 @@
   },
   "lint-staged": {
     "src/**/*.{ts,tsx}": [
-      "eslint --cache --fix",
-      "git add"
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint --cache --fix",
-      "git add"
+      "eslint --cache --fix"
     ]
   }
 }

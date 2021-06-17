@@ -55,7 +55,7 @@ const GoodsManagementList = () => {
     },
     {
       title: '商品分类',
-      dataIndex: 'commodityVarietyName',
+      dataIndex: 'commodityCategoryName',
     },
     {
       title: 'SKU数',
@@ -123,7 +123,7 @@ const GoodsManagementList = () => {
         onCancel={() => toggle()}
         confirmLoading={updateName.isLoading}
         onOk={handleEditSPU}>
-        <SpuForm ref={spuFormRef} data={editData} />
+        {visible ? <SpuForm ref={spuFormRef} data={editData} /> : null}
       </Modal>
     </div>
   )
