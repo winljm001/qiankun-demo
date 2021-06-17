@@ -15,6 +15,23 @@ declare namespace defs {
       errMsg?: string
     }
 
+    export class CommodityBomListVO {
+      /** bom id */
+      commodityBomId?: number
+
+      /** 商品分类 */
+      commodityCategory?: string
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品规格 */
+      commoditySpec?: string
+
+      /** 商品类型 */
+      commodityType?: string
+    }
+
     export class CommodityDTO {
       /** 商品品类id */
       commodityCategoryId?: number
@@ -33,6 +50,44 @@ declare namespace defs {
 
       /** 商品品种id */
       commodityVarietyId?: number
+    }
+
+    export class CommodityFruitListVO {
+      /** 商品分类id */
+      categoryId?: number
+
+      /** 商品分类名称 */
+      categoryName?: Array<string>
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
+
+      /** 产地id */
+      placeOriginId?: number
+
+      /** 产地名称 */
+      placeOriginName?: string
+
+      /** 商品单位id */
+      unitId?: number
+
+      /** 商品单位名称 */
+      unitName?: string
+
+      /** 商品品种id */
+      varietyId?: number
+
+      /** 商品品种名称 */
+      varietyName?: string
     }
 
     export class CommodityModifyDTO {
@@ -172,6 +227,17 @@ declare namespace defs {
       status?: number
     }
 
+    export class CommodityTypeVO {
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
+
+      /** 上级类型id */
+      parentCommodityTypeId?: number
+    }
+
     export class CommodityVerifyDTO {
       /** 商品id */
       commodityId?: number
@@ -194,6 +260,34 @@ declare namespace defs {
       totalRecords?: number
     }
 
+    export class FinishedGoodsReturnedList {
+      /** categoryText */
+      categoryText?: string
+
+      /** commodityId */
+      commodityId?: number
+
+      /** commodityName */
+      commodityName?: string
+
+      /** placeOriginName */
+      placeOriginName?: string
+
+      /** specText */
+      specText?: string
+
+      /** varietyName */
+      varietyName?: string
+    }
+
+    export class FinishedProductDTO {
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品规格 */
+      commoditySpecName?: string
+    }
+
     export class ModifyTheSkuStatus {
       /** sku id */
       commoditySkuIds?: Array<number>
@@ -211,6 +305,42 @@ declare namespace defs {
 
       /** value */
       value?: number
+    }
+
+    export class SaveCommodityBomIngredientDTO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
+    }
+
+    export class SaveCommodityDTO {
+      /** 配料列表 */
+      commodityBomIngredientDTOS?: Array<
+        defs.commodityService.SaveCommodityBomIngredientDTO
+      >
+
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品id */
+      commodityId?: number
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
     }
 
     export class ScreeningSkuList {
@@ -232,6 +362,9 @@ declare namespace defs {
 
       /** 商品类型，1水果，2食品 */
       commodityTypeId?: number
+
+      /** sku属性 */
+      commodityTypes?: Array<defs.commodityService.CommodityTypeVO>
 
       /** 状态（1激活，0禁用） */
       status?: number
@@ -270,6 +403,9 @@ declare namespace defs {
 
       /** sku Id */
       commoditySkuId?: number
+
+      /** 商品类型/属性名称 */
+      propertyText?: string
 
       /** SpecificationsAndOptions */
       skuCommoditySpecOptionMap?: ObjectMap<any, string>
@@ -355,6 +491,9 @@ declare namespace defs {
     }
 
     export class SubsidiaryPageVo {
+      /** 商品分类名称ID（原品类） */
+      commodityCategoryId?: number
+
       /** 商品分类名称（原品类） */
       commodityCategoryName?: string
 
@@ -478,6 +617,40 @@ declare namespace API {
       }
 
       /**
+       * pageFinishedProduct
+       * /api/commodity/v1/spu/product/list
+       */
+      export namespace pageFinishedProduct {
+        export class Params {
+          /** offset */
+          offset?: number
+          /** pageCurrent */
+          pageCurrent?: number
+          /** pageSize */
+          pageSize?: number
+          /** sortBys */
+          sortBys?: Array<string>
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.DefaultPageResult<
+            defs.commodityService.FinishedGoodsReturnedList
+          >
+        >
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.FinishedProductDTO
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.DefaultPageResult<
+              defs.commodityService.FinishedGoodsReturnedList
+            >
+          >
+        >
+      }
+
+      /**
        * doUpdateCommodityName
        * /api/commodity/v1/spu/update/name
        */
@@ -541,6 +714,96 @@ declare namespace API {
         ): Promise<
           defs.commodityService.ApiResult<defs.commodityService.CommoditySpuVO>
         >
+      }
+    }
+
+    /**
+     * Commodity Bom Controller
+     */
+    export namespace commodityBom {
+      /**
+       * pageCommodityBom
+       * /api/commodity/v1/bom/list
+       */
+      export namespace pageCommodityBom {
+        export class Params {
+          /** 商品名称 */
+          commodityName?: string
+          /** offset */
+          offset?: number
+          /** pageCurrent */
+          pageCurrent?: number
+          /** pageSize */
+          pageSize?: number
+          /** sortBys */
+          sortBys?: Array<string>
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.DefaultPageResult<
+            defs.commodityService.CommodityBomListVO
+          >
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.DefaultPageResult<
+              defs.commodityService.CommodityBomListVO
+            >
+          >
+        >
+      }
+
+      /**
+       * pageCommodityFruit
+       * /api/commodity/v1/bom/list/fruit
+       */
+      export namespace pageCommodityFruit {
+        export class Params {
+          /** 商品名称 */
+          commodityName?: string
+          /** offset */
+          offset?: number
+          /** pageCurrent */
+          pageCurrent?: number
+          /** pageSize */
+          pageSize?: number
+          /** sortBys */
+          sortBys?: Array<string>
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.DefaultPageResult<
+            defs.commodityService.CommodityFruitListVO
+          >
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.DefaultPageResult<
+              defs.commodityService.CommodityFruitListVO
+            >
+          >
+        >
+      }
+
+      /**
+       * saveCommodityBom
+       * /api/commodity/v1/bom/save
+       */
+      export namespace saveCommodityBom {
+        export class Params {}
+
+        export type Response = defs.commodityService.ApiResult<boolean>
+        export const init: Response
+        export function request(
+          params: Params,
+          bodyParams: defs.commodityService.SaveCommodityDTO
+        ): Promise<defs.commodityService.ApiResult<boolean>>
       }
     }
 
