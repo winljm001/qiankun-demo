@@ -1,5 +1,4 @@
 {
-    "cSpell.words": [
-        "enter"
-    ]
+  "cSpell.words": ["enter"],
+  "editor.formatOnSave": true // 保存自动格式化
 }

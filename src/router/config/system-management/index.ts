@@ -2,7 +2,17 @@
 import loadable from '@loadable/component'
 import BlankLayout from '@/layouts/blankLayout/index'
 import { CustomRouteConfig } from '../index'
-import { BASE_URL, GOODS_MANAGEMENT, GOODS_MANAGEMENT_ADD, SKU_MANAGEMENT, SPEC_MANAGEMENT } from './path'
+import {
+  BASE_URL,
+  GOODS_MANAGEMENT,
+  GOODS_MANAGEMENT_ADD,
+  SKU_MANAGEMENT,
+  SPEC_MANAGEMENT,
+  SUBSIDIARY_MANAGEMENT,
+  SUBSIDIARY_MANAGEMENT_ADD,
+  SUBSIDIARY_SKU_MANAGEMENT,
+  SUBSIDIARY_SPEC_MANAGEMENT,
+} from './path'
 const routes: CustomRouteConfig[] = [
   {
     path: BASE_URL,
@@ -45,6 +55,41 @@ const routes: CustomRouteConfig[] = [
             },
             component: loadable(() => import('@/pages/system-management/goods-management/spec-management')),
             breadcrumb: [{ name: '系统管理' }, { name: '果品管理', path: GOODS_MANAGEMENT }, { name: '规格管理' }],
+          },
+        ],
+      },
+      {
+        path: SUBSIDIARY_MANAGEMENT,
+        authKey: '211012',
+        meta: {
+          menuText: '辅料管理',
+        },
+        component: loadable(() => import('@/pages/system-management/subsidiary-management/list/index')),
+        breadcrumb: [{ name: '系统管理' }, { name: '辅料管理' }],
+        routes: [
+          {
+            path: SUBSIDIARY_MANAGEMENT_ADD,
+            exact: true,
+            meta: {
+              contentPadding: 0,
+            },
+            component: loadable(() => import('@/pages/system-management/subsidiary-management/add/index')),
+            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: GOODS_MANAGEMENT }],
+          },
+          {
+            path: `${SUBSIDIARY_SKU_MANAGEMENT}/:id`,
+            exact: true,
+            component: loadable(() => import('@/pages/system-management/subsidiary-management/sku-management')),
+            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: GOODS_MANAGEMENT }, { name: 'SKU管理' }],
+          },
+          {
+            path: `${SUBSIDIARY_SPEC_MANAGEMENT}/:id`,
+            exact: true,
+            meta: {
+              contentPadding: 0,
+            },
+            component: loadable(() => import('@/pages/system-management/subsidiary-management/spec-management')),
+            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: GOODS_MANAGEMENT }, { name: '规格管理' }],
           },
         ],
       },
