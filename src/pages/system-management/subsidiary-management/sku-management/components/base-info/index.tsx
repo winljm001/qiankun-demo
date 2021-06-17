@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
-import { Descriptions } from 'antd';
+import React, { FC } from 'react'
+import { Descriptions } from 'antd'
 
-const { Item } = Descriptions;
+const { Item } = Descriptions
 
 interface IProps {
-  data: defs.commodityService.CommoditySpuVO;
+  data: defs.commodityService.CommoditySpuVO
 }
 
 const BaseInfo: FC<IProps> = ({ data }) => {
@@ -17,7 +17,7 @@ const BaseInfo: FC<IProps> = ({ data }) => {
         {data.commodityPlaceOriginName && <Item label="商品产地">{data.commodityPlaceOriginName}</Item>}
       </Descriptions>
     </div>
-  );
-};
+  )
+}
 
-export default BaseInfo;
+export default BaseInfo

@@ -10,6 +10,7 @@
     "prettier": "prettier --write 'src/**/*.{js,json,yml,yaml,ts,tsx,md}'"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.6.2",
     "@loadable/component": "^5.15.0",
     "ahooks": "^2.10.5",
     "antd": "^4.15.3",

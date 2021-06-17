@@ -9,6 +9,75 @@ class ApiResult {
   errMsg = ''
 }
 
+class CommodityBomDetailDTO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 数量 */
+  quantity = undefined
+
+  /** 数量单位 */
+  quantityUnit = undefined
+}
+
+class CommodityBomDetailListVO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 数量 */
+  quantity = undefined
+
+  /** 数量单位 */
+  quantityUnit = undefined
+
+  /** 数量单位名称 */
+  quantityUnitName = ''
+}
+
+class CommodityBomListVO {
+  /** bom id */
+  commodityBomId = undefined
+
+  /** 商品分类 */
+  commodityCategoryName = ''
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品规格 */
+  commoditySpecName = ''
+
+  /** 商品类型 */
+  commodityTypeName = ''
+}
+
 class CommodityDTO {
   /** 商品品类id */
   commodityCategoryId = undefined
@@ -166,6 +235,17 @@ class CommodityStatusDTO {
   status = undefined
 }
 
+class CommodityTypeVO {
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 上级类型id */
+  parentCommodityTypeId = undefined
+}
+
 class CommodityVerifyDTO {
   /** 商品id */
   commodityId = undefined
@@ -188,6 +268,133 @@ class DefaultPageResult {
   totalRecords = undefined
 }
 
+class FinishedGoodsReturnedList {
+  /** categoryText */
+  categoryText = ''
+
+  /** commodityId */
+  commodityId = undefined
+
+  /** commodityName */
+  commodityName = ''
+
+  /** placeOriginName */
+  placeOriginName = ''
+
+  /** specText */
+  specText = ''
+
+  /** varietyName */
+  varietyName = ''
+}
+
+class FinishedProductDTO {
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品规格 */
+  commoditySpecName = ''
+}
+
+class FinishedProductVO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品产地名称 */
+  commodityPlaceOriginName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品规格名称 */
+  commoditySpecName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 商品品种名称 */
+  commodityVarietyName = ''
+}
+
+class FoodAccessoriesListVO {
+  /** 商品分类id */
+  categoryId = undefined
+
+  /** 商品分类名称 */
+  categoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品规格名称 */
+  commoditySpecName = []
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 商品单位id */
+  unitId = undefined
+
+  /** 商品单位名称 */
+  unitName = ''
+}
+
+class FruitListVO {
+  /** 商品分类id */
+  categoryId = undefined
+
+  /** 商品分类名称 */
+  categoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 产地id */
+  placeOriginId = undefined
+
+  /** 产地名称 */
+  placeOriginName = ''
+
+  /** 商品单位id */
+  unitId = undefined
+
+  /** 商品单位名称 */
+  unitName = ''
+
+  /** 商品品种id */
+  varietyId = undefined
+
+  /** 商品品种名称 */
+  varietyName = ''
+}
+
 class ModifyTheSkuStatus {
   /** sku id */
   commoditySkuIds = []
@@ -207,6 +414,29 @@ class Option {
   value = undefined
 }
 
+class SaveCommodityBomDTO {
+  /** 配料列表 */
+  commodityBomDetailDTOS = []
+
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+}
+
 class ScreeningSkuList {
   /** 规格id */
   commoditySpecId = undefined
@@ -224,6 +454,9 @@ class SkuDetails {
 
   /** 商品类型，1水果，2食品 */
   commodityTypeId = undefined
+
+  /** sku属性 */
+  commodityTypes = []
 
   /** 状态（1激活，0禁用） */
   status = undefined
@@ -258,6 +491,9 @@ class SkuList {
 
   /** sku Id */
   commoditySkuId = undefined
+
+  /** 商品类型/属性名称 */
+  propertyText = ''
 
   /** SpecificationsAndOptions */
   skuCommoditySpecOptionMap = undefined
@@ -339,6 +575,9 @@ class SubsidiaryDTO {
 }
 
 class SubsidiaryPageVo {
+  /** 商品分类名称ID（原品类） */
+  commodityCategoryId = undefined
+
   /** 商品分类名称（原品类） */
   commodityCategoryName = ''
 
@@ -386,6 +625,32 @@ class SubsidiaryUpdateDTO {
   commodityName = ''
 }
 
+class UpdateCommodityBomDTO {
+  /** 配料列表 */
+  commodityBomDetailDTOS = []
+
+  /** bom id */
+  commodityBomId = undefined
+
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+}
+
 class UpdateSkuDTO {
   /** sku id */
   commoditySkuIds = []
@@ -405,6 +670,9 @@ class UpdateSkuDTO {
 
 export const commodityService = {
   ApiResult,
+  CommodityBomDetailDTO,
+  CommodityBomDetailListVO,
+  CommodityBomListVO,
   CommodityDTO,
   CommodityModifyDTO,
   CommodityNameDTO,
@@ -416,10 +684,17 @@ export const commodityService = {
   CommoditySpecOptionDTO,
   CommoditySpuVO,
   CommodityStatusDTO,
+  CommodityTypeVO,
   CommodityVerifyDTO,
   DefaultPageResult,
+  FinishedGoodsReturnedList,
+  FinishedProductDTO,
+  FinishedProductVO,
+  FoodAccessoriesListVO,
+  FruitListVO,
   ModifyTheSkuStatus,
   Option,
+  SaveCommodityBomDTO,
   ScreeningSkuList,
   SkuDetails,
   SkuHeader,
@@ -433,5 +708,6 @@ export const commodityService = {
   SubsidiaryPageVo,
   SubsidiarySpuVO,
   SubsidiaryUpdateDTO,
+  UpdateCommodityBomDTO,
   UpdateSkuDTO
 }

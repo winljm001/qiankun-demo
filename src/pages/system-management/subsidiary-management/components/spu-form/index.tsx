@@ -1,39 +1,39 @@
-import { useDebounceFn } from 'ahooks';
-import { Form, FormInstance, Input } from 'antd';
-import { useForm } from 'antd/lib/form/Form';
-import React, { forwardRef, useEffect, useImperativeHandle } from 'react';
-import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch';
-import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
-import { isSpuNameRepeat } from '@/services/commodityService/mods/subsidiary/isSpuNameRepeat';
-import { listSpuCategoryOption } from '@/services/commodityService/mods/subsidiaryCategory/listSpuCategoryOption';
+import { useDebounceFn } from 'ahooks'
+import { Form, FormInstance, Input } from 'antd'
+import { useForm } from 'antd/lib/form/Form'
+import React, { forwardRef, useEffect, useImperativeHandle } from 'react'
+import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch'
+import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig'
+import { isSpuNameRepeat } from '@/services/commodityService/mods/subsidiary/isSpuNameRepeat'
+import { listSpuCategoryOption } from '@/services/commodityService/mods/subsidiaryCategory/listSpuCategoryOption'
 
 interface SpuFormProps {
-  data?: defs.commodityService.CommoditySpuVO;
+  data?: defs.commodityService.CommoditySpuVO
 }
 const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }, ref) => {
-  const [form] = useForm();
+  const [form] = useForm()
 
   useImperativeHandle(ref, () => ({
     ...form,
-  }));
+  }))
 
   // 商品名验重
   const { run } = useDebounceFn((rule, value, callback) => {
     if (value) {
       isSpuNameRepeat({ commodityName: value, commodityId: data?.commodityId }).then(({ data }) => {
         if (data) {
-          callback();
+          callback()
         } else {
-          callback('该商品名称已存在');
+          callback('该商品名称已存在')
         }
-      });
+      })
     } else {
-      callback();
+      callback()
     }
-  });
+  })
   useEffect(() => {
-    form.setFieldsValue(data);
-  }, [data]);
+    form.setFieldsValue(data)
+  }, [data])
   // 编辑的时候显示的内容
   const displayItem = () => {
     return (
@@ -41,8 +41,8 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         <Form.Item label="商品类型">{data?.commodityTypeName}</Form.Item>
         <Form.Item label="商品分类">{data?.commodityCategoryName}</Form.Item>
       </>
-    );
-  };
+    )
+  }
   return (
     <Form form={form} {...(data?.commodityId ? {} : { layout: 'vertical', ...fromSingleLayoutProps })}>
       <Form.Item name="commodityId" hidden />
@@ -75,7 +75,7 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         </Form.Item>
       )}
     </Form>
-  );
-});
+  )
+})
 
-export default SpuForm;
+export default SpuForm

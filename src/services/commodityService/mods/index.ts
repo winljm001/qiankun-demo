@@ -1,4 +1,5 @@
 import * as commodity from './commodity'
+import * as commodityBom from './commodityBom'
 import * as commodityCategory from './commodityCategory'
 import * as commoditySku from './commoditySku'
 import * as commodityType from './commodityType'
@@ -10,6 +11,7 @@ import * as subsidiarySpec from './subsidiarySpec'
 
 export const commodityService = {
   commodity,
+  commodityBom,
   commodityCategory,
   commoditySku,
   commodityType,

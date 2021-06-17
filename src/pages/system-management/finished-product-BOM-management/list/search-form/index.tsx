@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
 import { Button, Form, FormInstance, Input, Space } from 'antd'
+// import JsonFilter, { defineConfig } from '@/components/JsonFilter';
 import SearchFormLayout from '@/components/SearchFormLayout'
 
 interface IProps {
@@ -13,10 +14,10 @@ const SearchForm: React.FC<IProps> = ({ form, submit, reset }) => {
     <Form form={form}>
       <SearchFormLayout
         list={[
-          <Form.Item label="SPU名称" name="commodityName" key={1}>
-            <Input placeholder="SPU名称" />
+          <Form.Item label="商品名称" name="commodityName" key="商品名称">
+            <Input placeholder="请输入查询" />
           </Form.Item>,
-          <Form.Item key="2">
+          <Form.Item key="操作">
             <Space size={24}>
               <Button type="primary" htmlType="submit" onClick={submit}>
                 查询
