@@ -123,7 +123,7 @@ const GoodsManagementList = () => {
         onCancel={() => toggle()}
         confirmLoading={updateName.isLoading}
         onOk={handleEditSPU}>
-        <SpuForm ref={spuFormRef} data={editData} />
+        {visible ? <SpuForm ref={spuFormRef} data={editData} /> : null}
       </Modal>
     </div>
   )

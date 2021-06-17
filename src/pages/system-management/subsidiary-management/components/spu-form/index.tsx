@@ -49,15 +49,12 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
         ]}>
         <Input autoComplete="off" />
       </Form.Item>
-      {/* 当有id时是编辑 */}
-      <Form.Item shouldUpdate noStyle>
-        <Form.Item label="商品分类" name="commodityCategoryId" rules={[{ required: true, message: '请选择商品分类' }]}>
-          <BaseSelectByFetch
-            remote={{
-              fetch: listSpuCategoryOption,
-            }}
-          />
-        </Form.Item>
+      <Form.Item label="商品分类" name="commodityCategoryId" rules={[{ required: true, message: '请选择商品分类' }]}>
+        <BaseSelectByFetch
+          remote={{
+            fetch: listSpuCategoryOption,
+          }}
+        />
       </Form.Item>
     </Form>
   )
