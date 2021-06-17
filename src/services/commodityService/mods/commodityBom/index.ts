@@ -1,8 +1,18 @@
 /**
  * @description Commodity Bom Controller
  */
+import * as deleteCommodityBom from './deleteCommodityBom'
 import * as pageCommodityBom from './pageCommodityBom'
-import * as pageCommodityFruit from './pageCommodityFruit'
+import * as pageFoodAccessories from './pageFoodAccessories'
+import * as pageFruit from './pageFruit'
 import * as saveCommodityBom from './saveCommodityBom'
+import * as updateCommodityBom from './updateCommodityBom'
 
-export { pageCommodityBom, pageCommodityFruit, saveCommodityBom }
+export {
+  deleteCommodityBom,
+  pageCommodityBom,
+  pageFoodAccessories,
+  pageFruit,
+  saveCommodityBom,
+  updateCommodityBom
+}

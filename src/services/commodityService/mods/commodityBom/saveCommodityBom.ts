@@ -11,7 +11,7 @@ export class Params {}
  * @description saveCommodityBom 接口参数
  */
 export type SaveCommodityBomParams = Params &
-  defs.commodityService.SaveCommodityDTO
+  defs.commodityService.SaveCommodityBomDTO
 
 /**
  * @description saveCommodityBom 接口

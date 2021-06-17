@@ -10,7 +10,7 @@ export class Params {}
 /**
  * @description doUpdateSku 接口参数
  */
-export type DoUpdateSkuParams = Params & defs.commodityService.UpdateSkuDTO
+export type DoUpdateSkuParams = Params & defs.commodityService.UpdateSubSkuDTO
 
 /**
  * @description doUpdateSku 接口
