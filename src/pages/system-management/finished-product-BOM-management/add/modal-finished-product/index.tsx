@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useImperativeHandle, forwardRef, memo } from 'react'
 import { Modal, Button, Form, Input, Table, message } from 'antd'
-import type { ColumnType } from 'antd/lib/table/interface'
+import type { ColumnType, TableRowSelection } from 'antd/lib/table/interface'
 import useAsyncTable from '@/hooks/useAsyncTable'
 import useState from '@/hooks/useState'
 import { pageFinishedProduct } from '@/services/commodityService/mods/commodity/pageFinishedProduct'
@@ -88,10 +88,10 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
     setState({ visible: false })
   }
 
-  const rowSelection = {
+  const rowSelection: TableRowSelection<TableItem> = {
     type: 'radio',
     selectedRowKeys: state.selected,
-    onChange: (selectedRowKeys: React.Key[], selectedRows: TableItem[]) => {
+    onChange: (selectedRowKeys, selectedRows) => {
       setState({
         selected: selectedRowKeys as number[],
         selectedObj: selectedRows,

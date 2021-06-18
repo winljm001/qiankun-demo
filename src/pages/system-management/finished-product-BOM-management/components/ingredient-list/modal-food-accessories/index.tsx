@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useImperativeHandle, forwardRef, memo } from 'react'
 import { Modal, Button, Form, Input, Table } from 'antd'
-import type { ColumnType } from 'antd/lib/table/interface'
+import type { ColumnType, TableRowSelection } from 'antd/lib/table/interface'
 import useAsyncTable from '@/hooks/useAsyncTable'
 import useState from '@/hooks/useState'
 import { pageFoodAccessories } from '@/services/commodityService/mods/commodityBom/pageFoodAccessories'
@@ -52,7 +52,7 @@ const columns: ColumnType<TableItem>[] = [
  * 添加食品、辅料对话框
  */
 const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAccessoriesInstance>((_, ref) => {
-  const { tableProps, form, submit, reset } = useAsyncTable(useAsyncTableParams)
+  const { tableProps, form, submit } = useAsyncTable(useAsyncTableParams)
   const ShowOnOkRef = useRef<ShowOnOk>(null)
   const [state, setState] = useState<LocalState>({
     visible: false,
@@ -62,16 +62,27 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
   })
 
   useImperativeHandle(ref, () => ({
-    show: ({ onOk, type }) => {
-      // 重置列表数据？
-      reset()
-
+    show: ({ onOk, type, selected }) => {
       ShowOnOkRef.current = onOk
       setState({
         visible: true,
         type,
         selected: [],
       })
+
+      // 重置列表数据？
+      form.resetFields()
+      form.setFields([
+        {
+          name: 'commodityIds',
+          value: selected,
+        },
+        {
+          name: 'commodityTypeId',
+          value: type,
+        },
+      ])
+      submit()
     },
   }))
 
@@ -87,9 +98,9 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
     setState({ visible: false })
   }
 
-  const rowSelection = {
+  const rowSelection: TableRowSelection<TableItem> = {
     selectedRowKeys: state.selected,
-    onChange: (selectedRowKeys: React.Key[], selectedRows: TableItem[]) => {
+    onChange: (selectedRowKeys, selectedRows) => {
       setState({
         selected: selectedRowKeys as number[],
         selectedObj: selectedRows,
@@ -106,7 +117,11 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       onOk={onOk}>
       <Form form={form} onFinish={submit}>
         <Form.Item hidden name="commodityTypeId">
-          <Input type="hidden" value={state.type} />
+          <Input type="hidden" />
+        </Form.Item>
+
+        <Form.Item hidden name="commodityIds">
+          <Input />
         </Form.Item>
 
         <SearchFormLayout
