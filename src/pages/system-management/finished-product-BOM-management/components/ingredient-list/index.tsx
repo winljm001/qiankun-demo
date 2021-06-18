@@ -1,18 +1,22 @@
 import React, { useState, useRef, useImperativeHandle, forwardRef, memo } from 'react'
-import { Button, Table, Input, Space } from 'antd'
+import { Button, Table, Space, message } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import BaseCard from '@/components/BaseCard'
+import { isDef } from '@/utils/typeof'
 
 import type { IngredientListModalFruitInstance } from './modal-fruit'
 import IngredientListModalFruit from './modal-fruit'
 import IngredientListModalFoodAccessories from './modal-food-accessories'
 import type { IngredientListModalFoodAccessoriesInstance } from './modal-food-accessories'
+import Quantity from './quantity'
 
 import './index.less'
 
 type IngredientItem = defs.commodityService.CommodityBomDetailListVO
 
-export interface IngredientListInstance {}
+export interface IngredientListInstance {
+  getValue: () => Promise<IngredientItem[]>
+}
 
 interface IngredientListProps {
   /**
@@ -25,19 +29,51 @@ interface IngredientListProps {
    * @default false
    */
   edit?: boolean
+
+  /**
+   * 是否在请求数据中
+   * @default false
+   */
+  loading?: boolean
+
+  extra?: React.ReactNode
 }
 
 /**
  * 配料清单
  */
 const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
-  ({ edit = false, defaultValue = [] }, ref) => {
+  ({ edit = false, defaultValue = [{}], loading = false, extra }, ref) => {
     const IngredientListModalFruitRef = useRef<IngredientListModalFruitInstance>(null)
     const IngredientListModalFoodAccessoriesRef = useRef<IngredientListModalFoodAccessoriesInstance>(null)
     const [ingredientList, setIngredientList] = useState<IngredientItem[]>(defaultValue)
 
     // 向外暴露方法
-    useImperativeHandle(ref, () => ({}))
+    useImperativeHandle(ref, () => ({
+      getValue: () =>
+        new Promise((resolve, reject) => {
+          let errMsg: string
+
+          ingredientList.some((item) => {
+            if (isDef(item.quantity) && +item.quantity <= 0) {
+              errMsg = `${item.commodityName}的数量有误`
+              return true
+            }
+            return false
+          })
+
+          if (!errMsg && ingredientList.length === 0) {
+            errMsg = '请选择配料'
+          }
+
+          if (errMsg) {
+            message.error(errMsg)
+            reject(new Error(errMsg))
+          } else {
+            resolve(ingredientList)
+          }
+        }),
+    }))
 
     const column: ColumnType<IngredientItem>[] = [
       {
@@ -51,8 +87,20 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
       },
       {
         title: '商品数量',
-        render: () => {
-          return <Input />
+        width: 280,
+        render: (_, row, index) => {
+          return (
+            <Quantity
+              edit={edit}
+              value={row.quantity}
+              onChange={(n) => {
+                setIngredientList((il) => {
+                  il[index].quantity = n
+                  return [].concat(il)
+                })
+              }}
+            />
+          )
         },
       },
       {
@@ -70,7 +118,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
             },
           }
         : null,
-    ].filter(Boolean)
+    ]
 
     const filterByCommodityTypeId = (typeId: 1 | 2 | 3) =>
       ingredientList.reduce((pre, cur) => {
@@ -104,7 +152,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
 
     return (
       <>
-        <BaseCard title="配料清单">
+        <BaseCard title="配料清单" extra={extra}>
           {edit ? (
             <Space className="finished-product-BOM-management-ingredient-list-btn-group">
               <Button
@@ -140,12 +188,16 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
             </Space>
           ) : null}
 
-          <Table columns={column} dataSource={ingredientList} />
+          <Table columns={column.filter(Boolean)} dataSource={ingredientList} loading={loading} />
         </BaseCard>
 
-        <IngredientListModalFruit ref={IngredientListModalFruitRef} />
+        {edit ? (
+          <>
+            <IngredientListModalFruit ref={IngredientListModalFruitRef} />
 
-        <IngredientListModalFoodAccessories ref={IngredientListModalFoodAccessoriesRef} />
+            <IngredientListModalFoodAccessories ref={IngredientListModalFoodAccessoriesRef} />
+          </>
+        ) : null}
       </>
     )
   },

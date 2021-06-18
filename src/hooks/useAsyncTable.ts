@@ -1,9 +1,8 @@
 import { useAntdTable } from 'ahooks'
 import { PaginatedParams } from 'ahooks/lib/useAntdTable'
+import useUrlState from '@ahooksjs/use-url-state'
 import { Form } from 'antd'
 import { useEffect } from 'react'
-
-import useUrlState from '@ahooksjs/use-url-state'
 interface IProps {
   /** 请求 */
   fetchAction: (params: any) => Promise<any>
