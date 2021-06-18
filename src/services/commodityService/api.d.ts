@@ -38,6 +38,35 @@ declare namespace defs {
       quantityUnit?: number
     }
 
+    export class CommodityBomDetailListVO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
+
+      /** 数量单位名称 */
+      quantityUnitName?: string
+    }
+
     export class CommodityBomListVO {
       /** bom id */
       commodityBomId?: number
@@ -273,18 +302,53 @@ declare namespace defs {
       commoditySpecName?: string
     }
 
-    export class FoodAccessoriesListVO {
+    export class FinishedProductVO {
       /** 商品分类id */
-      categoryId?: number
+      commodityCategoryId?: number
 
       /** 商品分类名称 */
-      categoryName?: Array<string>
+      commodityCategoryName?: string
 
       /** 商品id */
       commodityId?: number
 
       /** 商品名称 */
       commodityName?: string
+
+      /** 商品产地名称 */
+      commodityPlaceOriginName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品规格名称 */
+      commoditySpecName?: string
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
+
+      /** 商品品种名称 */
+      commodityVarietyName?: string
+    }
+
+    export class FoodAccessoriesListVO {
+      /** 商品分类id */
+      categoryId?: number
+
+      /** 商品分类名称 */
+      categoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** 商品规格名称 */
+      commoditySpecName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -304,7 +368,7 @@ declare namespace defs {
       categoryId?: number
 
       /** 商品分类名称 */
-      categoryName?: Array<string>
+      categoryName?: string
 
       /** 商品id */
       commodityId?: number
@@ -816,6 +880,52 @@ declare namespace API {
         export function request(
           params: Params
         ): Promise<defs.commodityService.ApiResult<boolean>>
+      }
+
+      /**
+       * getFinishProduct
+       * /api/commodity/v1/bom/detail/commodity/{commodityBomId}
+       */
+      export namespace getFinishProduct {
+        export class Params {
+          /** bom id */
+          commodityBomId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          defs.commodityService.FinishedProductVO
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            defs.commodityService.FinishedProductVO
+          >
+        >
+      }
+
+      /**
+       * list
+       * /api/commodity/v1/bom/detail/list/{commodityBomId}
+       */
+      export namespace list {
+        export class Params {
+          /** bom id */
+          commodityBomId: number
+        }
+
+        export type Response = defs.commodityService.ApiResult<
+          Array<defs.commodityService.CommodityBomDetailListVO>
+        >
+        export const init: Response
+        export function request(
+          params: Params
+        ): Promise<
+          defs.commodityService.ApiResult<
+            Array<defs.commodityService.CommodityBomDetailListVO>
+          >
+        >
       }
 
       /**

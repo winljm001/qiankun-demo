@@ -34,7 +34,6 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   useEffect(() => {
     form.setFieldsValue(data)
   }, [data])
-
   return (
     <Form form={form} {...(data?.commodityId ? {} : { layout: 'vertical', ...fromSingleLayoutProps })}>
       <Form.Item name="commodityId" hidden />

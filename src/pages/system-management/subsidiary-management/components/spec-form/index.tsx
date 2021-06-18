@@ -1,10 +1,10 @@
-import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd';
-import React, { forwardRef, useImperativeHandle } from 'react';
-import { useForm } from 'antd/lib/form/Form';
-import { CloseOutlined, PlusOutlined } from '@ant-design/icons';
-import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig';
-import { getInitialSpecValue, initialValues } from './initialValues';
-import styles from './index.module.less';
+import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd'
+import React, { forwardRef, useImperativeHandle } from 'react'
+import { useForm } from 'antd/lib/form/Form'
+import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
+import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig'
+import { getInitialSpecValue, initialValues } from './initialValues'
+import styles from './index.module.less'
 
 const optionInputLayout = {
   labelCol: {
@@ -29,15 +29,15 @@ const optionInputLayout = {
       span: 18,
     },
   },
-};
+}
 interface SpuFormProps {
-  data?: any;
+  data?: any
 }
 const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }, ref) => {
-  const [form] = useForm();
+  const [form] = useForm()
   useImperativeHandle(ref, () => ({
     ...form,
-  }));
+  }))
   return (
     <Form form={form} layout="vertical" {...fromSingleLayoutProps} initialValues={initialValues}>
       <Form.List name="commoditySpecs">
@@ -51,7 +51,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <CloseOutlined
                         className={styles.specDelIcon}
                         onClick={() => {
-                          remove(field.name);
+                          remove(field.name)
                         }}
                       />
                     )}
@@ -88,7 +88,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                             <div
                                               className={styles.optionDelIcon}
                                               onClick={() => {
-                                                removeItem(itemField.name);
+                                                removeItem(itemField.name)
                                               }}>
                                               <CloseOutlined />
                                             </div>
@@ -109,7 +109,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                   </Form.Item>
                                   <Form.Item hidden name={[itemField.name, 'commoditySpecOptionId']} />
                                 </Col>
-                              );
+                              )
                             })}
                             {itemFields?.length < 20 ? (
                               <Col span={8}>
@@ -119,7 +119,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                                   type="dashed"
                                   block
                                   onClick={() => {
-                                    addItem();
+                                    addItem()
                                   }}>
                                   新增
                                 </Button>
@@ -130,7 +130,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       </Form.List>
                     </Form.Item>
                   </div>
-                );
+                )
               })}
               {fields?.length < 3 ? (
                 <div style={{ padding: '0 24px' }}>
@@ -148,11 +148,11 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                 </div>
               ) : null}
             </>
-          );
+          )
         }}
       </Form.List>
     </Form>
-  );
-});
+  )
+})
 
-export default SpecForm;
+export default SpecForm

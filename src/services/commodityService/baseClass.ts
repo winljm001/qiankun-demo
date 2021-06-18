@@ -32,6 +32,35 @@ class CommodityBomDetailDTO {
   quantityUnit = undefined
 }
 
+class CommodityBomDetailListVO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 数量 */
+  quantity = undefined
+
+  /** 数量单位 */
+  quantityUnit = undefined
+
+  /** 数量单位名称 */
+  quantityUnitName = ''
+}
+
 class CommodityBomListVO {
   /** bom id */
   commodityBomId = undefined
@@ -267,18 +296,53 @@ class FinishedProductDTO {
   commoditySpecName = ''
 }
 
-class FoodAccessoriesListVO {
+class FinishedProductVO {
   /** 商品分类id */
-  categoryId = undefined
+  commodityCategoryId = undefined
 
   /** 商品分类名称 */
-  categoryName = []
+  commodityCategoryName = ''
 
   /** 商品id */
   commodityId = undefined
 
   /** 商品名称 */
   commodityName = ''
+
+  /** 商品产地名称 */
+  commodityPlaceOriginName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品规格名称 */
+  commoditySpecName = ''
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
+
+  /** 商品品种名称 */
+  commodityVarietyName = ''
+}
+
+class FoodAccessoriesListVO {
+  /** 商品分类id */
+  categoryId = undefined
+
+  /** 商品分类名称 */
+  categoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** 商品规格名称 */
+  commoditySpecName = []
 
   /** 商品类型id */
   commodityTypeId = undefined
@@ -298,7 +362,7 @@ class FruitListVO {
   categoryId = undefined
 
   /** 商品分类名称 */
-  categoryName = []
+  categoryName = ''
 
   /** 商品id */
   commodityId = undefined
@@ -621,6 +685,7 @@ class UpdateSubSkuDTO {
 export const commodityService = {
   ApiResult,
   CommodityBomDetailDTO,
+  CommodityBomDetailListVO,
   CommodityBomListVO,
   CommodityDTO,
   CommodityModifyDTO,
@@ -638,6 +703,7 @@ export const commodityService = {
   DefaultPageResult,
   FinishedGoodsReturnedList,
   FinishedProductDTO,
+  FinishedProductVO,
   FoodAccessoriesListVO,
   FruitListVO,
   ModifyTheSkuStatus,
