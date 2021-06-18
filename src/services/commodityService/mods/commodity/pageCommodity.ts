@@ -6,16 +6,28 @@ import * as request from '@/utils/fetch'
  * @description pageCommodity 接口 URL 参数/GET
  */
 export class Params {
+  /** admin */
+  admin?: boolean
   /** commodityName */
   commodityName?: string
+  /** currentDate */
+  currentDate?: string
   /** offset */
   offset?: number
+  /** organizationId */
+  organizationId?: number
+  /** organizationName */
+  organizationName?: string
   /** pageCurrent */
   pageCurrent?: number
   /** pageSize */
   pageSize?: number
   /** sortBys */
   sortBys?: Array<string>
+  /** userId */
+  userId?: number
+  /** userName */
+  userName?: string
 }
 
 /**

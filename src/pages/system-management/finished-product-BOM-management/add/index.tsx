@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Form, Button } from 'antd'
+import { Form, Button, message } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useMutation } from 'react-query'
 import BaseFormWrap from '@/components/BaseFormWrap'
@@ -19,8 +19,10 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
   const ModalFinishedProductRef = useRef<ModalFinishedProductInstance>(null)
   const IngredientListRef = useRef<IngredientListInstance>(null)
   const [finishedProduct, setFinishedProduct] = useState<FinishedProduct>({} as any)
-  const saveCommodityBom = useMutation(fetchSaveCommodityBOM, {
-    onSuccess() {},
+  const { isLoading: isLoadingSaveCommodityBOM, mutate: mutateSaveCommodityBOM } = useMutation(fetchSaveCommodityBOM, {
+    onSuccess() {
+      history.goBack()
+    },
   })
 
   const onClickShowModal = useCallback(() => {
@@ -31,7 +33,13 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
 
   const onClickSave = () => {
     // 检验数据
-    console.log(saveCommodityBom)
+    if (!finishedProduct.commodityId) {
+      message.error('请选择商品')
+      return
+    }
+
+    // 提交数据
+    console.log(mutateSaveCommodityBOM)
   }
 
   return (
@@ -42,6 +50,7 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
           onClick: history.goBack,
         },
         {
+          loading: isLoadingSaveCommodityBOM,
           type: 'primary',
           children: '保存',
           onClick: onClickSave,

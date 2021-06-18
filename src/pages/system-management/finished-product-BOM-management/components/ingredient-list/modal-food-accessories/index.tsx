@@ -103,11 +103,12 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       onCancel={onCancel}
       onOk={onOk}>
       <Form form={form} onFinish={submit}>
+        <Form.Item hidden name="commodityTypeId">
+          <Input type="hidden" value={state.type} />
+        </Form.Item>
+
         <SearchFormLayout
           list={[
-            <Form.Item name="commodityTypeId" key="商品类型">
-              <Input type="hidden" value={state.type} />
-            </Form.Item>,
             <Form.Item label="商品名称" name="commodityName" key="商品名称">
               <Input placeholder="请输入查询" />
             </Form.Item>,

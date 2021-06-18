@@ -1,20 +1,33 @@
 import React, { memo } from 'react'
-import { Form } from 'antd'
+import { Form, Skeleton } from 'antd'
 import BaseCard from '@/components/BaseCard'
 
 interface CardFinishedProductInformationProps {
-  // info: {}
+  /**
+   * 成品资料
+   */
+  data: defs.commodityService.FinishedProductVO
+
+  /**
+   * 是否加载中
+   */
+  loading?: boolean
 }
 
-const CardFinishedProductInformation: React.FC<CardFinishedProductInformationProps> = () => {
+const CardFinishedProductInformation: React.FC<CardFinishedProductInformationProps> = ({
+  data = {},
+  loading = false,
+}) => {
   return (
     <BaseCard title="成品资料">
-      <Form.Item label="商品名称">商品名称</Form.Item>
-      <Form.Item label="商品规格">商品规格</Form.Item>
-      <Form.Item label="商品类型">商品类型</Form.Item>
-      <Form.Item label="商品分类">商品分类</Form.Item>
-      <Form.Item label="商品品种">商品品种</Form.Item>
-      <Form.Item label="商品产地">商品产地</Form.Item>
+      <Skeleton active loading={loading}>
+        <Form.Item label="商品名称">{data.commodityName}</Form.Item>
+        <Form.Item label="商品规格">{data.commoditySpecName}</Form.Item>
+        <Form.Item label="商品类型">{data.commodityCategoryName}</Form.Item>
+        <Form.Item label="商品分类">{data.commodityTypeName}</Form.Item>
+        <Form.Item label="商品品种">{data.commodityVarietyName}</Form.Item>
+        <Form.Item label="商品产地">{data.commodityPlaceOriginName}</Form.Item>
+      </Skeleton>
     </BaseCard>
   )
 }

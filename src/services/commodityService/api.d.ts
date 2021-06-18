@@ -715,7 +715,20 @@ declare namespace API {
        * /api/commodity/v1/spu/insert
        */
       export namespace doInsertCommodity {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -731,16 +744,28 @@ declare namespace API {
        */
       export namespace pageCommodity {
         export class Params {
+          /** admin */
+          admin?: boolean
           /** commodityName */
           commodityName?: string
+          /** currentDate */
+          currentDate?: string
           /** offset */
           offset?: number
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
           /** pageCurrent */
           pageCurrent?: number
           /** pageSize */
           pageSize?: number
           /** sortBys */
           sortBys?: Array<string>
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
         }
 
         export type Response = defs.commodityService.ApiResult<
@@ -799,7 +824,20 @@ declare namespace API {
        * /api/commodity/v1/spu/update/name
        */
       export namespace doUpdateCommodityName {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -814,7 +852,20 @@ declare namespace API {
        * /api/commodity/v1/spu/update/status
        */
       export namespace doUpdateCommodityStatus {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -829,7 +880,20 @@ declare namespace API {
        * /api/commodity/v1/spu/verify/name
        */
       export namespace isSpuNameRepeat {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1404,7 +1468,20 @@ declare namespace API {
        * /api/commodity/v1/spec/modify
        */
       export namespace doModifySpecById {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -1441,7 +1518,20 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/insert
        */
       export namespace doInsertCommodity {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -1457,16 +1547,28 @@ declare namespace API {
        */
       export namespace pageCommodity {
         export class Params {
+          /** admin */
+          admin?: boolean
           /** commodityName */
           commodityName?: string
+          /** currentDate */
+          currentDate?: string
           /** offset */
           offset?: number
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
           /** pageCurrent */
           pageCurrent?: number
           /** pageSize */
           pageSize?: number
           /** sortBys */
           sortBys?: Array<string>
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
         }
 
         export type Response = defs.commodityService.ApiResult<
@@ -1491,7 +1593,20 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/update
        */
       export namespace doUpdateCommodityName {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1506,7 +1621,20 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/update/status
        */
       export namespace doUpdateCommodityStatus {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1521,7 +1649,20 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/verify/name
        */
       export namespace isSpuNameRepeat {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1790,7 +1931,20 @@ declare namespace API {
        * /api/commodity/v1/subsidiary/spec/modify
        */
       export namespace doModifySpecById {
-        export class Params {}
+        export class Params {
+          /** admin */
+          admin?: boolean
+          /** currentDate */
+          currentDate?: string
+          /** organizationId */
+          organizationId?: number
+          /** organizationName */
+          organizationName?: string
+          /** userId */
+          userId?: number
+          /** userName */
+          userName?: string
+        }
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
