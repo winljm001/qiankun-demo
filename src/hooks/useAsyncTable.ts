@@ -1,9 +1,9 @@
-import { useAntdTable, useSessionStorageState } from 'ahooks'
+import { useAntdTable } from 'ahooks'
 import { PaginatedParams } from 'ahooks/lib/useAntdTable'
 import { Form } from 'antd'
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-let pathname = ''
+
+import useUrlState from '@ahooksjs/use-url-state'
 interface IProps {
   /** 请求 */
   fetchAction: (params: any) => Promise<any>
@@ -27,23 +27,14 @@ const useAsyncTable = (props: IProps): any => {
   const [form] = Form.useForm()
 
   // 缓存逻辑开始
-  let location = useLocation()
 
-  const [cacheParams, setCacheParams] = useSessionStorageState<PaginatedParams>(location?.pathname)
-  // TODO: 想离开页面清除数据，好像没起作用，后面再看看
-  useEffect(() => {
-    if (pathname && location?.pathname) {
-      if (pathname !== location?.pathname) {
-        setCacheParams(null)
-      }
-    }
-    if (location?.pathname) {
-      pathname = location?.pathname
-    }
-  }, [location?.pathname])
+  const [cacheParams, setCacheParams] = useUrlState({})
 
-  const defaultParamsObj = isCache ? (cacheParams ? { defaultParams: cacheParams } : {}) : {}
-
+  const defaultParamsObj: any = isCache
+    ? JSON.stringify(cacheParams) !== '{}'
+      ? { defaultParams: [cacheParams, cacheParams] }
+      : {}
+    : {}
   // 缓存逻辑结束
   const { tableProps, params, search, refresh } = useAntdTable(
     (data) => {
@@ -54,9 +45,10 @@ const useAsyncTable = (props: IProps): any => {
       form,
     },
   )
-  // params改变存进缓存
   useEffect(() => {
-    setCacheParams(params)
+    if (params?.length > 1) {
+      setCacheParams({ ...params[0], ...params[1] })
+    }
   }, [params])
   const { submit, reset } = search
   tableProps['pagination'].showSizeChanger = true
