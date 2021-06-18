@@ -9,6 +9,7 @@ import IngredientListModalFruit from './modal-fruit'
 import IngredientListModalFoodAccessories from './modal-food-accessories'
 import type { IngredientListModalFoodAccessoriesInstance } from './modal-food-accessories'
 import Quantity from './quantity'
+import CommodityUnit from './commodity-unit'
 
 import './index.less'
 
@@ -105,8 +106,20 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
       },
       {
         title: '商品单位',
-        render: () => {
-          return <span>根据商品类型判断</span>
+        width: 160,
+        render: (_, row, index) => {
+          return (
+            <CommodityUnit
+              value={row.quantityUnit}
+              onChange={(value, label) => {
+                setIngredientList((il) => {
+                  il[index].quantityUnit = value
+                  il[index].quantityUnitName = label
+                  return [].concat(il)
+                })
+              }}
+            />
+          )
         },
       },
       edit
@@ -114,7 +127,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
             title: '操作',
             dataIndex: 'action',
             render: () => {
-              return <span>删除</span>
+              return <Button type="link">删除</Button>
             },
           }
         : null,
