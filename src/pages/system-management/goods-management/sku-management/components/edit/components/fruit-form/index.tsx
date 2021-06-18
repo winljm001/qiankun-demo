@@ -41,7 +41,7 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       name="unitType"
       className={styles.select_after}
       rules={[{ required: true, message: '请选择sku净重单位!' }]}>
-      <Select placeholder="单位" style={{ width: 80 }}>
+      <Select defaultValue="单位" style={{ width: 80 }}>
         {weightArr.map((item) => {
           return (
             <Option key={item.value} value={item.value}>
