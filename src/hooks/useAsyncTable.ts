@@ -9,10 +9,12 @@ interface IProps {
   fetchAction: (params: any) => Promise<any>
   // 是否缓存
   isCache?: boolean
+  // 是否手动调用
+  manual?: boolean
   extraParams?: any
 }
 const useAsyncTable = (props: IProps): any => {
-  const { fetchAction, isCache = true, extraParams = {} } = props
+  const { fetchAction, isCache = true, manual = false, extraParams = {} } = props
 
   const getTableData = ({ current, pageSize }: PaginatedParams[0], formData: Object) => {
     const fetchParams = { pageCurrent: current, pageSize, ...formData, ...extraParams }
@@ -42,6 +44,7 @@ const useAsyncTable = (props: IProps): any => {
     },
     {
       ...defaultParamsObj,
+      manual,
       form,
     },
   )
