@@ -24,7 +24,7 @@ type LocalState = {
 }
 
 /** useAsyncTable 参数 */
-const useAsyncTableParams = { fetchAction: pageFinishedProduct }
+const useAsyncTableParams = { fetchAction: pageFinishedProduct, manual: true, isCache: false }
 
 const columns: ColumnType<TableItem>[] = [
   {
@@ -50,7 +50,7 @@ const columns: ColumnType<TableItem>[] = [
 ]
 
 const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) => {
-  const { tableProps, form, submit } = useAsyncTable(useAsyncTableParams)
+  const { tableProps, form, submit, reset } = useAsyncTable(useAsyncTableParams)
   const ShowOnOkRef = useRef<ShowOnOk>(null)
   const [state, setState] = useState<LocalState>({
     visible: false,
@@ -62,6 +62,8 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
   useImperativeHandle(ref, () => ({
     show: (onOk) => {
       // 重置列表数据？
+      reset()
+
       ShowOnOkRef.current = onOk
       setState({
         visible: true,

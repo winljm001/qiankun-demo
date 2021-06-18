@@ -24,7 +24,7 @@ type LocalState = {
 }
 
 /** useAsyncTable 参数 */
-const useAsyncTableParams = { fetchAction: pageFruit }
+const useAsyncTableParams = { fetchAction: pageFruit, manual: true, isCache: false }
 
 const columns: ColumnType<TableItem>[] = [
   {
@@ -53,7 +53,7 @@ const columns: ColumnType<TableItem>[] = [
  * 添加水果对话框
  */
 const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_, ref) => {
-  const { tableProps, form, submit } = useAsyncTable(useAsyncTableParams)
+  const { tableProps, form, submit, reset } = useAsyncTable(useAsyncTableParams)
   const ShowOnOkRef = useRef<ShowOnOk>(null)
   const [state, setState] = useState<LocalState>({
     visible: false,
@@ -64,6 +64,8 @@ const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_
   useImperativeHandle(ref, () => ({
     show: ({ onOk }) => {
       // 重置列表数据？
+      reset()
+
       ShowOnOkRef.current = onOk
       setState({
         visible: true,
