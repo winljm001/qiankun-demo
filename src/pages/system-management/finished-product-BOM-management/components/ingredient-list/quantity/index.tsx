@@ -7,8 +7,14 @@ import { positiveTwoDecimalPlaces } from '@/utils/number'
 import './index.less'
 
 interface QuantityProps {
+  /**
+   * 当前的值
+   */
   value: number
 
+  /**
+   * 点击保存后的回调
+   */
   onChange?: (n: number) => void
 
   /**

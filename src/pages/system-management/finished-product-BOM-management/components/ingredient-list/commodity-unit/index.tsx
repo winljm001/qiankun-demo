@@ -10,20 +10,25 @@ type State = {
   edit: boolean
 }
 
+export type CommodityUnitSelectItem = { label: string; value: number }
 interface CommodityUnitProps {
+  /**
+   * 单位选项
+   */
+  options: CommodityUnitSelectItem[]
+
+  /**
+   * 当前的值
+   */
   value: number
 
+  /**
+   * 点击确定后的回调
+   */
   onChange: (value: number, label: string) => void
 }
 
-export const options = [
-  { label: 'kg', value: 1 },
-  { label: 'g', value: 2 },
-]
-
-const findLabel = (n: number) => options.filter((op) => op.value === n)[0]?.label
-
-const CommodityUnit: React.FC<CommodityUnitProps> = ({ value, onChange }) => {
+const CommodityUnit: React.FC<CommodityUnitProps> = ({ options, value, onChange }) => {
   const [state, setState] = useState<State>({
     value: value,
     edit: false,
@@ -38,6 +43,8 @@ const CommodityUnit: React.FC<CommodityUnitProps> = ({ value, onChange }) => {
       edit: true,
     })
   }, [])
+
+  const findLabel = (n: number) => options.filter((op) => op.value === n)[0]?.label
 
   const onClickSave = () => {
     onChange(state.value, findLabel(state.value))

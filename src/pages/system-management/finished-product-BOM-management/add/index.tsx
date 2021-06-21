@@ -26,10 +26,10 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
   })
 
   const onClickShowModal = useCallback(() => {
-    ModalFinishedProductRef.current.show((p) => {
+    ModalFinishedProductRef.current.show(finishedProduct.commodityId, (p) => {
       setFinishedProduct(p)
     })
-  }, [])
+  }, [finishedProduct.commodityId])
 
   const onClickSave = () => {
     // 检验数据

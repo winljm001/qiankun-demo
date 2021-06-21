@@ -28,6 +28,9 @@ declare namespace defs {
       /** 商品名称 */
       commodityName?: string
 
+      /** sku id */
+      commoditySkuId?: number
+
       /** 商品类型id */
       commodityTypeId?: number
 
@@ -50,6 +53,12 @@ declare namespace defs {
 
       /** 商品名称 */
       commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品SpecificationsAndOptions名称 */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -275,31 +284,26 @@ declare namespace defs {
     }
 
     export class FinishedGoodsReturnedList {
-      /** categoryText */
+      /** 商品分类 */
       categoryText?: string
 
-      /** commodityId */
+      /** 商品id */
       commodityId?: number
 
-      /** commodityName */
-      commodityName?: string
-
-      /** placeOriginName */
-      placeOriginName?: string
-
-      /** specText */
-      specText?: string
-
-      /** varietyName */
-      varietyName?: string
-    }
-
-    export class FinishedProductDTO {
       /** 商品名称 */
       commodityName?: string
 
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品产地 */
+      placeOriginName?: string
+
       /** 商品规格 */
-      commoditySpecName?: string
+      specText?: Array<string>
+
+      /** 商品品种 */
+      varietyName?: string
     }
 
     export class FinishedProductVO {
@@ -346,6 +350,9 @@ declare namespace defs {
 
       /** 商品名称 */
       commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
 
       /** 商品SpecificationsAndOptions名称 */
       commoditySpecOptionName?: Array<string>
@@ -672,6 +679,9 @@ declare namespace defs {
       /** sku id */
       commoditySkuIds?: Array<number>
 
+      /** commodityTypeIds */
+      commodityTypeIds: Array<number>
+
       /** 状态（1激活，0禁用） */
       status?: number
 
@@ -766,6 +776,10 @@ declare namespace API {
        */
       export namespace pageFinishedProduct {
         export class Params {
+          /** 商品名称 */
+          commodityName?: string
+          /** 商品规格 */
+          commoditySpecName?: string
           /** offset */
           offset?: number
           /** pageCurrent */
@@ -783,8 +797,7 @@ declare namespace API {
         >
         export const init: Response
         export function request(
-          params: Params,
-          bodyParams: defs.commodityService.FinishedProductDTO
+          params: Params
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<
@@ -971,6 +984,8 @@ declare namespace API {
         export class Params {
           /** 商品名称 */
           commodityName?: string
+          /** 已选择sku id集合 */
+          commoditySkuIds?: Array<number>
           /** 商品规格名称 */
           commoditySpecName?: string
           /** 商品类型id【2食品、3辅料】 */

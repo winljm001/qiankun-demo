@@ -36,7 +36,10 @@ const columns: ColumnType<TableItem>[] = [
   },
   {
     title: '商品规格',
-    dataIndex: 'commoditySpecName',
+    dataIndex: 'commoditySpecOptionName',
+    render: (text: string[]) => {
+      return text.join('/')
+    },
   },
   {
     title: '商品单位',
@@ -60,6 +63,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
     selected: [],
     selectedObj: [],
   })
+  // const buildRowKey = (row: TableItem) => `${row.commodityId}_${row.unitId}_${row.commoditySpecOptionName.join('/')}`
 
   useImperativeHandle(ref, () => ({
     show: ({ onOk, type, selected }) => {
@@ -116,7 +120,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       onCancel={onCancel}
       onOk={onOk}>
       <Form form={form} onFinish={submit}>
-        <Form.Item hidden name="commodityTypeId">
+        <Form.Item hidden name="commoditySkuId">
           <Input type="hidden" />
         </Form.Item>
 
@@ -141,7 +145,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
         />
       </Form>
 
-      <Table {...tableProps} columns={columns} rowKey="commodityId" rowSelection={rowSelection} />
+      <Table {...tableProps} columns={columns} rowKey="commoditySkuId" rowSelection={rowSelection} />
     </Modal>
   )
 })
