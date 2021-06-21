@@ -48,8 +48,10 @@ const useAsyncTable = (props: IProps) => {
     },
   )
   useEffect(() => {
-    if (params?.length > 1) {
-      setCacheParams({ ...params[0], ...params[1] })
+    if (isCache) {
+      if (params?.length > 1) {
+        setCacheParams({ ...params[0], ...params[1] })
+      }
     }
   }, [params])
   const { submit, reset } = search
