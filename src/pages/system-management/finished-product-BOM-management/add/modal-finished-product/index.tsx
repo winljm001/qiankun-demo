@@ -14,7 +14,7 @@ export interface ModalFinishedProductInstance {
   /**
    * 显示弹窗
    */
-  show: (p: ShowOnOk) => void
+  show: (id: number, p: ShowOnOk) => void
 }
 
 type LocalState = {
@@ -60,14 +60,14 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
 
   // 向外暴露方法
   useImperativeHandle(ref, () => ({
-    show: (onOk) => {
+    show: (id, onOk) => {
       // 重置列表数据？
       reset()
 
       ShowOnOkRef.current = onOk
       setState({
         visible: true,
-        selected: [],
+        selected: id ? [id] : [],
       })
     },
   }))
