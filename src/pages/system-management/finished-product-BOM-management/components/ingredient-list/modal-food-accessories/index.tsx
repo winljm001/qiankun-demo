@@ -78,7 +78,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       form.resetFields()
       form.setFields([
         {
-          name: 'commodityIds',
+          name: 'commoditySkuId',
           value: selected,
         },
         {
@@ -120,11 +120,11 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       onCancel={onCancel}
       onOk={onOk}>
       <Form form={form} onFinish={submit}>
-        <Form.Item hidden name="commoditySkuId">
+        <Form.Item hidden name="commodityTypeId">
           <Input type="hidden" />
         </Form.Item>
 
-        <Form.Item hidden name="commodityIds">
+        <Form.Item hidden name="commoditySkuId">
           <Input />
         </Form.Item>
 

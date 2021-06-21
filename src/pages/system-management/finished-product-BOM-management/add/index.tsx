@@ -38,8 +38,11 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
       return
     }
 
-    // 提交数据
-    console.log(mutateSaveCommodityBOM)
+    IngredientListRef.current.getValue().then((list) => {
+      console.log(list)
+      // 提交数据
+      console.log(mutateSaveCommodityBOM)
+    })
   }
 
   return (

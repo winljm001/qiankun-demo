@@ -79,8 +79,8 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
           let errMsg: string
 
           ingredientList.some((item) => {
-            if (isDef(item.quantity) && +item.quantity <= 0) {
-              errMsg = `${item.commodityName}的数量有误`
+            if (!isDef(item.quantity) || +item.quantity <= 0) {
+              errMsg = `${item.commodityCategoryName}/${item.commodityName}的数量有误`
               return true
             }
             return false
