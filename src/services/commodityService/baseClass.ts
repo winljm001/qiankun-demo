@@ -71,8 +71,8 @@ class CommodityBomListVO {
   /** 商品名称 */
   commodityName = ''
 
-  /** 商品规格 */
-  commoditySpecName = ''
+  /** 商品SpecificationsAndOptions */
+  commoditySpecOptionName = []
 
   /** 商品类型 */
   commodityTypeName = ''
@@ -315,8 +315,8 @@ class FinishedProductVO {
   /** sku id */
   commoditySkuId = undefined
 
-  /** 商品规格名称 */
-  commoditySpecName = ''
+  /** 商品SpecificationsAndOptions名称 */
+  commoditySpecOptionName = []
 
   /** 商品类型id */
   commodityTypeId = undefined
@@ -341,8 +341,8 @@ class FoodAccessoriesListVO {
   /** 商品名称 */
   commodityName = ''
 
-  /** 商品规格名称 */
-  commoditySpecName = []
+  /** 商品SpecificationsAndOptions名称 */
+  commoditySpecOptionName = []
 
   /** 商品类型id */
   commodityTypeId = undefined

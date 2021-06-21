@@ -7,7 +7,7 @@ import * as request from '@/utils/fetch'
  */
 export class Params {
   /** commodityBomId */
-  commodityBomId: string
+  commodityBomId: number
 }
 
 /**
