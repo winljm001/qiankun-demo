@@ -12,7 +12,7 @@ type IProps = {
 const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
   const [skuUnitOptions, setSkuUnitOptions] = useState([])
   const [totalTypeOptions, setTotalTypeOptions] = useState([])
-  const [unitState, { toggle }] = useBoolean(false)
+  const [unitState, { toggle, setTrue }] = useBoolean(false)
   const [form] = useForm()
   useImperativeHandle(ref, () => ({
     form,
@@ -26,6 +26,12 @@ const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       })
       .catch((err) => {})
   }, [])
+  useEffect(() => {
+    if (initialValues?.totalType) {
+      setTrue()
+    }
+  }, [initialValues?.totalType])
+
   return (
     <Form form={form} layout="vertical" initialValues={{ status: true, ...initialValues }} name="basic">
       <Form.Item label="最小单位" name="unitType" rules={[{ required: true, message: '请选择单位!' }]}>
