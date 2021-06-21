@@ -15,30 +15,10 @@ declare namespace defs {
       errMsg?: string
     }
 
-    export class CommodityBomDetailDTO {
-      /** 商品分类id */
-      commodityCategoryId?: number
-
-      /** 商品分类名称 */
-      commodityCategoryName?: string
-
-      /** 商品id */
-      commodityId?: number
-
-      /** 商品名称 */
-      commodityName?: string
-
-      /** 商品类型id */
-      commodityTypeId?: number
-
-      /** 数量 */
-      quantity?: number
-
-      /** 数量单位 */
-      quantityUnit?: number
-    }
-
     export class CommodityBomDetailListVO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -50,6 +30,12 @@ declare namespace defs {
 
       /** 商品名称 */
       commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品SpecificationsAndOptions名称 */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -275,31 +261,32 @@ declare namespace defs {
     }
 
     export class FinishedGoodsReturnedList {
-      /** categoryText */
+      /** 商品分类 */
       categoryText?: string
 
-      /** commodityId */
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品id */
       commodityId?: number
 
-      /** commodityName */
-      commodityName?: string
-
-      /** placeOriginName */
-      placeOriginName?: string
-
-      /** specText */
-      specText?: string
-
-      /** varietyName */
-      varietyName?: string
-    }
-
-    export class FinishedProductDTO {
       /** 商品名称 */
       commodityName?: string
 
+      /** 商品skuId */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品产地 */
+      placeOriginName?: string
+
       /** 商品规格 */
-      commoditySpecName?: string
+      specText?: Array<string>
+
+      /** 商品品种 */
+      varietyName?: string
     }
 
     export class FinishedProductVO {
@@ -346,6 +333,9 @@ declare namespace defs {
 
       /** 商品名称 */
       commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
 
       /** 商品SpecificationsAndOptions名称 */
       commoditySpecOptionName?: Array<string>
@@ -421,11 +411,6 @@ declare namespace defs {
     }
 
     export class SaveCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -443,6 +428,37 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      saveCommodityBomDetailDTOS?: Array<
+        defs.commodityService.SaveCommodityBomDetailDTO
+      >
+    }
+
+    export class SaveCommodityBomDetailDTO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class ScreeningSkuList {
@@ -641,11 +657,6 @@ declare namespace defs {
     }
 
     export class UpdateCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** bom id */
       commodityBomId?: number
 
@@ -666,11 +677,48 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      updateCommodityBomDetailDTOS?: Array<
+        defs.commodityService.UpdateCommodityBomDetailDTO
+      >
+    }
+
+    export class UpdateCommodityBomDetailDTO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class UpdateSkuDTO {
       /** sku id */
       commoditySkuIds?: Array<number>
+
+      /** commodityTypeIds */
+      commodityTypeIds: Array<number>
 
       /** 状态（1激活，0禁用） */
       status?: number
@@ -766,6 +814,10 @@ declare namespace API {
        */
       export namespace pageFinishedProduct {
         export class Params {
+          /** 商品名称 */
+          commodityName?: string
+          /** 商品规格 */
+          commoditySpecName?: string
           /** offset */
           offset?: number
           /** pageCurrent */
@@ -783,8 +835,7 @@ declare namespace API {
         >
         export const init: Response
         export function request(
-          params: Params,
-          bodyParams: defs.commodityService.FinishedProductDTO
+          params: Params
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<
@@ -971,6 +1022,8 @@ declare namespace API {
         export class Params {
           /** 商品名称 */
           commodityName?: string
+          /** 已选择sku id集合 */
+          commoditySkuIds?: Array<number>
           /** 商品规格名称 */
           commoditySpecName?: string
           /** 商品类型id【2食品、3辅料】 */
