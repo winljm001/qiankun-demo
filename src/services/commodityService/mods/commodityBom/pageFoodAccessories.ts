@@ -11,7 +11,7 @@ export class Params {
   /** 商品规格名称 */
   commoditySpecName?: string
   /** 商品类型id【2食品、3辅料】 */
-  commodityTypeId?: number
+  commodityTypeId: number
   /** offset */
   offset?: number
   /** pageCurrent */

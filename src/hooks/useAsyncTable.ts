@@ -12,7 +12,7 @@ interface IProps {
   manual?: boolean
   extraParams?: any
 }
-const useAsyncTable = (props: IProps): any => {
+const useAsyncTable = (props: IProps) => {
   const { fetchAction, isCache = true, manual = false, extraParams = {} } = props
 
   const getTableData = ({ current, pageSize }: PaginatedParams[0], formData: Object) => {

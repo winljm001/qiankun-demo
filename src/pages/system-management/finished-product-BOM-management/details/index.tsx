@@ -7,7 +7,7 @@ import {
   getFinishProduct as fetchGetFinishProduct,
   USE_GET_FINISH_PRODUCT_KEY,
 } from '@/services/commodityService/mods/commodityBom/getFinishProduct'
-import { list, USE_LIST_KEY } from '@/services/commodityService/mods/commodityBom/list'
+import { listDetail, USE_LIST_DETAIL_KEY } from '@/services/commodityService/mods/commodityBom/listDetail'
 import { deleteCommodityBom as fetchDeleteCommodityBom } from '@/services/commodityService/mods/commodityBom/deleteCommodityBom'
 import BaseFormWrap from '@/components/BaseFormWrap'
 import { FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT } from '@/router/config/system-management/path'
@@ -25,8 +25,8 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
         commodityBomId: +commodityBOMId,
       }).then((d) => d.data),
   )
-  const { data: dataList, isLoading: isLoadingList } = useQuery([USE_LIST_KEY, commodityBOMId], () =>
-    list({
+  const { data: dataListDetail, isLoading: isLoadingList } = useQuery([USE_LIST_DETAIL_KEY, commodityBOMId], () =>
+    listDetail({
       commodityBomId: +commodityBOMId,
     }).then((d) => d.data),
   )
@@ -45,7 +45,7 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
       content: '确认删除商品BOM?',
       onOk: () => {
         mutateDeleteCommodityBom({
-          commodityBomId: commodityBOMId,
+          commodityBomId: +commodityBOMId,
         })
       },
     })
@@ -68,7 +68,7 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />
 
       <IngredientList
-        defaultValue={dataList}
+        defaultValue={dataListDetail}
         loading={isLoadingList}
         extra={
           <Button

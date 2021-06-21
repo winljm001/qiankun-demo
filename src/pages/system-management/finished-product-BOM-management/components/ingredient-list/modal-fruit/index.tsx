@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useImperativeHandle, forwardRef, memo } from 'react'
 import { Modal, Button, Form, Input, Table } from 'antd'
-import type { ColumnType } from 'antd/lib/table/interface'
+import type { ColumnType, TableRowSelection } from 'antd/lib/table/interface'
 import useAsyncTable from '@/hooks/useAsyncTable'
 import useState from '@/hooks/useState'
 import { pageFruit } from '@/services/commodityService/mods/commodityBom/pageFruit'
@@ -24,7 +24,7 @@ type LocalState = {
 }
 
 /** useAsyncTable 参数 */
-const useAsyncTableParams = { fetchAction: pageFruit }
+const useAsyncTableParams = { fetchAction: pageFruit, manual: true, isCache: false }
 
 const columns: ColumnType<TableItem>[] = [
   {
@@ -62,13 +62,22 @@ const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_
   })
 
   useImperativeHandle(ref, () => ({
-    show: ({ onOk }) => {
-      // 重置列表数据？
+    show: ({ onOk, selected }) => {
       ShowOnOkRef.current = onOk
       setState({
         visible: true,
         selected: [],
       })
+
+      // 重置列表数据？
+      form.resetFields()
+      form.setFields([
+        {
+          name: 'commodityIds',
+          value: selected,
+        },
+      ])
+      submit()
     },
   }))
 
@@ -84,9 +93,9 @@ const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_
     setState({ visible: false })
   }
 
-  const rowSelection = {
+  const rowSelection: TableRowSelection<TableItem> = {
     selectedRowKeys: state.selected,
-    onChange: (selectedRowKeys: React.Key[], selectedRows: TableItem[]) => {
+    onChange: (selectedRowKeys, selectedRows) => {
       setState({
         selected: selectedRowKeys as number[],
         selectedObj: selectedRows,
@@ -97,6 +106,10 @@ const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_
   return (
     <Modal title="添加水果" width={880} visible={state.visible} onCancel={onCancel} onOk={onOk}>
       <Form form={form} onFinish={submit}>
+        <Form.Item hidden name="commodityIds">
+          <Input />
+        </Form.Item>
+
         <SearchFormLayout
           list={[
             <Form.Item label="商品名称" name="commodityName" key="商品名称">

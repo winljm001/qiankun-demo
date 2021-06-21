@@ -28,7 +28,7 @@
     "zustand": "^3.4.2"
   },
   "devDependencies": {
-    "@fruits-chain/eslint-config-preset": "^0.0.1",
+    "@fruits-chain/eslint-config-preset": "^0.0.3",
     "@types/loadable__component": "^5.13.3",
     "@types/lodash": "^4.14.170",
     "@types/react": "^17.0.0",

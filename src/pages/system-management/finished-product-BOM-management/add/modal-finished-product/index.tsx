@@ -1,6 +1,6 @@
 import React, { useCallback, useRef, useImperativeHandle, forwardRef, memo } from 'react'
 import { Modal, Button, Form, Input, Table, message } from 'antd'
-import type { ColumnType } from 'antd/lib/table/interface'
+import type { ColumnType, TableRowSelection } from 'antd/lib/table/interface'
 import useAsyncTable from '@/hooks/useAsyncTable'
 import useState from '@/hooks/useState'
 import { pageFinishedProduct } from '@/services/commodityService/mods/commodity/pageFinishedProduct'
@@ -24,7 +24,7 @@ type LocalState = {
 }
 
 /** useAsyncTable 参数 */
-const useAsyncTableParams = { fetchAction: pageFinishedProduct }
+const useAsyncTableParams = { fetchAction: pageFinishedProduct, manual: true, isCache: false }
 
 const columns: ColumnType<TableItem>[] = [
   {
@@ -50,7 +50,7 @@ const columns: ColumnType<TableItem>[] = [
 ]
 
 const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) => {
-  const { tableProps, form, submit } = useAsyncTable(useAsyncTableParams)
+  const { tableProps, form, submit, reset } = useAsyncTable(useAsyncTableParams)
   const ShowOnOkRef = useRef<ShowOnOk>(null)
   const [state, setState] = useState<LocalState>({
     visible: false,
@@ -62,6 +62,8 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
   useImperativeHandle(ref, () => ({
     show: (onOk) => {
       // 重置列表数据？
+      reset()
+
       ShowOnOkRef.current = onOk
       setState({
         visible: true,
@@ -86,10 +88,10 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
     setState({ visible: false })
   }
 
-  const rowSelection = {
+  const rowSelection: TableRowSelection<TableItem> = {
     type: 'radio',
     selectedRowKeys: state.selected,
-    onChange: (selectedRowKeys: React.Key[], selectedRows: TableItem[]) => {
+    onChange: (selectedRowKeys, selectedRows) => {
       setState({
         selected: selectedRowKeys as number[],
         selectedObj: selectedRows,

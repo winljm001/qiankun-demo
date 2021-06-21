@@ -5,20 +5,7 @@ import * as request from '@/utils/fetch'
 /**
  * @description doUpdateCommodityName 接口 URL 参数/GET
  */
-export class Params {
-  /** admin */
-  admin?: boolean
-  /** currentDate */
-  currentDate?: string
-  /** organizationId */
-  organizationId?: number
-  /** organizationName */
-  organizationName?: string
-  /** userId */
-  userId?: number
-  /** userName */
-  userName?: string
-}
+export class Params {}
 
 /**
  * @description doUpdateCommodityName 接口参数

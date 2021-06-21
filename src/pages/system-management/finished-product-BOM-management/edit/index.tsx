@@ -6,6 +6,7 @@ import {
   getFinishProduct as fetchDeleteCommodityBom,
   USE_GET_FINISH_PRODUCT_KEY,
 } from '@/services/commodityService/mods/commodityBom/getFinishProduct'
+import { listDetail, USE_LIST_DETAIL_KEY } from '@/services/commodityService/mods/commodityBom/listDetail'
 import BaseFormWrap from '@/components/BaseFormWrap'
 
 import IngredientList from '../components/ingredient-list'
@@ -20,6 +21,11 @@ const FinishedProductBOMManagementEdit: React.FC<RouteComponentProps<{ commodity
       fetchDeleteCommodityBom({
         commodityBomId: +commodityBOMId,
       }).then((d) => d.data),
+  )
+  const { data: dataListDetail, isLoading: isLoadingList } = useQuery([USE_LIST_DETAIL_KEY, commodityBOMId], () =>
+    listDetail({
+      commodityBomId: +commodityBOMId,
+    }).then((d) => d.data),
   )
 
   return (
@@ -37,7 +43,7 @@ const FinishedProductBOMManagementEdit: React.FC<RouteComponentProps<{ commodity
       ]}>
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />
 
-      <IngredientList edit />
+      <IngredientList edit defaultValue={dataListDetail} loading={isLoadingList} />
     </BaseFormWrap>
   )
 }

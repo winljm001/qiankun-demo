@@ -1,9 +1,9 @@
 /**
- * @description Commodity Bom Controller
+ * @description 成品bom管理
  */
 import * as deleteCommodityBom from './deleteCommodityBom'
 import * as getFinishProduct from './getFinishProduct'
-import * as list from './list'
+import * as listDetail from './listDetail'
 import * as pageCommodityBom from './pageCommodityBom'
 import * as pageFoodAccessories from './pageFoodAccessories'
 import * as pageFruit from './pageFruit'
@@ -13,7 +13,7 @@ import * as updateCommodityBom from './updateCommodityBom'
 export {
   deleteCommodityBom,
   getFinishProduct,
-  list,
+  listDetail,
   pageCommodityBom,
   pageFoodAccessories,
   pageFruit,

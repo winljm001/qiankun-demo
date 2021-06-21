@@ -22,7 +22,7 @@ const CardFinishedProductInformation: React.FC<CardFinishedProductInformationPro
     <BaseCard title="成品资料">
       <Skeleton active loading={loading}>
         <Form.Item label="商品名称">{data.commodityName}</Form.Item>
-        <Form.Item label="商品规格">{data.commoditySpecName}</Form.Item>
+        <Form.Item label="商品规格">{data.commoditySpecOptionName}</Form.Item>
         <Form.Item label="商品类型">{data.commodityCategoryName}</Form.Item>
         <Form.Item label="商品分类">{data.commodityTypeName}</Form.Item>
         <Form.Item label="商品品种">{data.commodityVarietyName}</Form.Item>
