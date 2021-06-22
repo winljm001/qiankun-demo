@@ -1511,7 +1511,7 @@
             "description": "listPropertyOptions",
             "name": "listPropertyOptions",
             "method": "get",
-            "path": "/api/commodity/v1/commodity/sku/option/property/{commodityTypeId}",
+            "path": "/api/commodity/v1/commodity/sku/option/property",
             "response": {
               "typeArgs": [
                 {
@@ -1562,7 +1562,7 @@
             },
             "parameters": [
               {
-                "in": "path",
+                "in": "query",
                 "description": "commodityTypeId",
                 "name": "commodityTypeId",
                 "required": true,

@@ -70,12 +70,12 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       <Form.Item label="sku单位" name="totalType" rules={[{ required: true, message: '请选择单位!' }]}>
         <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
-      <Form.Item label="SKU属性" name="propertyText">
+      <Form.Item label="SKU属性" name="commodityTypeIds">
         <BaseCheckboxByFetch
           remote={{
             fetch: listPropertyOptions,
             params: {
-              id: 1,
+              commodityTypeId: 1,
             },
           }}
         />

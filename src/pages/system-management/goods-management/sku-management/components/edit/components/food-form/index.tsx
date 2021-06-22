@@ -73,12 +73,12 @@ const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
           )
         }}
       </Form.Item>
-      <Form.Item label="SKU属性" name="propertyText">
+      <Form.Item label="SKU属性" name="commodityTypeIds">
         <BaseCheckboxByFetch
           remote={{
             fetch: listPropertyOptions,
             params: {
-              id: 1,
+              commodityTypeId: 2,
             },
           }}
         />

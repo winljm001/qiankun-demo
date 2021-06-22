@@ -1268,7 +1268,7 @@ declare namespace API {
 
       /**
        * listPropertyOptions
-       * /api/commodity/v1/commodity/sku/option/property/{commodityTypeId}
+       * /api/commodity/v1/commodity/sku/option/property
        */
       export namespace listPropertyOptions {
         export class Params {
