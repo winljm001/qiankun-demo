@@ -38,11 +38,24 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
       return
     }
 
-    IngredientListRef.current.getValue().then((list) => {
-      console.log(list)
-      // 提交数据
-      console.log(mutateSaveCommodityBOM)
-    })
+    IngredientListRef.current
+      .getValue()
+      .then((list) => {
+        console.log(finishedProduct)
+        console.log(list)
+        // 提交数据
+        console.log(mutateSaveCommodityBOM)
+        mutateSaveCommodityBOM({
+          commodityCategoryId: finishedProduct.commodityCategoryId,
+          commodityCategoryName: finishedProduct.categoryText,
+          commodityId: finishedProduct.commodityId,
+          commodityName: finishedProduct.commodityName,
+          commoditySkuId: finishedProduct.commoditySkuId,
+          commodityTypeId: finishedProduct.commodityTypeId,
+          saveCommodityBomDetailDTOS: list,
+        })
+      })
+      .catch(() => {})
   }
 
   return (
@@ -76,7 +89,7 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
               </Form.Item>
 
               <Form.Item required label="商品规格">
-                {finishedProduct.specText}
+                {finishedProduct.specText.join('、')}
               </Form.Item>
             </>
           ) : null}

@@ -34,6 +34,7 @@ const columns: ColumnType<TableItem>[] = [
   {
     title: '商品规格',
     dataIndex: 'specText',
+    render: (text: string[]) => text?.join('、'),
   },
   {
     title: '商品分类',
@@ -119,7 +120,7 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
         />
       </Form>
 
-      <Table {...tableProps} columns={columns} rowKey="commodityId" rowSelection={rowSelection} />
+      <Table {...tableProps} columns={columns} rowKey="commoditySkuId" rowSelection={rowSelection} />
     </Modal>
   )
 })

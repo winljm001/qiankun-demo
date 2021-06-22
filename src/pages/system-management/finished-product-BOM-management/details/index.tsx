@@ -42,7 +42,7 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
   const onClickDelete = () => {
     Modal.confirm({
       title: '删除BOM',
-      content: '确认删除商品BOM?',
+      content: '确认删除成品BOM清单?',
       onOk: () => {
         mutateDeleteCommodityBom({
           commodityBomId: +commodityBOMId,
@@ -55,14 +55,14 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
     <BaseFormWrap
       actions={[
         {
+          children: '返回',
+          onClick: history.goBack,
+        },
+        {
           danger: true,
           loading: isLoadingDeleteCommodityBom,
           children: '删除BOM',
           onClick: onClickDelete,
-        },
-        {
-          children: '返回',
-          onClick: history.goBack,
         },
       ]}>
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />

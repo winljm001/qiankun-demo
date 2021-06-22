@@ -1,5 +1,5 @@
 import React, { useState, useRef, useImperativeHandle, forwardRef, memo } from 'react'
-import { Button, Table, Space, message } from 'antd'
+import { Button, Table, Space, Popconfirm, message } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { useQuery } from 'react-query'
 import BaseCard from '@/components/BaseCard'
@@ -115,7 +115,8 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
       },
       {
         title: '商品规格',
-        dataIndex: 'commodityName',
+        dataIndex: 'commoditySpecOptionName',
+        render: (text: string[]) => text?.join('/'),
       },
       {
         title: '商品数量',
@@ -161,8 +162,18 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         ? {
             title: '操作',
             dataIndex: 'action',
-            render: () => {
-              return <Button type="link">删除</Button>
+            render: (_, row) => {
+              return (
+                <Popconfirm
+                  title="确定要删除？"
+                  onConfirm={() => {
+                    setIngredientList((il) => {
+                      return il.filter((item) => buildRowKey(item) !== buildRowKey(row))
+                    })
+                  }}>
+                  <Button type="link">删除</Button>
+                </Popconfirm>
+              )
             },
           }
         : null,
@@ -175,11 +186,18 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         }
         return pre
       }, [] as number[])
+    const filterByCommoditySkuId = (typeId: 2 | 3) =>
+      ingredientList.reduce((pre, cur) => {
+        if (cur.commodityTypeId === typeId) {
+          pre.push(cur.commoditySkuId)
+        }
+        return pre
+      }, [] as number[])
 
     const genOnClickAddBtn = (t: 2 | 3) => () => {
       IngredientListModalFoodAccessoriesRef.current.show({
         type: t,
-        selected: filterByCommodityTypeId(t),
+        selected: filterByCommoditySkuId(t),
         onOk: (p) => {
           setIngredientList((il) =>
             il.concat(
@@ -199,8 +217,6 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         },
       })
     }
-
-    console.log(ingredientList)
 
     return (
       <>
@@ -241,7 +257,13 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
             </Space>
           ) : null}
 
-          <Table rowKey={buildRowKey} columns={column.filter(Boolean)} dataSource={ingredientList} loading={loading} />
+          <Table
+            pagination={false}
+            rowKey={buildRowKey}
+            columns={column.filter(Boolean)}
+            dataSource={ingredientList}
+            loading={loading}
+          />
         </BaseCard>
 
         {edit ? (
