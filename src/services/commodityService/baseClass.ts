@@ -464,6 +464,35 @@ class ScreeningSkuList {
   commoditySpecOptionVOList = []
 }
 
+class SkuDetailVO {
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品类型，1水果，2食品 */
+  commodityTypeId = undefined
+
+  /** sku属性 */
+  commodityTypes = []
+
+  /** 状态（1激活，0禁用） */
+  status = undefined
+
+  /** 总计类型（sku单位；副单位） */
+  totalType = undefined
+
+  /** 总计类型（sku单位；副单位） */
+  totalTypeName = ''
+
+  /** 单位数量（sku净重；换算比率） */
+  unitQuantity = undefined
+
+  /** 单位类型（sku净重单位；最小单位） */
+  unitType = undefined
+
+  /** 单位类型名称（sku净重单位；最小单位） */
+  unitTypeName = ''
+}
+
 class SkuDetails {
   /** sku id */
   commoditySkuId = undefined
@@ -757,6 +786,7 @@ export const commodityService = {
   SaveCommodityBomDTO,
   SaveCommodityBomDetailDTO,
   ScreeningSkuList,
+  SkuDetailVO,
   SkuDetails,
   SkuHeader,
   SkuList,

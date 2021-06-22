@@ -8,7 +8,7 @@ import { FormRef } from '../../index'
 import styles from './style.module.less'
 
 type IProps = {
-  initialValues: defs.commodityService.SkuDetails
+  initialValues: defs.commodityService.SkuDetailVO
 }
 
 const { Option } = Select
@@ -54,9 +54,21 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       </Select>
     </Form.Item>
   )
-
+  console.log({
+    status: true,
+    ...initialValues,
+    commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
+  })
   return (
-    <Form form={form} name="basic" initialValues={{ status: true, ...initialValues }} className={styles.formBox}>
+    <Form
+      form={form}
+      name="basic"
+      initialValues={{
+        status: true,
+        ...initialValues,
+        commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
+      }}
+      className={styles.formBox}>
       <Form.Item
         label="sku净重"
         name="unitQuantity"

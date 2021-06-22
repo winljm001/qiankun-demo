@@ -57,6 +57,7 @@ const BaseCheckboxByFetch: React.FC<IProps> = ({
   }, [data])
   return (
     <Checkbox.Group
+      value={state}
       options={listData}
       onChange={(v) => {
         setState(v)
