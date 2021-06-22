@@ -2,6 +2,8 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'rea
 import { Form, Input, Select, Switch } from 'antd'
 import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions'
 import { useForm } from '@/components/JsonForm'
+import BaseCheckboxByFetch from '@/components/BaseCheckboxByFetch'
+import { listPropertyOptions } from '@/services/commodityService/mods/commoditySku/listPropertyOptions'
 import { FormRef } from '../../index'
 import styles from './style.module.less'
 
@@ -70,6 +72,16 @@ const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
             </Form.Item>
           )
         }}
+      </Form.Item>
+      <Form.Item label="SKU属性" name="commodityTypeIds">
+        <BaseCheckboxByFetch
+          remote={{
+            fetch: listPropertyOptions,
+            params: {
+              commodityTypeId: 2,
+            },
+          }}
+        />
       </Form.Item>
       <Form.Item className={styles.switch} label="状态" name="status" valuePropName="checked">
         <Switch checkedChildren="开启" unCheckedChildren="关闭" defaultChecked={true} />

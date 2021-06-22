@@ -116,7 +116,6 @@ export const buildOptions = (path: string, queryParams: Record<string, any>, met
     console.warn('Please set value for template key: ', key)
     return ''
   })
-
   // GET 请求参数放置 URL 上
   if (isGet && Object.keys(params).length) {
     url = `${url}?${qs.stringify(params)}`
