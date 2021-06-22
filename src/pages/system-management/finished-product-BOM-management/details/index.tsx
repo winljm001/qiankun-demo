@@ -68,7 +68,7 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />
 
       <IngredientList
-        defaultValue={dataListDetail}
+        value={dataListDetail}
         loading={isLoadingList}
         extra={
           <Button

@@ -50,6 +50,7 @@ const FinishedProductBOMManagementEdit: React.FC<RouteComponentProps<{ commodity
         // 提交数据
         mutateUpdateCommodityBom({
           ...dataFinishProduct,
+          commodityBomId: +commodityBOMId,
           updateCommodityBomDetailDTOS: list,
         })
       })
@@ -71,7 +72,7 @@ const FinishedProductBOMManagementEdit: React.FC<RouteComponentProps<{ commodity
       ]}>
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />
 
-      <IngredientList edit ref={IngredientListRef} defaultValue={dataListDetail} loading={isLoadingList} />
+      <IngredientList edit ref={IngredientListRef} value={dataListDetail} loading={isLoadingList} />
     </BaseFormWrap>
   )
 }

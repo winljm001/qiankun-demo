@@ -15,7 +15,7 @@ interface CommodityUnitProps {
   /**
    * 单位选项
    */
-  options: CommodityUnitSelectItem[]
+  options?: CommodityUnitSelectItem[]
 
   /**
    * 当前的值
@@ -28,7 +28,7 @@ interface CommodityUnitProps {
   onChange: (value: number, label: string) => void
 }
 
-const CommodityUnit: React.FC<CommodityUnitProps> = ({ options, value, onChange }) => {
+const CommodityUnit: React.FC<CommodityUnitProps> = ({ options = [], value, onChange }) => {
   const [state, setState] = useState<State>({
     value: value,
     edit: false,
