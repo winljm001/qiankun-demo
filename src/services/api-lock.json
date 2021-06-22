@@ -1419,7 +1419,7 @@
               "typeArgs": [
                 {
                   "typeArgs": [],
-                  "typeName": "SkuDetails",
+                  "typeName": "SkuDetailVO",
                   "isDefsType": true,
                   "templateIndex": -1,
                   "compileTemplateKeyword": "#/definitions/",
@@ -5426,6 +5426,148 @@
             },
             "name": "commoditySpecOptionVOList",
             "description": "SpecificationsAndOptions",
+            "required": false
+          }
+        ],
+        "templateArgs": []
+      },
+      {
+        "name": "SkuDetailVO",
+        "properties": [
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commoditySkuId",
+            "description": "sku id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityTypeId",
+            "description": "商品类型，1水果，2食品",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [
+                {
+                  "typeArgs": [],
+                  "typeName": "CommodityTypeVO",
+                  "isDefsType": true,
+                  "templateIndex": -1,
+                  "compileTemplateKeyword": "#/definitions/",
+                  "enum": [],
+                  "typeProperties": []
+                }
+              ],
+              "typeName": "Array",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityTypes",
+            "description": "sku属性",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "status",
+            "description": "状态（1激活，0禁用）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalType",
+            "description": "总计类型（sku单位；副单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "totalTypeName",
+            "description": "总计类型（sku单位；副单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitQuantity",
+            "description": "单位数量（sku净重；换算比率）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitType",
+            "description": "单位类型（sku净重单位；最小单位）",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "unitTypeName",
+            "description": "单位类型名称（sku净重单位；最小单位）",
             "required": false
           }
         ],
