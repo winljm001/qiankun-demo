@@ -28,7 +28,7 @@ export const listPropertyOptions = (
     >
   >({
     ...request.buildOptions(
-      '/api/commodity/v1/commodity/sku/option/property/{commodityTypeId}',
+      '/api/commodity/v1/commodity/sku/option/property',
       params,
       'GET'
     ),
@@ -40,7 +40,7 @@ export const listPropertyOptions = (
  * @description listPropertyOptions hooks 默认的 key
  */
 export const USE_LIST_PROPERTY_OPTIONS_KEY =
-  '/api/commodity/v1/commodity/sku/option/property/{commodityTypeId}_GET'
+  '/api/commodity/v1/commodity/sku/option/property_GET'
 
 // export const listPropertyOptionsQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

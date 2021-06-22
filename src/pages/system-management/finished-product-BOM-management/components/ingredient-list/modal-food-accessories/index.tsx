@@ -38,7 +38,7 @@ const columns: ColumnType<TableItem>[] = [
     title: '商品规格',
     dataIndex: 'commoditySpecOptionName',
     render: (text: string[]) => {
-      return text.join('/')
+      return text.join('、')
     },
   },
   {
@@ -78,7 +78,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
       form.resetFields()
       form.setFields([
         {
-          name: 'commoditySkuId',
+          name: 'commoditySkuIds',
           value: selected,
         },
         {
@@ -124,7 +124,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
           <Input type="hidden" />
         </Form.Item>
 
-        <Form.Item hidden name="commoditySkuId">
+        <Form.Item hidden name="commoditySkuIds">
           <Input />
         </Form.Item>
 

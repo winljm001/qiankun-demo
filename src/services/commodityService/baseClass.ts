@@ -9,33 +9,10 @@ class ApiResult {
   errMsg = ''
 }
 
-class CommodityBomDetailDTO {
-  /** 商品分类id */
-  commodityCategoryId = undefined
-
-  /** 商品分类名称 */
-  commodityCategoryName = ''
-
-  /** 商品id */
-  commodityId = undefined
-
-  /** 商品名称 */
-  commodityName = ''
-
-  /** sku id */
-  commoditySkuId = undefined
-
-  /** 商品类型id */
-  commodityTypeId = undefined
-
-  /** 数量 */
-  quantity = undefined
-
-  /** 数量单位 */
-  quantityUnit = undefined
-}
-
 class CommodityBomDetailListVO {
+  /** 配料id */
+  commodityBomDetailId = undefined
+
   /** 商品分类id */
   commodityCategoryId = undefined
 
@@ -281,11 +258,17 @@ class FinishedGoodsReturnedList {
   /** 商品分类 */
   categoryText = ''
 
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
   /** 商品id */
   commodityId = undefined
 
   /** 商品名称 */
   commodityName = ''
+
+  /** 商品skuId */
+  commoditySkuId = undefined
 
   /** 商品类型id */
   commodityTypeId = undefined
@@ -422,9 +405,6 @@ class Option {
 }
 
 class SaveCommodityBomDTO {
-  /** 配料列表 */
-  commodityBomDetailDTOS = []
-
   /** 商品分类id */
   commodityCategoryId = undefined
 
@@ -442,6 +422,35 @@ class SaveCommodityBomDTO {
 
   /** 商品类型id */
   commodityTypeId = undefined
+
+  /** 配料列表 */
+  saveCommodityBomDetailDTOS = []
+}
+
+class SaveCommodityBomDetailDTO {
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 数量 */
+  quantity = undefined
+
+  /** 数量单位 */
+  quantityUnit = undefined
 }
 
 class ScreeningSkuList {
@@ -630,9 +639,6 @@ class SubsidiaryUpdateDTO {
 }
 
 class UpdateCommodityBomDTO {
-  /** 配料列表 */
-  commodityBomDetailDTOS = []
-
   /** bom id */
   commodityBomId = undefined
 
@@ -653,6 +659,38 @@ class UpdateCommodityBomDTO {
 
   /** 商品类型id */
   commodityTypeId = undefined
+
+  /** 配料列表 */
+  updateCommodityBomDetailDTOS = []
+}
+
+class UpdateCommodityBomDetailDTO {
+  /** 配料id */
+  commodityBomDetailId = undefined
+
+  /** 商品分类id */
+  commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
+
+  /** 商品id */
+  commodityId = undefined
+
+  /** 商品名称 */
+  commodityName = ''
+
+  /** sku id */
+  commoditySkuId = undefined
+
+  /** 商品类型id */
+  commodityTypeId = undefined
+
+  /** 数量 */
+  quantity = undefined
+
+  /** 数量单位 */
+  quantityUnit = undefined
 }
 
 class UpdateSkuDTO {
@@ -694,7 +732,6 @@ class UpdateSubSkuDTO {
 
 export const commodityService = {
   ApiResult,
-  CommodityBomDetailDTO,
   CommodityBomDetailListVO,
   CommodityBomListVO,
   CommodityDTO,
@@ -718,6 +755,7 @@ export const commodityService = {
   ModifyTheSkuStatus,
   Option,
   SaveCommodityBomDTO,
+  SaveCommodityBomDetailDTO,
   ScreeningSkuList,
   SkuDetails,
   SkuHeader,
@@ -732,6 +770,7 @@ export const commodityService = {
   SubsidiarySpuVO,
   SubsidiaryUpdateDTO,
   UpdateCommodityBomDTO,
+  UpdateCommodityBomDetailDTO,
   UpdateSkuDTO,
   UpdateSubSkuDTO
 }

@@ -15,33 +15,10 @@ declare namespace defs {
       errMsg?: string
     }
 
-    export class CommodityBomDetailDTO {
-      /** 商品分类id */
-      commodityCategoryId?: number
-
-      /** 商品分类名称 */
-      commodityCategoryName?: string
-
-      /** 商品id */
-      commodityId?: number
-
-      /** 商品名称 */
-      commodityName?: string
-
-      /** sku id */
-      commoditySkuId?: number
-
-      /** 商品类型id */
-      commodityTypeId?: number
-
-      /** 数量 */
-      quantity?: number
-
-      /** 数量单位 */
-      quantityUnit?: number
-    }
-
     export class CommodityBomDetailListVO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -287,11 +264,17 @@ declare namespace defs {
       /** 商品分类 */
       categoryText?: string
 
+      /** 商品分类id */
+      commodityCategoryId?: number
+
       /** 商品id */
       commodityId?: number
 
       /** 商品名称 */
       commodityName?: string
+
+      /** 商品skuId */
+      commoditySkuId?: number
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -428,11 +411,6 @@ declare namespace defs {
     }
 
     export class SaveCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -450,6 +428,37 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      saveCommodityBomDetailDTOS?: Array<
+        defs.commodityService.SaveCommodityBomDetailDTO
+      >
+    }
+
+    export class SaveCommodityBomDetailDTO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class ScreeningSkuList {
@@ -648,11 +657,6 @@ declare namespace defs {
     }
 
     export class UpdateCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** bom id */
       commodityBomId?: number
 
@@ -673,6 +677,40 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      updateCommodityBomDetailDTOS?: Array<
+        defs.commodityService.UpdateCommodityBomDetailDTO
+      >
+    }
+
+    export class UpdateCommodityBomDetailDTO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class UpdateSkuDTO {
@@ -1230,7 +1268,7 @@ declare namespace API {
 
       /**
        * listPropertyOptions
-       * /api/commodity/v1/commodity/sku/option/property/{commodityTypeId}
+       * /api/commodity/v1/commodity/sku/option/property
        */
       export namespace listPropertyOptions {
         export class Params {

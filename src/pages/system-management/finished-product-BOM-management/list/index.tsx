@@ -36,7 +36,8 @@ const FinishedProductBOMManagementList = () => {
     },
     {
       title: '商品规格',
-      dataIndex: 'commoditySpecName',
+      dataIndex: 'commoditySpecOptionName',
+      render: (text: string[]) => text.join('、'),
     },
     {
       title: '操作',
