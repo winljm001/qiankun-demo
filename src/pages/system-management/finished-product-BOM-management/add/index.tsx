@@ -46,12 +46,8 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
         // 提交数据
         console.log(mutateSaveCommodityBOM)
         mutateSaveCommodityBOM({
-          commodityCategoryId: finishedProduct.commodityCategoryId,
+          ...finishedProduct,
           commodityCategoryName: finishedProduct.categoryText,
-          commodityId: finishedProduct.commodityId,
-          commodityName: finishedProduct.commodityName,
-          commoditySkuId: finishedProduct.commoditySkuId,
-          commodityTypeId: finishedProduct.commodityTypeId,
           saveCommodityBomDetailDTOS: list,
         })
       })

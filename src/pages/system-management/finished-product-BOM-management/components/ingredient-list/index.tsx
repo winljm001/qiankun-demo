@@ -1,4 +1,4 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef, memo } from 'react'
+import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef, memo } from 'react'
 import { Button, Table, Space, Popconfirm, message } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { useQuery } from 'react-query'
@@ -32,6 +32,11 @@ interface IngredientListProps {
   defaultValue?: IngredientItem[]
 
   /**
+   * 变动的数据，受控模式
+   */
+  value?: IngredientItem[]
+
+  /**
    * 是否是编辑模式
    * @default false
    */
@@ -56,7 +61,7 @@ const ProductTypesMap: Record<number, string> = {
  * 配料清单
  */
 const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
-  ({ edit = false, defaultValue = [], loading = false, extra }, ref) => {
+  ({ edit = false, defaultValue = [], value, loading = false, extra }, ref) => {
     const IngredientListModalFruitRef = useRef<IngredientListModalFruitInstance>(null)
     const IngredientListModalFoodAccessoriesRef = useRef<IngredientListModalFoodAccessoriesInstance>(null)
     const [ingredientList, setIngredientList] = useState<IngredientItem[]>(defaultValue)
@@ -64,7 +69,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
       [USE_LIST_UNIT_OPTIONS_KEY],
       () =>
         fetchListUnitOptions({
-          commodityTypeId: 1,
+          commodityTypeId: 5,
         }).then((d) => d.data),
       {
         enabled: edit,
@@ -98,6 +103,13 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
           }
         }),
     }))
+
+    // 和外界的数据同步
+    useEffect(() => {
+      if (isDef(value)) {
+        setIngredientList(value)
+      }
+    }, [value])
 
     const column: ColumnType<IngredientItem>[] = [
       {
