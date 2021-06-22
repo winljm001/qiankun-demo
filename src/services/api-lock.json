@@ -2722,7 +2722,7 @@
             "parameters": [
               {
                 "in": "path",
-                "description": "商品类型id（1：水果，2：食品，5：sku净重）",
+                "description": "商品类型id（1：水果，2：食品，3:辅料,5：sku净重）",
                 "name": "commodityTypeId",
                 "required": true,
                 "dataType": {
@@ -5444,6 +5444,20 @@
               "enum": [],
               "typeProperties": []
             },
+            "name": "commodityPlaceOriginId",
+            "description": "商品产地id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
             "name": "commoditySkuId",
             "description": "sku id",
             "required": false
@@ -5484,6 +5498,20 @@
             },
             "name": "commodityTypes",
             "description": "sku属性",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "number",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityVarietyId",
+            "description": "商品品类id",
             "required": false
           },
           {

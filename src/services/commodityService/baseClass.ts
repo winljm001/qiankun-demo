@@ -465,6 +465,9 @@ class ScreeningSkuList {
 }
 
 class SkuDetailVO {
+  /** 商品产地id */
+  commodityPlaceOriginId = undefined
+
   /** sku id */
   commoditySkuId = undefined
 
@@ -473,6 +476,9 @@ class SkuDetailVO {
 
   /** sku属性 */
   commodityTypes = []
+
+  /** 商品品类id */
+  commodityVarietyId = undefined
 
   /** 状态（1激活，0禁用） */
   status = undefined

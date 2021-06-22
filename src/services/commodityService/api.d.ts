@@ -475,6 +475,9 @@ declare namespace defs {
     }
 
     export class SkuDetailVO {
+      /** 商品产地id */
+      commodityPlaceOriginId?: number
+
       /** sku id */
       commoditySkuId?: number
 
@@ -483,6 +486,9 @@ declare namespace defs {
 
       /** sku属性 */
       commodityTypes?: Array<defs.commodityService.CommodityTypeVO>
+
+      /** 商品品类id */
+      commodityVarietyId?: number
 
       /** 状态（1激活，0禁用） */
       status?: number
@@ -1735,7 +1741,7 @@ declare namespace API {
        */
       export namespace listUnitOptions {
         export class Params {
-          /** 商品类型id（1：水果，2：食品，5：sku净重） */
+          /** 商品类型id（1：水果，2：食品，3:辅料,5：sku净重） */
           commodityTypeId: number
         }
 
