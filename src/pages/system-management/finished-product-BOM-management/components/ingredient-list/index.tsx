@@ -152,7 +152,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         title: '商品单位',
         width: 160,
         render: (_, row, index) => {
-          if (!edit || row.commodityCategoryId !== 1) {
+          if (!edit || isDef(row.commoditySkuId)) {
             return row.quantityUnitName
           }
           return (
