@@ -1,4 +1,4 @@
-import { Divider, Input, Table, Col, Row } from 'antd'
+import { Divider, Input, Table, Col, Row, Space, Button } from 'antd'
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo, useState } from 'react'
 import { useQuery } from 'react-query'
 
@@ -6,6 +6,7 @@ import {
   listSkuSelectedCombination,
   USE_LIST_SKU_SELECTED_COMBINATION_KEY,
 } from '@/services/commodityService/mods/commoditySku/listSkuSelectedCombination'
+import SearchFormLayout from '@/components/SearchFormLayout'
 import { getAllSpecDescartes, getColumns } from './utils'
 
 export interface SkuSelectRefProps {
@@ -16,6 +17,7 @@ interface SkuSelectFormProps {
   specData?: defs.commodityService.SpecificationsAndTypes[]
 }
 const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, specData = [] }, ref) => {
+  const [keyword, setKeyword] = useState('')
   const [selected, setSelected] = useState([])
   const [resData, setResData] = useState([])
   useImperativeHandle(ref, () => ({
@@ -48,11 +50,11 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
       setSelected(e)
     },
   }
-  const onSearch = (k) => {
+  const onSearch = () => {
     const res = data?.filter((v) => {
       let hasKey = false
       Object.keys(v).forEach((key) => {
-        if (typeof v[key] === 'string' && v[key]?.indexOf(k) !== -1) {
+        if (typeof v[key] === 'string' && v[key]?.indexOf(keyword) !== -1) {
           hasKey = true
         }
       })
@@ -63,11 +65,27 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
   }
   return (
     <div>
-      <Row>
-        <Col span={12}>
-          <Input.Search placeholder="搜索" onSearch={onSearch} enterButton allowClear />
-        </Col>
-      </Row>
+      <SearchFormLayout
+        size="small"
+        list={[
+          <Input
+            placeholder="搜索"
+            key="search"
+            value={keyword}
+            onChange={(v) => {
+              setKeyword(v.target.value)
+            }}
+          />,
+          <Space size={24} key="space">
+            <Button
+              onClick={() => {
+                onSearch()
+              }}>
+              查询
+            </Button>
+          </Space>,
+        ]}
+      />
       <Divider />
       <Table
         rowSelection={rowSelection}
