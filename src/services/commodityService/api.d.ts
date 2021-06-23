@@ -849,9 +849,9 @@ declare namespace API {
        */
       export namespace pageFinishedProduct {
         export class Params {
-          /** 商品名称 */
+          /** commodityName */
           commodityName?: string
-          /** 商品规格 */
+          /** commoditySpecName */
           commoditySpecName?: string
           /** offset */
           offset?: number
