@@ -8,8 +8,8 @@ import * as request from '@/utils/fetch'
 export class Params {
   /** commodityName */
   commodityName?: string
-  /** commoditySpecName */
-  commoditySpecName?: string
+  /** commoditySpecOptionName */
+  commoditySpecOptionName?: string
   /** offset */
   offset?: number
   /** pageCurrent */
