@@ -2,11 +2,13 @@ import React, { useState, useEffect, useImperativeHandle, forwardRef } from 'rea
 import { Switch, Form, Input, Select } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions'
+import BaseCheckboxByFetch from '@/components/BaseCheckboxByFetch'
+import { listPropertyOptions } from '@/services/commodityService/mods/commoditySku/listPropertyOptions'
 import { FormRef } from '../../index'
 import styles from './style.module.less'
 
 type IProps = {
-  initialValues: defs.commodityService.SkuDetails
+  initialValues: defs.commodityService.SkuDetailVO
 }
 
 const { Option } = Select
@@ -52,9 +54,22 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       </Select>
     </Form.Item>
   )
-
+  console.log({
+    status: true,
+    ...initialValues,
+    commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
+  })
   return (
-    <Form form={form} name="basic" initialValues={{ status: true, ...initialValues }} className={styles.formBox}>
+    <Form
+      form={form}
+      name="basic"
+      layout="vertical"
+      initialValues={{
+        status: true,
+        ...initialValues,
+        commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
+      }}
+      className={styles.formBox}>
       <Form.Item
         label="sku净重"
         name="unitQuantity"
@@ -68,7 +83,17 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       <Form.Item label="sku单位" name="totalType" rules={[{ required: true, message: '请选择单位!' }]}>
         <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
-      <Form.Item label="状态" name="status" valuePropName="checked" className={styles.switch}>
+      <Form.Item label="SKU属性" name="commodityTypeIds">
+        <BaseCheckboxByFetch
+          remote={{
+            fetch: listPropertyOptions,
+            params: {
+              commodityTypeId: 1,
+            },
+          }}
+        />
+      </Form.Item>
+      <Form.Item label="状态" name="status" valuePropName="checked">
         <Switch checkedChildren="开启" unCheckedChildren="关闭" />
       </Form.Item>
     </Form>

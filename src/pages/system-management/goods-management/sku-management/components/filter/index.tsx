@@ -69,7 +69,6 @@ const Filter: FC<IProps> = ({ items, form, submit, reset }) => {
                 type="primary"
                 htmlType="submit"
                 onClick={() => {
-                  console.log(form.getFieldsValue())
                   submit()
                 }}>
                 查询

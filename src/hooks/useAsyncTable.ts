@@ -12,7 +12,7 @@ interface IProps {
   manual?: boolean
   extraParams?: any
 }
-const useAsyncTable = (props: IProps): any => {
+const useAsyncTable = (props: IProps) => {
   const { fetchAction, isCache = true, manual = false, extraParams = {} } = props
 
   const getTableData = ({ current, pageSize }: PaginatedParams[0], formData: Object) => {
@@ -48,8 +48,10 @@ const useAsyncTable = (props: IProps): any => {
     },
   )
   useEffect(() => {
-    if (params?.length > 1) {
-      setCacheParams({ ...params[0], ...params[1] })
+    if (isCache) {
+      if (params?.length > 1) {
+        setCacheParams({ ...params[0], ...params[1] })
+      }
     }
   }, [params])
   const { submit, reset } = search

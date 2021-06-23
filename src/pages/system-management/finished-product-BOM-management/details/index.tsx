@@ -7,7 +7,7 @@ import {
   getFinishProduct as fetchGetFinishProduct,
   USE_GET_FINISH_PRODUCT_KEY,
 } from '@/services/commodityService/mods/commodityBom/getFinishProduct'
-import { list, USE_LIST_KEY } from '@/services/commodityService/mods/commodityBom/list'
+import { listDetail, USE_LIST_DETAIL_KEY } from '@/services/commodityService/mods/commodityBom/listDetail'
 import { deleteCommodityBom as fetchDeleteCommodityBom } from '@/services/commodityService/mods/commodityBom/deleteCommodityBom'
 import BaseFormWrap from '@/components/BaseFormWrap'
 import { FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT } from '@/router/config/system-management/path'
@@ -25,8 +25,8 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
         commodityBomId: +commodityBOMId,
       }).then((d) => d.data),
   )
-  const { data: dataList, isLoading: isLoadingList } = useQuery([USE_LIST_KEY, commodityBOMId], () =>
-    list({
+  const { data: dataListDetail, isLoading: isLoadingList } = useQuery([USE_LIST_DETAIL_KEY, commodityBOMId], () =>
+    listDetail({
       commodityBomId: +commodityBOMId,
     }).then((d) => d.data),
   )
@@ -42,10 +42,10 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
   const onClickDelete = () => {
     Modal.confirm({
       title: '删除BOM',
-      content: '确认删除商品BOM?',
+      content: '确认删除成品BOM清单?',
       onOk: () => {
         mutateDeleteCommodityBom({
-          commodityBomId: commodityBOMId,
+          commodityBomId: +commodityBOMId,
         })
       },
     })
@@ -55,20 +55,20 @@ const FinishedProductBOMManagementDetails: React.FC<RouteComponentProps<{ commod
     <BaseFormWrap
       actions={[
         {
+          children: '返回',
+          onClick: history.goBack,
+        },
+        {
           danger: true,
           loading: isLoadingDeleteCommodityBom,
           children: '删除BOM',
           onClick: onClickDelete,
         },
-        {
-          children: '返回',
-          onClick: history.goBack,
-        },
       ]}>
       <CardFinishedProductInformation data={dataFinishProduct} loading={isLoadingFinishProduct} />
 
       <IngredientList
-        defaultValue={dataList}
+        value={dataListDetail}
         loading={isLoadingList}
         extra={
           <Button

@@ -1,9 +1,9 @@
-// list 接口文件
+// listDetail 接口文件
 // import { useQuery } from 'react-query'
 import * as request from '@/utils/fetch'
 
 /**
- * @description list 接口 URL 参数/GET
+ * @description listDetail 接口 URL 参数/GET
  */
 export class Params {
   /** bom id */
@@ -11,14 +11,14 @@ export class Params {
 }
 
 /**
- * @description list 接口参数
+ * @description listDetail 接口参数
  */
-export type ListParams = Params
+export type ListDetailParams = Params
 
 /**
- * @description list 接口
+ * @description listDetail 接口
  */
-export const list = (params: ListParams, headers?: any) => {
+export const listDetail = (params: ListDetailParams, headers?: any) => {
   return request.request<
     defs.commodityService.ApiResult<
       Array<defs.commodityService.CommodityBomDetailListVO>
@@ -34,20 +34,20 @@ export const list = (params: ListParams, headers?: any) => {
 }
 
 /**
- * @description list hooks 默认的 key
+ * @description listDetail hooks 默认的 key
  */
-export const USE_LIST_KEY =
+export const USE_LIST_DETAIL_KEY =
   '/api/commodity/v1/bom/detail/list/{commodityBomId}_GET'
 
-// export const listQuery = ({ queryKey }: {queryKey:any[]}) => {
+// export const listDetailQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;
-//   return list(params);
+//   return listDetail(params);
 // }
 
 // /**
-//  * @description list hooks
+//  * @description listDetail hooks
 //  */
-// export const useList = (params: ListParams, headers?:any, key = 'USE_LIST_KEY') => {
+// export const useListDetail = (params: ListDetailParams, headers?:any, key = 'USE_LIST_DETAIL_KEY') => {
 //   // 修正数据
 //   if(typeof headers === 'string') {
 //     key = headers;
@@ -56,6 +56,6 @@ export const USE_LIST_KEY =
 
 //   return useQuery({
 //     queryKey: [key, params],
-//     queryFn: () => list(params, headers),
+//     queryFn: () => listDetail(params, headers),
 //   })
 // }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { Button, Space, Table } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { useHistory } from 'react-router-dom'
@@ -36,7 +36,8 @@ const FinishedProductBOMManagementList = () => {
     },
     {
       title: '商品规格',
-      dataIndex: 'commoditySpecName',
+      dataIndex: 'commoditySpecOptionName',
+      render: (text: string[]) => text.join('、'),
     },
     {
       title: '操作',
@@ -64,16 +65,16 @@ const FinishedProductBOMManagementList = () => {
     },
   ]
 
+  const onClickGoAdd = useCallback(() => {
+    history.push(FINISHED_PRODUCT_BOM_MANAGEMENT_ADD)
+  }, [history])
+
   return (
     <>
       <BaseCard>
         <SearchForm form={form} submit={submit} reset={reset} />
         <Space size={24}>
-          <Button
-            onClick={() => {
-              history.push(FINISHED_PRODUCT_BOM_MANAGEMENT_ADD)
-            }}
-            type="primary">
+          <Button ghost onClick={onClickGoAdd} type="primary">
             新增BOM
           </Button>
         </Space>

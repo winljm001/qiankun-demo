@@ -21,9 +21,5 @@ module.exports = {
     'no-undef': 0,
     'max-nested-callbacks': 'off',
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-  },
+  settings: {},
 }

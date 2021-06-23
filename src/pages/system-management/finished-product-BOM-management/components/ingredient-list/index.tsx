@@ -1,14 +1,21 @@
-import React, { useState, useRef, useImperativeHandle, forwardRef, memo } from 'react'
-import { Button, Table, Space, message } from 'antd'
+import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef, memo } from 'react'
+import { Button, Table, Space, Popconfirm, message } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
+import { useQuery } from 'react-query'
 import BaseCard from '@/components/BaseCard'
 import { isDef } from '@/utils/typeof'
+import {
+  listUnitOptions as fetchListUnitOptions,
+  USE_LIST_UNIT_OPTIONS_KEY,
+} from '@/services/commodityService/mods/commoditySku/listUnitOptions'
 
 import type { IngredientListModalFruitInstance } from './modal-fruit'
 import IngredientListModalFruit from './modal-fruit'
 import IngredientListModalFoodAccessories from './modal-food-accessories'
 import type { IngredientListModalFoodAccessoriesInstance } from './modal-food-accessories'
 import Quantity from './quantity'
+import CommodityUnit from './commodity-unit'
+import type { CommodityUnitSelectItem } from './commodity-unit'
 
 import './index.less'
 
@@ -25,6 +32,11 @@ interface IngredientListProps {
   defaultValue?: IngredientItem[]
 
   /**
+   * 变动的数据，受控模式
+   */
+  value?: IngredientItem[]
+
+  /**
    * 是否是编辑模式
    * @default false
    */
@@ -39,14 +51,31 @@ interface IngredientListProps {
   extra?: React.ReactNode
 }
 
+const ProductTypesMap: Record<number, string> = {
+  1: '水果',
+  2: '食品',
+  3: '辅料',
+}
+
 /**
  * 配料清单
  */
 const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
-  ({ edit = false, defaultValue = [{}], loading = false, extra }, ref) => {
+  ({ edit = false, defaultValue = [], value, loading = false, extra }, ref) => {
     const IngredientListModalFruitRef = useRef<IngredientListModalFruitInstance>(null)
     const IngredientListModalFoodAccessoriesRef = useRef<IngredientListModalFoodAccessoriesInstance>(null)
     const [ingredientList, setIngredientList] = useState<IngredientItem[]>(defaultValue)
+    const { data: dataListUnitOptions } = useQuery(
+      [USE_LIST_UNIT_OPTIONS_KEY],
+      () =>
+        fetchListUnitOptions({
+          commodityTypeId: 5,
+        }).then((d) => d.data),
+      {
+        enabled: edit,
+      },
+    )
+    const buildRowKey = (row: IngredientItem) => `${row.commodityId}_${row.commoditySkuId}`
 
     // 向外暴露方法
     useImperativeHandle(ref, () => ({
@@ -55,8 +84,8 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
           let errMsg: string
 
           ingredientList.some((item) => {
-            if (isDef(item.quantity) && +item.quantity <= 0) {
-              errMsg = `${item.commodityName}的数量有误`
+            if (!isDef(item.quantity) || +item.quantity <= 0) {
+              errMsg = `${item.commodityCategoryName}/${item.commodityName}的数量有误`
               return true
             }
             return false
@@ -75,15 +104,31 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         }),
     }))
 
+    // 和外界的数据同步
+    useEffect(() => {
+      if (isDef(value)) {
+        setIngredientList(value)
+      }
+    }, [value])
+
     const column: ColumnType<IngredientItem>[] = [
       {
         title: '商品类型',
+        dataIndex: 'commodityTypeId',
+        render: (text) => ProductTypesMap[text],
       },
       {
         title: '商品分类',
+        dataIndex: 'commodityCategoryName',
       },
       {
         title: '商品名称',
+        dataIndex: 'commodityName',
+      },
+      {
+        title: '商品规格',
+        dataIndex: 'commoditySpecOptionName',
+        render: (text: string[]) => text?.join('/'),
       },
       {
         title: '商品数量',
@@ -105,16 +150,42 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
       },
       {
         title: '商品单位',
-        render: () => {
-          return <span>根据商品类型判断</span>
+        width: 160,
+        render: (_, row, index) => {
+          if (!edit || isDef(row.commoditySkuId)) {
+            return row.quantityUnitName
+          }
+          return (
+            <CommodityUnit
+              options={dataListUnitOptions as CommodityUnitSelectItem[]}
+              value={row.quantityUnit}
+              onChange={(value, label) => {
+                setIngredientList((il) => {
+                  il[index].quantityUnit = value
+                  il[index].quantityUnitName = label
+                  return [].concat(il)
+                })
+              }}
+            />
+          )
         },
       },
       edit
         ? {
             title: '操作',
             dataIndex: 'action',
-            render: () => {
-              return <span>删除</span>
+            render: (_, row) => {
+              return (
+                <Popconfirm
+                  title="确定要删除？"
+                  onConfirm={() => {
+                    setIngredientList((il) => {
+                      return il.filter((item) => buildRowKey(item) !== buildRowKey(row))
+                    })
+                  }}>
+                  <Button type="link">删除</Button>
+                </Popconfirm>
+              )
             },
           }
         : null,
@@ -127,11 +198,18 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         }
         return pre
       }, [] as number[])
+    const filterByCommoditySkuId = (typeId: 2 | 3) =>
+      ingredientList.reduce((pre, cur) => {
+        if (cur.commodityTypeId === typeId) {
+          pre.push(cur.commoditySkuId)
+        }
+        return pre
+      }, [] as number[])
 
     const genOnClickAddBtn = (t: 2 | 3) => () => {
       IngredientListModalFoodAccessoriesRef.current.show({
         type: t,
-        selected: filterByCommodityTypeId(t),
+        selected: filterByCommoditySkuId(t),
         onOk: (p) => {
           setIngredientList((il) =>
             il.concat(
@@ -143,6 +221,8 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
                 commodityTypeId: item.commodityTypeId,
                 quantityUnit: item.unitId,
                 quantityUnitName: item.unitName,
+                commoditySkuId: item.commoditySkuId,
+                commoditySpecOptionName: item.commoditySpecOptionName,
               })),
             ),
           )
@@ -161,6 +241,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
                   IngredientListModalFruitRef.current.show({
                     selected: filterByCommodityTypeId(1),
                     onOk: (p) => {
+                      console.log(p)
                       setIngredientList((il) =>
                         il.concat(
                           p.map<IngredientItem>((item) => ({
@@ -188,7 +269,13 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
             </Space>
           ) : null}
 
-          <Table columns={column.filter(Boolean)} dataSource={ingredientList} loading={loading} />
+          <Table
+            pagination={false}
+            rowKey={buildRowKey}
+            columns={column.filter(Boolean)}
+            dataSource={ingredientList}
+            loading={loading}
+          />
         </BaseCard>
 
         {edit ? (

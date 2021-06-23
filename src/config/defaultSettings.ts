@@ -13,16 +13,41 @@ const fromColProps = {
 
 // 列表上查询条件表单布局配置
 const listSearchFromItemProps = {
-  rowProps: { gutter: { xs: 12, sm: 24 } },
-  colProps: {
-    xs: { span: 24 },
-    sm: { span: 24 },
-    md: { span: 12 },
-    lg: { span: 8 },
-    xl: { span: 8 },
-    xxl: { span: 6 },
+  small: {
+    rowProps: { gutter: { xs: 24, sm: 24 } },
+    colProps: {
+      xs: { span: 24 },
+      sm: { span: 24 },
+      md: { span: 12 },
+      lg: { span: 12 },
+      xl: { span: 12 },
+      xxl: { span: 12 },
+    },
+  },
+  middle: {
+    rowProps: { gutter: { xs: 12, sm: 24 } },
+    colProps: {
+      xs: { span: 24 },
+      sm: { span: 24 },
+      md: { span: 12 },
+      lg: { span: 8 },
+      xl: { span: 8 },
+      xxl: { span: 6 },
+    },
+  },
+  large: {
+    rowProps: { gutter: { xs: 12, sm: 24 } },
+    colProps: {
+      xs: { span: 24 },
+      sm: { span: 24 },
+      md: { span: 12 },
+      lg: { span: 8 },
+      xl: { span: 8 },
+      xxl: { span: 6 },
+    },
   },
 }
+
 const listSearchFromProps = {
   labelCol: {
     xs: { span: 24 },

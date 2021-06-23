@@ -20,7 +20,7 @@ export type GetSkuDetailParams = Params
  */
 export const getSkuDetail = (params: GetSkuDetailParams, headers?: any) => {
   return request.request<
-    defs.commodityService.ApiResult<defs.commodityService.SkuDetails>
+    defs.commodityService.ApiResult<defs.commodityService.SkuDetailVO>
   >({
     ...request.buildOptions(
       '/api/commodity/v1/commodity/sku/detail/{commoditySkuId}',

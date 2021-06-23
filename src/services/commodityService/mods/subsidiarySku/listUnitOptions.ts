@@ -6,7 +6,7 @@ import * as request from '@/utils/fetch'
  * @description listUnitOptions 接口 URL 参数/GET
  */
 export class Params {
-  /** 商品类型id（1：水果，2：食品，5：sku净重） */
+  /** 商品类型id（1：水果，2：食品，3:辅料,5：sku净重） */
   commodityTypeId: number
 }
 

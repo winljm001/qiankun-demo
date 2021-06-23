@@ -1,5 +1,5 @@
 import { useDebounceFn } from 'ahooks'
-import { Form, FormInstance, Input } from 'antd'
+import { Descriptions, Form, FormInstance, Input } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch'
@@ -42,20 +42,28 @@ const SpuForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null }
   // 编辑的时候显示的内容
   const displayItem = () => {
     return (
-      <>
-        <Form.Item label="商品类型">{data?.commodityTypeName}</Form.Item>
-        <Form.Item label="商品品类">{data?.commodityCategoryName}</Form.Item>
-        <Form.Item label="商品品种" hidden={!data?.commodityVarietyName}>
-          {data?.commodityVarietyName}
-        </Form.Item>
-        <Form.Item label="商品产地" hidden={!data?.commodityPlaceOriginName}>
-          {data?.commodityPlaceOriginName}
-        </Form.Item>
-      </>
+      <Descriptions>
+        <Descriptions.Item label="商品类型" span={24}>
+          {data?.commodityTypeName}
+        </Descriptions.Item>
+        <Descriptions.Item label="商品品类" span={24}>
+          {data?.commodityCategoryName}
+        </Descriptions.Item>
+        {data?.commodityVarietyName ? (
+          <Descriptions.Item label="商品品种" span={24}>
+            {data?.commodityVarietyName}
+          </Descriptions.Item>
+        ) : null}
+        {data?.commodityPlaceOriginName ? (
+          <Descriptions.Item label="商品产地" span={24}>
+            {data?.commodityPlaceOriginName}
+          </Descriptions.Item>
+        ) : null}
+      </Descriptions>
     )
   }
   return (
-    <Form form={form} {...(data?.commodityId ? {} : { layout: 'vertical', ...fromSingleLayoutProps })}>
+    <Form form={form} layout="vertical" {...(data?.commodityId ? {} : fromSingleLayoutProps)}>
       <Form.Item name="commodityId" hidden />
       <Form.Item
         label="商品名称"

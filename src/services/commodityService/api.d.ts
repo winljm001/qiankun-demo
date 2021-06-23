@@ -15,30 +15,10 @@ declare namespace defs {
       errMsg?: string
     }
 
-    export class CommodityBomDetailDTO {
-      /** 商品分类id */
-      commodityCategoryId?: number
-
-      /** 商品分类名称 */
-      commodityCategoryName?: string
-
-      /** 商品id */
-      commodityId?: number
-
-      /** 商品名称 */
-      commodityName?: string
-
-      /** 商品类型id */
-      commodityTypeId?: number
-
-      /** 数量 */
-      quantity?: number
-
-      /** 数量单位 */
-      quantityUnit?: number
-    }
-
     export class CommodityBomDetailListVO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -50,6 +30,12 @@ declare namespace defs {
 
       /** 商品名称 */
       commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品SpecificationsAndOptions名称 */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -77,8 +63,8 @@ declare namespace defs {
       /** 商品名称 */
       commodityName?: string
 
-      /** 商品规格 */
-      commoditySpecName?: string
+      /** 商品SpecificationsAndOptions */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型 */
       commodityTypeName?: string
@@ -275,31 +261,32 @@ declare namespace defs {
     }
 
     export class FinishedGoodsReturnedList {
-      /** categoryText */
+      /** 商品分类 */
       categoryText?: string
 
-      /** commodityId */
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品id */
       commodityId?: number
 
-      /** commodityName */
-      commodityName?: string
-
-      /** placeOriginName */
-      placeOriginName?: string
-
-      /** specText */
-      specText?: string
-
-      /** varietyName */
-      varietyName?: string
-    }
-
-    export class FinishedProductDTO {
       /** 商品名称 */
       commodityName?: string
 
+      /** 商品skuId */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 商品产地 */
+      placeOriginName?: string
+
       /** 商品规格 */
-      commoditySpecName?: string
+      specText?: Array<string>
+
+      /** 商品品种 */
+      varietyName?: string
     }
 
     export class FinishedProductVO {
@@ -321,8 +308,8 @@ declare namespace defs {
       /** sku id */
       commoditySkuId?: number
 
-      /** 商品规格名称 */
-      commoditySpecName?: string
+      /** 商品SpecificationsAndOptions名称 */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -347,8 +334,11 @@ declare namespace defs {
       /** 商品名称 */
       commodityName?: string
 
-      /** 商品规格名称 */
-      commoditySpecName?: Array<string>
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品SpecificationsAndOptions名称 */
+      commoditySpecOptionName?: Array<string>
 
       /** 商品类型id */
       commodityTypeId?: number
@@ -421,11 +411,6 @@ declare namespace defs {
     }
 
     export class SaveCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** 商品分类id */
       commodityCategoryId?: number
 
@@ -443,6 +428,37 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      saveCommodityBomDetailDTOS?: Array<
+        defs.commodityService.SaveCommodityBomDetailDTO
+      >
+    }
+
+    export class SaveCommodityBomDetailDTO {
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class ScreeningSkuList {
@@ -456,6 +472,41 @@ declare namespace defs {
       commoditySpecOptionVOList?: Array<
         defs.commodityService.SpecificationsAndOptions
       >
+    }
+
+    export class SkuDetailVO {
+      /** 商品产地id */
+      commodityPlaceOriginId?: number
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型，1水果，2食品 */
+      commodityTypeId?: number
+
+      /** sku属性 */
+      commodityTypes?: Array<defs.commodityService.CommodityTypeVO>
+
+      /** 商品品类id */
+      commodityVarietyId?: number
+
+      /** 状态（1激活，0禁用） */
+      status?: number
+
+      /** 总计类型（sku单位；副单位） */
+      totalType?: number
+
+      /** 总计类型（sku单位；副单位） */
+      totalTypeName?: string
+
+      /** 单位数量（sku净重；换算比率） */
+      unitQuantity?: number
+
+      /** 单位类型（sku净重单位；最小单位） */
+      unitType?: number
+
+      /** 单位类型名称（sku净重单位；最小单位） */
+      unitTypeName?: string
     }
 
     export class SkuDetails {
@@ -641,11 +692,6 @@ declare namespace defs {
     }
 
     export class UpdateCommodityBomDTO {
-      /** 配料列表 */
-      commodityBomDetailDTOS?: Array<
-        defs.commodityService.CommodityBomDetailDTO
-      >
-
       /** bom id */
       commodityBomId?: number
 
@@ -666,11 +712,48 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 配料列表 */
+      updateCommodityBomDetailDTOS?: Array<
+        defs.commodityService.UpdateCommodityBomDetailDTO
+      >
+    }
+
+    export class UpdateCommodityBomDetailDTO {
+      /** 配料id */
+      commodityBomDetailId?: number
+
+      /** 商品分类id */
+      commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
+
+      /** 商品id */
+      commodityId?: number
+
+      /** 商品名称 */
+      commodityName?: string
+
+      /** sku id */
+      commoditySkuId?: number
+
+      /** 商品类型id */
+      commodityTypeId?: number
+
+      /** 数量 */
+      quantity?: number
+
+      /** 数量单位 */
+      quantityUnit?: number
     }
 
     export class UpdateSkuDTO {
       /** sku id */
       commoditySkuIds?: Array<number>
+
+      /** commodityTypeIds */
+      commodityTypeIds: Array<number>
 
       /** 状态（1激活，0禁用） */
       status?: number
@@ -715,20 +798,7 @@ declare namespace API {
        * /api/commodity/v1/spu/insert
        */
       export namespace doInsertCommodity {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -744,28 +814,16 @@ declare namespace API {
        */
       export namespace pageCommodity {
         export class Params {
-          /** admin */
-          admin?: boolean
           /** commodityName */
           commodityName?: string
-          /** currentDate */
-          currentDate?: string
           /** offset */
           offset?: number
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
           /** pageCurrent */
           pageCurrent?: number
           /** pageSize */
           pageSize?: number
           /** sortBys */
           sortBys?: Array<string>
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
         }
 
         export type Response = defs.commodityService.ApiResult<
@@ -791,6 +849,10 @@ declare namespace API {
        */
       export namespace pageFinishedProduct {
         export class Params {
+          /** commodityName */
+          commodityName?: string
+          /** commoditySpecName */
+          commoditySpecName?: string
           /** offset */
           offset?: number
           /** pageCurrent */
@@ -808,8 +870,7 @@ declare namespace API {
         >
         export const init: Response
         export function request(
-          params: Params,
-          bodyParams: defs.commodityService.FinishedProductDTO
+          params: Params
         ): Promise<
           defs.commodityService.ApiResult<
             defs.commodityService.DefaultPageResult<
@@ -824,20 +885,7 @@ declare namespace API {
        * /api/commodity/v1/spu/update/name
        */
       export namespace doUpdateCommodityName {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -852,20 +900,7 @@ declare namespace API {
        * /api/commodity/v1/spu/update/status
        */
       export namespace doUpdateCommodityStatus {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -880,20 +915,7 @@ declare namespace API {
        * /api/commodity/v1/spu/verify/name
        */
       export namespace isSpuNameRepeat {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -926,7 +948,7 @@ declare namespace API {
     }
 
     /**
-     * Commodity Bom Controller
+     * 成品bom管理
      */
     export namespace commodityBom {
       /**
@@ -936,7 +958,7 @@ declare namespace API {
       export namespace deleteCommodityBom {
         export class Params {
           /** commodityBomId */
-          commodityBomId: string
+          commodityBomId: number
         }
 
         export type Response = defs.commodityService.ApiResult<boolean>
@@ -970,10 +992,10 @@ declare namespace API {
       }
 
       /**
-       * list
+       * listDetail
        * /api/commodity/v1/bom/detail/list/{commodityBomId}
        */
-      export namespace list {
+      export namespace listDetail {
         export class Params {
           /** bom id */
           commodityBomId: number
@@ -1035,10 +1057,12 @@ declare namespace API {
         export class Params {
           /** 商品名称 */
           commodityName?: string
+          /** 已选择sku id集合 */
+          commoditySkuIds?: Array<number>
           /** 商品规格名称 */
           commoditySpecName?: string
           /** 商品类型id【2食品、3辅料】 */
-          commodityTypeId?: number
+          commodityTypeId: number
           /** offset */
           offset?: number
           /** pageCurrent */
@@ -1244,13 +1268,13 @@ declare namespace API {
         }
 
         export type Response = defs.commodityService.ApiResult<
-          defs.commodityService.SkuDetails
+          defs.commodityService.SkuDetailVO
         >
         export const init: Response
         export function request(
           params: Params
         ): Promise<
-          defs.commodityService.ApiResult<defs.commodityService.SkuDetails>
+          defs.commodityService.ApiResult<defs.commodityService.SkuDetailVO>
         >
       }
 
@@ -1279,7 +1303,7 @@ declare namespace API {
 
       /**
        * listPropertyOptions
-       * /api/commodity/v1/commodity/sku/option/property/{commodityTypeId}
+       * /api/commodity/v1/commodity/sku/option/property
        */
       export namespace listPropertyOptions {
         export class Params {
@@ -1468,20 +1492,7 @@ declare namespace API {
        * /api/commodity/v1/spec/modify
        */
       export namespace doModifySpecById {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -1518,20 +1529,7 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/insert
        */
       export namespace doInsertCommodity {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response
@@ -1547,28 +1545,16 @@ declare namespace API {
        */
       export namespace pageCommodity {
         export class Params {
-          /** admin */
-          admin?: boolean
           /** commodityName */
           commodityName?: string
-          /** currentDate */
-          currentDate?: string
           /** offset */
           offset?: number
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
           /** pageCurrent */
           pageCurrent?: number
           /** pageSize */
           pageSize?: number
           /** sortBys */
           sortBys?: Array<string>
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
         }
 
         export type Response = defs.commodityService.ApiResult<
@@ -1593,20 +1579,7 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/update
        */
       export namespace doUpdateCommodityName {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1621,20 +1594,7 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/update/status
        */
       export namespace doUpdateCommodityStatus {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1649,20 +1609,7 @@ declare namespace API {
        * /api/commodity/v1/spu/subsidiary/verify/name
        */
       export namespace isSpuNameRepeat {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<boolean>
         export const init: Response
@@ -1794,7 +1741,7 @@ declare namespace API {
        */
       export namespace listUnitOptions {
         export class Params {
-          /** 商品类型id（1：水果，2：食品，5：sku净重） */
+          /** 商品类型id（1：水果，2：食品，3:辅料,5：sku净重） */
           commodityTypeId: number
         }
 
@@ -1931,20 +1878,7 @@ declare namespace API {
        * /api/commodity/v1/subsidiary/spec/modify
        */
       export namespace doModifySpecById {
-        export class Params {
-          /** admin */
-          admin?: boolean
-          /** currentDate */
-          currentDate?: string
-          /** organizationId */
-          organizationId?: number
-          /** organizationName */
-          organizationName?: string
-          /** userId */
-          userId?: number
-          /** userName */
-          userName?: string
-        }
+        export class Params {}
 
         export type Response = defs.commodityService.ApiResult<number>
         export const init: Response

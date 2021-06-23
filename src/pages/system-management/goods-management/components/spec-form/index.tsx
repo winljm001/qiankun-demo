@@ -6,30 +6,6 @@ import { fromSingleLayoutProps } from '@/components/JsonForm/defaultConfig'
 import { getInitialSpecValue, initialValues } from './initialValues'
 import styles from './index.module.less'
 
-// const specInputLayout = {
-//   labelCol: {
-//     xxl: {
-//       span: 3,
-//     },
-//     md: {
-//       span: 4,
-//     },
-//     xs: {
-//       span: 6,
-//     },
-//   },
-//   wrapperCol: {
-//     xxl: {
-//       span: 6,
-//     },
-//     md: {
-//       span: 8,
-//     },
-//     xs: {
-//       span: 18,
-//     },
-//   },
-// };
 const optionInputLayout = {
   labelCol: {
     xxl: {
@@ -87,7 +63,9 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <Input
                         autoComplete="off"
                         placeholder="请输入规格类型"
-                        disabled={data?.commoditySpecs && data?.commoditySpecs[idx]?.commoditySpecId}
+                        disabled={
+                          data?.commoditySpecs && form.getFieldValue(['commoditySpecs', field.name, 'commoditySpecId'])
+                        }
                       />
                     </Form.Item>
                     <Form.Item label="规格排序" name={[field.name, 'commoditySpecSort']}>

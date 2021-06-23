@@ -24,9 +24,12 @@ const BaseSelectByFetch: React.FC<IProps> = ({
   ...props
 }) => {
   const { fetch, normalize, params, onFetched } = remote
-  const [state, setState] = useControllableValue<string>(props, {
-    defaultValue: value,
-  })
+  const [state, setState] = useControllableValue<string>(
+    { ...props, value },
+    {
+      defaultValue: value,
+    },
+  )
   const [uid] = useState(Date.now())
   // 这里的key应该是有问题
   const { data, isLoading } = useQuery([`BaseSelectByFetch${uid}`, params], () => {

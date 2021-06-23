@@ -6,6 +6,10 @@ import * as request from '@/utils/fetch'
  * @description pageFinishedProduct 接口 URL 参数/GET
  */
 export class Params {
+  /** commodityName */
+  commodityName?: string
+  /** commoditySpecName */
+  commoditySpecName?: string
   /** offset */
   offset?: number
   /** pageCurrent */
@@ -19,8 +23,7 @@ export class Params {
 /**
  * @description pageFinishedProduct 接口参数
  */
-export type PageFinishedProductParams = Params &
-  defs.commodityService.FinishedProductDTO
+export type PageFinishedProductParams = Params
 
 /**
  * @description pageFinishedProduct 接口
@@ -39,7 +42,7 @@ export const pageFinishedProduct = (
     ...request.buildOptions(
       '/api/commodity/v1/spu/product/list',
       params,
-      'POST'
+      'GET'
     ),
     headers
   })
@@ -49,7 +52,7 @@ export const pageFinishedProduct = (
  * @description pageFinishedProduct hooks 默认的 key
  */
 export const USE_PAGE_FINISHED_PRODUCT_KEY =
-  '/api/commodity/v1/spu/product/list_POST'
+  '/api/commodity/v1/spu/product/list_GET'
 
 // export const pageFinishedProductQuery = ({ queryKey }: {queryKey:any[]}) => {
 //   const [,params] = queryKey;

@@ -8,10 +8,12 @@ import * as request from '@/utils/fetch'
 export class Params {
   /** 商品名称 */
   commodityName?: string
+  /** 已选择sku id集合 */
+  commoditySkuIds?: Array<number>
   /** 商品规格名称 */
   commoditySpecName?: string
   /** 商品类型id【2食品、3辅料】 */
-  commodityTypeId?: number
+  commodityTypeId: number
   /** offset */
   offset?: number
   /** pageCurrent */
