@@ -107,6 +107,7 @@ const GoodsManagementList = () => {
             onClick={() => {
               history.push(`${SUBSIDIARY_MANAGEMENT_ADD}`)
             }}
+            ghost
             type="primary">
             新增辅料
           </Button>

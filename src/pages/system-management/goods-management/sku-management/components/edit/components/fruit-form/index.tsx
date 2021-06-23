@@ -63,6 +63,7 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
     <Form
       form={form}
       name="basic"
+      layout="vertical"
       initialValues={{
         status: true,
         ...initialValues,
@@ -92,7 +93,7 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
           }}
         />
       </Form.Item>
-      <Form.Item label="状态" name="status" valuePropName="checked" className={styles.switch}>
+      <Form.Item label="状态" name="status" valuePropName="checked">
         <Switch checkedChildren="开启" unCheckedChildren="关闭" />
       </Form.Item>
     </Form>
