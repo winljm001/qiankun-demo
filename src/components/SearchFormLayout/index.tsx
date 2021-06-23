@@ -2,14 +2,16 @@ import React from 'react'
 import { Col, Row } from 'antd'
 import { listSearchFromItemProps } from '@/config/defaultSettings'
 interface IProps {
+  size?: 'large' | 'middle' | 'small'
   list?: any[]
 }
-const Index: React.FC<IProps> = ({ list }) => {
+const Index: React.FC<IProps> = ({ list, size = 'middle' }) => {
+  const attrProps = listSearchFromItemProps[size]
   return (
-    <Row {...listSearchFromItemProps.rowProps}>
+    <Row {...attrProps.rowProps}>
       {list?.map((v, i) => {
         return (
-          <Col {...listSearchFromItemProps.colProps} key={i}>
+          <Col {...attrProps.colProps} key={i}>
             {v}
           </Col>
         )
