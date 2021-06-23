@@ -129,6 +129,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
         </Form.Item>
 
         <SearchFormLayout
+          size="small"
           list={[
             <Form.Item label="商品名称" name="commodityName" key="商品名称">
               <Input placeholder="请输入查询" />

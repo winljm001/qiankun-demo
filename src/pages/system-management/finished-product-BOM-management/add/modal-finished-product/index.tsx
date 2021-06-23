@@ -38,7 +38,8 @@ const columns: ColumnType<TableItem>[] = [
   },
   {
     title: '商品分类',
-    dataIndex: 'categoryText',
+    dataIndex: '_',
+    render: (_, row) => `${row.commodityTypeName}/${row.commodityCategoryName}`,
   },
   {
     title: '商品品种',
@@ -104,6 +105,7 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
     <Modal title="选择成品" width={880} visible={state.visible} onCancel={onCancel} onOk={onOk}>
       <Form form={form} onFinish={submit}>
         <SearchFormLayout
+          size="small"
           list={[
             <Form.Item label="商品名称" name="commodityName" key="商品名称">
               <Input placeholder="请输入查询" />

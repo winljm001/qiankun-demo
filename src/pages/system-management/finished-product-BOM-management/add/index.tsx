@@ -41,13 +41,9 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
     IngredientListRef.current
       .getValue()
       .then((list) => {
-        console.log(finishedProduct)
-        console.log(list)
         // 提交数据
-        console.log(mutateSaveCommodityBOM)
         mutateSaveCommodityBOM({
           ...finishedProduct,
-          commodityCategoryName: finishedProduct.categoryText,
           saveCommodityBomDetailDTOS: list,
         })
       })
