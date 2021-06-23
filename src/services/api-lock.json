@@ -204,7 +204,7 @@
             "parameters": [
               {
                 "in": "query",
-                "description": "商品名称",
+                "description": "commodityName",
                 "name": "commodityName",
                 "required": false,
                 "dataType": {
@@ -219,7 +219,7 @@
               },
               {
                 "in": "query",
-                "description": "商品规格",
+                "description": "commoditySpecName",
                 "name": "commoditySpecName",
                 "required": false,
                 "dataType": {

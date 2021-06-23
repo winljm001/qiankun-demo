@@ -6,9 +6,9 @@ import * as request from '@/utils/fetch'
  * @description pageFinishedProduct 接口 URL 参数/GET
  */
 export class Params {
-  /** 商品名称 */
+  /** commodityName */
   commodityName?: string
-  /** 商品规格 */
+  /** commoditySpecName */
   commoditySpecName?: string
   /** offset */
   offset?: number
