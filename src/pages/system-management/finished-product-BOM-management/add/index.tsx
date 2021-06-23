@@ -81,7 +81,7 @@ const FinishedProductBOMManagementAdd: React.FC = () => {
               </Form.Item>
 
               <Form.Item required label="商品规格">
-                {finishedProduct.specText.join('、')}
+                {finishedProduct.specText?.join('、')}
               </Form.Item>
             </>
           ) : null}

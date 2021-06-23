@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect, useImperativeHandle, forwardRef, memo } from 'react'
-import { Button, Table, Space, Popconfirm, message } from 'antd'
+import { Button, Table, Space, Popconfirm, InputNumber, Select, message } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { useQuery } from 'react-query'
 import BaseCard from '@/components/BaseCard'
 import { isDef } from '@/utils/typeof'
+import { positiveTwoDecimalPlaces } from '@/utils/number'
 import {
   listUnitOptions as fetchListUnitOptions,
   USE_LIST_UNIT_OPTIONS_KEY,
@@ -13,13 +14,12 @@ import type { IngredientListModalFruitInstance } from './modal-fruit'
 import IngredientListModalFruit from './modal-fruit'
 import IngredientListModalFoodAccessories from './modal-food-accessories'
 import type { IngredientListModalFoodAccessoriesInstance } from './modal-food-accessories'
-import Quantity from './quantity'
-import CommodityUnit from './commodity-unit'
-import type { CommodityUnitSelectItem } from './commodity-unit'
 
 import './index.less'
 
 type IngredientItem = defs.commodityService.CommodityBomDetailListVO
+
+type CommodityUnitSelectItem = { label: string; value: number }
 
 export interface IngredientListInstance {
   getValue: () => Promise<IngredientItem[]>
@@ -134,18 +134,25 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
         title: '商品数量',
         width: 280,
         render: (_, row, index) => {
-          return (
-            <Quantity
-              edit={edit}
-              value={row.quantity}
-              onChange={(n) => {
-                setIngredientList((il) => {
-                  il[index].quantity = n
-                  return [].concat(il)
-                })
-              }}
-            />
-          )
+          if (edit) {
+            return (
+              <InputNumber
+                className="finished-product-BOM-management-ingredient-list-input-number"
+                min={0.01}
+                step="0.01"
+                placeholder="请输入(最多两位小数)"
+                value={row.quantity}
+                formatter={positiveTwoDecimalPlaces}
+                onChange={(n) => {
+                  setIngredientList((il) => {
+                    il[index].quantity = n
+                    return [].concat(il)
+                  })
+                }}
+              />
+            )
+          }
+          return row.quantity
         },
       },
       {
@@ -155,14 +162,15 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
           if (!edit || isDef(row.commoditySkuId)) {
             return row.quantityUnitName
           }
+
           return (
-            <CommodityUnit
-              options={dataListUnitOptions as CommodityUnitSelectItem[]}
+            <Select
               value={row.quantityUnit}
-              onChange={(value, label) => {
+              options={dataListUnitOptions as CommodityUnitSelectItem[]}
+              onChange={(_, item) => {
                 setIngredientList((il) => {
-                  il[index].quantityUnit = value
-                  il[index].quantityUnitName = label
+                  il[index].quantityUnit = (item as CommodityUnitSelectItem).value
+                  il[index].quantityUnitName = (item as CommodityUnitSelectItem).label
                   return [].concat(il)
                 })
               }}
@@ -241,7 +249,6 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
                   IngredientListModalFruitRef.current.show({
                     selected: filterByCommodityTypeId(1),
                     onOk: (p) => {
-                      console.log(p)
                       setIngredientList((il) =>
                         il.concat(
                           p.map<IngredientItem>((item) => ({
