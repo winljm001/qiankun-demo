@@ -111,6 +111,7 @@ const GoodsManagementList = () => {
             onClick={() => {
               history.push(`${GOODS_MANAGEMENT_ADD}`)
             }}
+            ghost
             type="primary">
             新增果品
           </Button>

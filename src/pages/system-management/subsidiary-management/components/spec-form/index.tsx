@@ -63,7 +63,9 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       <Input
                         autoComplete="off"
                         placeholder="请输入规格类型"
-                        disabled={data?.commoditySpecs && data?.commoditySpecs[idx]?.commoditySpecId}
+                        disabled={
+                          data?.commoditySpecs && form.getFieldValue(['commoditySpecs', field.name, 'commoditySpecId'])
+                        }
                       />
                     </Form.Item>
                     <Form.Item label="规格排序" name={[field.name, 'commoditySpecSort']}>
