@@ -1,4 +1,4 @@
-import { Button, Col, Form, FormInstance, Input, InputNumber, Row } from 'antd'
+import { Button, Col, Form, FormInstance, Input, Row } from 'antd'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'antd/lib/form/Form'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'
@@ -9,24 +9,24 @@ import styles from './index.module.less'
 const optionInputLayout = {
   labelCol: {
     xxl: {
-      span: 3,
+      span: 24,
     },
     md: {
-      span: 4,
+      span: 24,
     },
     xs: {
-      span: 6,
+      span: 24,
     },
   },
   wrapperCol: {
     xxl: {
-      span: 21,
+      span: 24,
     },
     md: {
-      span: 20,
+      span: 24,
     },
     xs: {
-      span: 18,
+      span: 24,
     },
   },
 }
@@ -56,28 +56,38 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                       />
                     )}
                     <Form.Item name={[field.name, 'commoditySpecId']} hidden />
-                    <Form.Item
-                      label="规格类型"
-                      name={[field.name, 'commoditySpecName']}
-                      rules={[{ required: true, message: '请输入规格类型' }]}>
-                      <Input
-                        autoComplete="off"
-                        placeholder="请输入规格类型"
-                        disabled={
-                          data?.commoditySpecs && form.getFieldValue(['commoditySpecs', field.name, 'commoditySpecId'])
-                        }
-                      />
-                    </Form.Item>
-                    <Form.Item label="规格排序" name={[field.name, 'commoditySpecSort']}>
-                      <InputNumber min={0} />
-                    </Form.Item>
+                    <Row gutter={16}>
+                      <Col span={6}>
+                        <Form.Item
+                          {...optionInputLayout}
+                          label="规格类型"
+                          name={[field.name, 'commoditySpecName']}
+                          rules={[{ required: true, message: '请输入规格类型' }]}>
+                          <Input
+                            autoComplete="off"
+                            placeholder="请输入规格类型"
+                            disabled={
+                              data?.commoditySpecs &&
+                              form.getFieldValue(['commoditySpecs', field.name, 'commoditySpecId'])
+                            }
+                          />
+                        </Form.Item>
+                      </Col>
+                    </Row>
+                    <Row gutter={16}>
+                      <Col span={6}>
+                        <Form.Item {...optionInputLayout} label="规格排序" name={[field.name, 'commoditySpecSort']}>
+                          <Input autoComplete="off" placeholder="规格排序" />
+                        </Form.Item>
+                      </Col>
+                    </Row>
                     <Form.Item label="规格选项" {...optionInputLayout}>
                       <Form.List name={[field.name, 'commoditySpecOptions']}>
                         {(itemFields, { add: addItem, remove: removeItem }) => (
                           <Row gutter={16}>
                             {itemFields.map((itemField, itemIndex) => {
                               return (
-                                <Col key={itemField.key} span={8}>
+                                <Col key={itemField.key} span={6}>
                                   <Form.Item
                                     shouldUpdate
                                     name={[itemField.name, 'commoditySpecOptionName']}
@@ -114,7 +124,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
                               )
                             })}
                             {itemFields?.length < 20 ? (
-                              <Col span={8}>
+                              <Col span={6}>
                                 <Button
                                   style={{ marginBottom: 24 }}
                                   icon={<PlusOutlined />}
@@ -136,7 +146,7 @@ const SpecForm = forwardRef<Partial<FormInstance>, SpuFormProps>(({ data = null 
               })}
               {fields?.length < 3 ? (
                 <div style={{ padding: '0 24px' }}>
-                  <Row>
+                  <Row gutter={16}>
                     <Col {...fromSingleLayoutProps.wrapperCol}>
                       <Button
                         type="dashed"
