@@ -10,6 +10,7 @@ import styles from './style.module.less'
 import SideMenu from './components/side-menu'
 import AppBreadcrumb from './components/breadcrubm'
 import AppHeader from './components/header'
+
 const { Header, Content, Sider } = Layout
 
 const LayoutComponent: React.FC<RouteConfigComponentProps> = memo((props) => {
@@ -25,7 +26,7 @@ const LayoutComponent: React.FC<RouteConfigComponentProps> = memo((props) => {
     (collapsed) => {
       setUserSetting({ collapsed })
     },
-    [userSetting.collapsed],
+    [setUserSetting],
   )
   const contentPadding = matchedRouteConfig?.meta?.contentPadding
 
