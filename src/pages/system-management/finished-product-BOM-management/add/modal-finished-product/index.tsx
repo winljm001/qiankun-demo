@@ -110,7 +110,7 @@ const ModalFinishedProduct = forwardRef<ModalFinishedProductInstance>((_, ref) =
             <Form.Item label="商品名称" name="commodityName" key="商品名称">
               <Input placeholder="请输入查询" />
             </Form.Item>,
-            <Form.Item label="商品规格" name="commoditySpecName" key="商品规格">
+            <Form.Item label="商品规格" name="commoditySpecOptionName" key="商品规格">
               <Input placeholder="请输入查询" />
             </Form.Item>,
             <Form.Item key="操作">
