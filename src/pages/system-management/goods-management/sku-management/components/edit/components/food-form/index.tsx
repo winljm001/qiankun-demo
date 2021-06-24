@@ -63,7 +63,7 @@ const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
           )
         }}
       </Form.Item>
-      <Form.Item label="SKU属性" name="commodityTypeIds">
+      <Form.Item label="SKU属性" name="commodityTypeIds" rules={[{ required: true, message: '请选择SKU属性!' }]}>
         <BaseCheckboxByFetch
           remote={{
             fetch: listPropertyOptions,
