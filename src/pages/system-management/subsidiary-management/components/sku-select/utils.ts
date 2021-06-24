@@ -39,7 +39,7 @@ export const getAllSpecDescartes = (
   }
   // 所有的规格组合
   const specArr = calcDescartes(formatSpecToArr(specData))
-  console.log(specArr)
+
   // 过滤掉已经选过的
   let resArr = specArr.filter((v) => {
     const ids = v?.map((v) => v.commoditySpecOptionId)

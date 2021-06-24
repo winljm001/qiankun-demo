@@ -115,7 +115,7 @@ const GoodsManagementList = () => {
         </Space>
       </BaseCard>
       <BaseCard>
-        <Table columns={columns} rowKey="commodityId" {...tableProps} />
+        <Table columns={columns} rowKey="commodityId" {...tableProps} bordered />
       </BaseCard>
       <Modal
         title="修改SPU"

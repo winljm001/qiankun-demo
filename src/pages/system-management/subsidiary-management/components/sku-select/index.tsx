@@ -89,6 +89,7 @@ const SkuSelectForm = forwardRef<SkuSelectRefProps, SkuSelectFormProps>(({ id, s
       <Table
         rowSelection={rowSelection}
         columns={columns}
+        bordered
         dataSource={resData}
         rowKey="commoditySpecOptionIdsList"
         pagination={{ showSizeChanger: true, showTotal: (total) => `共 ${total} 记录` }}
