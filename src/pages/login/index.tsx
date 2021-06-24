@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom'
 import useGlobalStore from '@/stores/global'
 import { login } from '@/services/userService/mods/userWeb/login'
 import { sendCheckCode } from '@/services/userService/mods/userWeb/sendCheckCode'
-import { BASE_PATH } from '@/router/config/basePath'
+import { BASE_PATH } from '@/router/config/base-path'
 import img from './images/logo.png'
 
 import styles from './style.module.less'

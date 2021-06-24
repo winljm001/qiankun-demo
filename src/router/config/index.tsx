@@ -6,7 +6,7 @@ import type * as Icons from '@ant-design/icons/lib/icons'
 import { Redirect } from 'react-router-dom'
 import Layouts from '@/layouts/common-layout/index'
 import type { BreadcrumbItem } from '@/layouts/common-layout/components/breadcrubm'
-import { BASE_PATH } from './basePath'
+import { BASE_PATH } from './base-path'
 
 const modules = import.meta.globEager('./**/index.ts')
 

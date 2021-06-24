@@ -7,4 +7,5 @@ const BlankLayout: React.FC<RouteConfigComponentProps> = memo((props) => {
   const { route } = props
   return renderRoutes(route?.routes)
 })
+
 export default BlankLayout

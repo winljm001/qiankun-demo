@@ -5,7 +5,7 @@ import type { CustomRouteConfig } from '@/router/config/index'
 import { mainRoutes } from '@/router/config/index'
 import { getMenuList, getHomepageUrl, getCurrentRouteAndMenuInfo } from '@/utils/tools'
 import { history } from '@/router'
-import { BASE_PATH } from '@/router/config/basePath'
+import { BASE_PATH } from '@/router/config/base-path'
 import { authListByUserId } from '@/services/authService/mods/role/authListByUserId'
 
 export type State = {
