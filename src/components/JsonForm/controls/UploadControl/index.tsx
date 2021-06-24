@@ -1,5 +1,5 @@
-import React from 'react'
-import { UploadProps } from 'antd/lib/upload/interface'
+import type React from 'react'
+import type { UploadProps } from 'antd/lib/upload/interface'
 
 export interface UploadControlProps extends UploadProps {
   readonly?: boolean

@@ -1,6 +1,8 @@
-import React, { FC } from 'react'
-import { Input, InputProps } from 'antd'
-import { PasswordProps } from 'antd/lib/input'
+import type { FC } from 'react'
+import React from 'react'
+import type { InputProps } from 'antd'
+import { Input } from 'antd'
+import type { PasswordProps } from 'antd/lib/input'
 
 export type InputControlProps = InputProps | PasswordProps
 

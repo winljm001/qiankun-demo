@@ -1,7 +1,8 @@
-import React, { FC } from 'react'
+import type { FC } from 'react'
+import React from 'react'
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
-import { CustomRouteConfig } from '@/router/config/index'
+import type { CustomRouteConfig } from '@/router/config/index'
 import styles from './index.module.less'
 
 export interface BreadcrumbItem {

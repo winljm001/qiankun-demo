@@ -101,6 +101,7 @@ const FinishedProductBOMManagementList = () => {
       <BaseCard>
         <Table
           {...tableProps}
+          bordered
           columns={columns}
           rowKey="commodityBomId"
           loading={tableProps.loading || isLoadingDeleteCommodityBom}

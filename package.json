@@ -6,11 +6,12 @@
     "build:test": "vite build --mode test",
     "build:prod": "tsc && vite build --mode production",
     "serve": "vite preview",
+    "lint:ts": "tsc --noEmit",
+    "lint:es": "eslint src --ext .ts,.tsx",
     "lint": "tsc --noEmit && eslint src --ext .ts,.tsx",
     "prettier": "prettier --write 'src/**/*.{js,json,yml,yaml,ts,tsx,md}'",
     "ncu": "npx npm-check-updates -u -x zustand,husky",
     "prepare": "husky install",
-    "preinstall": "npx npm-force-resolutions",
     "lint-staged": "lint-staged --allow-empty"
   },
   "dependencies": {
@@ -28,7 +29,7 @@
     "react-router-config": "^5.1.1",
     "react-router-dom": "^5.2.0",
     "wbd-frontend-kit": "^1.0.13",
-    "zustand": "3.5.4"
+    "zustand": "3.4.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^12.1.4",
@@ -64,7 +65,8 @@
       "git add"
     ],
     "*.{ts,tsx}": [
-      "npm run lint",
+      "bash -c tsc --noEmit",
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]

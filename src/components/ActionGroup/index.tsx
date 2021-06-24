@@ -1,5 +1,7 @@
-import React, { FC } from 'react'
-import { Button, ButtonProps, Space, Divider } from 'antd'
+import type { FC } from 'react'
+import React from 'react'
+import type { ButtonProps } from 'antd'
+import { Button, Space, Divider } from 'antd'
 
 interface ButtonConfig extends ButtonProps {
   show?: boolean | (() => boolean)

@@ -12,7 +12,7 @@ function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
       if (!token) {
         history.replace('/login')
       }
-    }, [])
+    }, [history])
     if (authStatus === null || authStatus === 'fail') {
       return null
     }

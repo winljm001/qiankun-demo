@@ -1,4 +1,4 @@
-import { BASE_PATH } from '../basePath'
+import { BASE_PATH } from '../base-path'
 
 export const BASE_URL = `${BASE_PATH}/system-management`
 

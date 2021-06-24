@@ -1,5 +1,7 @@
-import React, { useState, useEffect, PropsWithChildren, useRef, useCallback } from 'react'
-import { Select, SelectProps } from 'antd'
+import type { PropsWithChildren } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import type { SelectProps } from 'antd'
+import { Select } from 'antd'
 import { isEqual } from 'lodash'
 
 export interface RemoteSelectControlProps<VT = any> extends Omit<SelectProps<VT>, 'options' | 'loading' | 'fetch'> {

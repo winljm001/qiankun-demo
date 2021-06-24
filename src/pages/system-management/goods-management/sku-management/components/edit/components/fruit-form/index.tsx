@@ -4,7 +4,7 @@ import { useForm } from 'antd/lib/form/Form'
 import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/listUnitOptions'
 import BaseCheckboxByFetch from '@/components/BaseCheckboxByFetch'
 import { listPropertyOptions } from '@/services/commodityService/mods/commoditySku/listPropertyOptions'
-import { FormRef } from '../../index'
+import type { FormRef } from '../../index'
 import styles from './style.module.less'
 
 type IProps = {

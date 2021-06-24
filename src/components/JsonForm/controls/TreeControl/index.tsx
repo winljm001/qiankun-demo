@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { Tree, Spin, TreeProps } from 'antd'
+import type { TreeProps } from 'antd'
+import { Tree, Spin } from 'antd'
 
 export interface TreeControlProps extends TreeProps {
   value?: any[]

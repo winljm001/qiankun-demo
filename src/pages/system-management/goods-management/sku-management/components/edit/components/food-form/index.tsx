@@ -4,7 +4,7 @@ import { listUnitOptions } from '@/services/commodityService/mods/commoditySku/l
 import { useForm } from '@/components/JsonForm'
 import BaseCheckboxByFetch from '@/components/BaseCheckboxByFetch'
 import { listPropertyOptions } from '@/services/commodityService/mods/commoditySku/listPropertyOptions'
-import { FormRef } from '../../index'
+import type { FormRef } from '../../index'
 
 type IProps = {
   initialValues: defs.commodityService.SkuDetails

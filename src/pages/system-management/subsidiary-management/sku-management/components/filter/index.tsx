@@ -1,5 +1,7 @@
-import React, { FC, useEffect, useMemo } from 'react'
-import { Form, Select, FormInstance, Button } from 'antd'
+import type { FC } from 'react'
+import React, { useEffect, useMemo } from 'react'
+import type { FormInstance } from 'antd'
+import { Form, Select, Button } from 'antd'
 import SearchFormLayout from '@/components/SearchFormLayout'
 import Space from '@/components/Space'
 

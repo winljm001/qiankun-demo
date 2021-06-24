@@ -1,4 +1,5 @@
-import { Button, Col, Form, FormInstance, Input, Row } from 'antd'
+import type { FormInstance } from 'antd'
+import { Button, Col, Form, Input, Row } from 'antd'
 import React, { forwardRef, useImperativeHandle } from 'react'
 import { useForm } from 'antd/lib/form/Form'
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons'

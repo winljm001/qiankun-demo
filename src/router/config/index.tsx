@@ -1,18 +1,22 @@
-import React, { CSSProperties } from 'react'
+import type { CSSProperties } from 'react'
+import React from 'react'
 import loadable from '@loadable/component'
-import { RouteConfig } from 'react-router-config'
-import * as Icons from '@ant-design/icons/lib/icons'
+import type { RouteConfig } from 'react-router-config'
+import type * as Icons from '@ant-design/icons/lib/icons'
 import { Redirect } from 'react-router-dom'
-import Layouts from '@/layouts/commonLayout/index'
-import { BreadcrumbItem } from '@/layouts/commonLayout/components/breadcrubm'
-import { BASE_PATH } from './basePath'
+import Layouts from '@/layouts/common-layout/index'
+import type { BreadcrumbItem } from '@/layouts/common-layout/components/breadcrubm'
+import { BASE_PATH } from './base-path'
 
 const modules = import.meta.globEager('./**/index.ts')
+
 let config: RouteConfig[] = []
+
 // eslint-disable-next-line guard-for-in
 for (const path in modules) {
   config.push(...modules[path].default)
 }
+
 export interface CustomRouteConfig extends RouteConfig {
   /** 面包屑配置 */
   breadcrumb?: BreadcrumbItem[]
@@ -30,6 +34,7 @@ export interface CustomRouteConfig extends RouteConfig {
   /** 子路由 */
   routes?: CustomRouteConfig[]
 }
+
 export const mainRoutes: CustomRouteConfig[] = [
   {
     path: BASE_PATH,
@@ -38,6 +43,7 @@ export const mainRoutes: CustomRouteConfig[] = [
   },
   ...config,
 ]
+
 const routes: CustomRouteConfig[] = [
   {
     path: BASE_PATH,
@@ -59,4 +65,5 @@ const routes: CustomRouteConfig[] = [
     component: loadable(() => import('@/pages/404/index')),
   },
 ]
+
 export default routes

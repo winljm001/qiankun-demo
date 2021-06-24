@@ -1,4 +1,5 @@
-import { FormInstance, Modal } from 'antd'
+import type { FormInstance } from 'antd'
+import { Modal } from 'antd'
 import React, { useRef } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
@@ -10,7 +11,8 @@ import { SUBSIDIARY_SKU_MANAGEMENT } from '@/router/config/system-management/pat
 import { listSpecById, USE_LIST_SPEC_BY_ID_KEY } from '@/services/commodityService/mods/subsidiarySpec/listSpecById'
 import { doModifySpecById } from '@/services/commodityService/mods/subsidiarySpec/doModifySpecById'
 import { doSaveSkuList } from '@/services/commodityService/mods/subsidiarySku/doSaveSkuList'
-import SkuSelect, { SkuSelectRefProps } from '../components/sku-select'
+import type { SkuSelectRefProps } from '../components/sku-select'
+import SkuSelect from '../components/sku-select'
 import SpecForm from '../components/spec-form'
 import { getColumns } from '../components/sku-select/utils'
 

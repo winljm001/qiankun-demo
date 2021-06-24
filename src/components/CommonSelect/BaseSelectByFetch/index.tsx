@@ -1,4 +1,5 @@
-import { Select, SelectProps } from 'antd'
+import type { SelectProps } from 'antd'
+import { Select } from 'antd'
 import { useControllableValue } from 'ahooks'
 import React, { useState } from 'react'
 import { useQuery } from 'react-query'

@@ -1,5 +1,6 @@
 import { useDebounceFn } from 'ahooks'
-import { Descriptions, Form, FormInstance, Input } from 'antd'
+import type { FormInstance } from 'antd'
+import { Descriptions, Form, Input } from 'antd'
 import { useForm } from 'antd/lib/form/Form'
 import React, { forwardRef, useEffect, useImperativeHandle, useState } from 'react'
 import BaseSelectByFetch from '@/components/CommonSelect/BaseSelectByFetch'

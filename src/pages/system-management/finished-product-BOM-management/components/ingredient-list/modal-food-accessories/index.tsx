@@ -146,7 +146,7 @@ const IngredientListModalFoodAccessories = forwardRef<IngredientListModalFoodAcc
         />
       </Form>
 
-      <Table {...tableProps} columns={columns} rowKey="commoditySkuId" rowSelection={rowSelection} />
+      <Table {...tableProps} bordered columns={columns} rowKey="commoditySkuId" rowSelection={rowSelection} />
     </Modal>
   )
 })

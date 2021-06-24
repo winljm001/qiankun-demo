@@ -1,5 +1,6 @@
 import React from 'react'
-import { Radio, RadioGroupProps } from 'antd'
+import type { RadioGroupProps } from 'antd'
+import { Radio } from 'antd'
 
 export type RadioGroupControlProps = RadioGroupProps
 

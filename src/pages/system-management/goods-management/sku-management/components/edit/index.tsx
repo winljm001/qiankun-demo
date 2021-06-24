@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Modal, Button, message, FormInstance } from 'antd'
+import type { FormInstance } from 'antd'
+import { Modal, Button, message } from 'antd'
 import { doUpdateSku } from '@/services/commodityService/mods/commoditySku/doUpdateSku'
 import FruitForm from './components/fruit-form'
 import FoodForm from './components/food-form'

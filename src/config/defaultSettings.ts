@@ -1,4 +1,4 @@
-import { CheckboxOptionType } from 'antd'
+import type { CheckboxOptionType } from 'antd'
 
 // 表单栅格配置
 const fromRowProps = { gutter: { xs: 0, sm: 24 } }
