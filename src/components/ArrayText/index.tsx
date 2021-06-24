@@ -1,5 +1,6 @@
 import React from 'react'
-import { Popover, PopoverProps } from 'antd'
+import type { PopoverProps } from 'antd'
+import { Popover } from 'antd'
 import classnames from 'classnames'
 import styles from './index.module.less'
 

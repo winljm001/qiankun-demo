@@ -1,4 +1,5 @@
-import { Button, ButtonProps } from 'antd'
+import type { ButtonProps } from 'antd'
+import { Button } from 'antd'
 import React from 'react'
 import styles from './index.module.less'
 interface ButtonConfig extends ButtonProps {

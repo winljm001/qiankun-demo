@@ -1,5 +1,6 @@
 import React, { useCallback, useMemo, useState, memo } from 'react'
-import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
+import type { RouteConfigComponentProps } from 'react-router-config'
+import { renderRoutes } from 'react-router-config'
 import { Layout } from 'antd'
 import { useLocation } from 'react-router-dom'
 import useGlobalStore from '@/stores/global'

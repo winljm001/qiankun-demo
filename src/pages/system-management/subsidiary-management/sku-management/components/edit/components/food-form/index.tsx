@@ -3,7 +3,7 @@ import { Form, Input, Select, Switch } from 'antd'
 import { useBoolean } from 'ahooks'
 import { useForm } from '@/components/JsonForm'
 import { listUnitOptions } from '@/services/commodityService/mods/subsidiarySku/listUnitOptions'
-import { FormRef } from '../../index'
+import type { FormRef } from '../../index'
 
 type IProps = {
   initialValues: defs.commodityService.SkuDetails

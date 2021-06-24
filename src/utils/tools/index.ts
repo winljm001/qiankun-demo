@@ -1,5 +1,6 @@
 import { matchPath } from 'react-router-dom'
-import allRoutes, { CustomRouteConfig } from '@/router/config'
+import type { CustomRouteConfig } from '@/router/config'
+import allRoutes from '@/router/config'
 
 /**
  * 根据路由配置和权限数据获取菜单配置

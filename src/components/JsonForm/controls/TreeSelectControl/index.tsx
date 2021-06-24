@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { TreeSelect, TreeSelectProps } from 'antd'
+import type { TreeSelectProps } from 'antd'
+import { TreeSelect } from 'antd'
 
 export interface TreeSelectControlProps extends TreeSelectProps<any> {
   remote?: {

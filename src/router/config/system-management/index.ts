@@ -1,7 +1,7 @@
 // import React from 'react';
 import loadable from '@loadable/component'
-import BlankLayout from '@/layouts/blankLayout/index'
-import { CustomRouteConfig } from '../index'
+import BlankLayout from '@/layouts/blank-layout/index'
+import type { CustomRouteConfig } from '../index'
 import {
   BASE_URL,
   GOODS_MANAGEMENT,
@@ -16,6 +16,7 @@ import {
   FINISHED_PRODUCT_BOM_MANAGEMENT_ADD,
   FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT,
 } from './path'
+
 const routes: CustomRouteConfig[] = [
   {
     path: BASE_URL,

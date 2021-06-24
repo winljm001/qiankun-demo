@@ -1,8 +1,9 @@
 import React, { memo, createElement } from 'react'
-import { Menu, MenuProps } from 'antd'
+import type { MenuProps } from 'antd'
+import { Menu } from 'antd'
 import { Link } from 'react-router-dom'
 import * as Icons from '@ant-design/icons'
-import { CustomRouteConfig } from '@/router/config'
+import type { CustomRouteConfig } from '@/router/config'
 import styles from './style.module.less'
 
 interface IProps extends MenuProps {

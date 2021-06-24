@@ -1,6 +1,6 @@
 import { message } from 'antd'
 import { messageApi } from 'wbd-frontend-kit'
-import { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 
 const singleMessage = messageApi(message)
 

@@ -1,5 +1,6 @@
 import React, { memo } from 'react'
-import { Button, Form, FormInstance, Input, Space } from 'antd'
+import type { FormInstance } from 'antd'
+import { Button, Form, Input, Space } from 'antd'
 import SearchFormLayout from '@/components/SearchFormLayout'
 
 interface IProps {

@@ -1,7 +1,8 @@
 import React from 'react'
-import { DatePicker, DatePickerProps } from 'antd'
-import { RangePickerProps } from 'antd/lib/date-picker'
-import { NamePath } from 'rc-field-form/lib/interface'
+import type { DatePickerProps } from 'antd'
+import { DatePicker } from 'antd'
+import type { RangePickerProps } from 'antd/lib/date-picker'
+import type { NamePath } from 'rc-field-form/lib/interface'
 
 type DateControlConfig = {
   pickerType: 'DATE'

@@ -1,5 +1,5 @@
 import { useAntdTable } from 'ahooks'
-import { PaginatedParams } from 'ahooks/lib/useAntdTable'
+import type { PaginatedParams } from 'ahooks/lib/useAntdTable'
 import useUrlState from '@ahooksjs/use-url-state'
 import { Form } from 'antd'
 import { useEffect } from 'react'

@@ -6,6 +6,8 @@
     "build:test": "vite build --mode test",
     "build:prod": "tsc && vite build --mode production",
     "serve": "vite preview",
+    "lint:ts": "tsc --noEmit",
+    "lint:es": "eslint src --ext .ts,.tsx",
     "lint": "tsc --noEmit && eslint src --ext .ts,.tsx",
     "prettier": "prettier --write 'src/**/*.{js,json,yml,yaml,ts,tsx,md}'",
     "ncu": "npx npm-check-updates -u -x zustand,husky",
@@ -64,7 +66,7 @@
       "git add"
     ],
     "*.{ts,tsx}": [
-      "npm run lint",
+      "eslint --fix",
       "prettier --write",
       "git add"
     ]

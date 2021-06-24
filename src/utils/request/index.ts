@@ -1,6 +1,7 @@
 import qs from 'querystring'
 import { message } from 'antd'
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios from 'axios'
 import { omit } from 'wbd-frontend-kit'
 import config from '@/config'
 import useGlobalStore from '@/stores/global'

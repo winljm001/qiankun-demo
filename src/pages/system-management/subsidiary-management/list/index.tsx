@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
-import { Button, FormInstance, Modal, Space, Table } from 'antd'
+import type { FormInstance } from 'antd'
+import { Button, Modal, Space, Table } from 'antd'
 import { useHistory } from 'react-router-dom'
 import { useToggle } from 'ahooks'
 import { useMutation } from 'react-query'
