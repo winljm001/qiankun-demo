@@ -77,13 +77,13 @@ const routes: CustomRouteConfig[] = [
               contentPadding: 0,
             },
             component: loadable(() => import('@/pages/system-management/subsidiary-management/add/index')),
-            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: GOODS_MANAGEMENT }],
+            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: SUBSIDIARY_MANAGEMENT }],
           },
           {
             path: `${SUBSIDIARY_SKU_MANAGEMENT}/:id`,
             exact: true,
             component: loadable(() => import('@/pages/system-management/subsidiary-management/sku-management')),
-            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: GOODS_MANAGEMENT }, { name: 'SKU管理' }],
+            breadcrumb: [{ name: '系统管理' }, { name: '辅料管理', path: SUBSIDIARY_MANAGEMENT }, { name: 'SKU管理' }],
           },
           {
             path: `${SUBSIDIARY_SPEC_MANAGEMENT}/:id`,
