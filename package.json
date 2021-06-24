@@ -12,6 +12,7 @@
     "prettier": "prettier --write 'src/**/*.{js,json,yml,yaml,ts,tsx,md}'",
     "ncu": "npx npm-check-updates -u -x zustand,husky",
     "prepare": "husky install",
+    "resolutions": "npx npm-force-resolutions",
     "lint-staged": "lint-staged --allow-empty"
   },
   "dependencies": {
