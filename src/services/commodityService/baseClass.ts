@@ -255,11 +255,11 @@ class DefaultPageResult {
 }
 
 class FinishedGoodsReturnedList {
-  /** 商品分类 */
-  categoryText = ''
-
   /** 商品分类id */
   commodityCategoryId = undefined
+
+  /** 商品分类名称 */
+  commodityCategoryName = ''
 
   /** 商品id */
   commodityId = undefined
@@ -272,6 +272,9 @@ class FinishedGoodsReturnedList {
 
   /** 商品类型id */
   commodityTypeId = undefined
+
+  /** 商品类型名称 */
+  commodityTypeName = ''
 
   /** 商品产地 */
   placeOriginName = ''

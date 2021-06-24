@@ -14,7 +14,6 @@ import {
   SUBSIDIARY_SPEC_MANAGEMENT,
   FINISHED_PRODUCT_BOM_MANAGEMENT,
   FINISHED_PRODUCT_BOM_MANAGEMENT_ADD,
-  FINISHED_PRODUCT_BOM_MANAGEMENT_DETAILS,
   FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT,
 } from './path'
 const routes: CustomRouteConfig[] = [
@@ -114,12 +113,12 @@ const routes: CustomRouteConfig[] = [
             component: loadable(() => import('@/pages/system-management/finished-product-BOM-management/add')),
             breadcrumb: [{ name: '系统管理' }, { name: '成品BOM管理', path: FINISHED_PRODUCT_BOM_MANAGEMENT }],
           },
-          {
-            path: `${FINISHED_PRODUCT_BOM_MANAGEMENT_DETAILS}/:commodityBOMId`,
-            exact: true,
-            component: loadable(() => import('@/pages/system-management/finished-product-BOM-management/details')),
-            breadcrumb: [{ name: '系统管理' }, { name: '成品BOM管理', path: FINISHED_PRODUCT_BOM_MANAGEMENT }],
-          },
+          // {
+          //   path: `${FINISHED_PRODUCT_BOM_MANAGEMENT_DETAILS}/:commodityBOMId`,
+          //   exact: true,
+          //   component: loadable(() => import('@/pages/system-management/finished-product-BOM-management/details')),
+          //   breadcrumb: [{ name: '系统管理' }, { name: '成品BOM管理', path: FINISHED_PRODUCT_BOM_MANAGEMENT }],
+          // },
           {
             path: `${FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT}/:commodityBOMId`,
             exact: true,

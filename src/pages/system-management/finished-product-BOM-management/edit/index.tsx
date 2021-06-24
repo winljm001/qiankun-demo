@@ -45,8 +45,6 @@ const FinishedProductBOMManagementEdit: React.FC<RouteComponentProps<{ commodity
     IngredientListRef.current
       .getValue()
       .then((list) => {
-        console.log(dataFinishProduct)
-        console.log(list)
         // 提交数据
         mutateUpdateCommodityBom({
           ...dataFinishProduct,

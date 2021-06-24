@@ -261,11 +261,11 @@ declare namespace defs {
     }
 
     export class FinishedGoodsReturnedList {
-      /** 商品分类 */
-      categoryText?: string
-
       /** 商品分类id */
       commodityCategoryId?: number
+
+      /** 商品分类名称 */
+      commodityCategoryName?: string
 
       /** 商品id */
       commodityId?: number
@@ -278,6 +278,9 @@ declare namespace defs {
 
       /** 商品类型id */
       commodityTypeId?: number
+
+      /** 商品类型名称 */
+      commodityTypeName?: string
 
       /** 商品产地 */
       placeOriginName?: string
@@ -851,8 +854,8 @@ declare namespace API {
         export class Params {
           /** commodityName */
           commodityName?: string
-          /** commoditySpecName */
-          commoditySpecName?: string
+          /** commoditySpecOptionName */
+          commoditySpecOptionName?: string
           /** offset */
           offset?: number
           /** pageCurrent */

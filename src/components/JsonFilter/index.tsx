@@ -157,7 +157,7 @@ function JsonFilter<Values>({
     }
     if (shouldUpdate) {
       return (
-        <Col key={key} {...listSearchFromItemProps.colProps}>
+        <Col key={key} {...listSearchFromItemProps.middle.colProps}>
           <Form.Item shouldUpdate={shouldUpdate} noStyle>
             {() => {
               const formItemConfig = callableDataReturn(formItem)
@@ -170,7 +170,7 @@ function JsonFilter<Values>({
     }
     if (excluded) return null
     return (
-      <Col key={key} {...listSearchFromItemProps.colProps}>
+      <Col key={key} {...listSearchFromItemProps.middle.colProps}>
         {renderFormItem(formItemConfig)}
       </Col>
     )
@@ -203,7 +203,7 @@ function JsonFilter<Values>({
   // 根据表单项col props设置按钮组col props
   return (
     <Form style={{ marginBottom: -24, ...style }} {...formPropsResult} form={form} onFinish={onFormFinish}>
-      <Row {...listSearchFromItemProps.rowProps}>
+      <Row {...listSearchFromItemProps.middle.rowProps}>
         {/* 控件列表 */}
         {formItems.map(handleFormItemRenderLogic)}
         {/* 按钮组 */}

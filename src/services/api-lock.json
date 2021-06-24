@@ -219,8 +219,8 @@
               },
               {
                 "in": "query",
-                "description": "commoditySpecName",
-                "name": "commoditySpecName",
+                "description": "commoditySpecOptionName",
+                "name": "commoditySpecOptionName",
                 "required": false,
                 "dataType": {
                   "typeArgs": [],
@@ -4411,20 +4411,6 @@
           {
             "dataType": {
               "typeArgs": [],
-              "typeName": "string",
-              "isDefsType": false,
-              "templateIndex": -1,
-              "compileTemplateKeyword": "#/definitions/",
-              "enum": [],
-              "typeProperties": []
-            },
-            "name": "categoryText",
-            "description": "商品分类",
-            "required": false
-          },
-          {
-            "dataType": {
-              "typeArgs": [],
               "typeName": "number",
               "isDefsType": false,
               "templateIndex": -1,
@@ -4434,6 +4420,20 @@
             },
             "name": "commodityCategoryId",
             "description": "商品分类id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityCategoryName",
+            "description": "商品分类名称",
             "required": false
           },
           {
@@ -4490,6 +4490,20 @@
             },
             "name": "commodityTypeId",
             "description": "商品类型id",
+            "required": false
+          },
+          {
+            "dataType": {
+              "typeArgs": [],
+              "typeName": "string",
+              "isDefsType": false,
+              "templateIndex": -1,
+              "compileTemplateKeyword": "#/definitions/",
+              "enum": [],
+              "typeProperties": []
+            },
+            "name": "commodityTypeName",
+            "description": "商品类型名称",
             "required": false
           },
           {

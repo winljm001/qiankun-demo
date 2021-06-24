@@ -1,25 +1,34 @@
 import React, { useCallback } from 'react'
-import { Button, Space, Table } from 'antd'
+import { Button, Space, Table, Popconfirm } from 'antd'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { useHistory } from 'react-router-dom'
-import { pageCommodityBom } from '@/services/commodityService/mods/commodityBom/pageCommodityBom'
+import { useMutation } from 'react-query'
+import { pageCommodityBom as fetchPageCommodityBom } from '@/services/commodityService/mods/commodityBom/pageCommodityBom'
+import { deleteCommodityBom as fetchDeleteCommodityBom } from '@/services/commodityService/mods/commodityBom/deleteCommodityBom'
 import BaseCard from '@/components/BaseCard'
 import ActionGroup from '@/components/ActionGroup'
 import subRoute from '@/components/hoc/sub-route'
 import useAsyncTable from '@/hooks/useAsyncTable'
 import {
   FINISHED_PRODUCT_BOM_MANAGEMENT_ADD,
-  FINISHED_PRODUCT_BOM_MANAGEMENT_DETAILS,
   FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT,
 } from '@/router/config/system-management/path'
 import SearchForm from './search-form/index'
 
 /** useAsyncTable 参数 */
-const useAsyncTableParams = { fetchAction: pageCommodityBom }
+const useAsyncTableParams = { fetchAction: fetchPageCommodityBom }
 
 const FinishedProductBOMManagementList = () => {
   const history = useHistory()
-  const { tableProps, form, submit, reset } = useAsyncTable(useAsyncTableParams)
+  const { tableProps, form, submit, reset, refresh } = useAsyncTable(useAsyncTableParams)
+  const { mutate: mutateDeleteCommodityBom, isLoading: isLoadingDeleteCommodityBom } = useMutation(
+    fetchDeleteCommodityBom,
+    {
+      onSuccess() {
+        refresh()
+      },
+    },
+  )
 
   const columns: ColumnType<defs.commodityService.CommodityBomListVO>[] = [
     {
@@ -47,15 +56,25 @@ const FinishedProductBOMManagementList = () => {
           <ActionGroup
             actions={[
               {
-                children: '详情',
-                onClick() {
-                  history.push(`${FINISHED_PRODUCT_BOM_MANAGEMENT_DETAILS}/${record.commodityBomId}`)
-                },
-              },
-              {
                 children: '编辑',
                 onClick() {
                   history.push(`${FINISHED_PRODUCT_BOM_MANAGEMENT_EDIT}/${record.commodityBomId}`)
+                },
+              },
+              {
+                children: '删除',
+                render: (children) => {
+                  return (
+                    <Popconfirm
+                      title="确定要删除？"
+                      onConfirm={() => {
+                        mutateDeleteCommodityBom({
+                          commodityBomId: record.commodityBomId,
+                        })
+                      }}>
+                      {children}
+                    </Popconfirm>
+                  )
                 },
               },
             ]}
@@ -80,7 +99,12 @@ const FinishedProductBOMManagementList = () => {
         </Space>
       </BaseCard>
       <BaseCard>
-        <Table columns={columns} rowKey="commodityBomId" {...tableProps} />
+        <Table
+          {...tableProps}
+          columns={columns}
+          rowKey="commodityBomId"
+          loading={tableProps.loading || isLoadingDeleteCommodityBom}
+        />
       </BaseCard>
     </>
   )
