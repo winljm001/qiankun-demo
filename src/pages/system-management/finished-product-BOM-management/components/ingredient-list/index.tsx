@@ -277,6 +277,7 @@ const IngredientList = forwardRef<IngredientListInstance, IngredientListProps>(
           ) : null}
 
           <Table
+            bordered
             pagination={false}
             rowKey={buildRowKey}
             columns={column.filter(Boolean)}

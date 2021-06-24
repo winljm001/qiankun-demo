@@ -23,8 +23,8 @@ const CardFinishedProductInformation: React.FC<CardFinishedProductInformationPro
       <Skeleton active loading={loading}>
         <Form.Item label="商品名称">{data.commodityName}</Form.Item>
         <Form.Item label="商品规格">{data.commoditySpecOptionName?.join('、')}</Form.Item>
-        <Form.Item label="商品类型">{data.commodityCategoryName}</Form.Item>
-        <Form.Item label="商品分类">{data.commodityTypeName}</Form.Item>
+        <Form.Item label="商品类型">{data.commodityTypeName}</Form.Item>
+        <Form.Item label="商品分类">{data.commodityCategoryName}</Form.Item>
         {data.commodityVarietyName ? <Form.Item label="商品品种">{data.commodityVarietyName}</Form.Item> : null}
         {data.commodityPlaceOriginName ? <Form.Item label="商品产地">{data.commodityPlaceOriginName}</Form.Item> : null}
       </Skeleton>

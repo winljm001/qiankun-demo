@@ -125,7 +125,7 @@ const IngredientListModalFruit = forwardRef<IngredientListModalFruitInstance>((_
         />
       </Form>
 
-      <Table {...tableProps} columns={columns} rowKey="commodityId" rowSelection={rowSelection} />
+      <Table {...tableProps} bordered columns={columns} rowKey="commodityId" rowSelection={rowSelection} />
     </Modal>
   )
 })
