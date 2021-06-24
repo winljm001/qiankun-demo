@@ -1,4 +1,4 @@
-import create, { SetState, GetState } from 'zustand'
+import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
 import { Modal } from 'antd'
 import { mainRoutes, CustomRouteConfig } from '@/router/config/index'
@@ -39,12 +39,14 @@ export type State = {
   /** 退出 */
   logout: (callback?: () => void) => void
 }
+
 export const name = 'global-storage'
+
 const useGlobalStore = create<State>(
   devtools(
     // 本地存储，其他store不需要
     persist(
-      (set: SetState<State>, get: GetState<State>) => ({
+      (set, get) => ({
         menuList: null,
         isLogin: null,
         userId: null,
