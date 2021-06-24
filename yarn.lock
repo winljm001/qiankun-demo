@@ -791,9 +791,9 @@ ansi-styles@^4.0.0, ansi-styles@^4.1.0:
     color-convert "^2.0.1"
 
 antd@^4.16.3:
-  version "4.16.3"
-  resolved "https://registry.npmjs.org/antd/-/antd-4.16.3.tgz#9836613eaeabb55a0bcd4423551df699d65f67a8"
-  integrity sha512-goFcDw8MB9PKgb+fHjUEOwoseL5iuMNelzcdFJOJaG1LXPm9d/ZQhQWdYbzQf5l7v6bmvvvi91WNB1rDsuXh3w==
+  version "4.16.5"
+  resolved "https://registry.npmjs.org/antd/-/antd-4.16.5.tgz#6105bd848fb2e468e0d1d3ec024c82d2516587ef"
+  integrity sha512-HOPqJWdncFsviMisff7KUM77wwmIlSCfS6J0LAs3D/VP7pRCqo1YQLkdBJ77wxRjS60rwe8KDDayulohiTSoBQ==
   dependencies:
     "@ant-design/colors" "^6.0.0"
     "@ant-design/icons" "^4.6.2"
@@ -814,7 +814,7 @@ antd@^4.16.3:
     rc-image "~5.2.4"
     rc-input-number "~7.1.0"
     rc-mentions "~1.6.1"
-    rc-menu "~9.0.9"
+    rc-menu "~9.0.12"
     rc-motion "^2.4.0"
     rc-notification "~4.5.7"
     rc-pagination "~3.1.6"
@@ -1379,9 +1379,9 @@ dot-prop@^5.1.0:
     is-obj "^2.0.0"
 
 electron-to-chromium@^1.3.723:
-  version "1.3.755"
-  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.755.tgz#4b6101f13de910cf3f0a1789ddc57328133b9332"
-  integrity sha512-BJ1s/kuUuOeo1bF/EM2E4yqW9te0Hpof3wgwBx40AWJE18zsD1Tqo0kr7ijnOc+lRsrlrqKPauJAHqaxOItoUA==
+  version "1.3.756"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.756.tgz#942cee59cd64d19f576d8d5804eef09cb423740c"
+  integrity sha512-WsmJym1TMeHVndjPjczTFbnRR/c4sbzg8fBFtuhlb2Sru3i/S1VGpzDSrv/It8ctMU2bj8G7g7/O3FzYMGw6eA==
 
 emoji-regex@^8.0.0:
   version "8.0.0"
@@ -3266,7 +3266,7 @@ rc-mentions@~1.6.1:
     rc-trigger "^5.0.4"
     rc-util "^5.0.1"
 
-rc-menu@^9.0.0, rc-menu@~9.0.9:
+rc-menu@^9.0.0, rc-menu@~9.0.12:
   version "9.0.12"
   resolved "https://registry.npmjs.org/rc-menu/-/rc-menu-9.0.12.tgz#492c4bb07a596e2ce07587c669b27ee28c3810c5"
   integrity sha512-8uy47DL36iDEwVZdUO/fjhhW5+4j0tYlrCsOzw6iy8MJqKL7/HC2pj7sL/S9ayp2+hk9fYQYB9Tu+UN+N2OOOQ==
@@ -4408,7 +4408,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.npmjs.org/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zustand@3.5.4:
-  version "3.5.4"
-  resolved "https://registry.npmjs.org/zustand/-/zustand-3.5.4.tgz#9050a15042ced663b10588327b9210df91f0e13e"
-  integrity sha512-EtS3D83il8eiydRS+xUcpczffT0MpD9ePIqAT10ns2tfzPvq85nmMmYJl9mOLOJjPLaXAMK8lgk0iCz2h7CxGg==
+zustand@3.4.2:
+  version "3.4.2"
+  resolved "https://registry.npmjs.org/zustand/-/zustand-3.4.2.tgz#22f0e0503a364672c6e3bb83399e69479bcea9b2"
+  integrity sha512-/v0RRbzi8NNyiXf7vw2eizPfJaTlTbXNM3fjQ6xF+qr5Xc0cF0ypaa0ARLOvyaKsGx/q2p5azVhfGxl4uHK0Ag==
