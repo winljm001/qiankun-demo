@@ -54,11 +54,6 @@ const FruitForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       </Select>
     </Form.Item>
   )
-  console.log({
-    status: true,
-    ...initialValues,
-    commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
-  })
   return (
     <Form
       form={form}

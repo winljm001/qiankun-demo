@@ -7,7 +7,7 @@ import { listPropertyOptions } from '@/services/commodityService/mods/commodityS
 import type { FormRef } from '../../index'
 
 type IProps = {
-  initialValues: defs.commodityService.SkuDetails
+  initialValues: defs.commodityService.SkuDetailVO
 }
 
 const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
@@ -27,7 +27,15 @@ const FoodForm = forwardRef<FormRef, IProps>(({ initialValues }, ref) => {
       .catch((err) => {})
   }, [])
   return (
-    <Form form={form} layout="vertical" initialValues={{ status: true, ...initialValues }} name="basic">
+    <Form
+      form={form}
+      layout="vertical"
+      initialValues={{
+        status: true,
+        ...initialValues,
+        commodityTypeIds: initialValues?.commodityTypes?.map((v) => v?.commodityTypeId),
+      }}
+      name="basic">
       <Form.Item label="最小单位" name="unitType" rules={[{ required: true, message: '请选择单位!' }]}>
         <Select options={skuUnitOptions} placeholder="请选择" />
       </Form.Item>
