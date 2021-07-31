@@ -7,7 +7,7 @@ pipeline {
         stage('Package') {
             steps {
                 sh 'yarn install'
-                sh 'yarn build:test'
+                sh 'yarn build:dev'
             }
         }
         stage('Deliver for dev') {
@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'USER.FRUITS', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    sh "bash scripts/deploy/deploy.sh dev-001 ${username} ${password} gscm-admin-web_dev"
+                    sh "bash scripts/deploy/deploy.sh dev-001 ${username} ${password} pitaya-admin-web_dev"
                 }
             }
         }
