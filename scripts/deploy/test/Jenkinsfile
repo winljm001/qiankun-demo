@@ -18,7 +18,7 @@ pipeline {
             }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'USER.FRUITS', passwordVariable: 'password', usernameVariable: 'username')]) {
-                    sh "bash scripts/deploy/deploy.sh dev-001 ${username} ${password} pitaya-admin-web_test"
+                    sh "bash scripts/deploy/deploy.sh dev-001 ${username} ${password} pitaya-web_test"
                 }
             }
         }
