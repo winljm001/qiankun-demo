@@ -1,6 +1,11 @@
-import { useCallback, useState, useRef } from 'react'
+import qs from 'querystring'
+import { useCallback, useState, useRef, useMemo } from 'react'
 import { Form } from 'antd'
+import type { TablePaginationConfig } from 'antd/es/table/interface'
 import { usePersistFn } from 'ahooks'
+import { useHistory, useLocation } from 'react-router-dom'
+
+import useOriginalDeepCopy from '../useOriginalDeepCopy'
 
 /**
  * 参数类型
@@ -42,7 +47,7 @@ export interface UseTablePagingParams<DT, PT> {
   defaultPageSize?: number | string
 
   /**
-   * 默认参数，设置一次就改不了，如果要重置，使用向外暴露的 setParams 函数修改
+   * 默认参数
    * @description 这个适合页面进来就需要预置的参数
    */
   defaultParams?: PT
@@ -61,6 +66,12 @@ export interface UseTablePagingParams<DT, PT> {
    * 重置表单时忽略的字段
    */
   resetFieldsIgnores?: string[]
+
+  /**
+   * 参数是否同步到 search
+   * @default true
+   */
+  params2search?: boolean
 }
 
 /**
@@ -76,10 +87,19 @@ const useTablePaging = <DT, PT = Record<string, any>>({
   formatParams,
   paramsValueTypeMap,
   resetFieldsIgnores,
+  params2search = true,
 }: UseTablePagingParams<DT, PT>) => {
+  const location = useLocation()
+  const { push } = useHistory()
+
+  /** 请求函数 */
   const requestPersistFn = usePersistFn(request)
+  /** 重置忽略字段 */
+  const resetFieldsIgnoresOriginalDeepCopy = useOriginalDeepCopy(resetFieldsIgnores)
 
   const [form] = Form.useForm()
+  /** 分页参数，表单里面的原始值 */
+  const PagingParams = useRef<Record<string, any>>({})
   /** 额外不变的参数 */
   const DefaultParams = useRef(defaultParams)
   /** 请求时间戳 */
@@ -96,6 +116,17 @@ const useTablePaging = <DT, PT = Record<string, any>>({
     loading: false,
   })
 
+  const pagination = useMemo(
+    () => ({
+      current: paging.pageCurrent,
+      pageSize: paging.pageSize,
+      total: paging.totalRecords,
+      showSizeChanger: true,
+      showTotal: (total: number) => `共 ${total} 记录`,
+    }),
+    [paging],
+  )
+
   /**
    * 请求数据
    */
@@ -111,6 +142,9 @@ const useTablePaging = <DT, PT = Record<string, any>>({
         ...s,
         loading: true,
       }))
+
+      // 重置锁
+      ChangeParamsByAction.current = false
 
       requestPersistFn(xx)
         .then((data) => {
@@ -137,20 +171,101 @@ const useTablePaging = <DT, PT = Record<string, any>>({
   /**
    * 正向解析表单里面的参数
    */
-  const parseParams = useCallback(() => {}, [])
+  const parseParams = useCallback((v: any) => {
+    return v
+  }, [])
 
   /**
    * 方向解析表单里面的参数
    */
   const stringifyParams = useCallback(() => {}, [])
 
-  const resetForm = useCallback(() => {}, [])
+  /**
+   * 重置表单
+   */
+  const resetForm = useCallback(
+    (callback: () => void) => {
+      const values: Record<string, any> = form.getFieldsValue()
+      const ignoresValue: Record<string, any> = {}
 
-  const submit = useCallback(() => {}, [])
+      Object.entries(values).forEach(([key, value]) => {
+        if (resetFieldsIgnoresOriginalDeepCopy && resetFieldsIgnoresOriginalDeepCopy.indexOf(key) > -1) {
+          ignoresValue[key] = value
+        }
+      })
 
-  const reset = useCallback(() => {}, [])
+      form.resetFields()
+
+      form.setFieldsValue(ignoresValue)
+
+      callback?.()
+    },
+    [form, resetFieldsIgnoresOriginalDeepCopy],
+  )
+
+  /**
+   * 改变参数
+   */
+  const runChangeParams = useCallback(
+    (p: any) => {
+      const parsed = parseParams(p)
+
+      if (params2search) {
+        push({
+          pathname: location.pathname,
+          search: qs.stringify(parsed),
+        })
+      }
+
+      // TODO 优化路由变更后在请求数据
+      setTimeout(() => {
+        fetchData(parsed)
+      })
+    },
+    [parseParams, params2search, fetchData, push, location.pathname],
+  )
+
+  /**
+   * 只触发页面变更
+   */
+  const runChangePagination = useCallback(
+    (p: { pageCurrent?: number; pageSize?: number }) => {
+      runChangeParams({
+        ...PagingParams.current,
+        ...p,
+      })
+    },
+    [runChangeParams],
+  )
+
+  const submit = useCallback(() => {
+    const values: Record<string, any> = form.getFieldsValue()
+    runChangeParams(values)
+  }, [runChangeParams, form])
+
+  /**
+   * 重置表单并且重新搜索
+   */
+  const reset = useCallback(() => {
+    resetForm(() => {
+      submit()
+    })
+  }, [resetForm, submit])
 
   const refresh = useCallback(() => {}, [])
+
+  /**
+   * Table 页码变化
+   */
+  const onChange = useCallback(
+    (p: TablePaginationConfig) => {
+      runChangePagination({
+        pageCurrent: p.current,
+        pageSize: p.pageSize,
+      })
+    },
+    [runChangePagination],
+  )
 
   return {
     form,
@@ -159,7 +274,8 @@ const useTablePaging = <DT, PT = Record<string, any>>({
     refresh,
     tableProps: {
       loading: paging.loading,
-      pagination: {},
+      pagination,
+      onChange,
     },
   }
 }
