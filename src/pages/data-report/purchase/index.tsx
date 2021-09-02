@@ -2,7 +2,7 @@ import React from 'react'
 import type { ColumnType } from 'antd/lib/table/interface'
 import { Button, Space, Table, Form, DatePicker } from 'antd'
 import BaseCard from '@/components/base-card'
-import useAsyncTable from '@/hooks/useAsyncTable'
+import useTablePagingGQL from '@/hooks/useTablePaging/gql'
 import { PitayaPageCommodityBomDocument } from '@/graphql/operations/data-report/__generated__/purchase'
 import type { PitayaPageCommodityBomQuery } from '@/graphql/operations/data-report/__generated__/purchase'
 import Tabs from '../components/tabs'
@@ -26,9 +26,18 @@ const tabsOptions = [
  * 采购报表
  */
 const DataReportPurchase: React.FC = () => {
-  const { tableProps } = useAsyncTable({
+  const { tableProps } = useTablePagingGQL({
     gql: PitayaPageCommodityBomDocument,
     gqlKey: 'pitayaPageCommodityBom',
+    formatParams: (v) => {
+      if (v.time) {
+        v.startTime = v.time[0]
+        v.endTime = v.time[1]
+        v.endTime = null
+      }
+      console.log('formatParams  ->  ', v)
+      return v
+    },
   })
 
   const columns: ColumnType<ColumnTypeItem>[] = [
