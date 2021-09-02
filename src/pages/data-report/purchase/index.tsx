@@ -32,6 +32,7 @@ const DataReportPurchase: React.FC = () => {
     paramsValueTypeMap: {
       time: 'momentRange',
     },
+    // params2search: false,
     formatParams: (v) => {
       if (v.time) {
         v.startTime = v.time[0]
@@ -81,7 +82,7 @@ const DataReportPurchase: React.FC = () => {
 
   return (
     <>
-      <Tabs options={tabsOptions} value={tabsValue} onChange={onChangeTabs} />
+      <Tabs options={tabsOptions} defaultValue={tabsValue} onChange={onChangeTabs} />
 
       <div className="pageWrap">
         <BaseCard>
