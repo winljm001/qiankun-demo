@@ -616,6 +616,10 @@ export type GroupSkuInput = {
 export enum InBoundType {
   /**  采购入库 */
   Purchasing = 'PURCHASING',
+  /**  自采入库 */
+  PurchaseSelf = 'PURCHASE_SELF',
+  /**  调拨入库 */
+  AllocateIn = 'ALLOCATE_IN',
   /**  盘盈入库 */
   InventoryProfit = 'INVENTORY_PROFIT',
   /**  退货入库 */
@@ -1346,7 +1350,7 @@ export enum OutBoundType {
   /**  盘亏出库 */
   ProfitLoss = 'PROFIT_LOSS',
   /**  调拨出库 */
-  Transfer = 'TRANSFER',
+  AllocateOut = 'ALLOCATE_OUT',
   /**  报损出库 */
   Breakage = 'BREAKAGE',
   /**  其他出库 */
@@ -2173,6 +2177,10 @@ export type Query = {
   pageOutBoundReportForm: Maybe<OutBoundReportFormPagePayload>
   /**  列表导出 */
   exportOutBoundReportForm: Maybe<Scalars['String']>
+  /**  列表接口 */
+  pageOrderReportForm: Maybe<OrderReportFormPagePayload>
+  /**  列表导出 */
+  exportOrderReportForm: Maybe<Scalars['String']>
   /**  所属商户下拉 */
   listMerchantOption: Maybe<OptionList>
   /**  出库类型下拉 */
@@ -2182,13 +2190,11 @@ export type Query = {
   /**  客户类型下拉 */
   listCustomerTypeOption: Maybe<OptionList>
   /**  列表接口 */
-  pageOrderReportForm: Maybe<OrderReportFormPagePayload>
-  /**  列表导出 */
-  exportOrderReportForm: Maybe<Scalars['String']>
-  /**  列表接口 */
   pageSalesReportForm: Maybe<SalesReportFormPagePayload>
   /**  列表导出 */
   exportSalesReportForm: Maybe<Scalars['String']>
+  /**  库存导出 */
+  exportStock: Maybe<Scalars['String']>
   /** sku列表表头 */
   peachTableHead: Maybe<PeachTableHeadPayload>
   /** sku列表 */
@@ -2453,6 +2459,10 @@ export type QueryExportSalesReportFormArgs = {
   input?: Maybe<SalesReportFormQueryInput>
 }
 
+export type QueryExportStockArgs = {
+  input?: Maybe<StockReportFormQueryInput>
+}
+
 export type QueryPeachTableHeadArgs = {
   commodityId?: Maybe<Scalars['Int']>
 }
@@ -2524,6 +2534,8 @@ export type SalesReportFormListPayload = {
   varietyGroupId: Maybe<Scalars['Int']>
   /**  品种组 */
   varietyGroup: Maybe<Scalars['String']>
+  /**  柜次号 */
+  cabinetBatchCode: Maybe<Scalars['String']>
 }
 
 /**  列表分页入参 */
@@ -2746,6 +2758,10 @@ export enum StockRecordType {
   Out = 'OUT',
   /**  所有类型 */
   All = 'ALL',
+}
+
+export type StockReportFormQueryInput = {
+  categoryId?: Maybe<Scalars['Int']>
 }
 
 export type StockTypeOptionInput = {

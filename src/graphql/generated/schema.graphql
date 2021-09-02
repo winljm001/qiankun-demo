@@ -684,6 +684,12 @@ enum InBoundType {
   """ 采购入库"""
   PURCHASING
 
+  """ 自采入库"""
+  PURCHASE_SELF
+
+  """ 调拨入库"""
+  ALLOCATE_IN
+
   """ 盘盈入库"""
   INVENTORY_PROFIT
 
@@ -1373,7 +1379,7 @@ enum OutBoundType {
   PROFIT_LOSS
 
   """ 调拨出库"""
-  TRANSFER
+  ALLOCATE_OUT
 
   """ 报损出库"""
   BREAKAGE
@@ -2365,6 +2371,12 @@ type Query {
   """ 列表导出"""
   exportOutBoundReportForm(input: OutBoundReportFormQueryInput): String
 
+  """ 列表接口"""
+  pageOrderReportForm(input: OrderReportFormPageInput): OrderReportFormPagePayload
+
+  """ 列表导出"""
+  exportOrderReportForm(input: OrderReportFormQueryInput): String
+
   """ 所属商户下拉"""
   listMerchantOption: OptionList
 
@@ -2378,16 +2390,13 @@ type Query {
   listCustomerTypeOption: OptionList
 
   """ 列表接口"""
-  pageOrderReportForm(input: OrderReportFormPageInput): OrderReportFormPagePayload
-
-  """ 列表导出"""
-  exportOrderReportForm(input: OrderReportFormQueryInput): String
-
-  """ 列表接口"""
   pageSalesReportForm(input: SalesReportFormPageInput): SalesReportFormPagePayload
 
   """ 列表导出"""
   exportSalesReportForm(input: SalesReportFormQueryInput): String
+
+  """ 库存导出"""
+  exportStock(input: StockReportFormQueryInput): String
 
   """sku列表表头"""
   peachTableHead(commodityId: Int): PeachTableHeadPayload
@@ -2476,6 +2485,9 @@ type SalesReportFormListPayload {
 
   """ 品种组"""
   varietyGroup: String
+
+  """ 柜次号"""
+  cabinetBatchCode: String
 }
 
 """ 列表分页入参"""
@@ -2720,6 +2732,10 @@ enum StockRecordType {
 
   """ 所有类型"""
   ALL
+}
+
+input StockReportFormQueryInput {
+  categoryId: Int
 }
 
 input StockTypeOptionInput {

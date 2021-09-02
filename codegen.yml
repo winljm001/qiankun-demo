@@ -1,0 +1,53 @@
+schema:
+  - http://192.168.10.233:8888/graphql
+generates:
+  ./src/graphql/generated/schema.graphql:
+    plugins:
+      - schema-ast
+    config:
+      federation: false
+  src/graphql/generated/types.ts:
+    plugins:
+      - typescript
+    config:
+      maybeValue: T
+      avoidOptionals:
+        field: true
+      scalars:
+        BigDecimal: number
+        Long: number
+        Date: number
+        DateTime: number
+  ./src/graphql/:
+    documents:
+      - 'src/graphql/operations/**/**.gql'
+    preset: near-operation-file
+    presetConfig:
+      extension: '.ts'
+      baseTypesPath: 'generated/types.ts'
+      importTypesNamespace: SchemaTypes
+      folder: __generated__
+    plugins:
+      - typescript-operations
+      - typescript-react-apollo
+    config:
+      avoidOptionals:
+        field: true
+      arrayInputCoercion: false
+      preResolveTypes: true
+      onlyOperationTypes: true
+      declarationKind: interface
+      skipTypeNameForRoot: true
+      useTypeImports: true
+      skipTypename: true
+      omitOperationSuffix: false
+      scalars:
+        BigDecimal: number
+        Long: number
+        Date: number
+        DateTime: number
+hooks:
+  afterAllFileWrite:
+    - npx --no-install eslint --fix
+    # - npx --no-install prettier --write
+watch: true

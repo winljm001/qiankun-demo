@@ -2,4 +2,15 @@
 
 .tabs {
   background-color: #fff;
+  padding: 0 @padding-md;
+  border-top: @border-width-base @border-style-base @border-color-split;
+
+  :global {
+    .ant-tabs-nav {
+      margin-bottom: 0;
+      &::before {
+        display: none;
+      }
+    }
+  }
 }

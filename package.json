@@ -13,7 +13,10 @@
     "ncu": "npx npm-check-updates -u -x zustand,husky",
     "prepare": "husky install",
     "resolutions": "npx npm-force-resolutions",
-    "lint-staged": "lint-staged --allow-empty"
+    "lint-staged": "lint-staged --allow-empty",
+    "lint:gql:generated": "eslint src/graphql/operations --ext .ts --fix",
+    "prettier:gql:generated": "prettier --write 'src/graphql/operations/**/*.ts'",
+    "generate": "graphql-codegen"
   },
   "dependencies": {
     "@ahooksjs/use-url-state": "^2.5.8",

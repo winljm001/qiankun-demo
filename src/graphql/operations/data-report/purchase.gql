@@ -1,0 +1,16 @@
+## 成品 BOM 清单分页列表
+query pitayaPageCommodityBom($commodityName: String, $page: Page) {
+  pitayaPageCommodityBom(commodityName: $commodityName, page: $page) {
+    pageCurrent
+    pageSize
+    totalRecords
+    records {
+      commodityBomId
+      commoditySkuId
+      commodityTypeName
+      commodityCategoryName
+      commodityName
+      commoditySpecOptionName
+    }
+  }
+}
