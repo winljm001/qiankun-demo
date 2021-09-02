@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import type { ColumnType } from 'antd/lib/table/interface'
-import { Button, Space, Table, Form, DatePicker } from 'antd'
+import { Button, Space, Table, Form, DatePicker, Input } from 'antd'
 import BaseCard from '@/components/base-card'
 import useTablePagingGQL from '@/hooks/useTablePaging/gql'
 import { PitayaPageCommodityBomDocument } from '@/graphql/operations/data-report/__generated__/purchase'
@@ -26,14 +26,17 @@ const tabsOptions = [
  * 采购报表
  */
 const DataReportPurchase: React.FC = () => {
-  const { tableProps } = useTablePagingGQL({
+  const { tableProps, form, submit, reset, searchObject } = useTablePagingGQL({
     gql: PitayaPageCommodityBomDocument,
     gqlKey: 'pitayaPageCommodityBom',
+    paramsValueTypeMap: {
+      time: 'momentRange',
+    },
     formatParams: (v) => {
       if (v.time) {
         v.startTime = v.time[0]
         v.endTime = v.time[1]
-        v.endTime = null
+        v.time = null
       }
       console.log('formatParams  ->  ', v)
       return v
@@ -63,15 +66,33 @@ const DataReportPurchase: React.FC = () => {
     },
   ]
 
+  const onChangeTabs = useCallback(
+    (v: string) => {
+      form.setFieldsValue({
+        type: v,
+      })
+
+      submit()
+    },
+    [form, submit],
+  )
+
+  const tabsValue = (searchObject.type as string) || tabsOptions[0].value
+
   return (
     <>
-      <Tabs options={tabsOptions} />
+      <Tabs options={tabsOptions} value={tabsValue} onChange={onChangeTabs} />
 
       <div className="pageWrap">
         <BaseCard>
-          <Form layout="inline">
+          <Form
+            layout="inline"
+            form={form}
+            initialValues={{
+              type: tabsValue,
+            }}>
             <Form.Item hidden name="type">
-              <RangePicker />
+              <Input />
             </Form.Item>
 
             <Form.Item label="时间" name="time">
@@ -80,8 +101,12 @@ const DataReportPurchase: React.FC = () => {
 
             <Form.Item>
               <Space>
-                <Button type="primary">查询</Button>
-                <Button type="default">重置</Button>
+                <Button type="primary" onClick={submit}>
+                  查询
+                </Button>
+                <Button type="default" onClick={reset}>
+                  重置
+                </Button>
                 <Button ghost type="primary">
                   导出汇总
                 </Button>

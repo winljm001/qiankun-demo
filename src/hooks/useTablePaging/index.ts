@@ -1,11 +1,15 @@
 import qs from 'querystring'
-import { useCallback, useState, useRef, useMemo } from 'react'
+import { useCallback, useState, useRef, useMemo, useEffect } from 'react'
 import { Form } from 'antd'
 import type { TablePaginationConfig } from 'antd/es/table/interface'
 import { usePersistFn } from 'ahooks'
 import { useHistory, useLocation } from 'react-router-dom'
-
+import type { Moment } from 'moment'
+import moment from 'moment'
+import { isArray } from '@/utils/typeof'
 import useOriginalDeepCopy from '../useOriginalDeepCopy'
+
+type UnknownObject = Record<string, any>
 
 /**
  * 参数类型
@@ -77,7 +81,7 @@ export interface UseTablePagingParams<DT, PT> {
 /**
  * 配合 Table 组件的分页
  */
-const useTablePaging = <DT, PT = Record<string, any>>({
+const useTablePaging = <DT = any, PT = UnknownObject>({
   manual = false,
   defaultPageCurrent = 1,
   defaultPageSize = 10,
@@ -94,12 +98,21 @@ const useTablePaging = <DT, PT = Record<string, any>>({
 
   /** 请求函数 */
   const requestPersistFn = usePersistFn(request)
+  /** 自定义函数 */
+  const formatParamsPersistFn = usePersistFn((v: any) => {
+    if (formatParams) {
+      return formatParams(v)
+    }
+    return v
+  })
   /** 重置忽略字段 */
   const resetFieldsIgnoresOriginalDeepCopy = useOriginalDeepCopy(resetFieldsIgnores)
+  /** 参数值类型对照表 */
+  const paramsValueTypeMapOriginalDeepCopy = useOriginalDeepCopy(paramsValueTypeMap)
 
   const [form] = Form.useForm()
   /** 分页参数，表单里面的原始值 */
-  const PagingParams = useRef<Record<string, any>>({})
+  const PagingParams = useRef<UnknownObject>({})
   /** 额外不变的参数 */
   const DefaultParams = useRef(defaultParams)
   /** 请求时间戳 */
@@ -116,6 +129,7 @@ const useTablePaging = <DT, PT = Record<string, any>>({
     loading: false,
   })
 
+  /** Pagination分页 状态 */
   const pagination = useMemo(
     () => ({
       current: paging.pageCurrent,
@@ -127,12 +141,17 @@ const useTablePaging = <DT, PT = Record<string, any>>({
     [paging],
   )
 
+  const searchObject: Record<string, string | string[]> = useMemo(
+    () => (location.search ? (qs.parse(location.search.slice(1)) as Record<string, string | string[]>) : {}),
+    [location.search],
+  )
+
   /**
    * 请求数据
    */
   const fetchData = useCallback(
-    (p: any) => {
-      const xx = {}
+    (params: any) => {
+      const formattedParams = formatParamsPersistFn(params)
 
       const ts = new Date().getTime()
 
@@ -146,7 +165,7 @@ const useTablePaging = <DT, PT = Record<string, any>>({
       // 重置锁
       ChangeParamsByAction.current = false
 
-      requestPersistFn(xx)
+      requestPersistFn(formattedParams)
         .then((data) => {
           if (Timestamp.current === ts) {
             setPaging({
@@ -165,28 +184,88 @@ const useTablePaging = <DT, PT = Record<string, any>>({
           }
         })
     },
-    [requestPersistFn],
+    [requestPersistFn, formatParamsPersistFn],
   )
 
   /**
    * 正向解析表单里面的参数
    */
-  const parseParams = useCallback((v: any) => {
-    return v
-  }, [])
+  const parseParams = useCallback(
+    (v: UnknownObject) => {
+      const parsed: UnknownObject = {}
+
+      Object.entries(v).forEach(([key, value]) => {
+        parsed[key] = value
+
+        if (paramsValueTypeMapOriginalDeepCopy && value) {
+          const t = paramsValueTypeMapOriginalDeepCopy[key]
+
+          if (t) {
+            switch (t) {
+              case 'moment':
+                parsed[key] = (value as Moment).valueOf()
+                break
+              case 'momentRange':
+                parsed[key] = (value as Moment[]).filter(Boolean).map((v) => v.valueOf())
+                break
+              case 'multiple':
+              case 'multipleNumber':
+                parsed[key] = isArray(value) ? value : [value]
+                break
+            }
+          }
+        }
+      })
+
+      return parsed
+    },
+    [paramsValueTypeMapOriginalDeepCopy],
+  )
 
   /**
    * 方向解析表单里面的参数
    */
-  const stringifyParams = useCallback(() => {}, [])
+  const stringifyParams = useCallback(
+    (v: UnknownObject) => {
+      const parsed: UnknownObject = {}
+
+      Object.entries(v).forEach(([key, value]) => {
+        parsed[key] = value
+
+        if (paramsValueTypeMapOriginalDeepCopy && value) {
+          const t = paramsValueTypeMapOriginalDeepCopy[key]
+
+          if (t) {
+            switch (t) {
+              case 'moment':
+                parsed[key] = moment(+value)
+                break
+              case 'momentRange':
+                parsed[key] = (value as string[]).filter(Boolean).map((v) => moment(+v))
+                break
+              case 'multiple':
+                parsed[key] = isArray(value) ? value : [value]
+                break
+              case 'multipleNumber':
+                parsed[key] = (isArray(value) ? value : [value]).filter(Boolean).map((v) => +(v as string))
+                break
+            }
+          }
+        }
+      })
+
+      return parsed
+    },
+    [paramsValueTypeMapOriginalDeepCopy],
+  )
 
   /**
    * 重置表单
    */
   const resetForm = useCallback(
     (callback: () => void) => {
-      const values: Record<string, any> = form.getFieldsValue()
-      const ignoresValue: Record<string, any> = {}
+      const values: UnknownObject = form.getFieldsValue()
+      const ignoresValue: UnknownObject = {}
 
       Object.entries(values).forEach(([key, value]) => {
         if (resetFieldsIgnoresOriginalDeepCopy && resetFieldsIgnoresOriginalDeepCopy.indexOf(key) > -1) {
@@ -209,6 +288,8 @@ const useTablePaging = <DT, PT = Record<string, any>>({
   const runChangeParams = useCallback(
     (p: any) => {
       const parsed = parseParams(p)
+
+      console.log(parsed)
 
       if (params2search) {
         push({
@@ -239,9 +320,14 @@ const useTablePaging = <DT, PT = Record<string, any>>({
   )
 
   const submit = useCallback(() => {
-    const values: Record<string, any> = form.getFieldsValue()
-    runChangeParams(values)
-  }, [runChangeParams, form])
+    ChangeParamsByAction.current = true
+    const values: UnknownObject = form.getFieldsValue(true)
+    runChangeParams({
+      ...values,
+      pageCurrent: 1,
+      pageSize: PagingParams.current.pageSize || defaultPageSize,
+    })
+  }, [form, runChangeParams, defaultPageSize])
 
   /**
    * 重置表单并且重新搜索
@@ -259,6 +345,7 @@ const useTablePaging = <DT, PT = Record<string, any>>({
    */
   const onChange = useCallback(
     (p: TablePaginationConfig) => {
+      ChangeParamsByAction.current = true
       runChangePagination({
         pageCurrent: p.current,
         pageSize: p.pageSize,
@@ -266,6 +353,34 @@ const useTablePaging = <DT, PT = Record<string, any>>({
     },
     [runChangePagination],
   )
+
+  useEffect(() => {
+    const query: UnknownObject = location.search ? qs.parse(location.search.slice(1)) : {}
+
+    // 补全基础数据
+    // 补全必要的参数
+    if (!query.pageCurrent) {
+      query.pageCurrent = +defaultPageCurrent
+    }
+
+    if (!query.pageSize) {
+      query.pageSize = +defaultPageSize
+    }
+
+    // 反向解析成表单数据
+    PagingParams.current = stringifyParams(query)
+
+    if (!ChangeParamsByAction.current) {
+      // 还原表单数据
+      resetForm(() => {
+        form.setFieldsValue(PagingParams.current)
+
+        if (!manual) {
+          fetchData(query)
+        }
+      })
+    }
+  }, [defaultPageCurrent, defaultPageSize, fetchData, form, location.search, manual, resetForm, stringifyParams])
 
   return {
     form,
@@ -276,7 +391,9 @@ const useTablePaging = <DT, PT = Record<string, any>>({
       loading: paging.loading,
       pagination,
       onChange,
+      dataSource: paging.records,
     },
+    searchObject,
   }
 }
 

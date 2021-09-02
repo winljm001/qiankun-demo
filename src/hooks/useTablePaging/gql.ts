@@ -56,7 +56,7 @@ const useTablePagingGQL = <DT, PT = Record<string, any>>({
         }
       }
 
-      variables = formatParamsPersistFn(formatParamsPersistFn)
+      variables = formatParamsPersistFn(variables)
 
       return graphqlClient
         .query({

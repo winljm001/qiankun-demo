@@ -9,12 +9,13 @@ interface CustomTabsProps {
   options: { value: string; label: string }[]
   value?: string
   defaultValue?: string
+  onChange?: (v: string) => void
 }
 
-const CustomTabs: React.FC<CustomTabsProps> = ({ options, defaultValue, value }) => {
+const CustomTabs: React.FC<CustomTabsProps> = ({ options, defaultValue, value, onChange }) => {
   return (
     <div className={Styles.tabs}>
-      <Tabs defaultActiveKey={defaultValue} activeKey={value}>
+      <Tabs defaultActiveKey={defaultValue} activeKey={value} onChange={onChange}>
         {options.map((item) => {
           return <TabPane key={item.value} tab={item.label} />
         })}
