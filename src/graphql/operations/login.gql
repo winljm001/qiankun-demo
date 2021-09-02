@@ -1,0 +1,19 @@
+mutation login($input: LoginInput) {
+  login(input: $input)
+}
+mutation sendCodeMsg($input: SendCodeMsgInput) {
+  sendCodeMsg(input: $input)
+}
+mutation refreshToken {
+  refreshToken
+}
+query getCurrentUser {
+  getCurrentUser {
+    userId
+    userName
+    phone
+    roleNames
+    avatar
+    organizationName
+  }
+}

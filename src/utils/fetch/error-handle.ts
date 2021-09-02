@@ -8,7 +8,7 @@ const msgs = {
   networkErrorMsg: '您的网络出现问题，请检查网络重试',
 }
 // 错误提示
-function handleNoCommonError(err, config = null) {
+function handleNoCommonError(err, config: any = null) {
   // 请求配置了不提示时不提示
   if (config?.noErrorTip) {
     return false

@@ -1,22 +1,22 @@
-import React, { useEffect } from 'react'
-import { useHistory } from 'react-router'
+import React, { useLayoutEffect, useState } from 'react'
 import Loading from '@/components/loading'
-import useGlobalStore, { name as globalStoreName } from '@/stores/global'
+import { LOGIN_PATH } from '@/router/config/path'
+import { history } from '@/router'
+import storage from '@/utils/storage'
+import config from '@/config'
 
 function auth<T extends object>(Component: React.FC<T>): React.FC<T> {
   return (props) => {
-    const { authStatus } = useGlobalStore()
-    const history = useHistory()
-    useEffect(() => {
-      const token = JSON.parse(localStorage.getItem(globalStoreName))?.state?.token
+    const [loginStatus, setLoginStatus] = useState(false)
+    useLayoutEffect(() => {
+      const token = storage.getItem(config.authKey)
       if (!token) {
-        history.replace('/login')
+        history.replace(LOGIN_PATH)
+      } else {
+        setLoginStatus(true)
       }
-    }, [history])
-    if (authStatus === null || authStatus === 'fail') {
-      return null
-    }
-    if (authStatus === 'ok') {
+    }, [])
+    if (loginStatus) {
       return <Component {...props} />
     }
     return <Loading />

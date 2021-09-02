@@ -1,0 +1,19 @@
+
+
+  query getCategorDetail($categoryId: Int) {
+    selectCategoryById(categoryId: $categoryId) {
+      categoryId
+      categoryName
+      commodityTypeId
+      commodityTypeName
+      ordering
+    }
+    selectVarietyByCategoryId(categoryId: $categoryId) {
+      varietyId
+      varietyName
+    }
+    selectPlaceByCategoryId(categoryId: $categoryId) {
+      placeId
+      placeName
+    }
+  }

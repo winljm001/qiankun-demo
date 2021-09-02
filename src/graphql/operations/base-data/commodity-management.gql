@@ -1,0 +1,148 @@
+query pageCommodity($commodityName: String, $page: Page) {
+  pageCommodity(commodityName: $commodityName, page: $page) {
+    records {
+      commodityId
+      commodityName
+      commodityTypeName
+      commodityCategoryName
+      commodityVarietyName
+      commodityPlaceOriginName
+      status
+      skuSum
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+
+# 商品类型
+query typeOption {
+  typeOption {
+    label
+    value
+  }
+}
+# 品类
+query listSpuCategoryOption($commodityTypeId: Int!) {
+  listSpuCategoryOption(commodityTypeId: $commodityTypeId) {
+    label
+    value
+  }
+}
+# 品种
+query selectVarietyByCategoryId($categoryId: Int) {
+  selectVarietyByCategoryId(categoryId: $categoryId) {
+    value: varietyId
+    label: varietyName
+  }
+}
+
+# 产地
+query selectPlaceByCategoryId($categoryId: Int) {
+  selectPlaceByCategoryId(categoryId: $categoryId) {
+    value: placeId
+    label: placeName
+    placePid
+  }
+}
+
+# 新增
+mutation doInsertCommodity($insertCommodityInput: InsertCommodityInput) {
+  doInsertCommodity(insertCommodityInput: $insertCommodityInput)
+}
+# 更新SPU
+mutation doUpdateCommodityName($updateCommodityNameInput: UpdateCommodityNameInput) {
+  doUpdateCommodityName(updateCommodityNameInput: $updateCommodityNameInput)
+}
+# 更新规格
+mutation updateSpec($commodityModifyInput: CommodityModifyInput) {
+  updateSpec(commodityModifyInput: $commodityModifyInput)
+}
+# 获取spu详情
+query getCommodity($commodityId: Int) {
+  getCommodity(commodityId: $commodityId) {
+    commodityId
+    commodityName
+    commodityTypeId
+    commodityTypeName
+    commodityCategoryName
+    commodityVarietyName
+    commodityPlaceOriginName
+    englishName
+    thailandName
+    vietnamName
+  }
+}
+# 获取spu详情
+query specList($commodityId: Int) {
+  specList(commodityId: $commodityId) {
+    commoditySpecId
+    commoditySpecName
+    commoditySpecOptionList {
+      commoditySpecOptionId
+      commoditySpecOptionName
+      nameLocale {
+        chineseName
+        englishName
+        thailandName
+        vietnamName
+      }
+    }
+    commoditySpecSort
+    nameLocale {
+      chineseName
+      englishName
+      thailandName
+      vietnamName
+    }
+  }
+}
+
+# sku 列表
+query pageSku($skuListConditionInput: SkuListConditionInput) {
+  pageSku(skuListConditionInput: $skuListConditionInput) {
+    records {
+      commoditySkuId
+      skuCommoditySpecOptionList {
+        specId
+        optionName
+      }
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+
+# sku管理详情
+query getSkuDetail($commodityId: Int) {
+  listSkuQueryCondition(commodityId: $commodityId) {
+    commoditySpecId
+    commoditySpecName
+    commoditySpecOptionVOList {
+      commoditySpecOptionId
+      commoditySpecOptionName
+    }
+  }
+  getCommodity(commodityId: $commodityId) {
+    commodityId
+    commodityName
+    commodityTypeId
+    commodityTypeName
+    commodityCategoryName
+    commodityVarietyName
+    commodityPlaceOriginName
+    englishName
+    thailandName
+    vietnamName
+  }
+}
+# 已生成的sku列表
+query listSkuSelectedCombination($commodityId: Int) {
+  listSkuSelectedCombination(commodityId: $commodityId)
+}
+# 生成sku列表
+mutation doSaveSkuList($commoditySkus: CommoditySkuInputSave) {
+  doSaveSkuList(commoditySkus: $commoditySkus)
+}

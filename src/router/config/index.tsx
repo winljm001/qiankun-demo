@@ -1,69 +1,41 @@
-import type { CSSProperties } from 'react'
 import React from 'react'
 import loadable from '@loadable/component'
-import type { RouteConfig } from 'react-router-config'
-import type * as Icons from '@ant-design/icons/lib/icons'
 import { Redirect } from 'react-router-dom'
-import Layouts from '@/layouts/common-layout/index'
-import type { BreadcrumbItem } from '@/layouts/common-layout/components/breadcrubm'
-import { BASE_PATH } from './base-path'
+import { BASE_PATH, LOGIN_PATH } from './path'
+import { CustomRouteConfig } from './types.td'
 
-const modules = import.meta.globEager('./**/index.ts')
-
-let config: RouteConfig[] = []
-
+const subModules = import.meta.globEager('./**/index.{ts,tsx}')
+// 各个模块路由集合
+let subModulesRoutes: CustomRouteConfig[] = []
 // eslint-disable-next-line guard-for-in
-for (const path in modules) {
-  config.push(...modules[path].default)
+for (const subModule in subModules) {
+  subModulesRoutes.push(...subModules[subModule].default)
 }
 
-export interface CustomRouteConfig extends RouteConfig {
-  /** 面包屑配置 */
-  breadcrumb?: BreadcrumbItem[]
-  /** 权限 */
-  authKey?: string
-  /** 页面信息配置 */
-  meta?: {
-    /** 系统左侧菜单栏文案（为空或未配置则不会出现在菜单栏） */
-    menuText?: string
-    /** 菜单按钮 */
-    menuIcon?: keyof typeof Icons
-    /** 主内容区域padding（默认16px） */
-    contentPadding?: CSSProperties['padding']
-  }
-  /** 子路由 */
-  routes?: CustomRouteConfig[]
-}
-
-export const mainRoutes: CustomRouteConfig[] = [
-  {
-    path: BASE_PATH,
-    exact: true,
-    component: loadable(() => import('@/pages/home')),
-  },
-  ...config,
-]
-
+export const mainRoutes: CustomRouteConfig[] = [...subModulesRoutes]
 const routes: CustomRouteConfig[] = [
-  {
-    path: BASE_PATH,
-    component: Layouts,
-    routes: mainRoutes,
-  },
+  // 根路由
   {
     path: '/',
     exact: true,
-    render: () => <Redirect to={BASE_PATH} />,
+    component: () => <Redirect to={BASE_PATH} />,
   },
+  // 登录
   {
-    path: '/login',
+    path: LOGIN_PATH,
     exact: true,
     component: loadable(() => import('@/pages/login')),
   },
+  // 主页面
+  {
+    path: BASE_PATH,
+    component: loadable(() => import('@/layouts/main')),
+    routes: mainRoutes,
+  },
+  // 未匹配到的路由渲染内容
   {
     path: '*',
-    component: loadable(() => import('@/pages/404/index')),
+    component: loadable(() => import('@/pages/404')),
   },
 ]
-
 export default routes

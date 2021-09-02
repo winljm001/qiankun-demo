@@ -1,4 +1,4 @@
-import type { CheckboxOptionType } from 'antd'
+import { CheckboxOptionType } from 'antd'
 
 // 表单栅格配置
 const fromRowProps = { gutter: { xs: 0, sm: 24 } }
@@ -13,6 +13,17 @@ const fromColProps = {
 
 // 列表上查询条件表单布局配置
 const listSearchFromItemProps = {
+  rowProps: { gutter: { xs: 12, sm: 24 } },
+  colProps: {
+    xs: { span: 24 },
+    sm: { span: 24 },
+    md: { span: 12 },
+    lg: { span: 8 },
+    xl: { span: 8 },
+    xxl: { span: 6 },
+  },
+}
+const listSearchFromLayout = {
   small: {
     rowProps: { gutter: { xs: 24, sm: 24 } },
     colProps: {
@@ -47,7 +58,6 @@ const listSearchFromItemProps = {
     },
   },
 }
-
 const listSearchFromProps = {
   labelCol: {
     xs: { span: 24 },
@@ -66,23 +76,7 @@ const listSearchFromProps = {
     xxl: { span: 16 },
   },
 }
-/**
- * 列表类页面常量配置
- */
-// 列表横向滚动临界值
-const listTableScrollX = 1440
-// 组件间间距
-const listPageSpaceSize = 24
-// 操作按钮间距
-const listActionSpaceSize = 8
-// 表单控件缩进距离
-const formControlIndent = 32
-// 柜次的宽度
-const cabinetBatchCodeW = 150
-// 柜号的宽度
-const cabinetCodeW = 140
-// 状态的宽度
-const statusW = 130
+
 // 启用/禁用状态配置
 const StatusOptions: Array<CheckboxOptionType> = [
   {
@@ -95,20 +89,38 @@ const StatusOptions: Array<CheckboxOptionType> = [
   },
 ]
 
-const MaxPageSizeOptions = ['10', '20', '50', '100', '200', '500']
+// 单列表单配置
+const fromSingleLayoutProps = {
+  labelCol: {
+    xxl: {
+      span: 24,
+    },
+    md: {
+      span: 24,
+    },
+    xs: {
+      span: 24,
+    },
+  },
+  wrapperCol: {
+    xxl: {
+      span: 6,
+    },
+    md: {
+      span: 12,
+    },
+    xs: {
+      span: 12,
+    },
+  },
+}
 
 export {
   fromColProps,
   fromRowProps,
   listSearchFromProps,
   listSearchFromItemProps,
-  listTableScrollX,
-  listPageSpaceSize,
-  listActionSpaceSize,
-  formControlIndent,
-  cabinetBatchCodeW,
-  cabinetCodeW,
-  statusW,
+  listSearchFromLayout,
   StatusOptions,
-  MaxPageSizeOptions,
+  fromSingleLayoutProps,
 }

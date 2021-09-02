@@ -1,134 +1,70 @@
 import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { Modal } from 'antd'
-import type { CustomRouteConfig } from '@/router/config/index'
-import { mainRoutes } from '@/router/config/index'
-import { getMenuList, getHomepageUrl, getCurrentRouteAndMenuInfo } from '@/utils/tools'
-import { history } from '@/router'
-import { BASE_PATH } from '@/router/config/base-path'
-import { authListByUserId } from '@/services/authService/mods/role/authListByUserId'
+import { CustomRouteConfig } from '@/router/config/types.td'
+import storage from '@/utils/storage'
+import config from '@/config'
+import { getMenuConfigByRoutes } from '@/utils/route'
+import { mainRoutes } from '@/router/config'
 
 export type State = {
-  /** menuList */
-  menuList: CustomRouteConfig[]
-  /** 是否登录 */
-  isLogin: boolean
-  /** 用户id */
-  userId: number
-  /** token */
-  token: string
+  /** menuConfig */
+  menuConfig: CustomRouteConfig[]
   /** 用户信息 */
   userInfo: {
     /** 用户名 */
-    username: string
-    /** 公司名 */
-    companyName: string
+    username: string | null
+    /** 组织名 */
+    orgName: string | null
   }
-  /**
-   * 权限是否准备好
-   * - fail 获取失败
-   * - ok 获取成功
-   * - null 初始状态
-   * */
-  authStatus: 'fail' | 'ok' | null
   /** 用户设置 */
   userSetting: {
     /** 菜单是否收起 */
-    collapsed: boolean
+    collapsed: boolean | null
   }
+  /** 保存登录数据 */
+  saveLoginData: (value: Pick<State, 'userInfo'>) => void
+  // 设置用户个性化设置
   setUserSetting: (value: Partial<State['userSetting']>) => void
   /** 退出 */
   logout: (callback?: () => void) => void
 }
-
-export const name = 'global-storage'
-
+export const name = 'global-store'
 const useGlobalStore = create<State>(
   devtools(
     // 本地存储，其他store不需要
     persist(
-      (set, get) => ({
-        menuList: null,
-        isLogin: null,
-        userId: null,
-        token: null,
-        userInfo: {
-          companyName: '',
-          username: '',
-        },
-        userSetting: {
-          collapsed: null,
-        },
-        authStatus: null,
-        setUserSetting: (value) => {
-          set({ userSetting: { ...get().userSetting, ...value } })
-        },
-        logout: (callback) => {
-          set({ isLogin: false })
-          callback?.()
-        },
-      }),
+      (set, get) => {
+        return {
+          menuConfig: getMenuConfigByRoutes(mainRoutes),
+          userInfo: {
+            username: '',
+            orgName: '',
+          },
+          userSetting: {
+            collapsed: null,
+          },
+          saveLoginData: ({ userInfo }) => {
+            set({ userInfo })
+          },
+          setUserSetting: (value) => {
+            set({ userSetting: { ...get().userSetting, ...value } })
+          },
+          // 退出登录、清空token和用户数据
+          logout: (callback) => {
+            storage.removeItem(config.authKey)
+            set({ userInfo: { username: '', orgName: '' } })
+            callback?.()
+          },
+        }
+      },
       {
         name,
-        getStorage: () => localStorage,
-        // only these props will be persisted
-        whitelist: ['isLogin', 'userId', 'token', 'userSetting', 'userInfo'],
+        getStorage: () => storage,
+        // Only these props will be persisted
+        whitelist: ['userSetting', 'userInfo'],
       },
     ),
   ),
-)
-
-useGlobalStore.subscribe(
-  (isLogin) => {
-    // 登录成功执行操作
-    if (isLogin) {
-      // 延迟执行（因为此时token可能还未存储到localStorage，请求中拿不到token）
-      useGlobalStore.setState({ authStatus: null })
-      setTimeout(() => {
-        authListByUserId({ userId: useGlobalStore.getState().userId })
-          .then((resp) => {
-            const [currentRoute] = getCurrentRouteAndMenuInfo(location.pathname)
-            const authKeys = resp.data || []
-            let noAuth = false
-            let menuList = []
-            // 如果用户没有当前路由权限
-            if (currentRoute.authKey && !authKeys.some((item) => item.authKey === currentRoute.authKey)) {
-              noAuth = true
-            } else {
-              menuList = getMenuList(mainRoutes, authKeys)
-              const homepageUrl = getHomepageUrl(menuList)
-              // 若路由处于BASE_PATH，则需要跳转
-              if (location.pathname === BASE_PATH) {
-                // 获取首页路由（第一个可选中菜单项），若无可跳转路由，则提示无访问权限
-                if (homepageUrl) {
-                  history.replace(homepageUrl)
-                } else {
-                  noAuth = true
-                }
-              }
-            }
-            if (noAuth) {
-              Modal.info({
-                title: '系统提示',
-                content: '暂无访问权限',
-                okText: '知道了',
-                onOk() {
-                  history.push('/login')
-                },
-              })
-            }
-            useGlobalStore.setState({ authStatus: noAuth ? 'fail' : 'ok', menuList })
-          })
-          .catch(() => {
-            useGlobalStore.setState({ authStatus: 'fail' })
-          })
-      })
-    } else {
-      // empty user data
-      useGlobalStore.setState({ userId: null, token: null, userInfo: null })
-    }
-  },
-  (state) => state.isLogin,
 )
 
 export default useGlobalStore

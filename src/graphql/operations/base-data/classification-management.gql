@@ -1,0 +1,73 @@
+# 新增
+mutation createCategory($categoryInput: CategoryInput) {
+  createCategory(categoryInput: $categoryInput) {
+    categoryId
+    categoryName
+    commodityTypeId
+    commodityTypeName
+    categorySort
+    nameLocale {
+      locale
+      name
+    }
+  }
+}
+
+# 修改
+mutation updateCategory($categoryInput: CategoryInput) {
+  updateCategory(categoryInput: $categoryInput) {
+    categoryId
+    categoryName
+    commodityTypeId
+    commodityTypeName
+    categorySort
+    nameLocale {
+      locale
+      name
+    }
+  }
+}
+
+# 删除
+mutation deleteCategory($categoryId: Int!) {
+  deleteCategory(categoryId: $categoryId)
+}
+
+# list
+query pageCategoryDetails($pageCategoryInput: PageCategoryInput) {
+  pageCategoryDetails(pageCategoryInput: $pageCategoryInput) {
+    records {
+      categoryId
+      categoryName
+      commodityTypeId
+      commodityTypeName
+      categorySort
+      nameLocale {
+        locale
+        name
+      }
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+
+# detail
+query categoryDetail($categoryId: Int!) {
+  categoryDetail(categoryId: $categoryId) {
+    categoryId
+    categoryName
+    commodityTypeId
+    commodityTypeName
+    categorySort
+    nameLocale {
+      locale
+      name
+    }
+  }
+}
+# 分类计数
+query countCategory {
+  countCategory
+}

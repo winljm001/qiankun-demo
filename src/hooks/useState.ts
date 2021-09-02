@@ -6,7 +6,7 @@ import useDestroyed from './useDestroyed'
 
 type UpdateStateParam<T> = Partial<T> | ((s: T) => Partial<T>)
 
-type UpdateState<T> = (p: UpdateStateParam<T>) => void
+export type UpdateState<T> = (p: UpdateStateParam<T>) => void
 
 /**
  * useState 类似 this.setState 可以传入部分字段更新

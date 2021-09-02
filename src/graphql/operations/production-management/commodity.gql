@@ -1,0 +1,138 @@
+# 商品类型
+query pitayaCommodityTypeOption {
+  pitayaCommodityTypeOption {
+    label
+    value
+  }
+}
+# 商品品类
+query pitayaCategoryOption {
+  pitayaCategoryOption {
+    label
+    value
+  }
+}
+# 商品list
+query pitayaPageCommodityManage($pageCommodityInput: PitayaPageCommodityInput, $page: Page) {
+  pitayaPageCommodityManage(pageCommodityInput: $pageCommodityInput, page: $page) {
+    pageCurrent
+    pageSize
+    totalRecords
+    records {
+      commodityId
+      commodityName
+      commodityTypeId
+      commodityTypeName
+      categoryId
+      categoryName
+      varietyId
+      varietyName
+      originId
+      originName
+      skuQuantity
+      status
+    }
+  }
+}
+mutation pitayaUpdateCommodityStatus($updateCommodityStatusInput: PitayaUpdateCommodityStatusInput) {
+  pitayaUpdateCommodityStatus(updateCommodityStatusInput: $updateCommodityStatusInput)
+}
+
+query pitayaPageNoCommodity($pageNoCommodityInput: PitayaPageNoCommodityInput, $page: Page) {
+  pitayaPageNoCommodity(pageNoCommodityInput: $pageNoCommodityInput, page: $page) {
+    pageCurrent
+    pageSize
+    totalRecords
+    records {
+      commodityId
+      commodityName
+      commodityTypeName
+      commodityTypeId
+      commodityCategoryName
+      commodityVarietyName
+      commodityPlaceOriginName
+    }
+  }
+}
+
+query pitayaOriginOption($categoryId: Int!) {
+  pitayaOriginOption(categoryId: $categoryId) {
+    label
+    value
+  }
+}
+query pitayaVarietyOption($categoryId: Int!) {
+  pitayaVarietyOption(categoryId: $categoryId) {
+    label
+    value
+  }
+}
+query pitayaTableHead($commodityId: Int) {
+  pitayaTableHead(commodityId: $commodityId) {
+    spec {
+      specId
+      specName
+    }
+    other {
+      key
+      title
+    }
+  }
+}
+query pitayaNotChosenSkuOption($commodityId: Int!) {
+  pitayaNotChosenSkuOption(commodityId: $commodityId) {
+    commoditySkuId
+    optionId
+  }
+}
+mutation pitayaUpdateSkuStatus($updateStatusInput: PitayaUpdateStatusInput) {
+  pitayaUpdateSkuStatus(updateStatusInput: $updateStatusInput)
+}
+mutation pitayaUpdateCommoditySku($updateCommoditySkuInput: PitayaUpdateCommoditySkuInput) {
+  pitayaUpdateCommoditySku(updateCommoditySkuInput: $updateCommoditySkuInput)
+}
+mutation pitayaCreateCommoditySku($commoditySkuId: [Int]) {
+  pitayaCreateCommoditySku(commoditySkuId: $commoditySkuId)
+}
+mutation pitayaCreateCommodity($createCommodityInput: PitayaListCreateCommodityInput) {
+  pitayaCreateCommodity(createCommodityInput: $createCommodityInput)
+}
+
+query pitayaPageSku($pageSku: PitayaPageSkuInput, $page: Page) {
+  pitayaPageSku(pageSku: $pageSku, page: $page) {
+    pageCurrent
+    pageSize
+    totalRecords
+    records {
+      commoditySkuId
+      skuOption {
+        specId
+        optionName
+      }
+      total
+      unit
+      status
+      change
+      property
+    }
+  }
+}
+query listUnitOptions($commodityTypeId: Int) {
+  listUnitOptions(commodityTypeId: $commodityTypeId) {
+    label
+    value
+  }
+}
+
+query pitayaCommoditySkuDetail($commoditySkuId: Int) {
+  pitayaCommoditySkuDetail(commoditySkuId: $commoditySkuId) {
+    commoditySkuId
+    commodityTypeId
+    unitQuantity
+    unitType
+    totalType
+    property
+    status
+    change
+  }
+}

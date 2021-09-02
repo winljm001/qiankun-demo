@@ -1,43 +1,41 @@
 /**
  * 配置文件
  */
-interface CommonIConfig {
+interface CommonConfig {
+  /** 权限key */
   authKey: string
 }
-interface EnvIconfig {
+interface EnvConfig {
   /** api host */
   apiHost: string
-  /** 上传host */
-  uploadHost: string
   /** 项目根路径 */
   baseUrl: string
 }
-export interface Iconfig extends CommonIConfig, EnvIconfig {}
+export interface IConfig extends CommonConfig, EnvConfig {}
 
 const env = import.meta.env?.VITE_APP_ENV
+
 // 配置(公共)
-const commonConfig: CommonIConfig = {
+const commonConfig: CommonConfig = {
   authKey: 'Authorization',
 }
 // 配置(根据环境变量区分)
-export const envConfig: Record<typeof env, EnvIconfig> = {
+export const envConfig: Record<typeof env, EnvConfig> = {
   // 开发环境
   dev: {
-    apiHost: 'https://pitaya-dev.hjgpscm.com',
-    uploadHost: 'https://pitaya-dev.hjgpscm.com',
-    baseUrl: '/pitaya-app',
+    // apiHost: 'http://192.168.10.116:8081',
+    apiHost: 'http://192.168.10.233:8888',
+    baseUrl: '/',
   },
   // 测试环境
   test: {
-    apiHost: 'https://pitaya-dev.hjgpscm.com',
-    uploadHost: 'https://pitaya-dev.hjgpscm.com',
-    baseUrl: '/pitaya-app',
+    apiHost: 'https://mdm-test.hjgpscm.com',
+    baseUrl: '/',
   },
   // 生产环境
   prod: {
     apiHost: 'https://pitaya.hjgpscm.com',
-    uploadHost: 'https://pitaya.hjgpscm.com',
-    baseUrl: '/pitaya-app',
+    baseUrl: '/',
   },
 }
 const config = { ...commonConfig, ...envConfig[env] }

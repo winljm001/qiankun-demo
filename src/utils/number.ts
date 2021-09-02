@@ -15,8 +15,8 @@ export const positiveInteger = (v: string | number) => {
  * @param v 需要转换的值
  * @param retain 强制保留两位小数
  */
-export const positiveTwoDecimalPlaces = (v: string | number, retain = false) => {
-  const vs = v
+export const positiveTwoDecimalPlaces = (v: string | number | undefined, retain = false) => {
+  const vs = (v || '')
     .toString()
     .replace(/[^\d.]/g, '')
     .split('.')

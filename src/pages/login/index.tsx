@@ -1,83 +1,85 @@
-import { useMount, useCountDown } from 'ahooks'
-import { Button, message, Form, Input } from 'antd'
+import React from 'react'
+import { useCountDown, useMount } from 'ahooks'
+import { Button, Form, Input, message } from 'antd'
 import { SafetyOutlined, TabletOutlined } from '@ant-design/icons'
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import dayjs from 'dayjs'
 import useGlobalStore from '@/stores/global'
-import { login } from '@/services/userService/mods/userWeb/login'
-import { sendCheckCode } from '@/services/userService/mods/userWeb/sendCheckCode'
-import { BASE_PATH } from '@/router/config/base-path'
+import { BASE_PATH } from '@/router/config/path'
+import config from '@/config'
+import { history } from '@/router'
+import storage from '@/utils/storage'
+import {
+  useGetCurrentUserQuery,
+  useLoginMutation,
+  useSendCodeMsgMutation,
+} from '@/graphql/operations/__generated__/login'
 import img from './images/logo.png'
-
 import styles from './style.module.less'
 
-const Index: React.FC = () => {
-  // 创建loading
-  const [loading, setLoading] = useState(false)
-  // 创建倒计时ahook
-  const [countdown, setTargetDate] = useCountDown()
+const Login: React.FC = () => {
+  // 创建 loading 实现加载
+  const [, setTargetDate, formattedRes] = useCountDown()
+  const [sendCodeMsg, { loading: sendCoding }] = useSendCodeMsgMutation()
+  const [login, { loading: loginLoading }] = useLoginMutation()
+  const { loading: getUserLoading, refetch: refetchGetCurrentUser } = useGetCurrentUserQuery({
+    skip: true,
+  })
 
-  // Form实例化
-  const [FormInstance] = Form.useForm()
-
-  // 获取验证码
-  const toastVerificationCode = () => {
-    setTargetDate(Date.now() + 60000)
-
-    // 取手机号码
-    const phoneNum1 = FormInstance.getFieldValue('username')
-    sendCheckCode({
-      // phoneNum: String(phoneNum1),
-      phoneNum: phoneNum1,
-    })
-      .then((res) => {
-        if (res.data) {
-          message.success('获取验证码成功！')
-        } else {
-          message.error(res.errMsg)
-          setTargetDate(undefined)
-        }
-      })
-      .catch(() => {
-        setTargetDate(undefined)
-      })
-  }
-
-  const history = useHistory()
+  const { seconds } = formattedRes
+  // Form 实例化
+  const [form] = Form.useForm()
   const { logout } = useGlobalStore()
+
   useMount(() => {
     logout()
   })
 
   // 登录按钮提交
-  const onFinish = (values: any) => {
-    setLoading(true)
+  const onFinish = (values) => {
     login({
-      /** 短信验证码 */
-      checkCode: values.text,
-      /** 用户电话号码 */
-      phoneNum: values.username,
+      variables: {
+        input: {
+          phone: values?.phone,
+          code: values?.code,
+        },
+      },
+    }).then(async (res) => {
+      // 本地存入token
+      storage.setItem(config.authKey, String(res.data?.login))
+      refetchGetCurrentUser().then(({ data }) => {
+        if (data.getCurrentUser.userName && data.getCurrentUser.organizationName) {
+          useGlobalStore.setState({
+            userInfo: {
+              /** 用户名 */
+              username: data.getCurrentUser.userName,
+              /** 公司名 */
+              orgName: data.getCurrentUser.organizationName,
+            },
+          })
+          history.replace(BASE_PATH)
+        } else {
+          message.error('当前账号有问题，请联系管理员')
+        }
+      })
     })
-      .then((res) => {
-        setLoading(false)
-        // 存入globalState
-        useGlobalStore.setState({
-          isLogin: true,
-          token: res.data.token,
-          userId: res.data.userId,
-          userInfo: {
-            /** 用户名 */
-            username: res.data.userName,
-            /** 公司名 */
-            companyName: res.data.organizationName,
-          },
-        })
-        history.replace(BASE_PATH)
-      })
-      .catch((err) => {
-        setLoading(false)
-      })
   }
+
+  const sendCode = () => {
+    const phone = form.getFieldValue('phone')
+    sendCodeMsg({
+      variables: {
+        input: {
+          phone,
+        },
+      },
+    }).then(() => {
+      setTargetDate(dayjs().add(60, 'seconds').toDate())
+      message.success('验证码已发送，请注意查收')
+    })
+  }
+
+  /** 今年的年份 */
+  const currentYear = new Date().getFullYear()
 
   return (
     <div className={styles.login}>
@@ -91,61 +93,32 @@ const Index: React.FC = () => {
         </div>
       </div>
       <div className={styles.loginBox}>
-        <img src={img} alt="星桥分拣管理系统" className={styles.logo} />
-        <div className={styles.title}>星桥分拣管理系统</div>
+        <img src={img} alt="洪九星桥生产运营平台" className={styles.logo} />
+        <div className={styles.title}>洪九星桥生产运营平台</div>
         <div className={styles.formBox}>
-          <Form form={FormInstance} name="basic" initialValues={{ remember: true }} onFinish={onFinish}>
+          <Form form={form} name="basic" initialValues={{ phone: '' }} onFinish={onFinish}>
             {/* 用户 */}
             <Form.Item
-              name="username"
+              name="phone"
               className={styles.formInput}
-              rules={[
-                { required: true, message: '请输入手机号！' },
-                {
-                  pattern: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/,
-                  message: '请输入11位正确电话号码!',
-                },
-              ]}>
-              <Input
-                className={styles.inputUser}
-                placeholder="请输入手机号"
-                maxLength={11}
-                prefix={<TabletOutlined />}
-              />
+              rules={[{ required: true, message: '请输入登录账号!' }]}>
+              <Input className={styles.inputUser} placeholder="请输入登录账号" prefix={<TabletOutlined />} />
             </Form.Item>
 
             {/* 验证码、按钮 */}
             <Form.Item shouldUpdate>
-              {({ getFieldValue, getFieldError }) => {
-                let codeFlag = true
-                let userError = getFieldError('username')[0]
-                if (userError || !getFieldValue('username')) {
-                  codeFlag = true
-                } else {
-                  codeFlag = false
-                }
+              {({ getFieldValue }) => {
                 return (
                   <Form.Item className={styles.formInputB}>
-                    <Form.Item
-                      name="text"
-                      rules={[
-                        { min: 6, max: 6, message: '请输入6位验证码' },
-                        { required: true, message: '输入验证码' },
-                      ]}>
-                      <Input
-                        className={styles.inputPassword}
-                        maxLength={6}
-                        placeholder="请输入6位验证码"
-                        prefix={<SafetyOutlined />}
-                      />
+                    <Form.Item name="code" rules={[{ required: true, message: '请输入验证码!' }]}>
+                      <Input className={styles.inputPassword} placeholder="请输入验证码" prefix={<SafetyOutlined />} />
                     </Form.Item>
                     <Button
-                      onClick={() => {
-                        toastVerificationCode()
-                      }}
-                      disabled={codeFlag || countdown !== 0}
+                      onClick={sendCode}
+                      disabled={!!seconds || !getFieldValue('phone')}
+                      loading={sendCoding}
                       className={styles.btn}>
-                      {countdown === 0 ? '获取验证码' : `${Math.round(countdown / 1000)}s`}
+                      {seconds ? `${seconds}s` : '获取验证码'}
                     </Button>
                   </Form.Item>
                 )
@@ -156,10 +129,10 @@ const Index: React.FC = () => {
             <Form.Item shouldUpdate>
               {({ getFieldError, getFieldValue }) => {
                 let disabled = true
-                const userErr = getFieldError('username')
-                const userValue = getFieldValue('username')
-                const codeErr = getFieldError('text')
-                const codeValue = getFieldValue('text')
+                const userErr = getFieldError('phone')
+                const userValue = getFieldValue('phone')
+                const codeErr = getFieldError('code')
+                const codeValue = getFieldValue('code')
                 if (userErr[0] || codeErr[0]) {
                   disabled = true
                 } else if (!userValue || !codeValue) {
@@ -170,7 +143,7 @@ const Index: React.FC = () => {
                 return (
                   <Form.Item>
                     <Button
-                      loading={loading}
+                      loading={loginLoading || getUserLoading}
                       disabled={disabled}
                       block
                       className={styles.btnB}
@@ -184,10 +157,10 @@ const Index: React.FC = () => {
             </Form.Item>
           </Form>
         </div>
-        <div className={styles.record}>&copy; 1987-2021 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
+        <div className={styles.record}>&copy; 1987-{currentYear} 重庆洪九果品股份有限公司 渝ICP备19002690号-7</div>
       </div>
     </div>
   )
 }
 
-export default Index
+export default Login

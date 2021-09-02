@@ -1,0 +1,137 @@
+# 出库报表
+# 出库报表列表
+query pageOutBoundReportForm($input: OutBoundReportFormPageInput) {
+  pageOutBoundReportForm(input: $input) {
+    records {
+      id
+      outboundCode
+      batchStockCode
+      merchant
+      repository
+      productName
+      outboundType
+      quantity
+      unit
+      outboundTime
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+# 出库报表导出
+query exportOutBoundReportForm($input: OutBoundReportFormQueryInput) {
+  exportOutBoundReportForm(input: $input)
+}
+#所属商户
+query listMerchantOption {
+  listMerchantOption {
+    options {
+      label
+      value
+      disable
+    }
+  }
+}
+# 出库类型
+query listStockTypeOption($input: StockTypeOptionInput) {
+  listStockTypeOption(input: $input) {
+    option {
+      label
+      value
+    }
+  }
+}
+
+# 销售报表
+# 销售列表
+query pageSalesReportForm($input: SalesReportFormPageInput) {
+  pageSalesReportForm(input: $input) {
+    records {
+      merchant
+      id
+      payMethod
+      orderCode
+      customerId
+      customerName
+      payTime
+      customerType
+      productId
+      productName
+      batchStockCode
+      unit
+      quantity
+      unitPrice
+      totalMoney
+      remark
+      varietyGroupId
+      varietyGroup
+      numberOfBalances
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+# 销售报表导出
+query exportSalesReportForm($input: SalesReportFormQueryInput) {
+  exportSalesReportForm(input: $input)
+}
+# 支付方式
+query listPayMethodOption {
+  listPayMethodOption {
+    options {
+      label
+      value
+      disable
+    }
+  }
+}
+# 客户类型
+query listCustomerTypeOption {
+  listCustomerTypeOption {
+    options {
+      label
+      value
+      disable
+    }
+  }
+}
+
+# 订单报表
+# 订单报表列表
+query pageOrderReportForm($input: OrderReportFormPageInput) {
+  pageOrderReportForm(input: $input) {
+    records {
+      id
+      orderCode
+      productAndCount {
+        productName
+        quantity
+        unit
+      }
+      merchant
+      customerType
+      customerName
+      salesmanName
+      cashierName
+      totalMoney
+      totalQuantity
+      discountMoney
+      cashMoney
+      elecpayMoney
+      arrearsMoney
+      payMethod
+      billingTime
+      payTime
+      receivableMoney
+    }
+    pageCurrent
+    pageSize
+    totalRecords
+  }
+}
+# 订单报表导出
+query exportOrderReportForm($input: OrderReportFormQueryInput) {
+  exportOrderReportForm(input: $input)
+}
