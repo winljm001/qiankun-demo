@@ -1,6 +1,6 @@
 {
-  "name": "next-web-template",
-  "version": "0.0.0",
+  "name": "pitaya-web",
+  "version": "1.6.0",
   "scripts": {
     "dev": "vite",
     "build:test": "vite build --mode test",

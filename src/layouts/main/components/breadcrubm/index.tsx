@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import { CustomRouteConfig } from '@/router/config/types.td'
+import { CustomRouteConfig } from '@/router/config/types'
 import styles from './index.module.less'
 
 interface IProps {

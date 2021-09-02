@@ -2,7 +2,7 @@ import React from 'react'
 import loadable from '@loadable/component'
 import { Redirect } from 'react-router-dom'
 import { BASE_PATH, LOGIN_PATH } from './path'
-import { CustomRouteConfig } from './types.td'
+import type { CustomRouteConfig } from './types'
 
 const subModules = import.meta.globEager('./**/index.{ts,tsx}')
 // 各个模块路由集合

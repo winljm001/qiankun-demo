@@ -1,3 +1,5 @@
+import p from '../../package.json'
+
 interface Options {
   namespace: string
   version: string
@@ -55,4 +57,4 @@ export class NSLocalStorage {
   }
 }
 
-export default new NSLocalStorage({ namespace: 'pitaya-admin', version: '1.0.0' })
+export default new NSLocalStorage({ namespace: p.name, version: p.version })
