@@ -1,5 +1,6 @@
 import React from 'react'
-import { Space, SpaceProps } from 'antd'
+import type { SpaceProps } from 'antd'
+import { Space } from 'antd'
 import classnames from 'classnames'
 import styles from './index.module.less'
 
