@@ -1,5 +1,6 @@
 import React from 'react'
-import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
+import type { RouteConfigComponentProps } from 'react-router-config'
+import { renderRoutes } from 'react-router-config'
 import { useLocation, matchPath } from 'react-router'
 
 /**

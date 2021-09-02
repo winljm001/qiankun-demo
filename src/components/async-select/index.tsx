@@ -1,9 +1,11 @@
-import { Select, SelectProps } from 'antd'
+import type { SelectProps } from 'antd'
+import { Select } from 'antd'
 import React, { useMemo } from 'react'
 import { useControllableValue } from 'ahooks'
 import get from 'lodash/get'
-import { DocumentNode, useQuery } from '@apollo/client'
-import { PropertyPath } from 'lodash'
+import type { DocumentNode } from '@apollo/client'
+import { useQuery } from '@apollo/client'
+import type { PropertyPath } from 'lodash'
 const { Option } = Select
 export interface AsyncSelectProps extends SelectProps<any> {
   remote: {

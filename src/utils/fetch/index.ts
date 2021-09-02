@@ -1,6 +1,7 @@
 import qs from 'querystring'
 import { message } from 'antd'
-import axios, { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios'
+import type { AxiosError, AxiosRequestConfig, AxiosResponse, Method } from 'axios'
+import axios from 'axios'
 
 import Config from '@/config'
 

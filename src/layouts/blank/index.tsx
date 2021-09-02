@@ -1,5 +1,7 @@
-import React, { memo } from 'react'
-import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
+import type React from 'react'
+import { memo } from 'react'
+import type { RouteConfigComponentProps } from 'react-router-config'
+import { renderRoutes } from 'react-router-config'
 
 const BlankLayout: React.FC<RouteConfigComponentProps> = memo((props) => {
   const { route } = props

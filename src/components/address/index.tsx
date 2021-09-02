@@ -1,5 +1,6 @@
 import qs from 'querystring'
-import { Form, FormInstance, FormItemProps, Input, Select, SelectProps } from 'antd'
+import type { FormInstance, FormItemProps, SelectProps } from 'antd'
+import { Form, Input, Select } from 'antd'
 import { debounce, isNil } from 'lodash'
 import React, { useEffect, useRef, useState } from 'react'
 

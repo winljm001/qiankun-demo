@@ -1,6 +1,7 @@
 import React, { memo } from 'react'
-import { Menu, MenuItemProps, MenuProps, SubMenuProps } from 'antd'
-import { CustomRouteConfig } from '@/router/config/types'
+import type { MenuItemProps, MenuProps, SubMenuProps } from 'antd'
+import { Menu } from 'antd'
+import type { CustomRouteConfig } from '@/router/config/types'
 import { history } from '@/router'
 import styles from './style.module.less'
 

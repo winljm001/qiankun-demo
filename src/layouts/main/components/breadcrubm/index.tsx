@@ -3,8 +3,8 @@ import React from 'react'
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import styles from './index.module.less'
 import type { CustomRouteConfig } from '@/router/config/types'
+import styles from './index.module.less'
 
 interface IProps {
   route: CustomRouteConfig

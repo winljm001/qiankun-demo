@@ -1,9 +1,9 @@
 import React from 'react'
 import loadable from '@loadable/component'
 import { ApartmentOutlined } from '@ant-design/icons'
-import { BASE_URL, DATA_REPORT_PURCHASE } from './path'
 import BlankLayout from '@/layouts/blank'
 import type { CustomRouteConfig } from '@/router/config/types'
+import { BASE_URL, DATA_REPORT_PURCHASE } from './path'
 
 const routes: CustomRouteConfig[] = [
   {

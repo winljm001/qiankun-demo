@@ -1,5 +1,6 @@
 import React from 'react'
-import { Descriptions, DescriptionsProps } from 'antd'
+import type { DescriptionsProps } from 'antd'
+import { Descriptions } from 'antd'
 interface DescriptionsItem {
   label: string
   props?: DescriptionsProps

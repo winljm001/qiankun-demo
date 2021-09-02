@@ -1,6 +1,6 @@
 import create from 'zustand'
 import { devtools, persist } from 'zustand/middleware'
-import { CustomRouteConfig } from '@/router/config/types'
+import type { CustomRouteConfig } from '@/router/config/types'
 import storage from '@/utils/storage'
 import config from '@/config'
 import { getMenuConfigByRoutes } from '@/utils/route'

@@ -3,14 +3,14 @@ import type { RouteConfigComponentProps } from 'react-router-config'
 import { renderRoutes } from 'react-router-config'
 import { Layout } from 'antd'
 import { Redirect, useLocation } from 'react-router-dom'
-import AppHeader from './components/header'
-import AppBreadcrumb from './components/breadcrubm'
-import SideMenu from './components/side-menu'
-import styles from './style.module.less'
 import { BASE_PATH } from '@/router/config/path'
 import { getCurrentRouteAndMenuInfo, getHomepageUrl } from '@/utils/route'
 import useGlobalStore from '@/stores/global'
 import auth from '@/components/hoc/auth'
+import AppHeader from './components/header'
+import AppBreadcrumb from './components/breadcrubm'
+import SideMenu from './components/side-menu'
+import styles from './style.module.less'
 const { Header, Content, Sider } = Layout
 
 const MainLayout: React.FC<RouteConfigComponentProps> = memo((props) => {

@@ -1,5 +1,5 @@
 import { useAntdTable } from 'ahooks'
-import { PaginatedParams } from 'ahooks/lib/useAntdTable'
+import type { PaginatedParams } from 'ahooks/lib/useAntdTable'
 import type { DocumentNode } from '@apollo/client'
 import useUrlState from '@ahooksjs/use-url-state'
 import { useCallback, useEffect } from 'react'

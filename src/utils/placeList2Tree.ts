@@ -1,4 +1,4 @@
-import { Place } from '@/graphql/types'
+import type { Place } from '@/graphql/types'
 
 /** 树节点数据类型定义 */
 export interface TreeNodeData {
