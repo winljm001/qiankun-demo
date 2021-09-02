@@ -1,15 +1,16 @@
 import React, { memo, useCallback, useMemo } from 'react'
-import { RouteConfigComponentProps, renderRoutes } from 'react-router-config'
+import type { RouteConfigComponentProps } from 'react-router-config'
+import { renderRoutes } from 'react-router-config'
 import { Layout } from 'antd'
 import { Redirect, useLocation } from 'react-router-dom'
-import { BASE_PATH } from '@/router/config/path'
-import { getCurrentRouteAndMenuInfo, getHomepageUrl } from '@/utils/route'
-import useGlobalStore from '@/stores/global'
-import auth from '@/components/hoc/auth'
 import AppHeader from './components/header'
 import AppBreadcrumb from './components/breadcrubm'
 import SideMenu from './components/side-menu'
 import styles from './style.module.less'
+import { BASE_PATH } from '@/router/config/path'
+import { getCurrentRouteAndMenuInfo, getHomepageUrl } from '@/utils/route'
+import useGlobalStore from '@/stores/global'
+import auth from '@/components/hoc/auth'
 const { Header, Content, Sider } = Layout
 
 const MainLayout: React.FC<RouteConfigComponentProps> = memo((props) => {
@@ -24,7 +25,7 @@ const MainLayout: React.FC<RouteConfigComponentProps> = memo((props) => {
     (collapsed) => {
       setUserSetting({ collapsed })
     },
-    [userSetting.collapsed],
+    [setUserSetting],
   )
   if (matchedRouteConfig?.path === BASE_PATH) {
     return <Redirect to={getHomepageUrl(menuConfig)} />
@@ -35,7 +36,7 @@ const MainLayout: React.FC<RouteConfigComponentProps> = memo((props) => {
       {/* 顶部header */}
       <Header className={styles.header}>
         <AppHeader
-          sysName="星桥运营支撑平台"
+          sysName="洪九星桥生产运营平台"
           userInfo={userInfo}
           collapsed={userSetting.collapsed!}
           onCollapsedChange={setCollapsed}

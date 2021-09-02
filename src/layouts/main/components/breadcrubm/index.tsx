@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import type { FC } from 'react'
+import React from 'react'
 import { Breadcrumb } from 'antd'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
-import { CustomRouteConfig } from '@/router/config/types'
 import styles from './index.module.less'
+import type { CustomRouteConfig } from '@/router/config/types'
 
 interface IProps {
   route: CustomRouteConfig

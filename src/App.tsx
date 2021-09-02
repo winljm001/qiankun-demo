@@ -1,10 +1,10 @@
 import React from 'react'
-import './App.css'
+import './App.less'
 import { ApolloProvider } from '@apollo/client'
 import { ConfigProvider } from 'antd'
 import zhCN from 'antd/lib/locale/zh_CN'
-import gqlClient from '@/graphql/client'
 import Router from './router'
+import gqlClient from '@/graphql/client'
 
 function App() {
   return (
