@@ -12,9 +12,9 @@ type ColumnTypeItem = PitayaPageCommodityBomQuery['pitayaPageCommodityBom']['rec
 const { RangePicker } = DatePicker
 
 /**
- * 汇总报表
+ * 生产报表 损耗统计表
  */
-const DataReportSummary: React.FC = () => {
+const DataReportProduceLossStatistics: React.FC = () => {
   const { tableProps, form, submit, reset } = useTablePagingGQL({
     gql: PitayaPageCommodityBomDocument,
     gqlKey: 'pitayaPageCommodityBom',
@@ -96,4 +96,4 @@ const DataReportSummary: React.FC = () => {
   )
 }
 
-export default DataReportSummary
+export default DataReportProduceLossStatistics

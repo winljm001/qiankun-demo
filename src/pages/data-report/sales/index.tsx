@@ -15,7 +15,7 @@ const { RangePicker } = DatePicker
  * 销售报表
  */
 const DataReportSales: React.FC = () => {
-  const { tableProps, form, submit, reset, searchObject } = useTablePagingGQL({
+  const { tableProps, form, submit, reset } = useTablePagingGQL({
     gql: PitayaPageCommodityBomDocument,
     gqlKey: 'pitayaPageCommodityBom',
     paramsValueTypeMap: {
