@@ -18,7 +18,7 @@ type UnknownObject = Record<string, any>
  * @description moment 时间类型
  * @description momentRange 时间段
  */
-type ParamsValueType = 'multiple' | 'multipleNumber' | 'moment' | 'momentRange'
+type ParamsValueType = 'multiple' | 'multipleNumber' | 'moment' | 'momentRange' | 'momentDayRange'
 
 type PagingData<DT> = {
   pageCurrent: number
@@ -165,7 +165,10 @@ const useTablePaging = <DT = any, PT = UnknownObject>({
       // 重置锁
       ChangeParamsByAction.current = false
 
-      requestPersistFn(formattedParams)
+      requestPersistFn({
+        ...DefaultParams.current,
+        ...formattedParams,
+      })
         .then((data) => {
           if (Timestamp.current === ts) {
             setPaging({
@@ -206,8 +209,17 @@ const useTablePaging = <DT = any, PT = UnknownObject>({
                 parsed[key] = (value as Moment).valueOf()
                 break
               case 'momentRange':
-                parsed[key] = (value as Moment[]).filter(Boolean).map((v) => v.valueOf())
+                parsed[key] = (value as Moment[]).map((v) => v.valueOf())
                 break
+              case 'momentDayRange': {
+                const [start, end] = value as [Moment, Moment]
+
+                parsed[key] = [
+                  start.hour(0).minute(0).second(0).millisecond(0).valueOf(),
+                  end.hour(23).minute(59).second(59).millisecond(0).valueOf(),
+                ]
+                break
+              }
               case 'multiple':
               case 'multipleNumber':
                 parsed[key] = isArray(value) ? value : [value]
@@ -241,6 +253,7 @@ const useTablePaging = <DT = any, PT = UnknownObject>({
                 parsed[key] = moment(+value)
                 break
               case 'momentRange':
+              case 'momentDayRange':
                 parsed[key] = (value as string[]).filter(Boolean).map((v) => moment(+v))
                 break
               case 'multiple':

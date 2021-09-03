@@ -30,7 +30,7 @@ const DataReportPurchase: React.FC = () => {
     gql: PitayaPageCommodityBomDocument,
     gqlKey: 'pitayaPageCommodityBom',
     paramsValueTypeMap: {
-      time: 'momentRange',
+      time: 'momentDayRange',
     },
     // params2search: false,
     formatParams: (v) => {
