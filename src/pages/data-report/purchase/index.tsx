@@ -6,6 +6,7 @@ import useTablePagingGQL from '@/hooks/useTablePaging/gql'
 import { PitayaPageCommodityBomDocument } from '@/graphql/operations/data-report/__generated__/purchase'
 import type { PitayaPageCommodityBomQuery } from '@/graphql/operations/data-report/__generated__/purchase'
 import Tabs from '../components/tabs'
+import { getStartEndMoment } from '../helper'
 
 type ColumnTypeItem = PitayaPageCommodityBomQuery['pitayaPageCommodityBom']['records'][0]
 
@@ -91,6 +92,7 @@ const DataReportPurchase: React.FC = () => {
             form={form}
             initialValues={{
               type: tabsValue,
+              time: getStartEndMoment(),
             }}>
             <Form.Item hidden name="type">
               <Input />
